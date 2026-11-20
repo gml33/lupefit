@@ -25,6 +25,7 @@ import com.lupefit.app.data.local.dao.RecipeDao;
 import com.lupefit.app.data.local.dao.RecipeIngredientDao;
 import com.lupefit.app.data.local.dao.WaterLogDao;
 import com.lupefit.app.data.local.dao.ProgressPhotoDao;
+import com.lupefit.core.sync.queue.SyncQueueDao;
 import com.lupefit.app.data.local.entity.FoodLog;
 import com.lupefit.app.data.local.entity.WorkoutLog;
 import com.lupefit.app.data.local.entity.PersonalRecordEntity;
@@ -40,6 +41,7 @@ import com.lupefit.app.data.local.entity.Recipe;
 import com.lupefit.app.data.local.entity.RecipeIngredient;
 import com.lupefit.app.data.local.entity.WaterLog;
 import com.lupefit.app.data.local.entity.ProgressPhoto;
+import com.lupefit.core.sync.model.SyncQueueItem;
 
 /**
  * Room Database principal de LuPeFit.
@@ -61,7 +63,8 @@ import com.lupefit.app.data.local.entity.ProgressPhoto;
         Recipe.class,
         RecipeIngredient.class,
         WaterLog.class,
-        ProgressPhoto.class
+        ProgressPhoto.class,
+        SyncQueueItem.class
     },
     version = 1,
     exportSchema = false
@@ -86,6 +89,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract RecipeIngredientDao recipeIngredientDao();
     public abstract WaterLogDao waterLogDao();
     public abstract ProgressPhotoDao progressPhotoDao();
+    public abstract com.lupefit.core.sync.queue.SyncQueueDao syncQueueDao();
 
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {

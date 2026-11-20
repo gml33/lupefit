@@ -46,20 +46,39 @@ import com.lupefit.app.domain.usecase.MoodEntryUseCase;
 import com.lupefit.app.domain.usecase.UserNoteUseCase;
 import com.lupefit.app.domain.usecase.UserProfileUseCase;
 
+import com.lupefit.core.sync.worker.SyncWorkerFactory;
+import com.lupefit.core.sync.worker.SyncWorkerFactoryProvider;
+import com.lupefit.core.sync.queue.SyncQueueRepository;
+
 /**
  * Application principal - Inicializa el contenedor de dependencias manual (AppContainer).
  * No usa Dagger/Hilt/Kapt - Inyección 100% manual en Java 17+.
+ * Implementa SyncWorkerFactoryProvider para proveer dependencias al SyncWorker.
  */
-public class MyApplication extends Application {
+public class MyApplication extends Application implements SyncWorkerFactoryProvider {
 
     private static MyApplication instance;
     private AppContainer container;
+    private SyncWorkerFactory syncWorkerFactory;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
         container = new AppContainer(this);
+
+        // Inicializar factory para SyncWorker
+        syncWorkerFactory = new SyncWorkerFactory() {
+            @Override
+            public SyncQueueRepository createSyncQueueRepository() {
+                return container.getSyncQueueRepository();
+            }
+
+            @Override
+            public com.lupefit.core.network.SyncEngine createSyncEngine() {
+                return container.getNetworkSyncEngine();
+            }
+        };
     }
 
     public static MyApplication getInstance() {
@@ -72,5 +91,10 @@ public class MyApplication extends Application {
 
     public AppContainer getContainer() {
         return container;
+    }
+
+    @Override
+    public SyncWorkerFactory getSyncWorkerFactory() {
+        return syncWorkerFactory;
     }
 }
