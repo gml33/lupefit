@@ -1,0 +1,64 @@
+# LuPeFit - .gitignore
+
+# Gradle
+.gradle/
+build/
+*/build/
+*/out/
+!*/src/main/res/values/version.xml
+
+# Local configuration
+local.properties
+*.iml
+.idea/
+*.iws
+*.ipr
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Android
+*.apk
+*.ap_
+*.aab
+output/
+captures/
+
+# Analysis artifacts (regenerable)
+apktool_out/
+jadx_out/
+manifest.xml
+strings.json
+
+# Original APK (binary, large)
+mfp.apk
+lupefit.png
+
+# Backend (separate repo)
+backend/
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+*.temp
+.tmp/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+*.swp
+*.swo
+
+# Test reports
+*/test-results/
+*/reports/
+
+# Cache
+.caches/

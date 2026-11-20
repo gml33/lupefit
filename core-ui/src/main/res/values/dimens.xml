@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================================
+         LUPEFIT - DIMENSIONES Y ESPACIADO CONSISTENTE
+         Basado en escala de 4dp (Material Design)
+         ============================================================ -->
+    
+    <!-- Espaciado base (4dp) -->
+    <dimen name="spacing_xxs">2dp</dimen>
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_xl">24dp</dimen>
+    <dimen name="spacing_xxl">32dp</dimen>
+    <dimen name="spacing_xxxl">48dp</dimen>
+    
+    <!-- Márgenes estándar -->
+    <dimen name="margin_screen">16dp</dimen>
+    <dimen name="margin_card">12dp</dimen>
+    <dimen name="margin_section">24dp</dimen>
+    <dimen name="margin_component">8dp</dimen>
+    
+    <!-- Padding estándar -->
+    <dimen name="padding_screen">16dp</dimen>
+    <dimen name="padding_card">16dp</dimen>
+    <dimen name="padding_button_horizontal">24dp</dimen>
+    <dimen name="padding_button_vertical">12dp</dimen>
+    <dimen name="padding_chip">12dp</dimen>
+    <dimen name="padding_fab">16dp</dimen>
+    
+    <!-- Border radius -->
+    <dimen name="radius_xs">4dp</dimen>
+    <dimen name="radius_sm">8dp</dimen>
+    <dimen name="radius_md">12dp</dimen>
+    <dimen name="radius_lg">16dp</dimen>
+    <dimen name="radius_xl">28dp</dimen>
+    <dimen name="radius_full">9999dp</dimen>
+    
+    <!-- Elevation -->
+    <dimen name="elevation_card">2dp</dimen>
+    <dimen name="elevation_card_raised">4dp</dimen>
+    <dimen name="elevation_fab">6dp</dimen>
+    <dimen name="elevation_bottom_sheet">8dp</dimen>
+    <dimen name="elevation_modal">12dp</dimen>
+    <dimen name="elevation_dropdown">8dp</dimen>
+    
+    <!-- Icon sizes -->
+    <dimen name="icon_xs">16dp</dimen>
+    <dimen name="icon_sm">20dp</dimen>
+    <dimen name="icon_md">24dp</dimen>
+    <dimen name="icon_lg">32dp</dimen>
+    <dimen name="icon_xl">48dp</dimen>
+    <dimen name="icon_xxl">64dp</dimen>
+    
+    <!-- Touch targets (mínimo 48dp) -->
+    <dimen name="touch_target_min">48dp</dimen>
+    <dimen name="touch_target_comfortable">56dp</dimen>
+    
+    <!-- Divider -->
+    <dimen name="divider_thin">1dp</dimen>
+    <dimen name="divider_thick">2dp</dimen>
+    
+    <!-- Progress -->
+    <dimen name="progress_thickness">4dp</dimen>
+    <dimen name="progress_track_thickness">4dp</dimen>
+    
+    <!-- Bottom Navigation -->
+    <dimen name="bottom_nav_height">72dp</dimen>
+    <dimen name="bottom_nav_item_min_width">72dp</dimen>
+    
+    <!-- Toolbar / App Bar -->
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="toolbar_title_margin">16dp</dimen>
+    
+    <!-- TextInput -->
+    <dimen name="text_input_height">56dp</dimen>
+    <dimen name="text_input_box_padding">12dp</dimen>
+    
+    <!-- Chip -->
+    <dimen name="chip_height">32dp</dimen>
+    <dimen name="chip_icon_size">18dp</dimen>
+    
+    <!-- List items -->
+    <dimen name="list_item_height_min">56dp</dimen>
+    <dimen name="list_item_height_comfortable">72dp</dimen>
+    <dimen name="list_item_padding_horizontal">16dp</dimen>
+    <dimen name="list_item_padding_vertical">12dp</dimen>
+    
+    <!-- Avatar -->
+    <dimen name="avatar_xs">24dp</dimen>
+    <dimen name="avatar_sm">32dp</dimen>
+    <dimen name="avatar_md">40dp</dimen>
+    <dimen name="avatar_lg">56dp</dimen>
+    <dimen name="avatar_xl">72dp</dimen>
+    <dimen name="avatar_xxl">96dp</dimen>
+    
+    <!-- Animaciones -->
+    <dimen name="animation_duration_short">150ms</dimen>
+    <dimen name="animation_duration_medium">250ms</dimen>
+    <dimen name="animation_duration_long">350ms</dimen>
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo principal modo oscuro -->
+    <item android:drawable="@color/lupefit_background" />
+    
+    <!-- Logo centrado -->
+    <item
+        android:width="120dp"
+        android:height="120dp"
+        android:gravity="center">
+        <vector
+            android:width="120dp"
+            android:height="120dp"
+            android:viewportWidth="120"
+            android:viewportHeight="120">
+            <!-- Círculo de fondo -->
+            <path
+                android:fillColor="@color/lupefit_primary"
+                android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0" />
+            <!-- Logo LuPeFit - L y P estilizadas -->
+            <path
+                android:fillColor="@color/lupefit_on_primary"
+                android:pathData="M40,30 L40,80 M40,80 L65,80" 
+                android:strokeWidth="8"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round" />
+            <path
+                android:fillColor="@color/lupefit_on_primary"
+                android:pathData="M75,30 L75,80 M75,30 L95,30 M95,30 L95,55 M75,55 L95,55" 
+                android:strokeWidth="8"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round" />
+            <!-- Punto verde lima como acento -->
+            <path
+                android:fillColor="@color/lupefit_primary_container"
+                android:pathData="M100,35 L100,35" 
+                android:strokeWidth="6"
+                android:strokeLineCap="round" />
+        </vector>
+    </item>
+    
+    <!-- Texto "LuPeFit" debajo del logo -->
+    <item
+        android:top="160dp"
+        android:gravity="center_horizontal">
+        <text
+            android:text="LuPeFit"
+            android:textSize="28sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/lupefit_on_background" />
+    </item>
+</layer-list>

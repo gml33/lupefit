@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================================
+         LUPEFIT - PALETA MODO OSCURO (Material 3)
+         ============================================================ -->
+    
+    <!-- Brand Colors - Dark -->
+    <color name="lupefit_primary">#B7D86B</color>           <!-- Verde lima suave -->
+    <color name="lupefit_primary_container">#167D62</color>   <!-- Verde petróleo -->
+    <color name="lupefit_on_primary">#18211D</color>
+    <color name="lupefit_on_primary_container">#F6F8F5</color>
+    
+    <color name="lupefit_secondary">#F2A541</color>           <!-- Ámbar -->
+    <color name="lupefit_secondary_container">#8B6000</color>
+    <color name="lupefit_on_secondary">#18211D</color>
+    <color name="lupefit_on_secondary_container">#FFF3E0</color>
+    
+    <color name="lupefit_tertiary">#90CAF9</color>            <!-- Azul claro -->
+    <color name="lupefit_tertiary_container">#0D47A1</color>
+    <color name="lupefit_on_tertiary">#18211D</color>
+    <color name="lupefit_on_tertiary_container">#E3F2FD</color>
+    
+    <!-- Surface & Background - Dark -->
+    <color name="lupefit_surface">#1E1E1E</color>             <!-- Tarjetas oscuras -->
+    <color name="lupefit_surface_variant":#2A2A2A</color>
+    <color name="lupefit_surface_container">#232323</color>
+    <color name="lupefit_surface_container_high">#2C2C2C</color>
+    <color name="lupefit_surface_container_highest">#363636</color>
+    <color name="lupefit_on_surface">#F6F8F5</color>          <!-- Texto principal claro -->
+    <color name="lupefit_on_surface_variant">#B7B9B5</color>   <!-- Texto secundario claro -->
+    
+    <color name="lupefit_background">#121212</color>          <!-- Fondo principal oscuro -->
+    <color name="lupefit_on_background">#F6F8F5</color>
+    
+    <!-- Error - Dark -->
+    <color name="lupefit_error">#F2B8B5</color>
+    <color name="lupefit_error_container">#8C1D18</color>
+    <color name="lupefit_on_error">#18211D</color>
+    <color name="lupefit_on_error_container">#FCEEEE</color>
+    
+    <!-- Outline & Dividers - Dark -->
+    <color name="lupefit_outline">#8A8D88</color>
+    <color name="lupefit_outline_variant">#4A4D48</color>
+    
+    <!-- Inverse - Dark -->
+    <color name="lupefit_inverse_surface">#F6F8F5</color>
+    <color name="lupefit_inverse_on_surface">#18211D</color>
+    <color name="lupefit_inverse_primary">#167D62</color>
+    
+    <!-- Scrim / Shadow -->
+    <color name="lupefit_scrim">#000000</color>
+    <color name="lupefit_shadow">#000000</color>
+    
+    <!-- ============================================================
+         COLORES SEMÁNTICOS POR FEATURE - DARK
+         ============================================================ -->
+    
+    <!-- Macros -->
+    <color name="color_macros_proteinas">#90CAF9</color>
+    <color name="color_macros_proteinas_container">#0D47A1</color>
+    <color name="color_macros_carbohidratos">#F2A541</color>
+    <color name="color_macros_carbohidratos_container">#8B6000</color>
+    <color name="color_macros_grasas">#B7D86B</color>
+    <color name="color_macros_grasas_container">#167D62</color>
+    <color name="color_macros_fibra">#D7CCC8</color>
+    <color name="color_macros_fibra_container">#4E342E</color>
+    
+    <!-- Features -->
+    <color name="color_agua">#81D4FA</color>
+    <color name="color_agua_container">#01579B</color>
+    <color name="color_ejercicio">#F48FB1</color>
+    <color name="color_ejercicio_container">#880E4F</color>
+    <color name="color_peso">#CE93D8</color>
+    <color name="color_peso_container">#4A148C</color>
+    <color name="color_insights">#B39DDB</color>
+    <color name="color_insights_container">#311B92</color>
+    <color name="color_planes">#80CBC4</color>
+    <color name="color_planes_container">#004D40</color>
+    <color name="color_recetas">#FFCCBC</color>
+    <color name="color_recetas_container">#BF360C</color>
+    
+    <!-- Estados -->
+    <color name="color_exito">#B7D86B</color>
+    <color name="color_exito_container">#167D62</color>
+    <color name="color_advertencia">#F2A541</color>
+    <color name="color_advertencia_container">#8B6000</color>
+    <color name="color_info">#90CAF9</color>
+    <color name="color_info_container">#0D47A1</color>
+    
+    <!-- On-colors para semánticos dark -->
+    <color name="on_color_macros_proteinas">#18211D</color>
+    <color name="on_color_macros_carbohidratos">#18211D</color>
+    <color name="on_color_macros_grasas">#18211D</color>
+    <color name="on_color_macros_fibra">#18211D</color>
+    <color name="on_color_agua">#18211D</color>
+    <color name="on_color_ejercicio">#18211D</color>
+    <color name="on_color_peso">#18211D</color>
+    <color name="on_color_insights">#18211D</color>
+    <color name="on_color_planes">#18211D</color>
+    <color name="on_color_recetas">#18211D</color>
+</resources>

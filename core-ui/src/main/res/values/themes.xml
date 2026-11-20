@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================================
+         LUPEFIT - TEMAS MATERIAL 3
+         ============================================================ -->
+    
+    <!-- Tema Base Light -->
+    <style name="Theme.LuPeFit" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Color Scheme Light -->
+        <item name="colorPrimary">@color/lupefit_primary</item>
+        <item name="colorPrimaryContainer">@color/lupefit_primary_container</item>
+        <item name="colorOnPrimary">@color/lupefit_on_primary</item>
+        <item name="colorOnPrimaryContainer">@color/lupefit_on_primary_container</item>
+        
+        <item name="colorSecondary">@color/lupefit_secondary</item>
+        <item name="colorSecondaryContainer">@color/lupefit_secondary_container</item>
+        <item name="colorOnSecondary">@color/lupefit_on_secondary</item>
+        <item name="colorOnSecondaryContainer">@color/lupefit_on_secondary_container</item>
+        
+        <item name="colorTertiary">@color/lupefit_tertiary</item>
+        <item name="colorTertiaryContainer">@color/lupefit_tertiary_container</item>
+        <item name="colorOnTertiary">@color/lupefit_on_tertiary</item>
+        <item name="colorOnTertiaryContainer">@color/lupefit_on_tertiary_container</item>
+        
+        <item name="colorError">@color/lupefit_error</item>
+        <item name="colorErrorContainer">@color/lupefit_error_container</item>
+        <item name="colorOnError">@color/lupefit_on_error</item>
+        <item name="colorOnErrorContainer">@color/lupefit_on_error_container</item>
+        
+        <item name="colorSurface">@color/lupefit_surface</item>
+        <item name="colorSurfaceVariant">@color/lupefit_surface_variant</item>
+        <item name="colorSurfaceContainer">@color/lupefit_surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/lupefit_surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/lupefit_surface_container_highest</item>
+        <item name="colorOnSurface">@color/lupefit_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/lupefit_on_surface_variant</item>
+        
+        <item name="colorBackground">@color/lupefit_background</item>
+        <item name="colorOnBackground">@color/lupefit_on_background</item>
+        
+        <item name="colorOutline">@color/lupefit_outline</item>
+        <item name="colorOutlineVariant">@color/lupefit_outline_variant</item>
+        
+        <item name="colorInverseSurface">@color/lupefit_inverse_surface</item>
+        <item name="colorInverseOnSurface">@color/lupefit_inverse_on_surface</item>
+        <item name="colorInversePrimary">@color/lupefit_inverse_primary</item>
+        
+        <item name="colorScrim">@color/lupefit_scrim</item>
+        <item name="colorShadow">@color/lupefit_shadow</item>
+        
+        <!-- Elevation Overlays (para modo oscuro automático) -->
+        <item name="elevationOverlayEnabled">true</item>
+        
+        <!-- Typography - Material 3 Type Scale -->
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.LuPeFit.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.LuPeFit.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.LuPeFit.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.LuPeFit.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.LuPeFit.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.LuPeFit.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.LuPeFit.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.LuPeFit.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.LuPeFit.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.LuPeFit.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.LuPeFit.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.LuPeFit.LabelSmall</item>
+        
+        <!-- Shapes - Material 3 Shape Scale -->
+        <item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.LuPeFit.CornerExtraSmall</item>
+        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.LuPeFit.CornerSmall</item>
+        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.LuPeFit.CornerMedium</item>
+        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.LuPeFit.CornerLarge</item>
+        <item name="shapeAppearanceCornerExtraLarge">@style/ShapeAppearance.LuPeFit.CornerExtraLarge</item>
+        
+        <!-- Component Overrides -->
+        <item name="materialButtonStyle">@style/Widget.LuPeFit.Button</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.LuPeFit.Button.Outlined</item>
+        <item name="materialButtonTextStyle">@style/Widget.LuPeFit.Button.Text</item>
+        <item name="filledButtonStyle">@style/Widget.LuPeFit.Button.Filled</item>
+        <item name="tonalButtonStyle">@style/Widget.LuPeFit.Button.Tonal</item>
+        <item name="outlinedButtonStyle">@style/Widget.LuPeFit.Button.Outlined</item>
+        <item name="textInputStyle">@style/Widget.LuPeFit.TextInputLayout</item>
+        <item name="chipStyle">@style/Widget.LuPeFit.Chip</item>
+        <item name="navigationBarStyle">@style/Widget.LuPeFit.NavigationBar</item>
+        <item name="bottomSheetStyle">@style/Widget.LuPeFit.BottomSheet</item>
+        <item name="dialogStyle">@style/Widget.LuPeFit.Dialog</item>
+        <item name="alertDialogStyle">@style/Widget.LuPeFit.AlertDialog</item>
+        <item name="floatingActionButtonStyle">@style/Widget.LuPeFit.FAB</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Widget.LuPeFit.FAB.Extended</item>
+        <item name="cardViewStyle">@style/Widget.LuPeFit.CardView</item>
+        <item name="materialCardViewStyle">@style/Widget.LuPeFit.MaterialCardView</item>
+        <item name="dividerHorizontalStyle">@style/Widget.LuPeFit.Divider.Horizontal</item>
+        <item name="dividerVerticalStyle">@style/Widget.LuPeFit.Divider.Vertical</item>
+        <item name="progressBarStyle">@style/Widget.LuPeFit.ProgressBar</item>
+        <item name="circularProgressIndicatorStyle">@style/Widget.LuPeFit.CircularProgressIndicator</item>
+        <item name="linearProgressIndicatorStyle">@style/Widget.LuPeFit.LinearProgressIndicator</item>
+        <item name="switchStyle">@style/Widget.LuPeFit.Switch</item>
+        <item name="checkboxStyle">@style/Widget.LuPeFit.CheckBox</item>
+        <item name="radioButtonStyle">@style/Widget.LuPeFit.RadioButton</item>
+        <item name="sliderStyle">@style/Widget.LuPeFit.Slider</item>
+        <item name="tooltipStyle">@style/Widget.LuPeFit.Tooltip</item>
+        <item name="snackbarStyle">@style/Widget.LuPeFit.Snackbar</item>
+    </style>
+    
+    <!-- Tema para Splash Screen -->
+    <style name="Theme.LuPeFit.Splash" parent="Theme.LuPeFit">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowSplashScreenBackground">@color/lupefit_primary</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_lupefit_splash</item>
+        <item name="android:windowSplashScreenAnimationDuration">300</item>
+    </style>
+    
+    <!-- Tema para Activities con Toolbar personalizada -->
+    <style name="Theme.LuPeFit.Toolbar" parent="Theme.LuPeFit">
+        <item name="toolbarStyle">@style/Widget.LuPeFit.Toolbar</item>
+    </style>
+    
+    <!-- Tema para Bottom Sheets modales -->
+    <style name="Theme.LuPeFit.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.LuPeFit.BottomSheet.Modal</item>
+    </style>
+</resources>

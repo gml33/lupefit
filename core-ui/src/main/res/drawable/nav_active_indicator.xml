@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Indicador activo para Bottom Navigation - pill shape -->
+    <item
+        android:top="4dp"
+        android:bottom="4dp"
+        android:left="8dp"
+        android:right="8dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp" />
+            <solid android:color="?attr/colorPrimaryContainer" />
+        </shape>
+    </item>
+</layer-list>
