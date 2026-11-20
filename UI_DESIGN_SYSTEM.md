@@ -1,4 +1,4 @@
-# UI_DESIGN_SYSTEM.md — Guía Maestra de Diseño y Arquitectura UI
+# UI_DESIGN_SYSTEM.md — Guía Maestra de Diseño y Arquitectura UI (LuPeFit)
 
 ## 1. Stack Tecnológico y Reglas Estrictas
 * **Lenguaje:** Java 17+ (Estricto. No generar código Kotlin).
@@ -7,6 +7,9 @@
 * **Librería UI Base:** Material Components for Android (`com.google.android.material:material:1.12.0+`) heredando de `Theme.Material3.DayNight.NoActionBar`.
 * **Gráficos y Estadísticas:** `MPAndroidChart` (`v3.1.0`) para gráficos de barras, líneas y donas complejas. Componentes nativos `CircularProgressIndicator` y `LinearProgressIndicator` para progreso diario.
 * **Escaneo y Cámara:** CameraX + Google ML Kit (Barcode Scanning).
+* **DI:** Hilt/Dagger (Java).
+* **Base de Datos:** Room Database (Java).
+* **Red:** Retrofit + OkHttp (Java).
 
 ---
 
@@ -145,3 +148,31 @@ Todo archivo generado debe respetar esta nomenclatura estricta:
 7. **Agua (1 Fragment, 2 Sheets):** `AguaDetalleFragment` | `AgregarAguaRapidoSheet`, `ConfigurarMetaAguaSheet`.
 8. **Configuración (14 Fragments):** `ConfigHomeFragment`, `ConfigCuentaFragment`, `ConfigPerfilFisicoFragment`, `ConfigMetasCaloricasFragment`, `ConfigNotificacionesFragment`, `ConfigNotifComidasFragment`, `ConfigNotifAguaFragment`, `ConfigAparienciaThemeFragment`, `ConfigIdiomaFragment`, `ConfigUnidadesFragment`, `ConfigSyncHealthFragment`, `ConfigExportarDatosFragment`, `ConfigPrivacidadFragment`, `ConfigEliminarCuentaFragment`.
 9. **Perfil / Auth (8 Fragments):** `AuthSplashFragment`, `AuthLoginFragment`, `AuthRegistroFragment`, `AuthRecuperarPassFragment`, `OnboardingPaso1ObjetivoFragment`, `OnboardingPaso2DatosFragment`, `OnboardingPaso3ActividadFragment`, `OnboardingPaso4ResumenFragment`.
+
+---
+
+## 7. Funcionalidades Extra (v2.0) — LuPeFit
+
+### A. Nuevos Tokens de Color (Modo Claro / Modo Oscuro)
+Agregar a `colors.xml` y `values-night/colors.xml` para soportar CrossFit, Rachas y Estado de Ánimo:
+* **CrossFit / Alta Intensidad (`crossfit_accent`):** `#EA580C` (Claro) | `#FB923C` (Oscuro)
+* **Rachas / Fuego (`streak_active`):** `#F59E0B` (Claro) | `#FBBF24` (Oscuro)
+* **Humor / Bienestar (`mood_positive`, `mood_neutral`, `mood_low`):** `#10B981`, `#6366F1`, `#F43F5E`
+
+### B. Arquitectura Offline-First y Sincronización
+* **Persistencia Local:** Uso obligatorio de **Room Database** en Java como única fuente de verdad para la UI. Ninguna pantalla debe depender de una llamada de red directa para renderizarse.
+* **Cola de Sincronización:** Cada entidad (alimento, WOD, nota, humor) debe incluir un campo booleano `isSynced` y un `timestamp`. **WorkManager** ejecutará tareas en segundo plano cuando haya conectividad.
+* **Health Connect:** Integrar `androidx.health.connect:connect-client` en Java (en el Módulo 8: `ConfigSyncHealthFragment` y lectura pasiva en `DiarioHomeFragment`) para importar pasos, frecuencia cardíaca, sueño y calorías activas.
+
+### C. Componentes Reutilizables Nuevos
+1. **`view_streak_badge.xml`:** Píldora compacta en el encabezado superior (`view_header_date.xml`) con icono de llama (`@color/streak_active`) y contador numérico de días consecutivos cumpliendo objetivos.
+2. **`card_voice_input.xml` (Hands-Free Logging):** Botón de micrófono animado (`Lottie` o cambio de escala en `MaterialButton`) dentro de `QuickAddSheet` y `DiarioBuscarFragment`. Muestra transcripción en tiempo real mediante `SpeechRecognizer` o endpoint externo (Whisper) antes de confirmar los alimentos.
+3. **`view_wod_timer.xml`:** Cronómetro de alto contraste y números gigantes (`48sp` Bold tabular) para `EjercicioSesionActivaFragment`. Soporta modos **AMRAP**, **EMOM**, **For Time** y **Tabata**, con señales sonoras/vibración y botones táctiles grandes (`>= 56dp`) para marcar rondas sin mirar la pantalla.
+4. **`card_daily_journal_mood.xml`:** Tarjeta compacta al pie de `DiarioHomeFragment` y `EjercicioSesionActivaFragment` con selector de 5 emojis/iconos de humor (`1` a `5`) y campo de texto expandible (`TextInputLayout`) para notas rápidas sobre energía, digestión o sensaciones del entrenamiento.
+
+### D. Lógica de Macronutrientes Dinámicos (Ciclado)
+* Cuando el usuario registra una sesión en el módulo de **CrossFit / Fuerza** o **Health Connect** reporta un gasto activo superior al umbral base, `NutricionResumenFragment` y `card_macro_summary.xml` deben recalcular automáticamente el objetivo diario de carbohidratos y proteínas, mostrando una etiqueta sutil (`+35g Carbs por WOD`).
+
+### E. Pantallas Nuevas Incorporadas al Inventario
+* **Módulo 1 (Diario):** `DiarioVozSheet` (registro manos libres), `DiarioNotaHumorSheet` (registro diario de estado de ánimo y comentarios).
+* **Módulo 2 (Ejercicio):** `EjercicioWodCrossfitFragment` (constructor y lista de WODs), `EjercicioTimerFullFragment` (pantalla completa de cronómetro AMRAP/EMOM con contador de rondas).
