@@ -18,6 +18,7 @@ import com.lupefit.app.data.local.dao.RecipeDao;
 import com.lupefit.app.data.local.dao.RecipeIngredientDao;
 import com.lupefit.app.data.local.dao.WaterLogDao;
 import com.lupefit.app.data.local.dao.ProgressPhotoDao;
+import com.lupefit.app.data.local.dao.FoodProductDao;
 import com.lupefit.app.domain.repository.FoodLogRepository;
 import com.lupefit.app.domain.repository.WorkoutLogRepository;
 import com.lupefit.app.domain.repository.PersonalRecordRepository;
@@ -32,6 +33,7 @@ import com.lupefit.app.domain.repository.FoodRepository;
 import com.lupefit.app.domain.repository.RecipeRepository;
 import com.lupefit.app.domain.repository.WaterLogRepository;
 import com.lupefit.app.domain.repository.ProgressPhotoRepository;
+import com.lupefit.app.data.local.repository.FoodCatalogRepository;
 import com.lupefit.app.domain.engine.MacroCalculatorEngine;
 import com.lupefit.app.domain.engine.StreakManager;
 import com.lupefit.app.domain.engine.HealthConnectManager;
@@ -78,6 +80,7 @@ public final class AppContainer {
     private volatile RecipeIngredientDao recipeIngredientDao;
     private volatile WaterLogDao waterLogDao;
     private volatile ProgressPhotoDao progressPhotoDao;
+    private volatile FoodProductDao foodProductDao;
 
     // Repositories
     private volatile FoodLogRepository foodLogRepository;
@@ -95,6 +98,7 @@ public final class AppContainer {
     private volatile WaterLogRepository waterLogRepository;
     private volatile ProgressPhotoRepository progressPhotoRepository;
     private volatile SyncQueueRepository syncQueueRepository;
+    private volatile FoodCatalogRepository foodCatalogRepository;
 
     // Engines
     private volatile MacroCalculatorEngine macroCalculatorEngine;
@@ -138,6 +142,7 @@ public final class AppContainer {
         recipeIngredientDao = database.recipeIngredientDao();
         waterLogDao = database.waterLogDao();
         progressPhotoDao = database.progressPhotoDao();
+        foodProductDao = database.foodProductDao();
 
         // Repositories
         foodLogRepository = new FoodLogRepository(foodLogDao);
@@ -155,6 +160,7 @@ public final class AppContainer {
         waterLogRepository = new WaterLogRepository(waterLogDao);
         progressPhotoRepository = new ProgressPhotoRepository(progressPhotoDao);
         syncQueueRepository = new SyncQueueRepository(database.syncQueueDao());
+        foodCatalogRepository = new FoodCatalogRepository(context, foodProductDao);
 
         // Engines
         macroCalculatorEngine = new MacroCalculatorEngine();
@@ -213,6 +219,7 @@ public final class AppContainer {
     public RecipeIngredientDao getRecipeIngredientDao() { return recipeIngredientDao; }
     public WaterLogDao getWaterLogDao() { return waterLogDao; }
     public ProgressPhotoDao getProgressPhotoDao() { return progressPhotoDao; }
+    public FoodProductDao getFoodProductDao() { return foodProductDao; }
 
     public FoodLogRepository getFoodLogRepository() { return foodLogRepository; }
     public WorkoutLogRepository getWorkoutLogRepository() { return workoutLogRepository; }
@@ -229,6 +236,7 @@ public final class AppContainer {
     public WaterLogRepository getWaterLogRepository() { return waterLogRepository; }
     public ProgressPhotoRepository getProgressPhotoRepository() { return progressPhotoRepository; }
     public SyncQueueRepository getSyncQueueRepository() { return syncQueueRepository; }
+    public FoodCatalogRepository getFoodCatalogRepository() { return foodCatalogRepository; }
 
     public MacroCalculatorEngine getMacroCalculatorEngine() { return macroCalculatorEngine; }
     public StreakManager getStreakManager() { return streakManager; }

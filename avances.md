@@ -1,9 +1,9 @@
 # Avances - LuPeFit: Replicación y Rediseño Completo
 
-## Estado Actual: **PASO 3 - CORE SYNC MODULE COMPLETADO** ✅
+## Estado Actual: **PASO 4 - ESCÁNER + OPEN FOOD FACTS + CATÁLOGO + VOZ COMPLETADO** ✅
 
 ### Fecha de Inicio: 2026-11-20
-### Fase Actual: Implementación - Paso 3 Completado (Core Sync)
+### Fase Actual: Implementación - Paso 4 Completado (Scanner + Catalog + Voice)
 
 ---
 
@@ -77,20 +77,37 @@
 - ✅ **MyApplication** implementa SyncWorkerFactoryProvider
 - ✅ **Build verificado**: BUILD SUCCESSFUL
 
-#### Hito 14: Backend FastAPI + Docker - PENDIENTE
+#### Hito 14: **PASO 4 - Escáner Offline-First + Open Food Facts + Catálogo JSON + Voz** ✅ **COMPLETADO**
+- ✅ **FoodProduct Entity + DAO** - Room entity con macros, `isFreshFood`, Parcelable, índices (barcode unique, name, is_fresh_food)
+- ✅ **Precarga JSON (assets/fresh_foods.json)** - 30 alimentos frescos argentinos (carnes, huevos, lácteos, cereales, frutas, verduras) con valores nutricionales estándar por 100g
+- ✅ **AppDatabase Callback onCreate** - ExecutorService para precarga automática en primer arranque (búsqueda 0ms offline)
+- ✅ **CameraX + ML Kit Barcode Scanner** - PreviewView full-screen, overlay recuadro redondeado `md_theme_primary`, formatos EAN-13, EAN-8, UPC-A, UPC-E, anti-duplicados 1.5s
+- ✅ **FoodCatalogRepository (Offline-First)** - 1) Room local → 2) Open Food Facts API (OkHttp+Gson, User-Agent válido) → 3) Guarda en Room para uso offline → 4) Fallback crear alimento manual
+- ✅ **VoiceTranscriptionEngine (Strategy Pattern)** - Interfaz con Listener (partial/final/error) + ParsedFoodItem
+- ✅ **NativeAndroidVoiceEngine** - SpeechRecognizer nativo `es-AR`, resultados parciales tiempo real
+- ✅ **WhisperServerVoiceEngine** - MediaRecorder MPEG-4 AAC 16kHz mono + OkHttp Multipart → `/v1/audio/transcriptions` endpoint configurable
+- ✅ **VoiceFoodParser** - NLP español: "200 gramos de pollo y 100 de arroz" → extrae cantidad/unidad, busca en catálogo, calcula macros
+- ✅ **DiarioVozSheet** - BottomSheetDialogFragment 28dp, micrófono animado (anillos pulsantes), transcripción live, lista editable con barras macro P/C/G, confirmar todo junto
+- ✅ **ResultadoEscaneoSheet** - Producto detectado, selector gramos (+/- chips 100g/porción/200g), resumen calculado dinámico
+- ✅ **Layouts XML Material 3** - sheet_resultado_escaneo.xml, sheet_diario_voz.xml, item_parsed_food.xml, item_macro_mini.xml, drawables, iconos
+- ✅ **Integración DI** - AppContainer: FoodProductDao, FoodCatalogRepository wireados
+- ✅ **Dependencias**: gson 2.11.0 agregada
+- ✅ **Build verificado**: BUILD SUCCESSFUL
+
+#### Hito 15: Backend FastAPI + Docker - PENDIENTE
 - Estructura completa: models, schemas, api/v1, services, tasks
 - SQLAlchemy models con UUID, índices, full-text search
 - JWT Auth (access/refresh tokens, bcrypt)
 - docker-compose.yml: postgres, redis, backend, celery-worker, celery-beat
 - Sync batch endpoint con versionado global
 
-#### Hito 15: Feature Modules UI & Navigation - PENDIENTE
+#### Hito 16: Feature Modules UI & Navigation - PENDIENTE
 - 11 feature modules (diario, ejercicio, nutricion, progreso, recetas, escaneo, agua, configuracion, perfil, insights, planes)
 - Navigation graphs por feature (XML)
 - Bottom Nav: Inicio | Tendencias | [FAB] | Planes | Perfil
 - Sin premium/upsell modules
 
-#### Hito 16: UI - Tema Material 3 Completo (core:core-ui) ✅
+#### Hito 17: UI - Tema Material 3 Completo (core:core-ui) ✅
 **Paleta LuPeFit Oficial (Tokens `md_theme_*`):**
 | Color | Light | Dark | Uso |
 |-------|-------|------|-----|
@@ -127,33 +144,33 @@
 - **Modo oscuro**: Completo (values-night/colors.xml + themes.xml con DayNight auto-switch)
 - **Elevation**: 0-1dp + stroke 1dp dark mode (tokens `md_theme_*`)
 
-#### Hito 17: 4 Componentes Base Obligatorios ✅
+#### Hito 18: 4 Componentes Base Obligatorios ✅
 1. `view_header_date.xml` - Selector fecha + avatar (Material 3)
 2. `card_macro_summary.xml` - CircularProgress 150dp/14dp + 3 LinearProgress 10dp (macro rings)
 3. `item_log_entry.xml` - Icono circular + título 15sp Bold + subtítulo 13sp + valor derecha
 4. `sheet_base_container.xml` - Píldora arrastre + título 18sp Bold + botón ancho completo
 
-#### Hito 18: Drawables Base ✅
+#### Hito 19: Drawables Base ✅
 - `ic_chevron_left.xml` / `ic_chevron_right.xml`
 - `ic_avatar_placeholder.xml` / `ic_food_placeholder.xml`
 - `bg_rounded_xs.xml` (4dp)
 - `nav_active_indicator.xml`
 - `splash_background.xml`
 
-#### Hito 19: Strings - Castellano Argentino ✅
+#### Hito 20: Strings - Castellano Argentino ✅
 - Archivo: `core/core-ui/src/main/res/values-es-rAR/strings.xml`
 - 365 strings localizadas (App, Auth, Diario, Ejercicio, Nutrición, Progreso, Recetas, Escaneo, Agua, Config, Perfil, Insights, Planes, Errores, Unidades, Macros, Accesibilidad)
 - Formato fecha: dd/MM/yyyy, hora: HH:mm
 - Términos: "Registrate", "Entrar", "Probá", "Tocá", "Apuntá", "Almuerzo", "Merienda"
 
-#### Hito 20: Documentación Actualizada (features.md v3) ✅
+#### Hito 21: Documentación Actualizada (features.md v3) ✅
 - Arquitectura LuPeFit completa
 - Module map actualizado (app + 2 core + 11 feature = 14 módulos)
 - Paleta de colores documentada (tokens `md_theme_*`)
 - Schema Room documentado (14 entidades + offline-first fields)
 - Build gradle configurado
 
-#### Hito 21: **PASO 1 - Esqueleto Base Compilable** ✅
+#### Hito 22: **PASO 1 - Esqueleto Base Compilable** ✅
 - **build.gradle (app)**: Material 3, Room (annotationProcessor), Health Connect, WorkManager, Play Services Location, MPAndroidChart
 - **MyApplication.java** + **AppContainer.java**: Inyección de Dependencias Manual (sin Hilt/Dagger/KAPT)
 - **AppDatabase.java** + **14 Entidades Room** con campos offline-first (isSynced, syncAction, serverId, timestamp, lastModified)
@@ -202,19 +219,43 @@
 ### Paso 1 - Esqueleto Base (App Module)
 29. `app/build.gradle` - Dependencias completas (Material 3, Room, Health Connect, WorkManager, Play Services Location, MPAndroidChart, CameraX, ML Kit, Lottie, CircleImageView)
 30. `app/src/main/java/com/lupefit/app/MyApplication.java` - Application class
-31. `app/src/main/java/com/lupefit/app/AppContainer.java` - Manual DI Container (218 líneas)
+31. `app/src/main/java/com/lupefit/app/AppContainer.java` - Manual DI Container (218+ líneas)
 32. `app/src/main/java/com/lupefit/app/data/local/AppDatabase.java` - Room Database singleton
-33. `app/src/main/java/com/lupefit/app/data/local/entity/*.java` - 14 Entidades (offline-first)
-34. `app/src/main/java/com/lupefit/app/data/local/dao/*.java` - 14 DAOs (LiveData queries)
+33. `app/src/main/java/com/lupefit/app/data/local/entity/*.java` - 15 Entidades (offline-first)
+34. `app/src/main/java/com/lupefit/app/data/local/dao/*.java` - 15 DAOs (LiveData queries)
 35. `app/src/main/java/com/lupefit/app/data/local/converters/TypeConverters.java` - TypeConverters
 36. `app/src/main/java/com/lupefit/app/domain/repository/*.java` - 14 Repositories (stubs)
 37. `app/src/main/java/com/lupefit/app/domain/engine/*.java` - 5 Engines (stubs)
 38. `app/src/main/java/com/lupefit/app/domain/usecase/*.java` - 7 UseCases (stubs)
 39. `app/src/main/res/values/attrs.xml` - Atributos Material 3 custom
 40. `app/src/main/res/xml/data_extraction_rules.xml` + `backup_rules.xml`
-41. `app/src/main/res/values/strings.xml` - app_name
+41. `app/src/main/res/values/strings.xml` - app_name + escaneo/voz strings
 42. `app/src/main/res/mipmap-*/ic_launcher*.xml` - Iconos vectoriales
 43. `app/src/main/AndroidManifest.xml` - Permisos, Activities, Providers, Health Connect meta-data
+
+### Paso 4 - Escáner + Catálogo + Voz (App Module)
+44. `app/src/main/assets/fresh_foods.json` - 30 alimentos frescos argentinos precargados
+45. `app/src/main/java/com/lupefit/app/data/local/entity/FoodProduct.java` - Entity Room + Parcelable
+46. `app/src/main/java/com/lupefit/app/data/local/dao/FoodProductDao.java` - DAO con búsqueda relevancia
+47. `app/src/main/java/com/lupefit/app/data/local/repository/FoodCatalogRepository.java` - Offline-First OpenFoodFacts
+48. `app/src/main/java/com/lupefit/app/ui/escaneo/BarcodeAnalyzer.java` - ML Kit analyzer anti-duplicados
+49. `app/src/main/java/com/lupefit/app/ui/escaneo/EscaneoCodigoBarrasFragment.java` - CameraX preview + permisos
+50. `app/src/main/java/com/lupefit/app/ui/escaneo/ResultadoEscaneoSheet.java` - BottomSheet selector gramos
+51. `app/src/main/java/com/lupefit/app/domain/engine/voice/VoiceTranscriptionEngine.java` - Strategy interface
+52. `app/src/main/java/com/lupefit/app/domain/engine/voice/NativeAndroidVoiceEngine.java` - SpeechRecognizer es-AR
+53. `app/src/main/java/com/lupefit/app/domain/engine/voice/WhisperServerVoiceEngine.java` - MediaRecorder + OkHttp
+54. `app/src/main/java/com/lupefit/app/domain/engine/voice/VoiceFoodParser.java` - NLP español + macros
+55. `app/src/main/java/com/lupefit/app/ui/diario/DiarioVozSheet.java` - BottomSheet micrófono animado + lista editable
+56. `app/src/main/res/layout/fragment_escaneo_codigo_barras.xml` - Preview + overlay recuadro
+57. `app/src/main/res/layout/sheet_resultado_escaneo.xml` - Producto + selector gramos + resumen
+58. `app/src/main/res/layout/sheet_diario_voz.xml` - Micrófono animado + transcripción + lista
+59. `app/src/main/res/layout/item_parsed_food.xml` - Card alimento + barras macro P/C/G
+60. `app/src/main/res/layout/item_macro_mini.xml` - Macro compacto para sheets
+61. `app/src/main/res/drawable/bg_focus_overlay.xml` - Overlay recuadro enfoque
+61. `app/src/main/res/drawable/bg_mic_ring.xml` - Anillo micrófono animado
+62. `app/src/main/res/drawable/bg_input_outline.xml` - Input outline style
+63. `app/src/main/res/drawable/ic_flash_off.xml`, `ic_plus.xml`, `ic_minus.xml`, `ic_mic.xml`, `ic_edit.xml`, `ic_food_generic.xml`
+64. `app/src/main/res/values/ids.xml` - Animation tag IDs
 
 ---
 
@@ -222,14 +263,15 @@
 
 ### Arquitectura
 - **Pattern**: Clean Architecture por feature module
-- **Módulos Gradle**: app + core:core-domain + core:core-ui = **3 módulos actuales** (simplificado de 14 planeados para Paso 1)
+- **Módulos Gradle**: app + core:core-domain + core:core-ui + core:core-network + core:core-sync = **5 módulos actuales** (simplificado de 14 planeados)
 - **Offline-first**: Room + WorkManager sync bidireccional
 - **Stack**: Java 17+, XML Views, ViewBinding, Room (annotationProcessor), Material 3
 
-### Base de Datos (14 entidades + Streak = 15)
+### Base de Datos (15 entidades)
 - User, FoodLog, WorkoutLog, WorkoutSet, Exercise, Food, Recipe, RecipeIngredient
-- WaterLog, ProgressPhoto, PersonalRecordEntity, GlucoseLog, MoodEntry, UserNote, WeatherSnapshot, Streak
+- WaterLog, ProgressPhoto, PersonalRecordEntity, GlucoseLog, MoodEntry, UserNote, WeatherSnapshot, Streak, **FoodProduct**
 - **Todas con offline-first**: `isSynced` (boolean), `syncAction` (CREATE/UPDATE/DELETE), `serverId` (String), `timestamp` (long), `lastModified` (long)
+- **FoodProduct**: catálogo offline-first (sin sync fields, solo lectura local)
 
 ### Backend (FastAPI + PostgreSQL) - PENDIENTE
 - 30+ endpoints REST organizados por feature
@@ -246,7 +288,7 @@
 | libpassiolib.so | Passio SDK (mantener) o custom TFLite |
 
 ### Features Incluidas (Todas Gratis)
-Diario, Ejercicio, Nutrición (Net Carbs, Metas por comida), Progreso (Export CSV/JSON), Recetas (Colecciones, Importar web), Escaneo (Código barras + IA Comida), Agua, Configuración (Tema, Unidades, Sync), Perfil (Auth local), Insights (IA, Tendencias), Planes (Comida + Entrenamiento)
+Diario, Ejercicio, Nutrición (Net Carbs, Metas por comida), Progreso (Export CSV/JSON), Recetas (Colecciones, Importar web), **Escaneo (Código barras + IA Comida)**, Agua, Configuración (Tema, Unidades, Sync), Perfil (Auth local), Insights (IA, Tendencias), Planes (Comida + Entrenamiento), **Voz (Hands-Free Logging)**
 
 ### Features Excluidas
 Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Facebook/Google Login, Samsung Health, Ads/Analytics terceros
@@ -255,14 +297,14 @@ Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Fac
 
 ## Próximos Pasos: Implementación Continua
 
-### PASO 4: Backend FastAPI + Docker Compose
+### PASO 5: Backend FastAPI + Docker Compose
 1. Backend FastAPI + Docker Compose (PostgreSQL, Redis, Celery)
 2. SQLAlchemy models + Pydantic schemas
 3. JWT Auth endpoints
 4. Sync batch endpoint `/api/v1/sync/batch`
 5. docker-compose.yml con postgres, redis, backend, celery-worker, celery-beat
 
-### PASO 5: Feature Modules (11 módulos)
+### PASO 6: Feature Modules (11 módulos)
 - `feature-diario` → DiarioFragment, BuscarAlimento, QuickAdd, EscanearCodigoBarras
 - `feature-ejercicio` → Lista, Buscar, Nuevo, Rutinas, WOD CrossFit, Timer
 - `feature-nutricion` → Resumen, Metas, Macros, Gráficos (MPAndroidChart)
@@ -275,9 +317,9 @@ Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Fac
 - `feature-insights` → Semanal, Tendencias, Predicciones, Patrones
 - `feature-planes` → Comida, Entrenamiento, Mis Planes, Quick Log
 
-### PASO 6: Advanced Features (v2.0-v4.0)
+### PASO 7: Advanced Features (v2.0-v4.0)
 - Health Connect Integration (Steps, Active Calories, Exercise Sessions, Heart Rate)
-- Voice Logging (SpeechRecognizer + Whisper Strategy)
+- Voice Logging (SpeechRecognizer + Whisper Strategy) - **Base implementada en Paso 4**
 - CrossFit WOD Module (AMRAP, EMOM, For Time, Tabata) + Timer
 - Dynamic Macros (Ciclado por gasto energético)
 - Streak Manager (Rachas diarias)
@@ -313,11 +355,11 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 3. `core/core-ui/` - Tema Material 3 completo listo para usar
 4. `core/core-network/` - API Service, DTOs, SyncEngine, NetworkModule
 5. `core/core-sync/` - SyncWorker, SyncQueue, ConflictResolver, SyncScheduler
-6. `app/` - Esqueleto base compilable (Paso 1 completado)
+6. `app/` - Esqueleto base compilable + Escáner + Catálogo + Voz (Paso 4 completado)
 7. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 3 (Core Sync) 100% completo y compilando**. Próximo: **Paso 4 - Backend FastAPI + Docker**.
+**Estado**: **Paso 4 (Escáner + Catálogo + Voz) 100% completo y compilando**. Próximo: **Paso 5 - Backend FastAPI + Docker**.
 
 ---
 
-*Última actualización: 2026-11-20 - Paso 3 completado, BUILD SUCCESSFUL, listo para Paso 4*
+*Última actualización: 2026-11-20 - Paso 4 completado, BUILD SUCCESSFUL, listo para Paso 5*

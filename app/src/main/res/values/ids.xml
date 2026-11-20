@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- IDs para animaciones de voz -->
+    <item name="anim_pulse_outer" type="id" />
+    <item name="anim_pulse_outer_y" type="id" />
+    <item name="anim_pulse_middle" type="id" />
+    <item name="anim_pulse_middle_y" type="id" />
+</resources>

@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LuPeFit</string>
+
+    <!-- Escaneo de código de barras -->
+    <string name="escaneo_guia_apunte_codigo">Apuntá el código de barras al recuadro</string>
+    <string name="escaneo_linterna">Linterna</string>
+    <string name="escaneo_ingreso_manual">Ingreso manual</string>
+    <string name="escaneo_hint_codigo">Código de barras</string>
+    <string name="escaneo_buscar">Buscar</string>
+    <string name="escaneo_cancelar">Cancelar</string>
+    <string name="escaneo_reintentar">Reintentar</string>
+    <string name="escaneo_crear_alimento">Crear alimento</string>
+    <string name="escaneo_permiso_requerido">Se necesita permiso de cámara para escanear</string>
+    <string name="escaneo_conceder_permiso">Conceder permiso</string>
+    <string name="escaneo_permiso_denegado">Permiso de cámara denegado</string>
+    <string name="escaneo_linterna_proximamente">Linterna próximamente</string>
+    <string name="escaneo_resultado_encontrado">Producto encontrado</string>
+    <string name="escaneo_por_100g">Por 100g</string>
+    <string name="escaneo_cantidad">Cantidad</string>
+    <string name="escaneo_gramos">Gramos</string>
+    <string name="escaneo_gr">g</string>
+    <string name="escaneo_disminuir">Disminuir</string>
+    <string name="escaneo_aumentar">Aumentar</string>
+    <string name="escaneo_preset_100g">100g</string>
+    <string name="escaneo_preset_porcion">1 porción</string>
+    <string name="escaneo_preset_200g">200g</string>
+    <string name="escaneo_calculado_para">Calculado para</string>
+    <string name="escaneo_agregar_diario">Agregar al diario</string>
+    <string name="escaneo_no_encontrado">No encontrado</string>
+    <string name="escaneo_no_encontrado_msg">El código %1$s no está en nuestra base de datos ni en Open Food Facts.</string>
+
+    <!-- Registro por voz -->
+    <string name="diario_voz_titulo">Registro por voz</string>
+    <string name="diario_voz_subtitulo">Decí lo que comiste, ej: \"200 gramos de pollo y 100 de arroz\"</string>
+    <string name="diario_voz_mic">Micrófono</string>
+    <string name="diario_voz_toca_mic">Tocá el micrófono y empezá a hablar</string>
+    <string name="diario_voz_escuchando">Escuchando…</string>
+    <string name="diario_voz_procesando">Procesando…</string>
+    <string name="diario_voz_transcripcion">Lo que dijiste:</string>
+    <string name="diario_voz_alimentos_detectados">Alimentos detectados</string>
+    <string name="diario_voz_lista_confirmar">Listo para confirmar</string>
+    <string name="diario_voz_no_detectado">No se detectaron alimentos, intentá de nuevo</string>
+    <string name="diario_voz_error">Error al procesar</string>
+    <string name="diario_voz_cancelar">Cancelar</string>
+    <string name="diario_voz_confirmar">Confirmar y guardar</string>
+    <string name="diario_voz_editar">Editar</string>
+    <string name="diario_voz_alimento">Alimento</string>
 </resources>

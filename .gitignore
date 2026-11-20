@@ -62,3 +62,5 @@ backend/
 
 # Cache
 .caches/
+
+prompts.md

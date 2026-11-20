@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    tools:context=".ui.escaneo.EscaneoCodigoBarrasFragment">
+
+    <!-- CameraX PreviewView a pantalla completa -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Overlay visual: recuadro de enfoque con esquinas redondeadas -->
+    <View
+        android:id="@+id/focusOverlay"
+        android:layout_width="280dp"
+        android:layout_height="160dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/bg_focus_overlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Texto guía superior -->
+    <TextView
+        android:id="@+id/tvGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/escaneo_guia_apunte_codigo"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Botón Linterna (Flash) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnFlash"
+        style="@style/Widget.LuPeFit.FAB.Icon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="120dp"
+        android:contentDescription="@string/escaneo_linterna"
+        android:src="@drawable/ic_flash_off"
+        app:iconGravity="textStart"
+        app:iconSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón ingreso manual de código -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnManualEntry"
+        style="@style/Widget.LuPeFit.Button.Outlined"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="120dp"
+        android:text="@string/escaneo_ingreso_manual"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Indicador de escaneo activo (animado) -->
+    <View
+        android:id="@+id/scanningIndicator"
+        android:layout_width="280dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="118dp"
+        android:background="?attr/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/focusOverlay"
+        app:layout_constraintEnd_toEndOf="@id/focusOverlay"
+        app:layout_constraintStart_toStartOf="@id/focusOverlay" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

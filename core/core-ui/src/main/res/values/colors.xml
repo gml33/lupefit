@@ -25,6 +25,9 @@
     <color name="md_theme_onSurface">#171D1A</color>
     <color name="md_theme_surfaceVariant">#DBE5DD</color>
     <color name="md_theme_onSurfaceVariant">#404943</color>
+    <color name="md_theme_surfaceContainer">#E8EFE8</color>
+    <color name="md_theme_surfaceContainerHigh">#DCE4DC</color>
+    <color name="md_theme_surfaceContainerHighest">#D0D8D1</color>
     <color name="md_theme_outline">#707973</color>
     <color name="md_theme_outlineVariant">#C4C7C3</color>
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo semitransparente fuera del área de enfoque -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#80000000" />
+        </shape>
+    </item>
+    <!-- Área de enfoque transparente con bordes redondeados -->
+    <item
+        android:left="80dp"
+        android:top="40dp"
+        android:right="80dp"
+        android:bottom="40dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="2dp"
+                android:color="?attr/colorPrimary" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+    <!-- Esquinas decorativas en el área de enfoque -->
+    <item
+        android:left="80dp"
+        android:top="40dp"
+        android:right="80dp"
+        android:bottom="40dp">
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="4dp"
+                android:color="?attr/colorPrimary" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+</layer-list>

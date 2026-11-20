@@ -95,6 +95,9 @@ dependencies {
     // Lottie
     implementation libs.lottie
 
+    // Gson (JSON parsing)
+    implementation libs.gson
+
     // Guava ListenableFuture
     implementation libs.guava
 

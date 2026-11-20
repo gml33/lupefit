@@ -410,7 +410,6 @@ copies of the Software...
 - **MPAndroidChart** - Gráficos nutricionales
 - **ML Kit** - Escaneo códigos de barras
 - **Health Connect** - Datos de salud unificados
-- **Passio SDK** - Reconocimiento de alimentos por IA (opcional)
 
 ---
 
@@ -422,6 +421,6 @@ copies of the Software...
 
 ---
 
-> **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17+ • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
+> **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17 • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
 **Última actualización**: 2026-11-20 | **Versión**: 1.0.0-Paso3 | **Build**: `a75b287` ✅

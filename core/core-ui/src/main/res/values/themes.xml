@@ -262,6 +262,11 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="ShapeAppearance.LuPeFit.Circle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="ShapeAppearance.LuPeFit.ProgressTrack">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
@@ -306,11 +311,27 @@
         <item name="android:paddingHorizontal">24dp</item>
     </style>
 
+    <style name="Widget.LuPeFit.Button.IconOnly" parent="Widget.Material3.Button.IconButton">
+        <item name="shapeAppearance">@style/ShapeAppearance.LuPeFit.Circle</item>
+        <item name="backgroundTint">?attr/colorSurfaceVariant</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
     <style name="Widget.LuPeFit.FAB" parent="Widget.Material3.FloatingActionButton.Primary">
         <item name="shapeAppearance">@style/ShapeAppearance.LuPeFit.Pill</item>
         <item name="backgroundTint">?attr/colorPrimary</item>
         <item name="rippleColor">?attr/colorOnPrimary</item>
         <item name="tint">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Widget.LuPeFit.FAB.Icon" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="shapeAppearance">@style/ShapeAppearance.LuPeFit.Circle</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="rippleColor">?attr/colorOnPrimary</item>
+        <item name="tint">?attr/colorOnPrimary</item>
+        <item name="android:minWidth">56dp</item>
+        <item name="android:minHeight">56dp</item>
     </style>
 
     <style name="Widget.LuPeFit.FAB.Extended" parent="Widget.Material3.ExtendedFloatingActionButton.Primary">

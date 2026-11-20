@@ -242,3 +242,13 @@ Agregar a `colors.xml` y `values-night/colors.xml`:
 #### 4. Exportación Abierta (JSON / CSV) y Conector Self-Hosted
 * **Motor de Backup (`DataPortabilityManager.java`):** En `ConfigExportarDatosFragment.java`, permite exportar e importar toda la base de datos local Room en formato **JSON estructurado** o **CSV** mediante el *Storage Access Framework* de Android (`ACTION_CREATE_DOCUMENT` / `ACTION_OPEN_DOCUMENT`).
 * **Sincronización Configurable:** Incluye una interfaz `RemoteSyncAdapter` en Java con soporte para endpoints REST personalizados (URL base + Token configurables en `ConfigSyncHealthFragment`) para sincronizar opcionalmente con instancias propias (ej. *SparkyFitness*).
+
+
+### Módulo Transversal: Estimación Opcional de Costos y Presupuesto (`CostBudgetEngine`)
+* **Activación Opcional:** Controlado por preferencia global `enable_cost_tracking` en `SharedPreferences`. Si es `false`, ocultar (`View.GONE`) todas las vistas de precios.
+* **Campos en `FoodProduct` (Room):** `double referencePrice`, `double referenceQuantityGrams`, `long priceUpdatedAt`. En `FoodLog`: `double estimatedCostSnapshot` (guarda el costo calculado al momento del registro para no alterar históricos pasados).
+* **Indicador de Antigüedad:** Si `priceUpdatedAt` supera los 30 días, mostrar badge sutil en `@color/macro_carbs` (*"Precio desactualizado"*).
+* **Integración UI:**
+  * Campo colapsable *"Precio de referencia (Opcional)"* en `ResultadoEscaneoSheet` y `DiarioCrearAlimentoFragment`.
+  * Píldora de gasto diario en `DiarioHomeFragment` y barra de presupuesto semanal en `PlanesComidaSemanalFragment` y `RecetasListaComprasFragment`.
+  * Métrica de eficiencia **"Costo por cada 10g de Proteína"** en `FoodSwapSheet`.

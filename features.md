@@ -4,7 +4,7 @@
 - **App Name**: LuPeFit
 - **Package**: com.lupefit.app
 - **Min SDK**: 28 (Android 9.0)
-- **Target SDK**: 34 (Android 14)
+- **Target SDK**: 36 (Android 14)
 - **Language**: Java + XML Views (traditional)
 - **Architecture**: Feature-modular (Enfoque A), Clean Architecture por feature
 - **Offline-first**: Room + WorkManager background sync
@@ -28,6 +28,9 @@
 | **md_theme_background** | `#F5FBF6` | `#0F1512` | Fondo principal |
 | **md_theme_surface** | `#FFFFFF` | `#171D1A` | Tarjetas |
 | **md_theme_surfaceVariant** | `#DBE5DD` | `#404943` | Variante de superficie |
+| **md_theme_surfaceContainer** | `#E8EFE8` | `#1C241F` | Contenedor superficie |
+| **md_theme_surfaceContainerHigh** | `#DCE4DC` | `#242D27` | Contenedor superficie alto |
+| **md_theme_surfaceContainerHighest** | `#D0D8D1` | `#2D372F` | Contenedor superficie máximo |
 | **md_theme_onSurface** | `#171D1A` | `#DFE4DF` | Texto principal |
 | **md_theme_onSurfaceVariant** | `#404943` | `#BFC9C2` | Texto secundario |
 | **md_theme_outline** | `#707973` | `#8A938C` | Divisores, bordes |
@@ -53,18 +56,19 @@
 
 ## Multi-Módulo Gradle Structure
 
-### Estado Actual: **Paso 2 - 4 Módulos Activos** (Simplificado de 14 planeados)
+### Estado Actual: **Paso 4 - 5 Módulos Activos** (Simplificado de 14 planeados)
 
 ```
 LuPeFit/
 ├── app/                          # Módulo principal (Application, DI Manual, Navigation)
 │   ├── data/local/               # Room Database, Entities, DAOs, TypeConverters
 │   ├── domain/                   # Repositories, Engines, UseCases (stubs Paso 1)
-│   └── ui/                       # Activities, Fragments (pendiente)
+│   └── ui/                       # Activities, Fragments (Escáner, Voz, etc. ✅)
 ├── core/
 │   ├── core-domain/              # Entidades dominio puras, Repository interfaces, Use Cases
 │   ├── core-ui/                  # Tema Material 3, Styles, Strings, Base Views, Components
-│   └── core-network/             # Retrofit, API Service, DTOs, SyncEngine, NetworkModule ✅
+│   ├── core-network/             # Retrofit, API Service, DTOs, SyncEngine, NetworkModule ✅
+│   └── core-sync/                # WorkManager Sync, Conflict Resolution, Queue ✅
 └── backend/                      # FastAPI + PostgreSQL (repositorio separado - PENDIENTE)
 ```
 
@@ -72,8 +76,7 @@ LuPeFit/
 
 ```
 ├── core/
-│   ├── core-network/             # Retrofit, API Service, DTOs, Sync Engine
-│   └── core-sync/                # WorkManager Sync, Conflict Resolution, Queue
+│   └── core-sync/                # WorkManager Sync, Conflict Resolution, Queue ✅
 ├── feature/
 │   ├── feature-diario/           # Diario de alimentos, búsqueda, quick-add, escaneo
 │   ├── feature-ejercicio/        # Ejercicios cardio/fuerza, rutinas, WOD, Timer
@@ -86,17 +89,18 @@ LuPeFit/
 │   ├── feature-perfil/           # Perfil, auth local, sync account
 │   ├── feature-insights/         # Insights nutricionales IA, tendencias, predicciones
 │   └── feature-planes/           # Planes de comida semanales, planes de entrenamiento
+```
 
 ## Features Principales (TODAS GRATIS - Sin Premium Gating)
 
 | Feature Module | Funcionalidad Completa Incluida |
 |----------------|--------------------------------|
-| **feature-diario** | Diario, búsqueda alimentos, quick add, escaneo código barras, **timestamps comida**, **macros por comida**, escaneo IA comida |
+| **feature-diario** | Diario, búsqueda alimentos, quick add, escaneo código barras, **timestamps comida**, **macros por comida**, escaneo IA comida, **voz (hands-free)** |
 | **feature-ejercicio** | Cardio/Fuerza, rutinas, **calorías ejercicio configurables**, RPE, series/reps |
 | **feature-nutricion** | Resumen macros, **metas por comida**, **macros por gramo/porcentaje**, **net carbs mode**, gráficos MPAndroidChart |
 | **feature-progreso** | Peso, medidas, fotos, **exportar datos (CSV/JSON)**, gráficos tendencia |
 | **feature-recetas** | Crear, importar URL, ingredientes, macros, **colecciones de recetas** |
-| **feature-escaneo** | Código barras (ML Kit), **escaneo IA comida (Passio SDK)** |
+| **feature-escaneo** | Código barras (ML Kit), **escaneo IA comida (Passio SDK)**, **catálogo offline-first** |
 | **feature-agua** | Seguimiento hidratación, meta diaria, recordatorios |
 | **feature-configuracion** | Settings, exportar datos, notificaciones, tema, **apariencia**, **metas personalizadas por día**, unidades |
 | **feature-perfil** | Auth local (email/password), sync account, perfil, **dashboard personalizable** |
@@ -116,6 +120,7 @@ LuPeFit/
 |---------|-------|-------------|
 | Usuario | `usuarios` | Email, password_hash, perfil antropométrico, metas |
 | PerfilNutricional | `perfiles_nutricionales` | Calorías, macros, metas por comida/día |
+| **FoodProduct** | `food_products` | **Catálogo offline-first: macros 100g, código barras, isFreshFood, precargado JSON** |
 | Alimento | `alimentos` | Info nutricional 100g, código barras, FTS5 search |
 | EntradaDiario | `entradas_diario` | Comida, porción, macros calculados, timestamp |
 | Ejercicio | `ejercicios` | MET value, tipo cardio/fuerza |
@@ -179,18 +184,20 @@ backend/
 | **Room + SQLite** | DB local |
 | **Retrofit + OkHttp** | Networking |
 | **WorkManager** | Background sync |
-| **Hilt/Dagger** | DI |
 | **MPAndroidChart** | Gráficos |
 | **ML Kit (Barcode/Text)** | Escaneo |
 | **Passio SDK** | IA comida (opcional) |
 | **TF Lite** | Inferencia local |
 | **Glide/Coil** | Imágenes |
 | **Material Components 3** | UI |
+| **Gson** | JSON parsing (catalog, OpenFoodFacts) |
+| **CameraX** | Preview + análisis |
+| **Lottie** | Animaciones |
 
 ## Navigation Graphs por Feature
 
 Cada feature tiene su `nav_*.xml`:
-- `nav_diario` → Diario, Buscar, QuickAdd, Escanear
+- `nav_diario` → Diario, Buscar, QuickAdd, Escanear, **Voz**
 - `nav_ejercicio` → Lista, Buscar, Nuevo, Rutinas
 - `nav_nutricion` → Resumen, Metas, Macros, Gráficos
 - `nav_progreso` → Peso, Medidas, Fotos, Gráficos, Exportar
@@ -206,11 +213,12 @@ Cada feature tiene su `nav_*.xml`:
 
 Completo en `core-ui/src/main/res/values-es-rAR/strings.xml`:
 - Auth: "Registrate", "Entrar", "¿Olvidaste tu contraseña?"
-- Diario: "Almuerzo", "Merienda", "Completar diario", "Agregado rápido"
+- Diario: "Almuerzo", "Merienda", "Completar diario", "Agregado rápido", **"Registro por voz"**
 - Ejercicio: "Series", "Repeticiones", "RPE", "Mis rutinas"
 - Nutrición: "Net Carbs", "Metas por comida", "Micronutrientes"
 - Progreso: "Exportar mis datos", "Frente/Lado/Espejo"
 - Config: "Sincronizar ahora", "Tema claro/oscuro/sistema", "Unidades métricas/imperiales"
+- Escaneo: **"Apuntá el código de barras al recuadro"**, "Ingreso manual", "No encontrado"
 - Errores: "Probá de nuevo", "Sin conexión. Trabajando en modo offline."
 
 ## Análisis Completado
@@ -221,7 +229,7 @@ Completo en `core-ui/src/main/res/values-es-rAR/strings.xml`:
 - [x] Native libs (4 × 4 archs)
 - [x] Navigation graphs (3)
 - [x] **Arquitectura LuPeFit definida** (Feature-modular)
-- [x] **Esquema Room definido** (13 entidades)
+- [x] **Esquema Room definido** (15 entidades incl. FoodProduct)
 - [x] **Sync engine diseñado** (Offline-first)
 - [x] **Backend FastAPI + Docker diseñado**
 - [x] **Tema Material 3 completo** (Light/Dark, colores, tipografía, formas, componentes)
@@ -232,10 +240,12 @@ Completo en `core-ui/src/main/res/values-es-rAR/strings.xml`:
 
 ## Próximos Pasos: Implementación
 
-1. **Setup proyecto Gradle** (settings.gradle.kts, version catalogs, build-logic)
-2. **Core modules** (core-data, core-domain, core-network, core-ui, core-sync)
-3. **Feature modules** (diario, ejercicio, nutricion, progreso, recetas, escaneo, agua, configuracion, perfil, insights, planes)
-4. **App module** (MainActivity, Hilt, Navigation, Bottom Nav)
-5. **Backend** (FastAPI, PostgreSQL, Docker, Sync batch endpoint)
-6. **Testing** (Unit, Integration, UI)
-7. **CI/CD** (GitHub Actions, Docker build, Deploy)
+1. **PASO 5 - Backend FastAPI + Docker Compose** (PostgreSQL, Redis, Celery, Sync batch endpoint, JWT Auth)
+2. **PASO 6 - Feature Modules UI** (11 módulos con Navigation graphs XML)
+3. **PASO 7 - Advanced Features** (Health Connect, CrossFit WOD, Dynamic Macros, Streaks, Mood, Notes)
+4. **Testing** (Unit, Integration, UI)
+5. **CI/CD** (GitHub Actions, Docker build, Deploy)
+
+---
+
+*Última actualización: 2026-11-20 - Paso 4 completado, BUILD SUCCESSFUL, listo para Paso 5*

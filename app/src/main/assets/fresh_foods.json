@@ -1,0 +1,312 @@
+[
+  {
+    "name": "Pechuga de pollo",
+    "brand": "",
+    "kcalPer100g": 165,
+    "proteinPer100g": 31,
+    "carbsPer100g": 0,
+    "fatPer100g": 3.6,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Huevo de gallina",
+    "brand": "",
+    "kcalPer100g": 155,
+    "proteinPer100g": 13,
+    "carbsPer100g": 1.1,
+    "fatPer100g": 11,
+    "defaultServingGrams": 50,
+    "isFreshFood": true
+  },
+  {
+    "name": "Leche entera de vaca",
+    "brand": "",
+    "kcalPer100g": 61,
+    "proteinPer100g": 3.2,
+    "carbsPer100g": 4.8,
+    "fatPer100g": 3.3,
+    "defaultServingGrams": 200,
+    "isFreshFood": true
+  },
+  {
+    "name": "Yogur natural",
+    "brand": "",
+    "kcalPer100g": 59,
+    "proteinPer100g": 10,
+    "carbsPer100g": 3.6,
+    "fatPer100g": 0.4,
+    "defaultServingGrams": 125,
+    "isFreshFood": true
+  },
+  {
+    "name": "Queso fresco",
+    "brand": "",
+    "kcalPer100g": 98,
+    "proteinPer100g": 11,
+    "carbsPer100g": 3.4,
+    "fatPer100g": 4.3,
+    "defaultServingGrams": 50,
+    "isFreshFood": true
+  },
+  {
+    "name": "Arroz blanco cocido",
+    "brand": "",
+    "kcalPer100g": 130,
+    "proteinPer100g": 2.7,
+    "carbsPer100g": 28,
+    "fatPer100g": 0.3,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Pasta cocida",
+    "brand": "",
+    "kcalPer100g": 131,
+    "proteinPer100g": 5,
+    "carbsPer100g": 25,
+    "fatPer100g": 1.1,
+    "defaultServingGrams": 100,
+    "isFreshFood": true
+  },
+  {
+    "name": "Papa cocida",
+    "brand": "",
+    "kcalPer100g": 77,
+    "proteinPer100g": 2,
+    "carbsPer100g": 17,
+    "fatPer100g": 0.1,
+    "defaultServingGrams": 200,
+    "isFreshFood": true
+  },
+  {
+    "name": "Boniato cocido",
+    "brand": "",
+    "kcalPer100g": 86,
+    "proteinPer100g": 1.6,
+    "carbsPer100g": 20,
+    "fatPer100g": 0.1,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Avena en hojuelas",
+    "brand": "",
+    "kcalPer100g": 389,
+    "proteinPer100g": 16.9,
+    "carbsPer100g": 66,
+    "fatPer100g": 6.9,
+    "defaultServingGrams": 50,
+    "isFreshFood": true
+  },
+  {
+    "name": "Plátano",
+    "brand": "",
+    "kcalPer100g": 89,
+    "proteinPer100g": 1.1,
+    "carbsPer100g": 23,
+    "fatPer100g": 0.3,
+    "defaultServingGrams": 120,
+    "isFreshFood": true
+  },
+  {
+    "name": "Manzana",
+    "brand": "",
+    "kcalPer100g": 52,
+    "proteinPer100g": 0.3,
+    "carbsPer100g": 14,
+    "fatPer100g": 0.2,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Naranja",
+    "brand": "",
+    "kcalPer100g": 47,
+    "proteinPer100g": 0.9,
+    "carbsPer100g": 12,
+    "fatPer100g": 0.1,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Frutilla",
+    "brand": "",
+    "kcalPer100g": 32,
+    "proteinPer100g": 0.7,
+    "carbsPer100g": 7.7,
+    "fatPer100g": 0.3,
+    "defaultServingGrams": 100,
+    "isFreshFood": true
+  },
+  {
+    "name": "Palta",
+    "brand": "",
+    "kcalPer100g": 160,
+    "proteinPer100g": 2,
+    "carbsPer100g": 8.5,
+    "fatPer100g": 15,
+    "defaultServingGrams": 100,
+    "isFreshFood": true
+  },
+  {
+    "name": "Tomate",
+    "brand": "",
+    "kcalPer100g": 18,
+    "proteinPer100g": 0.9,
+    "carbsPer100g": 3.9,
+    "fatPer100g": 0.2,
+    "defaultServingGrams": 100,
+    "isFreshFood": true
+  },
+  {
+    "name": "Lechuga",
+    "brand": "",
+    "kcalPer100g": 15,
+    "proteinPer100g": 1.4,
+    "carbsPer100g": 2.9,
+    "fatPer100g": 0.2,
+    "defaultServingGrams": 50,
+    "isFreshFood": true
+  },
+  {
+    "name": "Espinaca",
+    "brand": "",
+    "kcalPer100g": 23,
+    "proteinPer100g": 2.9,
+    "carbsPer100g": 3.6,
+    "fatPer100g": 0.4,
+    "defaultServingGrams": 100,
+    "isFreshFood": true
+  },
+  {
+    "name": "Brócoli",
+    "brand": "",
+    "kcalPer100g": 34,
+    "proteinPer100g": 2.8,
+    "carbsPer100g": 7,
+    "fatPer100g": 0.4,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Zanahoria",
+    "brand": "",
+    "kcalPer100g": 41,
+    "proteinPer100g": 0.9,
+    "carbsPer100g": 9.6,
+    "fatPer100g": 0.2,
+    "defaultServingGrams": 100,
+    "isFreshFood": true
+  },
+  {
+    "name": "Cebolla",
+    "brand": "",
+    "kcalPer100g": 40,
+    "proteinPer100g": 1.1,
+    "carbsPer100g": 9.3,
+    "fatPer100g": 0.1,
+    "defaultServingGrams": 50,
+    "isFreshFood": true
+  },
+  {
+    "name": "Pimiento rojo",
+    "brand": "",
+    "kcalPer100g": 31,
+    "proteinPer100g": 1,
+    "carbsPer100g": 6,
+    "fatPer100g": 0.3,
+    "defaultServingGrams": 100,
+    "isFreshFood": true
+  },
+  {
+    "name": "Pepino",
+    "brand": "",
+    "kcalPer100g": 15,
+    "proteinPer100g": 0.7,
+    "carbsPer100g": 3.6,
+    "fatPer100g": 0.1,
+    "defaultServingGrams": 100,
+    "isFreshFood": true
+  },
+  {
+    "name": "Atún fresco",
+    "brand": "",
+    "kcalPer100g": 144,
+    "proteinPer100g": 23.3,
+    "carbsPer100g": 0,
+    "fatPer100g": 4.9,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Salmón fresco",
+    "brand": "",
+    "kcalPer100g": 208,
+    "proteinPer100g": 20,
+    "carbsPer100g": 0,
+    "fatPer100g": 13,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Merluza",
+    "brand": "",
+    "kcalPer100g": 74,
+    "proteinPer100g": 16,
+    "carbsPer100g": 0,
+    "fatPer100g": 1,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Camarones",
+    "brand": "",
+    "kcalPer100g": 99,
+    "proteinPer100g": 24,
+    "carbsPer100g": 0.2,
+    "fatPer100g": 0.3,
+    "defaultServingGrams": 100,
+    "isFreshFood": true
+  },
+  {
+    "name": "Carne de res magra",
+    "brand": "",
+    "kcalPer100g": 250,
+    "proteinPer100g": 26,
+    "carbsPer100g": 0,
+    "fatPer100g": 15,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Cerdo magro",
+    "brand": "",
+    "kcalPer100g": 242,
+    "proteinPer100g": 27,
+    "carbsPer100g": 0,
+    "fatPer100g": 14,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Lentejas cocidas",
+    "brand": "",
+    "kcalPer100g": 116,
+    "proteinPer100g": 9,
+    "carbsPer100g": 20,
+    "fatPer100g": 0.4,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  },
+  {
+    "name": "Garbanzos cocidos",
+    "brand": "",
+    "kcalPer100g": 164,
+    "proteinPer100g": 8.9,
+    "carbsPer100g": 27,
+    "fatPer100g": 2.6,
+    "defaultServingGrams": 150,
+    "isFreshFood": true
+  }
+]
