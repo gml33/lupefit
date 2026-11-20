@@ -32,7 +32,7 @@
 
     <!-- Registro por voz -->
     <string name="diario_voz_titulo">Registro por voz</string>
-    <string name="diario_voz_subtitulo">Decí lo que comiste, ej: \"200 gramos de pollo y 100 de arroz\"</string>
+    <string name="diario_voz_subtitulo">Decí lo que comiste, ej: "200 gramos de pollo y 100 de arroz"</string>
     <string name="diario_voz_mic">Micrófono</string>
     <string name="diario_voz_toca_mic">Tocá el micrófono y empezá a hablar</string>
     <string name="diario_voz_escuchando">Escuchando…</string>
@@ -46,4 +46,40 @@
     <string name="diario_voz_confirmar">Confirmar y guardar</string>
     <string name="diario_voz_editar">Editar</string>
     <string name="diario_voz_alimento">Alimento</string>
+
+    <!-- Costos y Presupuesto -->
+    <string name="costo_precio_referencia">Precio de referencia</string>
+    <string name="costo_precio_pagado">Precio pagado ($)</string>
+    <string name="costo_peso_envase">Peso del envase (g)</string>
+    <string name="costo_presentaciones_rapidas">Presentaciones:</string>
+    <string name="costo_100g">100g</string>
+    <string name="costo_500g">500g</string>
+    <string name="costo_1kg">1 kg</string>
+    <string name="costo_personalizado">Personalizado</string>
+    <string name="costo_precio_desactualizado">Precio cargado hace %1$d días</string>
+    <string name="costo_guardar_precio">Guardar precio</string>
+    <string name="costo_icono">Icono costo</string>
+    <string name="costo_expandir">Expandir</string>
+    <string name="costo_alerta">Alerta</string>
+    <string name="costo_calculado_para">Calculado para %1$s g: %2$s</string>
+    <string name="costo_estimado_diario">Hoy: %1$s est.</string>
+
+    <!-- Presupuesto Semanal -->
+    <string name="presupuesto_semanal">Presupuesto semanal</string>
+    <string name="presupuesto_meta_no_definida">Sin meta definida</string>
+    <string name="presupuesto_editar_meta">Editar meta</string>
+    <string name="presupuesto_acumulado_cero">$0</string>
+    <string name="presupuesto_porcentaje_cero">0%</string>
+    <string name="presupuesto_sin_meta">Sin meta de presupuesto</string>
+    <string name="presupuesto_todos_con_precio">Todos los items tienen precio</string>
+    <string name="presupuesto_ver_detalle">Ver detalle</string>
+    <string name="presupuesto_icono">Icono presupuesto</string>
+
+    <!-- Configuración Costos -->
+    <string name="config_costo_tracking">Seguimiento de costos</string>
+    <string name="config_costo_tracking_desc">Activá para ver precios, costos por porción y presupuesto semanal</string>
+    <string name="config_presupuesto_semanal">Meta presupuesto semanal</string>
+    <string name="config_presupuesto_semanal_desc">Definí tu meta de gasto semanal en alimentos</string>
+    <string name="config_moneda">Moneda</string>
+    <string name="config_moneda_desc">Seleccioná tu moneda local</string>
 </resources>

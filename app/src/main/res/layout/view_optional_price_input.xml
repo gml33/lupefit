@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llOptionalPriceInput"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="gone"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="8dp">
+
+    <!-- Header colapsable -->
+    <LinearLayout
+        android:id="@+id/llPriceHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:paddingVertical="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@string/costo_icono"
+            android:src="@drawable/ic_attach_money"
+            app:tint="?attr/colorOnSurfaceVariant" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/costo_precio_referencia"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivPriceExpand"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/costo_expandir"
+            android:src="@drawable/ic_expand_more"
+            app:tint="?attr/colorOnSurfaceVariant" />
+    </LinearLayout>
+
+    <!-- Contenido expandible -->
+    <LinearLayout
+        android:id="@+id/llPriceContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:paddingTop="8dp">
+
+        <!-- Fila: Precio pagado + Presentación (peso envase) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilReferencePrice"
+                style="@style/Widget.LuPeFit.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                app:hintEnabled="true"
+                app:hintTextAppearance="@style/TextAppearance.LuPeFit.LabelSmall">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etReferencePrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/costo_precio_pagado"
+                    android:inputType="numberDecimal"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilReferenceQuantity"
+                style="@style/Widget.LuPeFit.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                app:hintEnabled="true"
+                app:hintTextAppearance="@style/TextAppearance.LuPeFit.LabelSmall">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etReferenceQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/costo_peso_envase"
+                    android:inputType="numberDecimal"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <!-- Chips rápidos para presentación común -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/costo_presentaciones_rapidas"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="12sp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipQty100g"
+                style="@style/Widget.LuPeFit.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/costo_100g" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipQty500g"
+                style="@style/Widget.LuPeFit.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/costo_500g" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipQty1kg"
+                style="@style/Widget.LuPeFit.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/costo_1kg" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipQtyCustom"
+                style="@style/Widget.LuPeFit.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/costo_personalizado" />
+        </LinearLayout>
+
+        <!-- Badge de precio desactualizado -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/llPriceStaleWarning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/macro_carbs_track"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/macro_carbs"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/costo_alerta"
+                    android:src="@drawable/ic_warning"
+                    app:tint="@color/macro_carbs" />
+
+                <TextView
+                    android:id="@+id/tvPriceStaleMessage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/costo_precio_desactualizado"
+                    android:textColor="@color/macro_carbs"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botón guardar precio -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSavePrice"
+            style="@style/Widget.LuPeFit.Button.Filled"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/costo_guardar_precio" />
+    </LinearLayout>
+
+</LinearLayout>

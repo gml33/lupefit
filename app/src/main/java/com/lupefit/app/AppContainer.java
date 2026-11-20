@@ -34,6 +34,7 @@ import com.lupefit.app.domain.repository.RecipeRepository;
 import com.lupefit.app.domain.repository.WaterLogRepository;
 import com.lupefit.app.domain.repository.ProgressPhotoRepository;
 import com.lupefit.app.data.local.repository.FoodCatalogRepository;
+import com.lupefit.app.data.local.preferences.UserPreferencesManager;
 import com.lupefit.app.domain.engine.MacroCalculatorEngine;
 import com.lupefit.app.domain.engine.StreakManager;
 import com.lupefit.app.domain.engine.HealthConnectManager;
@@ -100,6 +101,9 @@ public final class AppContainer {
     private volatile SyncQueueRepository syncQueueRepository;
     private volatile FoodCatalogRepository foodCatalogRepository;
 
+    // Preferences
+    private volatile UserPreferencesManager userPreferencesManager;
+
     // Engines
     private volatile MacroCalculatorEngine macroCalculatorEngine;
     private volatile StreakManager streakManager;
@@ -161,6 +165,9 @@ public final class AppContainer {
         progressPhotoRepository = new ProgressPhotoRepository(progressPhotoDao);
         syncQueueRepository = new SyncQueueRepository(database.syncQueueDao());
         foodCatalogRepository = new FoodCatalogRepository(context, foodProductDao);
+
+        // Preferences
+        userPreferencesManager = UserPreferencesManager.getInstance(context);
 
         // Engines
         macroCalculatorEngine = new MacroCalculatorEngine();
@@ -237,6 +244,8 @@ public final class AppContainer {
     public ProgressPhotoRepository getProgressPhotoRepository() { return progressPhotoRepository; }
     public SyncQueueRepository getSyncQueueRepository() { return syncQueueRepository; }
     public FoodCatalogRepository getFoodCatalogRepository() { return foodCatalogRepository; }
+
+    public UserPreferencesManager getUserPreferencesManager() { return userPreferencesManager; }
 
     public MacroCalculatorEngine getMacroCalculatorEngine() { return macroCalculatorEngine; }
     public StreakManager getStreakManager() { return streakManager; }

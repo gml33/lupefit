@@ -56,14 +56,14 @@
 
 ## Multi-Módulo Gradle Structure
 
-### Estado Actual: **Paso 4 - 5 Módulos Activos** (Simplificado de 14 planeados)
+### Estado Actual: **Paso 4.5 - 5 Módulos Activos** (Simplificado de 14 planeados)
 
 ```
 LuPeFit/
 ├── app/                          # Módulo principal (Application, DI Manual, Navigation)
 │   ├── data/local/               # Room Database, Entities, DAOs, TypeConverters
 │   ├── domain/                   # Repositories, Engines, UseCases (stubs Paso 1)
-│   └── ui/                       # Activities, Fragments (Escáner, Voz, etc. ✅)
+│   └── ui/                       # Activities, Fragments (Escáner, Voz, Costos ✅)
 ├── core/
 │   ├── core-domain/              # Entidades dominio puras, Repository interfaces, Use Cases
 │   ├── core-ui/                  # Tema Material 3, Styles, Strings, Base Views, Components
@@ -95,17 +95,17 @@ LuPeFit/
 
 | Feature Module | Funcionalidad Completa Incluida |
 |----------------|--------------------------------|
-| **feature-diario** | Diario, búsqueda alimentos, quick add, escaneo código barras, **timestamps comida**, **macros por comida**, escaneo IA comida, **voz (hands-free)** |
+| **feature-diario** | Diario, búsqueda alimentos, quick add, escaneo código barras, **timestamps comida**, **macros por comida**, escaneo IA comida, **voz (hands-free)**, **costos por porción** |
 | **feature-ejercicio** | Cardio/Fuerza, rutinas, **calorías ejercicio configurables**, RPE, series/reps |
 | **feature-nutricion** | Resumen macros, **metas por comida**, **macros por gramo/porcentaje**, **net carbs mode**, gráficos MPAndroidChart |
 | **feature-progreso** | Peso, medidas, fotos, **exportar datos (CSV/JSON)**, gráficos tendencia |
 | **feature-recetas** | Crear, importar URL, ingredientes, macros, **colecciones de recetas** |
 | **feature-escaneo** | Código barras (ML Kit), **escaneo IA comida (Passio SDK)**, **catálogo offline-first** |
 | **feature-agua** | Seguimiento hidratación, meta diaria, recordatorios |
-| **feature-configuracion** | Settings, exportar datos, notificaciones, tema, **apariencia**, **metas personalizadas por día**, unidades |
+| **feature-configuracion** | Settings, exportar datos, notificaciones, tema, **apariencia**, **metas personalizadas por día**, unidades, **cost tracking toggle**, **presupuesto semanal** |
 | **feature-perfil** | Auth local (email/password), sync account, perfil, **dashboard personalizable** |
 | **feature-insights** | **Insights nutricionales IA**, tendencias, predicciones, weekly digest, patrones |
-| **feature-planes** | **Planes de comida semanales**, planes de entrenamiento, quick log recipe |
+| **feature-planes** | **Planes de comida semanales**, planes de entrenamiento, quick log recipe, **presupuesto semanal** |
 
 ### Features EXCLUIDAS (por request)
 - ~~Blog~~ / ~~Community~~ / ~~Friends~~ / ~~Payments~~ / ~~Fasting~~
@@ -120,9 +120,9 @@ LuPeFit/
 |---------|-------|-------------|
 | Usuario | `usuarios` | Email, password_hash, perfil antropométrico, metas |
 | PerfilNutricional | `perfiles_nutricionales` | Calorías, macros, metas por comida/día |
-| **FoodProduct** | `food_products` | **Catálogo offline-first: macros 100g, código barras, isFreshFood, precargado JSON** |
+| **FoodProduct** | `food_products` | **Catálogo offline-first: macros 100g, código barras, isFreshFood, precargado JSON, referencePrice, referenceQuantityGrams, priceUpdatedAt** |
 | Alimento | `alimentos` | Info nutricional 100g, código barras, FTS5 search |
-| EntradaDiario | `entradas_diario` | Comida, porción, macros calculados, timestamp |
+| EntradaDiario | `entradas_diario` | Comida, porción, macros calculados, timestamp, **estimatedCostSnapshot** |
 | Ejercicio | `ejercicios` | MET value, tipo cardio/fuerza |
 | EntradaEjercicio | `entradas_ejercicio` | Duración, calorías, series, reps, peso, RPE |
 | Peso | `pesos` | Peso, grasa%, músculo, fecha |
@@ -197,15 +197,15 @@ backend/
 ## Navigation Graphs por Feature
 
 Cada feature tiene su `nav_*.xml`:
-- `nav_diario` → Diario, Buscar, QuickAdd, Escanear, **Voz**
+- `nav_diario` → Diario, Buscar, QuickAdd, Escanear, **Voz**, **Costos**
 - `nav_ejercicio` → Lista, Buscar, Nuevo, Rutinas
 - `nav_nutricion` → Resumen, Metas, Macros, Gráficos
 - `nav_progreso` → Peso, Medidas, Fotos, Gráficos, Exportar
 - `nav_recetas` → Lista, Crear, Importar, Detalle, Colecciones
-- `nav_configuracion` → Cuenta, Perfil, Metas, Notificaciones, Apariencia, Sync, Exportar
+- `nav_configuracion` → Cuenta, Perfil, Metas, Notificaciones, Apariencia, Sync, Exportar, **Cost Tracking**, **Presupuesto Semanal**
 - `nav_perfil` → Perfil, Editar, Password, Login, Registro
 - `nav_insights` → Semanal, Tendencias, Predicciones, Patrones
-- `nav_planes` → Comida, Entrenamiento, Mis Planes, Crear
+- `nav_planes` → Comida, Entrenamiento, Mis Planes, Crear, **Presupuesto**
 
 **Main Nav**: Bottom Navigation (Diario | Ejercicio | Nutrición | Progreso | Más)
 
@@ -213,12 +213,12 @@ Cada feature tiene su `nav_*.xml`:
 
 Completo en `core-ui/src/main/res/values-es-rAR/strings.xml`:
 - Auth: "Registrate", "Entrar", "¿Olvidaste tu contraseña?"
-- Diario: "Almuerzo", "Merienda", "Completar diario", "Agregado rápido", **"Registro por voz"**
+- Diario: "Almuerzo", "Merienda", "Completar diario", "Agregado rápido", **"Registro por voz"**, **"Costo estimado"**
 - Ejercicio: "Series", "Repeticiones", "RPE", "Mis rutinas"
 - Nutrición: "Net Carbs", "Metas por comida", "Micronutrientes"
 - Progreso: "Exportar mis datos", "Frente/Lado/Espejo"
-- Config: "Sincronizar ahora", "Tema claro/oscuro/sistema", "Unidades métricas/imperiales"
-- Escaneo: **"Apuntá el código de barras al recuadro"**, "Ingreso manual", "No encontrado"
+- Config: "Sincronizar ahora", "Tema claro/oscuro/sistema", "Unidades métricas/imperiales", **"Seguimiento de costos"**, **"Presupuesto semanal"**
+- Escaneo: **"Apuntá el código de barras al recuadro"**, "Ingreso manual", "No encontrado", **"Precio de referencia"**
 - Errores: "Probá de nuevo", "Sin conexión. Trabajando en modo offline."
 
 ## Análisis Completado
@@ -229,7 +229,7 @@ Completo en `core-ui/src/main/res/values-es-rAR/strings.xml`:
 - [x] Native libs (4 × 4 archs)
 - [x] Navigation graphs (3)
 - [x] **Arquitectura LuPeFit definida** (Feature-modular)
-- [x] **Esquema Room definido** (15 entidades incl. FoodProduct)
+- [x] **Esquema Room definido** (15 entidades incl. FoodProduct con costos)
 - [x] **Sync engine diseñado** (Offline-first)
 - [x] **Backend FastAPI + Docker diseñado**
 - [x] **Tema Material 3 completo** (Light/Dark, colores, tipografía, formas, componentes)
@@ -248,4 +248,4 @@ Completo en `core-ui/src/main/res/values-es-rAR/strings.xml`:
 
 ---
 
-*Última actualización: 2026-11-20 - Paso 4 completado, BUILD SUCCESSFUL, listo para Paso 5*
+*Última actualización: 2026-11-20 - Paso 4.5 completado, BUILD SUCCESSFUL, listo para Paso 5*

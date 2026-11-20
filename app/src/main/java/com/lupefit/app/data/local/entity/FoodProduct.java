@@ -14,6 +14,7 @@ import java.util.Objects;
 /**
  * Producto alimenticio para catálogo offline-first.
  * Incluye alimentos frescos (precargados) y productos escaneados de Open Food Facts.
+ * Extendido con campos opcionales de estimación de costos.
  */
 @Entity(
     tableName = "food_products",
@@ -60,6 +61,28 @@ public final class FoodProduct implements Parcelable {
     @ColumnInfo(name = "last_updated")
     public long lastUpdated;
 
+    // ==================== CAMPOS DE COSTOS (OPCIONALES) ====================
+    /**
+     * Precio de referencia pagado por el envase/presentación completa.
+     * 0.0 si no tiene precio asignado.
+     */
+    @ColumnInfo(name = "reference_price")
+    public double referencePrice = 0.0;
+
+    /**
+     * Peso en gramos del envase/presentación comprada (ej: 1000.0 para 1kg, 1800.0 para maple 30 huevos).
+     * 100.0 por defecto (precio por 100g).
+     */
+    @ColumnInfo(name = "reference_quantity_grams")
+    public double referenceQuantityGrams = 100.0;
+
+    /**
+     * Timestamp (epoch millis) de la última actualización del precio.
+     * Permite detectar precios desactualizados (>30 días) en contextos inflacionarios.
+     */
+    @ColumnInfo(name = "price_updated_at")
+    public long priceUpdatedAt = 0L;
+
     // Campos Offline-First (no sincronizados con backend, solo catálogo local)
     // No usamos isSynced/syncAction/serverId porque el catálogo es de solo lectura local
 
@@ -77,6 +100,9 @@ public final class FoodProduct implements Parcelable {
         defaultServingGrams = in.readDouble();
         isFreshFood = in.readByte() != 0;
         lastUpdated = in.readLong();
+        referencePrice = in.readDouble();
+        referenceQuantityGrams = in.readDouble();
+        priceUpdatedAt = in.readLong();
     }
 
     @Override
@@ -92,6 +118,9 @@ public final class FoodProduct implements Parcelable {
         dest.writeDouble(defaultServingGrams);
         dest.writeByte((byte) (isFreshFood ? 1 : 0));
         dest.writeLong(lastUpdated);
+        dest.writeDouble(referencePrice);
+        dest.writeDouble(referenceQuantityGrams);
+        dest.writeLong(priceUpdatedAt);
     }
 
     @Override

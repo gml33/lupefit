@@ -50,11 +50,17 @@ public class FoodLog {
     public double quantityGrams;
 
     public int calories;
+
     public double proteinGrams;
+
     public double carbsGrams;
+
     public double fatGrams;
+
     public double fiberGrams;
+
     public double sugarGrams;
+
     public double sodiumMg;
 
     @NonNull
@@ -73,6 +79,15 @@ public class FoodLog {
     public boolean fromVoiceInput = false;
     public boolean fromAIFoodScan = false;
     public String sourceType; // "MANUAL", "BARCODE", "AI_SCAN", "VOICE", "RECIPE", "QUICK_ADD"
+
+    // ==================== CAMPOS DE COSTOS ====================
+    /**
+     * Costo estimado congelado al momento del registro.
+     * Calculado como: (referencePrice / referenceQuantityGrams) * quantityGrams
+     * Se congela para evitar que futuras actualizaciones de precio por inflación
+     * alteren los gastos históricos ya registrados.
+     */
+    public double estimatedCostSnapshot = 0.0;
 
     @Override
     public boolean equals(Object o) {

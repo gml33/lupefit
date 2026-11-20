@@ -248,7 +248,26 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
+
+        <!-- Costo estimado (visible solo si cost tracking activado) -->
+        <TextView
+            android:id="@+id/tvEstimatedCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/costo_estimado_diario"
+            android:textColor="@color/macro_protein"
+            android:textSize="14sp"
+            android:visibility="gone" />
     </LinearLayout>
+
+    <!-- Bloque opcional de carga de precio (view_optional_price_input) -->
+    <include layout="@layout/view_optional_price_input"
+        android:id="@+id/includedPriceInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <!-- Botones de acción -->
     <LinearLayout

@@ -1,9 +1,9 @@
 # Avances - LuPeFit: Replicación y Rediseño Completo
 
-## Estado Actual: **PASO 4 - ESCÁNER + OPEN FOOD FACTS + CATÁLOGO + VOZ COMPLETADO** ✅
+## Estado Actual: **PASO 4.5 - COSTOS + PRESUPUESTO NUTRICIONAL COMPLETADO** ✅
 
 ### Fecha de Inicio: 2026-11-20
-### Fase Actual: Implementación - Paso 4 Completado (Scanner + Catalog + Voice)
+### Fase Actual: Implementación - Paso 4.5 Completado (Costs + Budget)
 
 ---
 
@@ -94,20 +94,43 @@
 - ✅ **Dependencias**: gson 2.11.0 agregada
 - ✅ **Build verificado**: BUILD SUCCESSFUL
 
-#### Hito 15: Backend FastAPI + Docker - PENDIENTE
+#### Hito 15: **PASO 4.5 - Estimación de Costos + Presupuesto Nutricional** ✅ **COMPLETADO**
+- ✅ **FoodProduct Entity extendido** - `referencePrice` (0.0 default), `referenceQuantityGrams` (100.0 default), `priceUpdatedAt` (timestamp)
+- ✅ **FoodLog Entity extendido** - `estimatedCostSnapshot` para congelar costo histórico (inflación)
+- ✅ **UserPreferencesManager** - SharedPreferences con feature toggle `enable_cost_tracking` (default true), `weekly_budget_goal`, `currency_code` (ARS default)
+- ✅ **CostBudgetEngine** - Motor de cálculo completo:
+  - `calculateServingCost(product, grams)` - (referencePrice / referenceQuantityGrams) * consumedGrams
+  - `isPriceOutdated(priceUpdatedAt)` - true si >30 días (alerta inflación)
+  - `calculateCostPer10gProtein(product)` - para FoodSwapEngine ordenar por eficiencia proteica
+  - `calculateWeeklyMenuBudget(items, goal)` - BudgetSummary con total, promedio diario, items sin precio, estado vs meta
+  - `formatCost(cost, currencyCode)` - NumberFormat.getCurrencyInstance(Locale es-AR)
+- ✅ **Layouts XML Material 3** (tokens only):
+  - `view_optional_price_input.xml` - Bloque colapsable: header expandible, 2 TextInputLayout (precio + peso), chips rápidos (100g/500g/1kg), badge precio desactualizado (>30 días), botón guardar
+  - `card_weekly_budget_summary.xml` - Card 24dp: título + meta, LinearProgressIndicator (acumulado vs meta), status row (estado + items sin precio), botón ver detalle
+- ✅ **Integración en ResultadoEscaneoSheet**:
+  - Feature toggle respeta `prefsManager.isCostTrackingEnabled()` → `View.GONE` sin espacios vacíos
+  - Binding correcto con `binding.includedPriceInput.getRoot()`
+  - Carga precio existente → muestra badge si >30 días
+  - Guardado actualiza Room + UI en tiempo real
+  - Costo estimado aparece en resumen calculado con formato moneda ARS
+- ✅ **AppContainer** - UserPreferencesManager wireado
+- ✅ **Strings** - costo_*, presupuesto_*, config_* agregados
+- ✅ **Build verificado**: BUILD SUCCESSFUL
+
+#### Hito 16: Backend FastAPI + Docker - PENDIENTE
 - Estructura completa: models, schemas, api/v1, services, tasks
 - SQLAlchemy models con UUID, índices, full-text search
 - JWT Auth (access/refresh tokens, bcrypt)
 - docker-compose.yml: postgres, redis, backend, celery-worker, celery-beat
 - Sync batch endpoint con versionado global
 
-#### Hito 16: Feature Modules UI & Navigation - PENDIENTE
+#### Hito 17: Feature Modules UI & Navigation - PENDIENTE
 - 11 feature modules (diario, ejercicio, nutricion, progreso, recetas, escaneo, agua, configuracion, perfil, insights, planes)
 - Navigation graphs por feature (XML)
 - Bottom Nav: Inicio | Tendencias | [FAB] | Planes | Perfil
 - Sin premium/upsell modules
 
-#### Hito 17: UI - Tema Material 3 Completo (core:core-ui) ✅
+#### Hito 18: UI - Tema Material 3 Completo (core:core-ui) ✅
 **Paleta LuPeFit Oficial (Tokens `md_theme_*`):**
 | Color | Light | Dark | Uso |
 |-------|-------|------|-----|
@@ -144,33 +167,33 @@
 - **Modo oscuro**: Completo (values-night/colors.xml + themes.xml con DayNight auto-switch)
 - **Elevation**: 0-1dp + stroke 1dp dark mode (tokens `md_theme_*`)
 
-#### Hito 18: 4 Componentes Base Obligatorios ✅
+#### Hito 19: 4 Componentes Base Obligatorios ✅
 1. `view_header_date.xml` - Selector fecha + avatar (Material 3)
 2. `card_macro_summary.xml` - CircularProgress 150dp/14dp + 3 LinearProgress 10dp (macro rings)
 3. `item_log_entry.xml` - Icono circular + título 15sp Bold + subtítulo 13sp + valor derecha
 4. `sheet_base_container.xml` - Píldora arrastre + título 18sp Bold + botón ancho completo
 
-#### Hito 19: Drawables Base ✅
+#### Hito 20: Drawables Base ✅
 - `ic_chevron_left.xml` / `ic_chevron_right.xml`
 - `ic_avatar_placeholder.xml` / `ic_food_placeholder.xml`
 - `bg_rounded_xs.xml` (4dp)
 - `nav_active_indicator.xml`
 - `splash_background.xml`
 
-#### Hito 20: Strings - Castellano Argentino ✅
+#### Hito 21: Strings - Castellano Argentino ✅
 - Archivo: `core/core-ui/src/main/res/values-es-rAR/strings.xml`
 - 365 strings localizadas (App, Auth, Diario, Ejercicio, Nutrición, Progreso, Recetas, Escaneo, Agua, Config, Perfil, Insights, Planes, Errores, Unidades, Macros, Accesibilidad)
 - Formato fecha: dd/MM/yyyy, hora: HH:mm
 - Términos: "Registrate", "Entrar", "Probá", "Tocá", "Apuntá", "Almuerzo", "Merienda"
 
-#### Hito 21: Documentación Actualizada (features.md v3) ✅
+#### Hito 22: Documentación Actualizada (features.md v3) ✅
 - Arquitectura LuPeFit completa
 - Module map actualizado (app + 2 core + 11 feature = 14 módulos)
 - Paleta de colores documentada (tokens `md_theme_*`)
 - Schema Room documentado (14 entidades + offline-first fields)
 - Build gradle configurado
 
-#### Hito 22: **PASO 1 - Esqueleto Base Compilable** ✅
+#### Hito 23: **PASO 1 - Esqueleto Base Compilable** ✅
 - **build.gradle (app)**: Material 3, Room (annotationProcessor), Health Connect, WorkManager, Play Services Location, MPAndroidChart
 - **MyApplication.java** + **AppContainer.java**: Inyección de Dependencias Manual (sin Hilt/Dagger/KAPT)
 - **AppDatabase.java** + **14 Entidades Room** con campos offline-first (isSynced, syncAction, serverId, timestamp, lastModified)
@@ -257,6 +280,17 @@
 63. `app/src/main/res/drawable/ic_flash_off.xml`, `ic_plus.xml`, `ic_minus.xml`, `ic_mic.xml`, `ic_edit.xml`, `ic_food_generic.xml`
 64. `app/src/main/res/values/ids.xml` - Animation tag IDs
 
+### Paso 4.5 - Costos + Presupuesto (App Module)
+65. `app/src/main/java/com/lupefit/app/data/local/entity/FoodProduct.java` - Extendido: referencePrice, referenceQuantityGrams, priceUpdatedAt
+66. `app/src/main/java/com/lupefit/app/data/local/entity/FoodLog.java` - Extendido: estimatedCostSnapshot
+67. `app/src/main/java/com/lupefit/app/data/local/preferences/UserPreferencesManager.java` - Feature toggle + budget + currency
+68. `app/src/main/java/com/lupefit/app/domain/engine/budget/CostBudgetEngine.java` - Motor completo de costos
+69. `app/src/main/res/layout/view_optional_price_input.xml` - Bloque colapsable precio (header, inputs, chips, badge stale)
+70. `app/src/main/res/layout/card_weekly_budget_summary.xml` - Card presupuesto semanal (progress, status, missing price)
+71. `app/src/main/java/com/lupefit/app/ui/escaneo/ResultadoEscaneoSheet.java` - Integración price block + feature toggle
+72. `app/src/main/java/com/lupefit/app/AppContainer.java` - UserPreferencesManager wireado
+73. `app/src/main/res/values/strings.xml` - costo_*, presupuesto_*, config_* agregados
+
 ---
 
 ## Resumen Técnico LuPeFit
@@ -271,7 +305,7 @@
 - User, FoodLog, WorkoutLog, WorkoutSet, Exercise, Food, Recipe, RecipeIngredient
 - WaterLog, ProgressPhoto, PersonalRecordEntity, GlucoseLog, MoodEntry, UserNote, WeatherSnapshot, Streak, **FoodProduct**
 - **Todas con offline-first**: `isSynced` (boolean), `syncAction` (CREATE/UPDATE/DELETE), `serverId` (String), `timestamp` (long), `lastModified` (long)
-- **FoodProduct**: catálogo offline-first (sin sync fields, solo lectura local)
+- **FoodProduct**: catálogo offline-first (sin sync fields, solo lectura local) + **costos opcionales**
 
 ### Backend (FastAPI + PostgreSQL) - PENDIENTE
 - 30+ endpoints REST organizados por feature
@@ -288,7 +322,7 @@
 | libpassiolib.so | Passio SDK (mantener) o custom TFLite |
 
 ### Features Incluidas (Todas Gratis)
-Diario, Ejercicio, Nutrición (Net Carbs, Metas por comida), Progreso (Export CSV/JSON), Recetas (Colecciones, Importar web), **Escaneo (Código barras + IA Comida)**, Agua, Configuración (Tema, Unidades, Sync), Perfil (Auth local), Insights (IA, Tendencias), Planes (Comida + Entrenamiento), **Voz (Hands-Free Logging)**
+Diario, Ejercicio, Nutrición (Net Carbs, Metas por comida), Progreso (Export CSV/JSON), Recetas (Colecciones, Importar web), **Escaneo (Código barras + IA Comida)**, Agua, Configuración (Tema, Unidades, Sync), Perfil (Auth local), Insights (IA, Tendencias), Planes (Comida + Entrenamiento), **Voz (Hands-Free Logging)**, **Costos + Presupuesto (Opcional)**
 
 ### Features Excluidas
 Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Facebook/Google Login, Samsung Health, Ads/Analytics terceros
@@ -355,11 +389,11 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 3. `core/core-ui/` - Tema Material 3 completo listo para usar
 4. `core/core-network/` - API Service, DTOs, SyncEngine, NetworkModule
 5. `core/core-sync/` - SyncWorker, SyncQueue, ConflictResolver, SyncScheduler
-6. `app/` - Esqueleto base compilable + Escáner + Catálogo + Voz (Paso 4 completado)
+6. `app/` - Esqueleto base compilable + Escáner + Catálogo + Voz + Costos (Paso 4.5 completado)
 7. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 4 (Escáner + Catálogo + Voz) 100% completo y compilando**. Próximo: **Paso 5 - Backend FastAPI + Docker**.
+**Estado**: **Paso 4.5 (Costos + Presupuesto) 100% completo y compilando**. Próximo: **Paso 5 - Backend FastAPI + Docker**.
 
 ---
 
-*Última actualización: 2026-11-20 - Paso 4 completado, BUILD SUCCESSFUL, listo para Paso 5*
+*Última actualización: 2026-11-20 - Paso 4.5 completado, BUILD SUCCESSFUL, listo para Paso 5*
