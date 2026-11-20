@@ -214,7 +214,7 @@ Completo en `core-ui/src/main/res/values-es-rAR/strings.xml`:
 
 ## Análisis Completado
 
-- [x] REA + apktool + jadx - Análisis completo MFP
+- [x] REA + apktool + jadx - Análisis completo App Referencia
 - [x] Multi-DEX mapping (12 DEX)
 - [x] Assets/config JSON (abtests, mpf_config, upsell)
 - [x] Native libs (4 × 4 archs)

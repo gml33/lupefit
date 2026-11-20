@@ -9,7 +9,7 @@
 
 ## Hitos Completados
 
-### ✅ Fase 1: Ingeniería Reversa MyFitnessPal (COMPLETA)
+### ✅ Fase 1: Ingeniería Reversa App de Referencia (COMPLETA)
 
 #### Hito 1: Información Básica del APK (REA)
 - Package: `com.myfitnesspal.android`, v22.24.2, SHA256 verificado
@@ -158,8 +158,8 @@
 
 ## Entregables Generados
 
-### Análisis MFP (Fase 1)
-1. `features.md` - v1: Análisis MFP completo
+### Análisis App Referencia (Fase 1)
+1. `features.md` - v1: Análisis App Referencia completo
 2. `avances.md` - Historial fase 1
 3. `manifest.xml` - 582 líneas
 4. `strings.json` - 2000 strings
@@ -282,13 +282,13 @@ cd /Users/marcelo/Desktop/Desarrollos/006
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
 ./gradlew :app:assembleDebug
 
-# Ver estructura MFP analizada
+# Ver estructura app referencia analizada
 find /Users/marcelo/Desktop/Desarrollos/006/apktool_out -type f -name "*.xml" | grep -E "(navigation|manifest)"
 
-# Buscar clases clave MFP
+# Buscar clases clave app referencia
 grep -r "class.*Activity" /Users/marcelo/Desktop/Desarrollos/006/jadx_out/sources/com/myfitnesspal/feature/ | head -30
 
-# Ver experimentos pricing MFP
+# Ver experimentos pricing app referencia
 jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/006/apktool_out/assets/config/abtests.json
 ```
 
@@ -301,7 +301,7 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 2. `avances.md` - Este historial
 3. `core/core-ui/` - Tema Material 3 completo listo para usar
 4. `app/` - Esqueleto base compilable (Paso 1 completado)
-5. `apktool_out/` / `jadx_out/` - Referencia MFP (regenerables)
+5. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
 **Estado**: **Paso 1 (Esqueleto Base) 100% completo y compilando**. Próximo: **Paso 2 - Core Network & Sync + Backend**.
 

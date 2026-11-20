@@ -1,6 +1,6 @@
 # LuPeFit 🏋️‍♂️🥗
 
-> **Aplicación de nutrición y entrenamiento offline-first, inspirada en MyFitnessPal, pero 100% gratuita, sin publicidad, con backend propio y en castellano argentino.**
+> **Aplicación de nutrición y entrenamiento offline-first, 100% gratuita, sin publicidad, con backend propio y en castellano argentino.**
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/gml33/lupefit/actions)
 [![Java 17+](https://img.shields.io/badge/Java-17+-orange)](https://openjdk.org/)
