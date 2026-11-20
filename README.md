@@ -25,7 +25,7 @@
 | ![Progreso](docs/screenshots/progreso_light.svg) | ![Progreso Dark](docs/screenshots/progreso_dark.svg) |
 | *Gráficos de Progreso* | *Gráficos de Progreso (Oscuro)* |
 
-> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 1 - Esqueleto Base**.
+> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 3 - Core Sync Module Completado**.
 
 ---
 
@@ -44,8 +44,8 @@
 | **Tema** | Material 3 (Tokens `md_theme_*`) | ✅ Paso 1 |
 | **BD Local** | Room (annotationProcessor) + Offline-First | ✅ Paso 1 |
 | **DI** | Manual (AppContainer) - Sin Hilt/Dagger | ✅ Paso 1 |
-| **Sync** | WorkManager + Backend propio | 🔄 Paso 2 |
-| **Backend** | FastAPI + PostgreSQL + Docker | 🔄 Paso 2 |
+| **Sync** | WorkManager + Backend propio | ✅ Paso 3 |
+| **Backend** | FastAPI + PostgreSQL + Docker | 🔄 Paso 4 |
 
 ### 🌙 **Modo Oscuro Completo**
 - Switch automático (DayNight) + toggle manual
@@ -70,14 +70,13 @@
 | **Core UI** | Tema M3 completo, 4 componentes base, drawables, strings AR |
 | **App Container** | DI Manual puro Java (218 líneas, zero reflection) |
 
-### 🔄 **En Desarrollo (Paso 2)**
+### 🔄 **En Desarrollo (Paso 4)**
 | Módulo | Descripción |
 |--------|-------------|
 | **Core Network** | Retrofit, API Service, DTOs, SyncEngine |
-| **Core Sync** | WorkManager SyncWorker, Conflict Resolution |
 | **Backend** | FastAPI + PostgreSQL + Redis + Celery (Docker) |
 
-### 📋 **Planificados (Pasos 3-4)**
+### 📋 **Planificados (Pasos 5-6)**
 
 #### **Feature Modules (11 módulos)**
 | Módulo | Funcionalidades Clave |
@@ -211,12 +210,12 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
 ```
 
 ### Estructura del Proyecto
-```
+```text
 LuPeFit/
 ├── app/                          # Módulo principal
 │   ├── src/main/java/com/lupefit/app/
 │   │   ├── MyApplication.java           # Application class
-│   │   ├── AppContainer.java            # Manual DI (218 líneas)
+│   │   ├── AppContainer.java            # Manual DI (218+ líneas)
 │   │   ├── data/local/                  # Room DB, Entities, DAOs
 │   │   ├── domain/                      # Repositories, Engines, UseCases
 │   │   └── ui/                          # Activities, Fragments (pendiente)
@@ -225,24 +224,28 @@ LuPeFit/
 ├── core/
 │   ├── core-domain/              # Entidades dominio, interfaces
 │   │   └── build.gradle.kts
-│   └── core-ui/                  # Tema M3, Styles, Components, Strings AR
-│       ├── src/main/res/
-│       │   ├── values/colors.xml          # Paleta Light (tokens md_theme_*)
-│       │   ├── values-night/colors.xml    # Paleta Dark
-│       │   ├── values/themes.xml          # Tema Light (480+ líneas)
-│       │   ├── values-night/themes.xml    # Tema Dark
-│       │   ├── values/styles.xml          # 20+ Widget Styles
-│       │   ├── values/dimens.xml          # Espaciado, elevation, touch targets
-│       │   ├── values/integers.xml        # Duraciones animaciones
-│       │   ├── color/*.xml                # 12 ColorStateLists
-│       │   ├── drawable/*.xml             # Icons, backgrounds
-│       │   ├── layout/                    # 4 Componentes base
-│       │   └── values-es-rAR/strings.xml  # 365 strings argentino
+│   ├── core-ui/                  # Tema M3, Styles, Components, Strings AR
+│   │   ├── src/main/res/
+│   │   │   ├── values/colors.xml          # Paleta Light (tokens md_theme_*)
+│   │   │   ├── values-night/colors.xml    # Paleta Dark
+│   │   │   ├── values/themes.xml          # Tema Light (480+ líneas)
+│   │   │   ├── values-night/themes.xml    # Tema Dark
+│   │   │   ├── values/styles.xml          # 20+ Widget Styles
+│   │   │   ├── values/dimens.xml          # Espaciado, elevation, touch targets
+│   │   │   ├── values/integers.xml        # Duraciones animaciones
+│   │   │   ├── color/*.xml                # 12 ColorStateLists
+│   │   │   ├── drawable/*.xml             # Icons, backgrounds
+│   │   │   ├── layout/                    # 4 Componentes base
+│   │   │   └── values-es-rAR/strings.xml  # 365 strings argentino
+│   │   └── build.gradle.kts
+│   ├── core-network/             # Retrofit, API Service, DTOs, SyncEngine ✅
+│   │   └── build.gradle.kts
+│   └── core-sync/                # WorkManager, SyncQueue, ConflictResolver ✅
 │       └── build.gradle.kts
 ├── gradle/
 │   ├── libs.versions.toml        # Version Catalog
 │   └── wrapper/                  # Gradle 8.11.1
-├── settings.gradle.kts           # include(:app, :core:core-domain, :core:core-ui)
+├── settings.gradle.kts           # include(:app, :core:core-domain, :core:core-ui, :core:core-network, :core:core-sync)
 ├── build.gradle.kts              # Root plugins
 ├── gradle.properties             # JVM args, Android configs
 ├── UI_DESIGN_SYSTEM.md           # Fuente de verdad diseño
@@ -258,10 +261,12 @@ LuPeFit/
 | Paso | Descripción | Estado | Commit |
 |------|-------------|--------|--------|
 | **1** | **Esqueleto Base Compilable** | ✅ **COMPLETADO** | `d9942ea` |
-| 2 | Core Network + Sync + Backend Docker | 🔄 En progreso | - |
-| 3 | 11 Feature Modules (UI + Lógica) | ⏳ Pendiente | - |
-| 4 | Advanced Features (Health Connect, Voice, CrossFit, Macros Dinámicos, Streaks, Mood) | ⏳ Pendiente | - |
-| 5 | Testing, CI/CD, Release | ⏳ Pendiente | - |
+| **2** | **Core Network Module** | ✅ **COMPLETADO** | `9414165` |
+| **3** | **Core Sync Module** | ✅ **COMPLETADO** | `b4d06cd` |
+| 4 | Backend FastAPI + Docker Compose | 🔄 En progreso | - |
+| 5 | 11 Feature Modules (UI + Lógica) | ⏳ Pendiente | - |
+| 6 | Advanced Features (Health Connect, Voice, CrossFit, Macros Dinámicos, Streaks, Mood) | ⏳ Pendiente | - |
+| 7 | Testing, CI/CD, Release | ⏳ Pendiente | - |
 
 ### ✅ Paso 1 - Entregables Verificados
 - [x] `build.gradle` (app) con dependencias exactas
@@ -275,7 +280,7 @@ LuPeFit/
 
 ---
 
-## 🐳 Backend (Próximo - Paso 2)
+## 🐳 Backend (Próximo - Paso 4)
 
 ```yaml
 # docker-compose.yml (planificado)
@@ -419,4 +424,4 @@ copies of the Software...
 
 > **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17+ • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
-**Última actualización**: 2026-11-20 | **Versión**: 1.0.0-Paso1 | **Build**: `d9942ea` ✅
+**Última actualización**: 2026-11-20 | **Versión**: 1.0.0-Paso3 | **Build**: `a75b287` ✅
