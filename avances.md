@@ -1,9 +1,9 @@
 # Avances - LuPeFit: Replicación y Rediseño Completo
 
-## Estado Actual: **PASO 2 - CORE NETWORK MODULE COMPLETADO** ✅
+## Estado Actual: **PASO 3 - CORE SYNC MODULE COMPLETADO** ✅
 
 ### Fecha de Inicio: 2026-11-20
-### Fase Actual: Implementación - Paso 2 Completado (Core Network)
+### Fase Actual: Implementación - Paso 3 Completado (Core Sync)
 
 ---
 
@@ -62,14 +62,20 @@
 - 14 interfaces Repository
 - 7+ Use Cases principales (FoodLog, WorkoutLog, PersonalRecord, GlucoseLog, MoodEntry, UserNote, UserProfile)
 
-#### Hito 13: Capa de Red & Sincronización (core-network, core-sync) ✅ **COMPLETADO (core-network)**
+#### Hito 13: Capa de Red & Sincronización (core-network, core-sync) ✅ **COMPLETADO**
 - ✅ **core:core-network module** - Retrofit + OkHttp + Moshi configurado
 - ✅ **LuPeFitApiService** - 30+ endpoints REST definidos (Auth, Sync, Food Logs, Workout Logs, Progress, Recipes, Foods, Water, Exercises, PRs, Glucose, Mood, Notes, Settings)
 - ✅ **DTOs completos** - Request/Response para todas las entidades (Auth, Food, Workout, Progress, Recipe, Water, Exercise, PR, Glucose, Mood, Note, Sync, User)
 - ✅ **NetworkModule** - Configuración Retrofit/OkHttp/Moshi con AuthInterceptor
 - ✅ **SyncEngine** - Motor de sincronización batch bidireccional con CompletableFuture
-- 🔄 **core:core-sync module** - WorkManager SyncWorker (PENDIENTE - próximo paso)
-- 🔄 **Conflict Resolution** - Server-wins / Merge / Latest-wins (PENDIENTE)
+- ✅ **core:core-sync module** - WorkManager SyncWorker con factory pattern
+- ✅ **SyncQueueDao/Repository** - Cola de sincronización offline-first con backoff exponencial
+- ✅ **ConflictResolver** - Resolución de conflictos (SERVER_WINS, CLIENT_WINS, MERGE, MANUAL)
+- ✅ **SyncScheduler** - Programación de sync periódico (15 min) + constraints (red, batería)
+- ✅ **SyncQueueItem entity + DAO** en core-sync + app module (Room)
+- ✅ **AppContainer** actualizado con networkSyncEngine (core-network SyncEngine)
+- ✅ **MyApplication** implementa SyncWorkerFactoryProvider
+- ✅ **Build verificado**: BUILD SUCCESSFUL
 
 #### Hito 14: Backend FastAPI + Docker - PENDIENTE
 - Estructura completa: models, schemas, api/v1, services, tasks
@@ -249,11 +255,14 @@ Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Fac
 
 ## Próximos Pasos: Implementación Continua
 
-### PASO 3: Core Sync Module + Backend
-1. `core:core-sync` - WorkManager SyncWorker (periodic + connectivity), Conflict Resolution, SyncQueue
-2. Backend FastAPI + Docker Compose (PostgreSQL, Redis, Celery)
+### PASO 4: Backend FastAPI + Docker Compose
+1. Backend FastAPI + Docker Compose (PostgreSQL, Redis, Celery)
+2. SQLAlchemy models + Pydantic schemas
+3. JWT Auth endpoints
+4. Sync batch endpoint `/api/v1/sync/batch`
+5. docker-compose.yml con postgres, redis, backend, celery-worker, celery-beat
 
-### PASO 4: Feature Modules (11 módulos)
+### PASO 5: Feature Modules (11 módulos)
 - `feature-diario` → DiarioFragment, BuscarAlimento, QuickAdd, EscanearCodigoBarras
 - `feature-ejercicio` → Lista, Buscar, Nuevo, Rutinas, WOD CrossFit, Timer
 - `feature-nutricion` → Resumen, Metas, Macros, Gráficos (MPAndroidChart)
@@ -266,7 +275,7 @@ Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Fac
 - `feature-insights` → Semanal, Tendencias, Predicciones, Patrones
 - `feature-planes` → Comida, Entrenamiento, Mis Planes, Quick Log
 
-### PASO 5: Advanced Features (v2.0-v4.0)
+### PASO 6: Advanced Features (v2.0-v4.0)
 - Health Connect Integration (Steps, Active Calories, Exercise Sessions, Heart Rate)
 - Voice Logging (SpeechRecognizer + Whisper Strategy)
 - CrossFit WOD Module (AMRAP, EMOM, For Time, Tabata) + Timer
@@ -303,11 +312,12 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 2. `avances.md` - Este historial
 3. `core/core-ui/` - Tema Material 3 completo listo para usar
 4. `core/core-network/` - API Service, DTOs, SyncEngine, NetworkModule
-5. `app/` - Esqueleto base compilable (Paso 1 completado)
-6. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
+5. `core/core-sync/` - SyncWorker, SyncQueue, ConflictResolver, SyncScheduler
+6. `app/` - Esqueleto base compilable (Paso 1 completado)
+7. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 2 (Core Network) 100% completo y compilando**. Próximo: **Paso 3 - Core Sync + Backend**.
+**Estado**: **Paso 3 (Core Sync) 100% completo y compilando**. Próximo: **Paso 4 - Backend FastAPI + Docker**.
 
 ---
 
-*Última actualización: 2026-11-20 - Paso 2 completado, BUILD SUCCESSFUL, listo para Paso 3*
+*Última actualización: 2026-11-20 - Paso 3 completado, BUILD SUCCESSFUL, listo para Paso 4*
