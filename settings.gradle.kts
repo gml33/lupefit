@@ -26,3 +26,4 @@ rootProject.name = "LuPeFit"
 include(":app")
 include(":core:core-domain")
 include(":core:core-ui")
+include(":core:core-network")

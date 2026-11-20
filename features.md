@@ -53,7 +53,7 @@
 
 ## Multi-Módulo Gradle Structure
 
-### Estado Actual: **Paso 1 - 3 Módulos Activos** (Simplificado de 14 planeados)
+### Estado Actual: **Paso 2 - 4 Módulos Activos** (Simplificado de 14 planeados)
 
 ```
 LuPeFit/
@@ -63,7 +63,8 @@ LuPeFit/
 │   └── ui/                       # Activities, Fragments (pendiente)
 ├── core/
 │   ├── core-domain/              # Entidades dominio puras, Repository interfaces, Use Cases
-│   └── core-ui/                  # Tema Material 3, Styles, Strings, Base Views, Components
+│   ├── core-ui/                  # Tema Material 3, Styles, Strings, Base Views, Components
+│   └── core-network/             # Retrofit, API Service, DTOs, SyncEngine, NetworkModule ✅
 └── backend/                      # FastAPI + PostgreSQL (repositorio separado - PENDIENTE)
 ```
 

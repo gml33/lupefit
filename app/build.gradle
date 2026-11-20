@@ -51,8 +51,9 @@ dependencies {
     implementation libs.androidx.recyclerview
     implementation libs.androidx.swiperefreshlayout
 
-    // Core UI module
+    // Core modules
     implementation project(":core:core-ui")
+    implementation project(":core:core-network")
 
     // Material Design 3
     implementation libs.material
