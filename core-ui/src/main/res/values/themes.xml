@@ -1,54 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ============================================================
-         LUPEFIT - TEMAS MATERIAL 3
+         LUPEFIT - TEMA MATERIAL 3 (UI_DESIGN_SYSTEM)
          ============================================================ -->
     
     <!-- Tema Base Light -->
     <style name="Theme.LuPeFit" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Color Scheme Light -->
-        <item name="colorPrimary">@color/lupefit_primary</item>
-        <item name="colorPrimaryContainer">@color/lupefit_primary_container</item>
-        <item name="colorOnPrimary">@color/lupefit_on_primary</item>
-        <item name="colorOnPrimaryContainer">@color/lupefit_on_primary_container</item>
+        <!-- Color Scheme Light (tokens md_theme_*) -->
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
         
-        <item name="colorSecondary">@color/lupefit_secondary</item>
-        <item name="colorSecondaryContainer">@color/lupefit_secondary_container</item>
-        <item name="colorOnSecondary">@color/lupefit_on_secondary</item>
-        <item name="colorOnSecondaryContainer">@color/lupefit_on_secondary_container</item>
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_secondaryContainer</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</item>
         
-        <item name="colorTertiary">@color/lupefit_tertiary</item>
-        <item name="colorTertiaryContainer">@color/lupefit_tertiary_container</item>
-        <item name="colorOnTertiary">@color/lupefit_on_tertiary</item>
-        <item name="colorOnTertiaryContainer">@color/lupefit_on_tertiary_container</item>
+        <item name="colorTertiary">@color/macro_protein</item>
+        <item name="colorTertiaryContainer">@color/macro_protein_track</item>
+        <item name="colorOnTertiary">@color/md_theme_onPrimary</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_onSurface</item>
         
-        <item name="colorError">@color/lupefit_error</item>
-        <item name="colorErrorContainer">@color/lupefit_error_container</item>
-        <item name="colorOnError">@color/lupefit_on_error</item>
-        <item name="colorOnErrorContainer">@color/lupefit_on_error_container</item>
+        <item name="colorError">@color/status_error</item>
+        <item name="colorErrorContainer">@color/md_theme_error_container</item>
+        <item name="colorOnError">@color/md_theme_onPrimary</item>
+        <item name="colorOnErrorContainer">@color/md_theme_onSurface</item>
         
-        <item name="colorSurface">@color/lupefit_surface</item>
-        <item name="colorSurfaceVariant">@color/lupefit_surface_variant</item>
-        <item name="colorSurfaceContainer">@color/lupefit_surface_container</item>
-        <item name="colorSurfaceContainerHigh">@color/lupefit_surface_container_high</item>
-        <item name="colorSurfaceContainerHighest">@color/lupefit_surface_container_highest</item>
-        <item name="colorOnSurface">@color/lupefit_on_surface</item>
-        <item name="colorOnSurfaceVariant">@color/lupefit_on_surface_variant</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</item>
         
-        <item name="colorBackground">@color/lupefit_background</item>
-        <item name="colorOnBackground">@color/lupefit_on_background</item>
+        <item name="colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_onBackground</item>
         
-        <item name="colorOutline">@color/lupefit_outline</item>
-        <item name="colorOutlineVariant">@color/lupefit_outline_variant</item>
+        <item name="colorOutline">@color/md_theme_outline</item>
         
-        <item name="colorInverseSurface">@color/lupefit_inverse_surface</item>
-        <item name="colorInverseOnSurface">@color/lupefit_inverse_on_surface</item>
-        <item name="colorInversePrimary">@color/lupefit_inverse_primary</item>
+        <item name="colorInverseSurface">@color/md_theme_inverse_surface</item>
+        <item name="colorInverseOnSurface">@color/md_theme_inverse_on_surface</item>
+        <item name="colorInversePrimary">@color/md_theme_primaryContainer</item>
         
-        <item name="colorScrim">@color/lupefit_scrim</item>
-        <item name="colorShadow">@color/lupefit_shadow</item>
-        
-        <!-- Elevation Overlays (para modo oscuro automático) -->
+        <!-- Elevation Overlays -->
         <item name="elevationOverlayEnabled">true</item>
         
         <!-- Typography - Material 3 Type Scale -->
@@ -65,17 +58,15 @@
         <item name="textAppearanceLabelMedium">@style/TextAppearance.LuPeFit.LabelMedium</item>
         <item name="textAppearanceLabelSmall">@style/TextAppearance.LuPeFit.LabelSmall</item>
         
-        <!-- Shapes - Material 3 Shape Scale -->
-        <item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.LuPeFit.CornerExtraSmall</item>
-        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.LuPeFit.CornerSmall</item>
-        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.LuPeFit.CornerMedium</item>
-        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.LuPeFit.CornerLarge</item>
-        <item name="shapeAppearanceCornerExtraLarge">@style/ShapeAppearance.LuPeFit.CornerExtraLarge</item>
+        <!-- Shapes - UI_DESIGN_SYSTEM especs -->
+        <item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.LuPeFit.CornerExtraSmall</item>  <!-- 4dp -->
+        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.LuPeFit.CornerSmall</item>      <!-- 8dp -->
+        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.LuPeFit.CornerMedium</item>    <!-- 12dp -->
+        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.LuPeFit.CornerLarge</item>     <!-- 16dp -->
+        <item name="shapeAppearanceCornerExtraLarge">@style/ShapeAppearance.LuPeFit.CornerExtraLarge</item> <!-- 28dp -->
         
         <!-- Component Overrides -->
         <item name="materialButtonStyle">@style/Widget.LuPeFit.Button</item>
-        <item name="materialButtonOutlinedStyle">@style/Widget.LuPeFit.Button.Outlined</item>
-        <item name="materialButtonTextStyle">@style/Widget.LuPeFit.Button.Text</item>
         <item name="filledButtonStyle">@style/Widget.LuPeFit.Button.Filled</item>
         <item name="tonalButtonStyle">@style/Widget.LuPeFit.Button.Tonal</item>
         <item name="outlinedButtonStyle">@style/Widget.LuPeFit.Button.Outlined</item>
@@ -105,17 +96,17 @@
     <!-- Tema para Splash Screen -->
     <style name="Theme.LuPeFit.Splash" parent="Theme.LuPeFit">
         <item name="android:windowBackground">@drawable/splash_background</item>
-        <item name="android:windowSplashScreenBackground">@color/lupefit_primary</item>
+        <item name="android:windowSplashScreenBackground">@color/md_theme_primary</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_lupefit_splash</item>
         <item name="android:windowSplashScreenAnimationDuration">300</item>
     </style>
     
-    <!-- Tema para Activities con Toolbar personalizada -->
+    <!-- Tema para Toolbar personalizada -->
     <style name="Theme.LuPeFit.Toolbar" parent="Theme.LuPeFit">
         <item name="toolbarStyle">@style/Widget.LuPeFit.Toolbar</item>
     </style>
     
-    <!-- Tema para Bottom Sheets modales -->
+    <!-- Tema para Bottom Sheets modales (esquinas 28dp) -->
     <style name="Theme.LuPeFit.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Widget.LuPeFit.BottomSheet.Modal</item>
     </style>

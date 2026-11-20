@@ -1,101 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ============================================================
-         LUPEFIT - PALETA MODO OSCURO (Material 3)
+         LUPEFIT - MODO OSCURO (UI_DESIGN_SYSTEM)
+         Tokens oficiales: md_theme_*
          ============================================================ -->
     
-    <!-- Brand Colors - Dark -->
-    <color name="lupefit_primary">#B7D86B</color>           <!-- Verde lima suave -->
-    <color name="lupefit_primary_container">#167D62</color>   <!-- Verde petróleo -->
-    <color name="lupefit_on_primary">#18211D</color>
-    <color name="lupefit_on_primary_container">#F6F8F5</color>
+    <!-- Identidad Principal -->
+    <color name="md_theme_primary">#6CDBAC</color>
+    <color name="md_theme_onPrimary">#003826</color>
+    <color name="md_theme_primaryContainer">#005138</color>
+    <color name="md_theme_onPrimaryContainer">#89F8C7</color>
     
-    <color name="lupefit_secondary">#F2A541</color>           <!-- Ámbar -->
-    <color name="lupefit_secondary_container">#8B6000</color>
-    <color name="lupefit_on_secondary">#18211D</color>
-    <color name="lupefit_on_secondary_container">#FFF3E0</color>
+    <!-- Secundarios y Superficies -->
+    <color name="md_theme_secondary">#B3CCBE</color>
+    <color name="md_theme_onSecondary">#1F352A</color>
+    <color name="md_theme_secondaryContainer">#354B40</color>
+    <color name="md_theme_onSecondaryContainer">#CFE9D9</color>
     
-    <color name="lupefit_tertiary">#90CAF9</color>            <!-- Azul claro -->
-    <color name="lupefit_tertiary_container">#0D47A1</color>
-    <color name="lupefit_on_tertiary">#18211D</color>
-    <color name="lupefit_on_tertiary_container">#E3F2FD</color>
+    <color name="md_theme_background">#0F1512</color>
+    <color name="md_theme_onBackground">#DFE4DF</color>
+    <color name="md_theme_surface">#171D1A</color>
+    <color name="md_theme_onSurface">#DFE4DF</color>
+    <color name="md_theme_surfaceVariant">#404943</color>
+    <color name="md_theme_onSurfaceVariant">#BFC9C2</color>
+    <color name="md_theme_outline">#8A938C</color>
     
-    <!-- Surface & Background - Dark -->
-    <color name="lupefit_surface">#1E1E1E</color>             <!-- Tarjetas oscuras -->
-    <color name="lupefit_surface_variant":#2A2A2A</color>
-    <color name="lupefit_surface_container">#232323</color>
-    <color name="lupefit_surface_container_high">#2C2C2C</color>
-    <color name="lupefit_surface_container_highest">#363636</color>
-    <color name="lupefit_on_surface">#F6F8F5</color>          <!-- Texto principal claro -->
-    <color name="lupefit_on_surface_variant">#B7B9B5</color>   <!-- Texto secundario claro -->
+    <!-- Semánticos: Macronutrientes -->
+    <color name="macro_protein">#60A5FA</color>
+    <color name="macro_protein_track">#1E3A8A</color>
+    <color name="macro_carbs">#FBBF24</color>
+    <color name="macro_carbs_track">#78350F</color>
+    <color name="macro_fat">#A78BFA</color>
+    <color name="macro_fat_track">#4C1D95</color>
     
-    <color name="lupefit_background">#121212</color>          <!-- Fondo principal oscuro -->
-    <color name="lupefit_on_background">#F6F8F5</color>
+    <!-- Semánticos: Hidratación y Estados -->
+    <color name="water_primary">#38BDF8</color>
+    <color name="water_track">#0C4A6E</color>
+    <color name="status_success">#4ADE80</color>
+    <color name="status_error">#FFB4AB</color>
     
-    <!-- Error - Dark -->
-    <color name="lupefit_error">#F2B8B5</color>
-    <color name="lupefit_error_container">#8C1D18</color>
-    <color name="lupefit_on_error">#18211D</color>
-    <color name="lupefit_on_error_container">#FCEEEE</color>
-    
-    <!-- Outline & Dividers - Dark -->
-    <color name="lupefit_outline">#8A8D88</color>
-    <color name="lupefit_outline_variant">#4A4D48</color>
-    
-    <!-- Inverse - Dark -->
-    <color name="lupefit_inverse_surface">#F6F8F5</color>
-    <color name="lupefit_inverse_on_surface">#18211D</color>
-    <color name="lupefit_inverse_primary">#167D62</color>
-    
-    <!-- Scrim / Shadow -->
-    <color name="lupefit_scrim">#000000</color>
-    <color name="lupefit_shadow">#000000</color>
-    
-    <!-- ============================================================
-         COLORES SEMÁNTICOS POR FEATURE - DARK
-         ============================================================ -->
-    
-    <!-- Macros -->
-    <color name="color_macros_proteinas">#90CAF9</color>
-    <color name="color_macros_proteinas_container">#0D47A1</color>
-    <color name="color_macros_carbohidratos">#F2A541</color>
-    <color name="color_macros_carbohidratos_container">#8B6000</color>
-    <color name="color_macros_grasas">#B7D86B</color>
-    <color name="color_macros_grasas_container">#167D62</color>
-    <color name="color_macros_fibra">#D7CCC8</color>
-    <color name="color_macros_fibra_container">#4E342E</color>
-    
-    <!-- Features -->
-    <color name="color_agua">#81D4FA</color>
-    <color name="color_agua_container">#01579B</color>
-    <color name="color_ejercicio">#F48FB1</color>
-    <color name="color_ejercicio_container">#880E4F</color>
-    <color name="color_peso">#CE93D8</color>
-    <color name="color_peso_container">#4A148C</color>
-    <color name="color_insights">#B39DDB</color>
-    <color name="color_insights_container">#311B92</color>
-    <color name="color_planes">#80CBC4</color>
-    <color name="color_planes_container">#004D40</color>
-    <color name="color_recetas">#FFCCBC</color>
-    <color name="color_recetas_container">#BF360C</color>
-    
-    <!-- Estados -->
-    <color name="color_exito">#B7D86B</color>
-    <color name="color_exito_container">#167D62</color>
-    <color name="color_advertencia">#F2A541</color>
-    <color name="color_advertencia_container">#8B6000</color>
-    <color name="color_info">#90CAF9</color>
-    <color name="color_info_container">#0D47A1</color>
-    
-    <!-- On-colors para semánticos dark -->
-    <color name="on_color_macros_proteinas">#18211D</color>
-    <color name="on_color_macros_carbohidratos">#18211D</color>
-    <color name="on_color_macros_grasas">#18211D</color>
-    <color name="on_color_macros_fibra">#18211D</color>
-    <color name="on_color_agua">#18211D</color>
-    <color name="on_color_ejercicio">#18211D</color>
-    <color name="on_color_peso">#18211D</color>
-    <color name="on_color_insights">#18211D</color>
-    <color name="on_color_planes">#18211D</color>
-    <color name="on_color_recetas">#18211D</color>
+    <!-- Alias de compatibilidad -->
+    <color name="colorPrimary">@color/md_theme_primary</color>
+    <color name="colorOnPrimary">@color/md_theme_onPrimary</color>
+    <color name="colorPrimaryContainer">@color/md_theme_primaryContainer</color>
+    <color name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</color>
+    <color name="colorSecondary">@color/md_theme_secondary</color>
+    <color name="colorOnSecondary">@color/md_theme_onSecondary</color>
+    <color name="colorSecondaryContainer">@color/md_theme_secondaryContainer</color>
+    <color name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</color>
+    <color name="colorBackground">@color/md_theme_background</color>
+    <color name="colorOnBackground">@color/md_theme_onBackground</color>
+    <color name="colorSurface">@color/md_theme_surface</color>
+    <color name="colorOnSurface">@color/md_theme_onSurface</color>
+    <color name="colorSurfaceVariant">@color/md_theme_surfaceVariant</color>
+    <color name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</color>
+    <color name="colorOutline">@color/md_theme_outline</color>
+    <color name="colorError">@color/status_error</color>
+    <color name="colorOnError">@color/md_theme_onPrimary</color>
 </resources>

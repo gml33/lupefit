@@ -270,4 +270,19 @@
     <string name="formato_fecha_corta">dd/MM/yyyy</string>
     <string name="formato_fecha_larga">dd \'de\' MMMM \'de\' yyyy</string>
     <string name="formato_hora">HH:mm</string>
+
+    <!-- Macros labels (para card_macro_summary) -->
+    <string name="macros_proteinas">Proteínas</string>
+    <string name="macros_carbohidratos">Carbohidratos</string>
+    <string name="macros_grasas">Grasas</string>
+
+    <!-- Componentes base (view_header_date, sheet_base_container) -->
+    <string name="fecha_anterior">Fecha anterior</string>
+    <string name="fecha_siguiente">Fecha siguiente</string>
+    <string name="avatar_usuario">Avatar del usuario</string>
+
+    <!-- item_log_entry -->
+    <string name="macro_proteinas">Proteínas</string>
+    <string name="macro_carbohidratos">Carbohidratos</string>
+    <string name="macro_grasas">Grasas</string>
 </resources>

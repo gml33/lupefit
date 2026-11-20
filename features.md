@@ -10,27 +10,46 @@
 - **Offline-first**: Room + WorkManager background sync
 - **Backend**: Python + FastAPI + PostgreSQL (Docker)
 
-## Paleta de Colores (Material 3) - Dirección Visual
+## Paleta de Colores (Material 3) - UI_DESIGN_SYSTEM (Fuente de Verdad)
 
-| Color | Hex | Uso |
-|-------|-----|-----|
-| **Primary** | `#167D62` | Verde petróleo - Acciones principales, FAB, botones primarios |
-| **Primary Container** | `#B7D86B` | Verde lima suave - Contenedores primarios, chips seleccionados |
-| **Secondary** | `#F2A541` | Ámbar - Actividad, datos destacados, acentos |
-| **Secondary Container** | `#FFF3E0` / `#8B6000` | Contenedores secundarios |
-| **Tertiary** | `#2196F3` | Azul - Proteínas, info |
-| **Surface** | `#FFFFFF` / `#1E1E1E` | Tarjetas (claro/oscuro) |
-| **Surface Variant** | `#F6F8F5` / `#2A2A2A` | Fondo claro / variante oscura |
-| **Background** | `#F6F8F5` / `#121212` | Fondo principal |
-| **On Surface** | `#18211D` / `#F6F8F5` | Texto principal |
-| **On Surface Variant** | `#66736D` / `#B7B9B5` | Texto secundario |
-| **Error** | `#B3261E` / `#F2B8B5` | Solo errores/alertas |
-| **Outline** | `#C4C7C3` / `#8A8D88` | Divisores, bordes |
+| Token | Light | Dark | Uso |
+|-------|-------|------|-----|
+| **md_theme_primary** | `#006C4C` | `#6CDBAC` | Verde petróleo - Acciones principales, FAB, botones primarios |
+| **md_theme_primaryContainer** | `#89F8C7` | `#005138` | Contenedores primarios, chips seleccionados |
+| **md_theme_secondary** | `#4D6357` | `#B3CCBE` | Verde musgo - Secundario, acentos |
+| **md_theme_secondaryContainer** | `#CFE9D9` | `#354B40` | Contenedores secundarios |
+| **md_theme_tertiary** | `#2563EB` | `#60A5FA` | Azul - Proteínas |
+| **macro_protein** | `#2563EB` | `#60A5FA` | Proteínas |
+| **macro_carbs** | `#D97706` | `#FBBF24` | Carbohidratos (Ámbar) |
+| **macro_fat** | `#7C3AED` | `#A78BFA` | Grasas (Violeta) |
+| **water_primary** | `#0284C7` | `#38BDF8` | Hidratación (Celeste) |
+| **status_success** | `#16A34A` | `#4ADE80` | Éxito |
+| **status_error** | `#BA1A1A` | `#FFB4AB` | Solo errores/alertas |
+| **md_theme_background** | `#F5FBF6` | `#0F1512` | Fondo principal |
+| **md_theme_surface** | `#FFFFFF` | `#171D1A` | Tarjetas |
+| **md_theme_surfaceVariant** | `#DBE5DD` | `#404943` | Variante de superficie |
+| **md_theme_onSurface** | `#171D1A` | `#DFE4DF` | Texto principal |
+| **md_theme_onSurfaceVariant** | `#404943` | `#BFC9C2` | Texto secundario |
+| **md_theme_outline** | `#707973` | `#8A938C` | Divisores, bordes |
+
+**Regla de Oro**: Nunca usar colores hex hardcodeados en layouts ni Java. Usar siempre `@color/md_theme_*` o `?attr/colorSurface`, etc.
 
 **Tipografía**: Material 3 Type Scale (Display > Headline > Title > Body > Label)
-**Formas**: 4dp (xs), 8dp (sm), 12dp (md), 16dp (lg), 28dp (xl)
-**Espaciado**: Escala de 4dp (2, 4, 8, 12, 16, 24, 32, 48)
+**Formas (UI_DESIGN_SYSTEM)**: 4dp (xs), 8dp (sm), 12dp (md - items RecyclerView), 16dp (lg - dialogs), 24dp (card - tarjetas principales), 28dp (xl - BottomSheet), 50% (pill - botones/FAB)
+**Espaciado**: Escala 4dp (2, 4, 8, 12, 16, 20, 24, 32, 48)
+**Elevation**: 0-1dp + stroke 1dp en dark mode
 **Modo oscuro**: Completo con values-night/colors.xml
+
+### Componentes Base Obligatorios (core-ui)
+1. **view_header_date.xml** - Encabezado con selector fecha, flechas, avatar
+2. **card_macro_summary.xml** - Tarjeta 24dp, CircularProgressIndicator 150dp/14dp + 3 LinearProgressIndicator 10dp
+3. **item_log_entry.xml** - Fila estándar: icono circular, título 15sp Bold, subtítulo 13sp, valor derecha
+4. **sheet_base_container.xml** - BottomSheet: píldora arrastre, título 18sp Bold, botón acción ancho completo
+
+### Convención Nomenclatura (UI_DESIGN_SYSTEM)
+- Fragments: `[Modulo][Nombre]Fragment.java` → `fragment_[modulo]_[nombre].xml`
+- BottomSheets/Dialogs: `[Modulo][Nombre]Sheet.java` → `sheet_[modulo]_[nombre].xml`
+- Adapters/Items: `[Nombre]Adapter.java` → `item_[nombre].xml`
 
 ## Multi-Módulo Gradle Structure
 

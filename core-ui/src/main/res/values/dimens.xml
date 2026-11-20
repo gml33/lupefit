@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ============================================================
-         LUPEFIT - DIMENSIONES Y ESPACIADO CONSISTENTE
-         Basado en escala de 4dp (Material Design)
+         LUPEFIT - DIMENSIONES Y ESPACIADO (UI_DESIGN_SYSTEM)
          ============================================================ -->
     
     <!-- Espaciado base (4dp) -->
@@ -15,31 +14,36 @@
     <dimen name="spacing_xxl">32dp</dimen>
     <dimen name="spacing_xxxl">48dp</dimen>
     
-    <!-- Márgenes estándar -->
+    <!-- Márgenes estándar (UI_DESIGN_SYSTEM) -->
     <dimen name="margin_screen">16dp</dimen>
     <dimen name="margin_card">12dp</dimen>
+    <dimen name="margin_card_alt">16dp</dimen>
     <dimen name="margin_section">24dp</dimen>
     <dimen name="margin_component">8dp</dimen>
     
-    <!-- Padding estándar -->
+    <!-- Padding estándar (UI_DESIGN_SYSTEM) -->
     <dimen name="padding_screen">16dp</dimen>
-    <dimen name="padding_card">16dp</dimen>
+    <dimen name="padding_card">20dp</dimen>           <!-- Tarjetas principales -->
+    <dimen name="padding_card_list_item">16dp</dimen>  <!-- Ítems RecyclerView -->
     <dimen name="padding_button_horizontal">24dp</dimen>
     <dimen name="padding_button_vertical">12dp</dimen>
     <dimen name="padding_chip">12dp</dimen>
     <dimen name="padding_fab">16dp</dimen>
     
-    <!-- Border radius -->
-    <dimen name="radius_xs">4dp</dimen>
-    <dimen name="radius_sm">8dp</dimen>
-    <dimen name="radius_md">12dp</dimen>
-    <dimen name="radius_lg">16dp</dimen>
-    <dimen name="radius_xl">28dp</dimen>
-    <dimen name="radius_full">9999dp</dimen>
+    <!-- Border radius (UI_DESIGN_SYSTEM) -->
+    <dimen name="radius_xs">4dp</dimen>              <!-- Chips, badges -->
+    <dimen name="radius_sm">8dp</dimen>              <!-- TextInput, Chips grandes, Progress track -->
+    <dimen name="radius_md">12dp</dimen>             <!-- Tarjetas RecyclerView items -->
+    <dimen name="radius_lg">16dp</dimen>             <!-- Dialogs, Menús -->
+    <dimen name="radius_card">24dp</dimen>           <!-- Tarjetas principales / Dashboard -->
+    <dimen name="radius_button">14dp</dimen>         <!-- Botones principales -->
+    <dimen name="radius_pill">9999dp</dimen>         <!-- Botones pill, FAB -->
+    <dimen name="radius_bottom_sheet">28dp</dimen>   <!-- BottomSheetDialogFragment -->
+    <dimen name="radius_progress_track">8dp</dimen>  <!-- Barras de progreso -->
     
-    <!-- Elevation -->
-    <dimen name="elevation_card">2dp</dimen>
-    <dimen name="elevation_card_raised">4dp</dimen>
+    <!-- Elevation (UI_DESIGN_SYSTEM: 0-1dp + stroke en dark) -->
+    <dimen name="elevation_card">1dp</dimen>
+    <dimen name="elevation_card_raised">2dp</dimen>
     <dimen name="elevation_fab">6dp</dimen>
     <dimen name="elevation_bottom_sheet">8dp</dimen>
     <dimen name="elevation_modal">12dp</dimen>
@@ -61,9 +65,14 @@
     <dimen name="divider_thin">1dp</dimen>
     <dimen name="divider_thick">2dp</dimen>
     
-    <!-- Progress -->
-    <dimen name="progress_thickness">4dp</dimen>
-    <dimen name="progress_track_thickness">4dp</dimen>
+    <!-- Progress (UI_DESIGN_SYSTEM) -->
+    <dimen name="progress_thickness">14dp</dimen>          <!-- CircularProgressIndicator grosor -->
+    <dimen name="progress_track_thickness">10dp</dimen>    <!-- LinearProgressIndicator grosor -->
+    <dimen name="progress_track_corner_radius">8dp</dimen> <!-- trackCornerRadius -->
+    
+    <!-- CircularProgressIndicator macro card -->
+    <dimen name="macro_circular_size">150dp</dimen>
+    <dimen name="macro_circular_stroke">14dp</dimen>
     
     <!-- Bottom Navigation -->
     <dimen name="bottom_nav_height">72dp</dimen>
@@ -94,6 +103,10 @@
     <dimen name="avatar_lg">56dp</dimen>
     <dimen name="avatar_xl">72dp</dimen>
     <dimen name="avatar_xxl">96dp</dimen>
+    
+    <!-- Header fecha (view_header_date) -->
+    <dimen name="header_date_avatar_size">40dp</dimen>
+    <dimen name="header_date_text_size">20sp</dimen>
     
     <!-- Animaciones -->
     <dimen name="animation_duration_short">150ms</dimen>

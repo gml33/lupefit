@@ -2,13 +2,11 @@
 <resources>
     <!-- ============================================================
          LUPEFIT - TEMA MODO OSCURO (values-night)
-         Hereda de Theme.LuPeFit, los colores vienen de values-night/colors.xml
+         Hereda colores de values-night/colors.xml (tokens md_theme_*)
+         Typography y Shapes iguales al tema light
          ============================================================ -->
     
     <style name="Theme.LuPeFit" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Los colores se toman automáticamente de values-night/colors.xml -->
-        <!-- Typography y Shapes igual que en light -->
-        
         <!-- Typography - Material 3 Type Scale -->
         <item name="textAppearanceHeadlineLarge">@style/TextAppearance.LuPeFit.HeadlineLarge</item>
         <item name="textAppearanceHeadlineMedium">@style/TextAppearance.LuPeFit.HeadlineMedium</item>
@@ -23,7 +21,7 @@
         <item name="textAppearanceLabelMedium">@style/TextAppearance.LuPeFit.LabelMedium</item>
         <item name="textAppearanceLabelSmall">@style/TextAppearance.LuPeFit.LabelSmall</item>
         
-        <!-- Shapes - Material 3 Shape Scale -->
+        <!-- Shapes - UI_DESIGN_SYSTEM specs -->
         <item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.LuPeFit.CornerExtraSmall</item>
         <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.LuPeFit.CornerSmall</item>
         <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.LuPeFit.CornerMedium</item>
@@ -32,8 +30,6 @@
         
         <!-- Component Overrides -->
         <item name="materialButtonStyle">@style/Widget.LuPeFit.Button</item>
-        <item name="materialButtonOutlinedStyle">@style/Widget.LuPeFit.Button.Outlined</item>
-        <item name="materialButtonTextStyle">@style/Widget.LuPeFit.Button.Text</item>
         <item name="filledButtonStyle">@style/Widget.LuPeFit.Button.Filled</item>
         <item name="tonalButtonStyle">@style/Widget.LuPeFit.Button.Tonal</item>
         <item name="outlinedButtonStyle">@style/Widget.LuPeFit.Button.Outlined</item>
@@ -63,7 +59,7 @@
     <!-- Tema para Splash Screen en modo oscuro -->
     <style name="Theme.LuPeFit.Splash" parent="Theme.LuPeFit">
         <item name="android:windowBackground">@drawable/splash_background_night</item>
-        <item name="android:windowSplashScreenBackground">@color/lupefit_primary</item>
+        <item name="android:windowSplashScreenBackground">@color/md_theme_primary</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_lupefit_splash</item>
         <item name="android:windowSplashScreenAnimationDuration">300</item>
     </style>

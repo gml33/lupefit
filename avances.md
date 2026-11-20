@@ -114,6 +114,22 @@
 - Backend endpoints documentados
 - Native libs replacement plan
 
+#### Hito 19: Alineación con UI_DESIGN_SYSTEM (Fuente de Verdad) ✅
+- **core-ui/** completamente reescrito para coincidir con UI_DESIGN_SYSTEM.md
+- **Paleta oficial**: Tokens `md_theme_*` (Primary `#006C4C`, Secondary `#4D6357`, etc.)
+- **Regla de Oro**: Cero hex hardcodeado - solo `@color/md_theme_*` / `?attr/`
+- **Formas exactas**: Card 24dp, List items 16dp, Buttons pill (50%), BottomSheet 28dp, Progress track 8dp
+- **Elevation**: 0-1dp + stroke 1dp dark mode
+- **4 Componentes base obligatorios creados**:
+  1. `view_header_date.xml` - Selector fecha + avatar
+  2. `card_macro_summary.xml` - CircularProgress 150dp/14dp + 3 LinearProgress 10dp
+  3. `item_log_entry.xml` - Icono circular + título 15sp Bold + subtítulo 13sp + valor derecha
+  4. `sheet_base_container.xml` - Píldora arrastre + título 18sp Bold + botón ancho completo
+- **Drawables base**: ic_chevron_left/right, ic_avatar_placeholder, ic_food_placeholder, bg_rounded_xs
+- **Strings**: macros labels, fecha_anterior/siguiente, avatar_usuario
+- **build.gradle.kts** + proguard-rules + consumer-rules para módulo core-ui
+- **Convención nomenclatura estricta**: `[Modulo][Nombre]Fragment` → `fragment_[modulo]_[nombre].xml`
+
 ---
 
 ## Entregables Generados
@@ -131,16 +147,24 @@
 
 ### Diseño LuPeFit (Fase 2)
 10. `features.md` - v2: **Arquitectura LuPeFit completa**
-11. `core-ui/src/main/res/values/colors.xml` - Paleta light
-12. `core-ui/src/main/res/values-night/colors.xml` - Paleta dark
+11. `core-ui/src/main/res/values/colors.xml` - Paleta light (tokens `md_theme_*`)
+12. `core-ui/src/main/res/values-night/colors.xml` - Paleta dark (tokens `md_theme_*`)
 13. `core-ui/src/main/res/values/themes.xml` - Tema Material 3 light
 14. `core-ui/src/main/res/values-night/themes.xml` - Tema Material 3 dark
-15. `core-ui/src/main/res/values/styles.xml` - 25+ widget styles
+15. `core-ui/src/main/res/values/styles.xml` - 25+ widget styles (UI_DESIGN_SYSTEM specs)
 16. `core-ui/src/main/res/values/dimens.xml` - Espaciado, elevation, icon sizes, touch targets
 17. `core-ui/src/main/res/color/*.xml` - 12 color state lists
 18. `core-ui/src/main/res/drawable/nav_active_indicator.xml`
 19. `core-ui/src/main/res/drawable/splash_background.xml` + `_night.xml`
 20. `core-ui/src/main/res/values-es-rAR/strings.xml` - 200+ strings argentino
+21. `core-ui/src/main/res/layout/view_header_date.xml` - Componente base 1
+22. `core-ui/src/main/res/layout/card_macro_summary.xml` - Componente base 2
+23. `core-ui/src/main/res/layout/item_log_entry.xml` - Componente base 3
+24. `core-ui/src/main/res/layout/sheet_base_container.xml` - Componente base 4
+25. `core-ui/src/main/res/drawable/ic_chevron_left.xml` / `ic_chevron_right.xml`
+26. `core-ui/src/main/res/drawable/ic_avatar_placeholder.xml` / `ic_food_placeholder.xml`
+27. `core-ui/src/main/res/drawable/bg_rounded_xs.xml`
+28. `core-ui/build.gradle.kts` + `proguard-rules.pro` + `consumer-rules.pro`
 
 ---
 

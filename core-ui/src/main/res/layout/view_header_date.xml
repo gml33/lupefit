@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- view_header_date.xml - Encabezado superior con selector de fecha, flechas y avatar -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel" type="com.lupefit.core.ui.common.HeaderDateViewModel" />
+    </data>
+
+    <androidx.cardview.widget.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_screen"
+        android:layout_marginTop="@dimen/margin_screen"
+        android:layout_marginBottom="@dimen/spacing_sm"
+        app:cardCornerRadius="@dimen/radius_card"
+        app:cardElevation="@dimen/elevation_card"
+        app:strokeColor="@color/md_theme_outline"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_card">
+
+            <!-- Flecha anterior -->
+            <ImageButton
+                android:id="@+id/btnDatePrev"
+                android:layout_width="@dimen/touch_target_min"
+                android:layout_height="@dimen/touch_target_min"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/fecha_anterior"
+                android:padding="@dimen/spacing_xs"
+                android:src="@drawable/ic_chevron_left"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvDate"
+                tools:ignore="ImageContrastCheck" />
+
+            <!-- Fecha central (clickeable para date picker) -->
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.formattedDate}"
+                android:textAppearance="@style/TextAppearance.LuPeFit.TitleLarge"
+                android:textColor="?attr/colorOnSurface"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnDateNext"
+                app:layout_constraintStart_toEndOf="@+id/btnDatePrev"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Hoy, 20 Nov" />
+
+            <!-- Flecha siguiente -->
+            <ImageButton
+                android:id="@+id/btnDateNext"
+                android:layout_width="@dimen/touch_target_min"
+                android:layout_height="@dimen/touch_target_min"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/fecha_siguiente"
+                android:padding="@dimen/spacing_xs"
+                android:src="@drawable/ic_chevron_right"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+                app:layout_constraintEnd_toStartOf="@+id/ivAvatar"
+                app:layout_constraintTop_toTopOf="@+id/tvDate"
+                tools:ignore="ImageContrastCheck" />
+
+            <!-- Avatar usuario -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="@dimen/header_date_avatar_size"
+                android:layout_height="@dimen/header_date_avatar_size"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:contentDescription="@string/avatar_usuario"
+                android:src="@drawable/ic_avatar_placeholder"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvDate"
+                tools:ignore="ImageContrastCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.MaterialCardView>
+</layout>

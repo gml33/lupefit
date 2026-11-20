@@ -1,106 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ============================================================
-         LUPEFIT - PALETA DE COLORES (Material 3)
+         LUPEFIT - SISTEMA DE COLOR MATERIAL 3 (UI_DESIGN_SYSTEM)
+         Tokens oficiales: md_theme_*
+         NUNCA usar hex hardcodeado en layouts ni Java.
          ============================================================ -->
     
-    <!-- Brand Colors -->
-    <color name="lupefit_primary">#167D62</color>        <!-- Verde petróleo - Acciones principales -->
-    <color name="lupefit_primary_container">#B7D86B</color>  <!-- Verde lima suave - Contenedores primarios -->
-    <color name="lupefit_on_primary">#FFFFFF</color>
-    <color name="lupefit_on_primary_container">#18211D</color>
+    <!-- Identidad Principal -->
+    <color name="md_theme_primary">#006C4C</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#89F8C7</color>
+    <color name="md_theme_onPrimaryContainer">#002114</color>
     
-    <color name="lupefit_secondary">#F2A541</color>        <!-- Ámbar - Actividad, datos destacados -->
-    <color name="lupefit_secondary_container">#FFF3E0</color>
-    <color name="lupefit_on_secondary">#FFFFFF</color>
-    <color name="lupefit_on_secondary_container">#18211D</color>
+    <!-- Secundarios y Superficies -->
+    <color name="md_theme_secondary">#4D6357</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_secondaryContainer">#CFE9D9</color>
+    <color name="md_theme_onSecondaryContainer">#0A1F16</color>
     
-    <color name="lupefit_tertiary">#2196F3</color>         <!-- Azul - Proteínas -->
-    <color name="lupefit_tertiary_container">#E3F2FD</color>
-    <color name="lupefit_on_tertiary">#FFFFFF</color>
-    <color name="lupefit_on_tertiary_container">#18211D</color>
+    <color name="md_theme_background">#F5FBF6</color>
+    <color name="md_theme_onBackground">#171D1A</color>
+    <color name="md_theme_surface">#FFFFFF</color>
+    <color name="md_theme_onSurface">#171D1A</color>
+    <color name="md_theme_surfaceVariant">#DBE5DD</color>
+    <color name="md_theme_onSurfaceVariant">#404943</color>
+    <color name="md_theme_outline">#707973</color>
     
-    <!-- Surface & Background -->
-    <color name="lupefit_surface">#FFFFFF</color>        <!-- Tarjetas blancas -->
-    <color name="lupefit_surface_variant">#F6F8F5</color>   <!-- Fondo claro -->
-    <color name="lupefit_surface_container">#FFFFFF</color>
-    <color name="lupefit_surface_container_high">#EEF1EE</color>
-    <color name="lupefit_surface_container_highest">#E8ECE8</color>
-    <color name="lupefit_on_surface">#18211D</color>       <!-- Texto principal -->
-    <color name="lupefit_on_surface_variant">#66736D</color> <!-- Texto secundario -->
+    <!-- Semánticos: Macronutrientes -->
+    <color name="macro_protein">#2563EB</color>
+    <color name="macro_protein_track">#DBEAFE</color>
+    <color name="macro_carbs">#D97706</color>
+    <color name="macro_carbs_track">#FEF3C7</color>
+    <color name="macro_fat">#7C3AED</color>
+    <color name="macro_fat_track">#EDE9FE</color>
     
-    <color name="lupefit_background">#F6F8F5</color>       <!-- Fondo principal -->
-    <color name="lupefit_on_background">#18211D</color>
+    <!-- Semánticos: Hidratación y Estados -->
+    <color name="water_primary">#0284C7</color>
+    <color name="water_track">#E0F2FE</color>
+    <color name="status_success">#16A34A</color>
+    <color name="status_error">#BA1A1A</color>
     
-    <!-- Error -->
-    <color name="lupefit_error">#B3261E</color>           <!-- Rojo - Solo errores/alertas -->
-    <color name="lupefit_error_container">#FCEEEE</color>
-    <color name="lupefit_on_error">#FFFFFF</color>
-    <color name="lupefit_on_error_container">#18211D</color>
-    
-    <!-- Outline & Dividers -->
-    <color name="lupefit_outline">#C4C7C3</color>
-    <color name="lupefit_outline_variant">#D0D3CF</color>
-    
-    <!-- Inverse (para modales, bottom sheets en tema oscuro) -->
-    <color name="lupefit_inverse_surface">#18211D</color>
-    <color name="lupefit_inverse_on_surface">#F6F8F5</color>
-    <color name="lupefit_inverse_primary">#B7D86B</color>
-    
-    <!-- Scrim / Shadow -->
-    <color name="lupefit_scrim">#000000</color>
-    <color name="lupefit_shadow">#000000</color>
-    
-    <!-- ============================================================
-         COLORES SEMÁNTICOS POR FEATURE
-         ============================================================ -->
-    
-    <!-- Macros -->
-    <color name="color_macros_proteinas">#2196F3</color>      <!-- Azul -->
-    <color name="color_macros_proteinas_container">#E3F2FD</color>
-    <color name="color_macros_carbohidratos">#F2A541</color>  <!-- Ámbar -->
-    <color name="color_macros_carbohidratos_container">#FFF3E0</color>
-    <color name="color_macros_grasas">#167D62</color>         <!-- Verde petróleo -->
-    <color name="color_macros_grasas_container">#E8F5E9</color>
-    <color name="color_macros_fibra">#795548</color>          <!-- Marrón -->
-    <color name="color_macros_fibra_container">#EFEBE9</color>
-    
-    <!-- Features -->
-    <color name="color_agua">#03A9F4</color>                  <!-- Celeste -->
-    <color name="color_agua_container">#E1F5FE</color>
-    <color name="color_ejercicio">#E91E63</color>             <!-- Rosa -->
-    <color name="color_ejercicio_container">#FCE4EC</color>
-    <color name="color_peso">#9C27B0</color>                  <!-- Violeta -->
-    <color name="color_peso_container">#F3E5F5</color>
-    <color name="color_insights">#673AB7</color>             <!-- Púrpura profundo -->
-    <color name="color_insights_container":#EDE7F6</color>
-    <color name="color_planes">#009688</color>               <!-- Teal -->
-    <color name="color_planes_container">#E0F2F1</color>
-    <color name="color_recetas">#FF5722</color>              <!-- Naranja profundo -->
-    <color name="color_recetas_container">#FBE9E7</color>
-    
-    <!-- Estados -->
-    <color name="color_exito">#167D62</color>
-    <color name="color_exito_container">#E8F5E9</color>
-    <color name="color_advertencia">#F2A541</color>
-    <color name="color_advertencia_container">#FFF3E0</color>
-    <color name="color_info">#2196F3</color>
-    <color name="color_info_container">#E3F2FD</color>
-    
-    <!-- On-colors para semánticos -->
-    <color name="on_color_macros_proteinas">#FFFFFF</color>
-    <color name="on_color_macros_carbohidratos">#18211D</color>
-    <color name="on_color_macros_grasas">#FFFFFF</color>
-    <color name="on_color_macros_fibra">#FFFFFF</color>
-    <color name="on_color_agua">#FFFFFF</color>
-    <color name="on_color_ejercicio">#FFFFFF</color>
-    <color name="on_color_peso">#FFFFFF</color>
-    <color name="on_color_insights">#FFFFFF</color>
-    <color name="on_color_planes">#FFFFFF</color>
-    <color name="on_color_recetas">#FFFFFF</color>
-    
-    <!-- ============================================================
-         MODO OSCURO - Valores override (en values-night/colors.xml)
-         ============================================================ -->
-    <!-- Ver values-night/colors.xml para paleta oscura completa -->
+    <!-- Alias de compatibilidad (para código legacy si existe) -->
+    <color name="colorPrimary">@color/md_theme_primary</color>
+    <color name="colorOnPrimary">@color/md_theme_onPrimary</color>
+    <color name="colorPrimaryContainer">@color/md_theme_primaryContainer</color>
+    <color name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</color>
+    <color name="colorSecondary">@color/md_theme_secondary</color>
+    <color name="colorOnSecondary">@color/md_theme_onSecondary</color>
+    <color name="colorSecondaryContainer">@color/md_theme_secondaryContainer</color>
+    <color name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</color>
+    <color name="colorBackground">@color/md_theme_background</color>
+    <color name="colorOnBackground">@color/md_theme_onBackground</color>
+    <color name="colorSurface">@color/md_theme_surface</color>
+    <color name="colorOnSurface">@color/md_theme_onSurface</color>
+    <color name="colorSurfaceVariant">@color/md_theme_surfaceVariant</color>
+    <color name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</color>
+    <color name="colorOutline">@color/md_theme_outline</color>
+    <color name="colorError">@color/status_error</color>
+    <color name="colorOnError">@color/md_theme_onPrimary</color>
 </resources>

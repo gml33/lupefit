@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- card_macro_summary.xml - Tarjeta 24dp con CircularProgressIndicator central + 3 LinearProgressIndicator -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="macros" type="com.lupefit.core.domain.model.Macros" />
+    </data>
+
+    <androidx.cardview.widget.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_screen"
+        android:layout_marginVertical="@dimen/spacing_sm"
+        app:cardCornerRadius="@dimen/radius_card"
+        app:cardElevation="@dimen/elevation_card"
+        app:strokeColor="@color/md_theme_outline"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_card">
+
+            <!-- CircularProgressIndicator central (calorías) -->
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/circularCalories"
+                android:layout_width="@dimen/macro_circular_size"
+                android:layout_height="@dimen/macro_circular_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/spacing_lg"
+                android:indeterminate="false"
+                app:indicatorColor="@color/md_theme_primary"
+                app:trackColor="@color/md_theme_surfaceVariant"
+                app:trackThickness="@dimen/macro_circular_stroke"
+                tools:progress="65" />
+
+            <!-- Texto calorías centrales -->
+            <TextView
+                android:id="@+id/tvCaloriesCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_xxl"
+                android:layout_marginBottom="@dimen/spacing_xl"
+                android:text="@{String.valueOf(macros.calorias)}"
+                android:textAppearance="@style/TextAppearance.LuPeFit.DisplayMedium"
+                android:textColor="?attr/colorOnSurface"
+                tools:text="1850" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/unidad_kcal"
+                android:textAppearance="@style/TextAppearance.LuPeFit.BodySmall"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_thin"
+                android:layout_marginVertical="@dimen/spacing_lg"
+                android:background="?attr/colorOutline" />
+
+            <!-- 3 LinearProgressIndicator horizontales (Macros) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/spacing_md">
+
+                <!-- Proteínas -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="@dimen/icon_md"
+                        android:layout_height="@dimen/icon_md"
+                        android:layout_marginEnd="@dimen/spacing_sm"
+                        android:background="@color/macro_protein"
+                        android:foreground="@drawable/bg_rounded_xs" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_sm"
+                        android:text="@string/macros_proteinas"
+                        android:textAppearance="@style/TextAppearance.LuPeFit.LabelMedium"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressProtein"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/progress_track_thickness"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/spacing_sm"
+                        android:indeterminate="false"
+                        app:indicatorColor="@color/macro_protein"
+                        app:trackColor="@color/macro_protein_track"
+                        app:trackCornerRadius="@dimen/radius_progress_track"
+                        app:trackThickness="@dimen/progress_track_thickness"
+                        tools:progress="30" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(macros.proteinasG) + @string/unidad_gramos}"
+                        android:textAppearance="@style/TextAppearance.LuPeFit.LabelMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        tools:text="140g" />
+                </LinearLayout>
+
+                <!-- Carbohidratos -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="@dimen/icon_md"
+                        android:layout_height="@dimen/icon_md"
+                        android:layout_marginEnd="@dimen/spacing_sm"
+                        android:background="@color/macro_carbs"
+                        android:foreground="@drawable/bg_rounded_xs" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_sm"
+                        android:text="@string/macros_carbohidratos"
+                        android:textAppearance="@style/TextAppearance.LuPeFit.LabelMedium"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressCarbs"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/progress_track_thickness"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/spacing_sm"
+                        android:indeterminate="false"
+                        app:indicatorColor="@color/macro_carbs"
+                        app:trackColor="@color/macro_carbs_track"
+                        app:trackCornerRadius="@dimen/radius_progress_track"
+                        app:trackThickness="@dimen/progress_track_thickness"
+                        tools:progress="45" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(macros.carbohidratosG) + @string/unidad_gramos}"
+                        android:textAppearance="@style/TextAppearance.LuPeFit.LabelMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        tools:text="210g" />
+                </LinearLayout>
+
+                <!-- Grasas -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <View
+                        android:layout_width="@dimen/icon_md"
+                        android:layout_height="@dimen/icon_md"
+                        android:layout_marginEnd="@dimen/spacing_sm"
+                        android:background="@color/macro_fat"
+                        android:foreground="@drawable/bg_rounded_xs" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_sm"
+                        android:text="@string/macros_grasas"
+                        android:textAppearance="@style/TextAppearance.LuPeFit.LabelMedium"
+                        android:textColor="?attr/colorOnSurface" />
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressFat"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/progress_track_thickness"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/spacing_sm"
+                        android:indeterminate="false"
+                        app:indicatorColor="@color/macro_fat"
+                        app:trackColor="@color/macro_fat_track"
+                        app:trackCornerRadius="@dimen/radius_progress_track"
+                        app:trackThickness="@dimen/progress_track_thickness"
+                        tools:progress="25" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(macros.grasasG) + @string/unidad_gramos}"
+                        android:textAppearance="@style/TextAppearance.LuPeFit.LabelMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        tools:text="65g" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.MaterialCardView>
+</layout>
