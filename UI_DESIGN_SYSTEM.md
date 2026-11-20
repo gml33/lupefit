@@ -176,3 +176,69 @@ Agregar a `colors.xml` y `values-night/colors.xml` para soportar CrossFit, Racha
 ### E. Pantallas Nuevas Incorporadas al Inventario
 * **Módulo 1 (Diario):** `DiarioVozSheet` (registro manos libres), `DiarioNotaHumorSheet` (registro diario de estado de ánimo y comentarios).
 * **Módulo 2 (Ejercicio):** `EjercicioWodCrossfitFragment` (constructor y lista de WODs), `EjercicioTimerFullFragment` (pantalla completa de cronómetro AMRAP/EMOM con contador de rondas).
+
+"Prohibido el uso de Dagger, Hilt, Kapt o KSP. Usar Inyección de Dependencias Manual (AppContainer), ExecutorService + LiveData para asincronía, y annotationProcessor estándar de Java para Room."
+
+## 8. Actualización v3.0 — Salud Metabólica, Clima, PRs, Widgets y Food Swaps
+
+### A. Nuevos Tokens de Color (Modo Claro / Modo Oscuro)
+Agregar a `colors.xml` y `values-night/colors.xml`:
+* **Glucosa / Metabolismo (`glucose_optimal`, `glucose_high`, `glucose_low`):**
+  * Claro: `#0D9488` (Teal), `#F59E0B` (Ámbar), `#E11D48` (Carmesí)
+  * Oscuro: `#2DD4BF`, `#FBBF24`, `#FB7185`
+* **Discos de Halterofilia (`plate_25kg`, `plate_20kg`, `plate_15kg`, `plate_10kg`, `plate_5kg`):**
+  * Estándar IWF: `#DC2626` (Rojo 25kg), `#2563EB` (Azul 20kg), `#EAB308` (Amarillo 15kg), `#16A34A` (Verde 10kg), `#F8FAFC` (Blanco 5kg).
+
+### B. Especificaciones Técnicas de las 5 Nuevas Funcionalidades
+
+#### 1. Seguimiento de Glucosa y Respuesta Metabólica
+* **Persistencia e Integración:** Crear entidad Room `GlucoseLog` (`id`, `valueMgDl`, `measurementContext` [AYUNAS, PRE_ENTRENO, POST_PRANDIAL, GENERAL], `timestamp`, `isSynced`). Sincronizar lectura/escritura bidireccional mediante `BloodGlucoseRecord` en **Health Connect** (`HealthConnectManager.java`).
+* **UI y Gráficos:** Crear `ProgresoGlucosaFragment.java` y `RegistrarGlucosaSheet.java`. Utilizar `MPAndroidChart` (`LineChart`) con banda sombreada (`LimitLine` / `FillFormatter`) para el rango objetivo (70–140 mg/dL) y correlación visual contra la ingesta de carbohidratos del día.
+
+#### 2. Hidratación Inteligente + Clima por Geolocalización
+* **Servicio de Clima:** Implementar `WeatherContextManager.java` en Java usando `FusedLocationProviderClient` (permiso `ACCESS_COARSE_LOCATION` bajo demanda) para consultar temperatura y humedad (ej. API abierta Open-Meteo sin necesidad de API Key compleja) y guardar `WeatherSnapshot` diario en Room.
+* **Lógica Adaptativa y Correlaciones:**
+  * Ajustar automáticamente la meta diaria de agua y electrolitos en `AguaDetalleFragment` cuando la temperatura supere los 26°C o la humedad sea alta, o tras registrar un WOD.
+  * Exponer los datos climáticos al motor de `InsightsPatronesFragment` para correlacionar calor/humedad con caídas en hidratación, rendimiento en CrossFit o cambios en el `MoodEntry` (humor).
+
+#### 3. Bóveda de Récords Personales (1RM) y Calculadora Visual de Discos
+* **Pantallas:** Crear `EjercicioPrVaultFragment.java` y `CalculadoraDiscosSheet.java` dentro del Módulo 2 (*Ejercicio*).
+* **Funcionalidad:**
+  * Almacenar historial de marcas máximas (`PersonalRecordEntity`: 1RM, 3RM, 5RM) para levantamientos olímpicos y básicos (Snatch, Clean & Jerk, Back Squat, Deadlift, Bench Press, Overhead Press) con cálculo automático de porcentajes (50% a 105%).
+  * **Calculadora de Barra:** Dado un peso objetivo y el peso de la barra (20kg hombre / 15kg mujer), calcular y dibujar mediante una vista personalizada en XML (`PlateBarbellView.java` extendiendo de `View`) los discos exactos por lado usando los colores estándar IWF.
+
+#### 4. Suite de Widgets de Pantalla de Inicio (AppWidgets en XML)
+* Crear paquete `ui/widgets/` con `RemoteViews` (strictly compatible con XML tradicional) y actualización vía `WorkManager` / Broadcasts desde Room:
+  1. **`WidgetQuickActionProvider` (2x1):** Accesos directos inmediatos con un toque a **Micrófono (Hands-Free Logging)**, **Escáner de Código de Barras** y **+250ml de Agua** sin abrir la pantalla principal.
+  2. **`WidgetDailyMacrosProvider` (4x2):** Muestra calorías restantes, barras de progreso de Proteínas/Carbs/Grasas, contador de **Racha (`Streak`)** y último registro de **Glucosa**.
+  3. **`WidgetHydrationMoodProvider` (2x2):** Botones rápidos para sumar agua (`+250ml`, `+500ml`) y selector de 3 estados de ánimo (`Mood`) directamente desde el escritorio.
+
+#### 5. Motor de Sustitución Rápida de Alimentos (Food Swaps)
+* **Motor de Recomendación:** Implementar `FoodSwapEngine.java` en Java. Analiza los macronutrientes restantes del día (o de una comida específica) y consulta en Room el historial frecuente del usuario + base local para sugerir alimentos que cubran el déficit prioritario (ej. *"Te faltan 28g de proteína y tienes margen de 5g de grasa"*) sin pasarse del límite calórico.
+* **UI:** Integrar `FoodSwapSheet.java` como botón de acción rápida ("Sugerir alimento para mis macros") dentro de `DiarioHomeFragment` y `DiarioBuscarFragment`.
+
+
+## 9. Actualización v4.0 (Cierre de Alcance) — Readiness, Meal Prep, Modo Flexible y Backup Abierto
+
+### A. Nuevos Tokens de Color (Modo Claro / Modo Oscuro)
+Agregar a `colors.xml` y `values-night/colors.xml`:
+* **Readiness Score (`readiness_peak`, `readiness_moderate`, `readiness_rest`):**
+  * Claro: `#059669` (Esmeralda), `#D97706` (Ámbar), `#DC2626` (Rojo)
+  * Oscuro: `#34D399`, `#FBBF24`, `#F87171`
+
+### B. Especificaciones de las 4 Funcionalidades Finales
+
+#### 1. Índice de Recuperación Matutino (`ReadinessScoreEngine.java`)
+* **Lógica:** Calcula diariamente un puntaje `0-100` cruzando datos importados de **Health Connect** (horas de sueño y frecuencia cardíaca en reposo del smartwatch), último registro de `GlucoseLog` en ayunas, `MoodEntry` y carga acumulada de WODs de los últimos 3 días.
+* **UI:** Tarjeta compacta `card_readiness_score.xml` en la parte superior de `DiarioHomeFragment` con indicador semicircular, estado (*Óptimo para PR*, *Moderado*, *Priorizar Descanso*) y ajuste automático sugerido para calorías/hidratación.
+
+#### 2. Planificador Meal Prep, Modo Cocina Hands-Free y Lista de Compras
+* **Modo Cocina (`RecetasModoCocinaFragment.java`):** Pantalla de paso a paso con fuente grande (`22sp`), bloqueo de suspensión (`getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)`) y comandos de voz mediante `SpeechRecognizer` (*"Siguiente"*, *"Anterior"*, *"Temporizador [X] minutos"*).
+* **Lista de Compras Agrupada (`RecetasListaComprasFragment.java`):** Consolida ingredientes de los planes semanales sumando cantidades equivalentes y funciona 100% *Offline-First* en Room con checkboxes persistentes.
+
+#### 3. Modo Flexible / Restaurante (Porciones Visuales)
+* **UI y Lógica:** Toggle rápido en `DiarioHomeFragment` y `DiarioBuscarFragment` (*"Modo Flexible / Sin Balanza"*). Permite registrar comidas usando equivalencias visuales estándar (1 Palma de proteína, 1 Puño de carbohidratos, 1 Pulgar de grasas) o dictado por voz de platos de restaurante, manteniendo intacta la **Racha (`StreakManager`)** sin generar estrés por gramaje exacto.
+
+#### 4. Exportación Abierta (JSON / CSV) y Conector Self-Hosted
+* **Motor de Backup (`DataPortabilityManager.java`):** En `ConfigExportarDatosFragment.java`, permite exportar e importar toda la base de datos local Room en formato **JSON estructurado** o **CSV** mediante el *Storage Access Framework* de Android (`ACTION_CREATE_DOCUMENT` / `ACTION_OPEN_DOCUMENT`).
+* **Sincronización Configurable:** Incluye una interfaz `RemoteSyncAdapter` en Java con soporte para endpoints REST personalizados (URL base + Token configurables en `ConfigSyncHealthFragment`) para sincronizar opcionalmente con instancias propias (ej. *SparkyFitness*).

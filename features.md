@@ -53,18 +53,29 @@
 
 ## Multi-Módulo Gradle Structure
 
+### Estado Actual: **Paso 1 - 3 Módulos Activos** (Simplificado de 14 planeados)
+
 ```
 LuPeFit/
-├── app/                          # Módulo principal (Application, DI, Navigation)
+├── app/                          # Módulo principal (Application, DI Manual, Navigation)
+│   ├── data/local/               # Room Database, Entities, DAOs, TypeConverters
+│   ├── domain/                   # Repositories, Engines, UseCases (stubs Paso 1)
+│   └── ui/                       # Activities, Fragments (pendiente)
 ├── core/
-│   ├── core-data/                # Room DB, Repositories, DataSources
-│   ├── core-domain/              # Use Cases, Entities, Repository Interfaces
+│   ├── core-domain/              # Entidades dominio puras, Repository interfaces, Use Cases
+│   └── core-ui/                  # Tema Material 3, Styles, Strings, Base Views, Components
+└── backend/                      # FastAPI + PostgreSQL (repositorio separado - PENDIENTE)
+```
+
+### Módulos Planificados para Pasos Posteriores
+
+```
+├── core/
 │   ├── core-network/             # Retrofit, API Service, DTOs, Sync Engine
-│   ├── core-ui/                  # Base Activities/Fragments, Views, Theme, Strings
 │   └── core-sync/                # WorkManager Sync, Conflict Resolution, Queue
 ├── feature/
 │   ├── feature-diario/           # Diario de alimentos, búsqueda, quick-add, escaneo
-│   ├── feature-ejercicio/        # Ejercicios cardio/fuerza, rutinas
+│   ├── feature-ejercicio/        # Ejercicios cardio/fuerza, rutinas, WOD, Timer
 │   ├── feature-nutricion/        # Nutrientes, macros, metas, gráficos, net carbs
 │   ├── feature-progreso/         # Peso, medidas, fotos, exportar, gráficos
 │   ├── feature-recetas/          # Recetas, importar, crear, colecciones
@@ -74,8 +85,6 @@ LuPeFit/
 │   ├── feature-perfil/           # Perfil, auth local, sync account
 │   ├── feature-insights/         # Insights nutricionales IA, tendencias, predicciones
 │   └── feature-planes/           # Planes de comida semanales, planes de entrenamiento
-└── backend/                      # FastAPI + PostgreSQL (repositorio separado)
-```
 
 ## Features Principales (TODAS GRATIS - Sin Premium Gating)
 

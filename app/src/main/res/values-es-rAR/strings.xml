@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================================
+         LUPEFIT - STRINGS CASTELLANO ARGENTINO (es-rAR)
+         Fuente: UI_DESIGN_SYSTEM.md v1.0-v4.0
+         ============================================================ -->
+
+    <!-- App -->
+    <string name="app_name">LuPeFit</string>
+    <string name="app_name_short">LuPeFit</string>
+
+    <!-- Auth -->
+    <string name="login_titulo">Iniciar sesión</string>
+    <string name="login_email_hint">Tu email</string>
+    <string name="login_password_hint">Contraseña</string>
+    <string name="login_boton">Entrar</string>
+    <string name="login_olvido_password">¿Olvidaste tu contraseña?</string>
+    <string name="login_registro">¿No tenés cuenta? Registrate</string>
+    <string name="login_error_credenciales">Email o contraseña incorrectos</string>
+    <string name="login_error_sincronizacion">Error al sincronizar. Probá más tarde.</string>
+
+    <string name="registro_titulo">Creá tu cuenta</string>
+    <string name="registro_nombre_hint">Tu nombre</string>
+    <string name="registro_email_hint">Tu email</string>
+    <string name="registro_password_hint">Contraseña (mín. 8 caracteres)</string>
+    <string name="registro_password_confirm_hint">Confirmá contraseña</string>
+    <string name="registro_boton">Registrarme</string>
+    <string name="registro_terminos">Al registrarte, aceptás nuestros <a href="#">Términos</a> y <a href="#">Privacidad</a>.</string>
+    <string name="registro_error_email_existe">Este email ya está registrado</string>
+    <string name="registro_error_password_coincide">Las contraseñas no coinciden</string>
+    <string name="registro_error_password_corta">La contraseña debe tener al menos 8 caracteres</string>
+
+    <!-- Onboarding / Perfil Inicial -->
+    <string name="onboarding_bienvenida">¡Bienvenido a LuPeFit!</string>
+    <string name="onboarding_subtitulo">Vamos a configurar tu perfil para personalizar tu experiencia</string>
+    <string name="onboarding_fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="onboarding_genero">Género</string>
+    <string name="onboarding_genero_masculino">Masculino</string>
+    <string name="onboarding_genero_femenino">Femenino</string>
+    <string name="onboarding_genero_otro">Otro / Prefiero no decir</string>
+    <string name="onboarding_altura">Altura (cm)</string>
+    <string name="onboarding_peso_actual">Peso actual (kg)</string>
+    <string name="onboarding_peso_objetivo">Peso objetivo (kg)</string>
+    <string name="onboarding_nivel_actividad">Nivel de actividad</string>
+    <string name="onboarding_nivel_sedentario">Sedentario (poco o nada de ejercicio)</string>
+    <string name="onboarding_nivel_ligero">Ligero (ejercicio 1-3 días/semana)</string>
+    <string name="onboarding_nivel_moderado">Moderado (ejercicio 3-5 días/semana)</string>
+    <string name="onboarding_nivel_activo">Activo (ejercicio 6-7 días/semana)</string>
+    <string name="onboarding_nivel_muy_activo">Muy activo (entrenamiento intenso 2x/día)</string>
+    <string name="onboarding_calcular_metas">Calcular mis metas</string>
+
+    <!-- Bottom Nav / Main (UI_DESIGN_SYSTEM tabs) -->
+    <string name="nav_inicio">Inicio</string>
+    <string name="nav_tendencias">Tendencias</string>
+    <string name="nav_planes">Planes</string>
+    <string name="nav_perfil">Perfil</string>
+
+    <!-- Diario -->
+    <string name="diario_titulo">Mi Diario</string>
+    <string name="diario_fecha_hoy">Hoy</string>
+    <string name="diario_fecha_ayer">Ayer</string>
+    <string name="diario_fecha_manana">Mañana</string>
+    <string name="diario_calorias_restantes">%1$d cal restantes de %2$d</string>
+    <string name="diario_calorias_consumidas">%1$d / %2$d cal</string>
+    <string name="diario_agregar_comida">Agregar a %1$s</string>
+    <string name="diario_comida_desayuno">Desayuno</string>
+    <string name="diario_comida_almuerzo">Almuerzo</string>
+    <string name="diario_comida_cena">Cena</string>
+    <string name="diario_comida_merienda">Merienda</string>
+    <string name="diario_comida_otro">Otro</string>
+    <string name="diario_sin_entradas">No hay alimentos registrados en %1$s</string>
+    <string name="diario_tocar_para_agregar">Tocá para agregar</string>
+    <string name="diario_quick_add">Agregado rápido</string>
+    <string name="diario_escanear_codigo">Escanear código de barras</string>
+    <string name="diario_escanear_comida">Escanear comida (IA)</string>
+    <string name="diario_voz">Registro por voz</string>
+    <string name="diario_nota_humor">Cómo me siento</string>
+    <string name="diario_completar_diario">Completar diario</string>
+    <string name="diario_completado_felicitaciones">¡Diario completado! Bien hecho 🎉</string>
+    <string name="diario_resumen_macros">Proteínas: %1$.1fg | Carbs: %2$.1fg | Grasas: %3$.1fg</string>
+
+    <!-- Buscar Alimento -->
+    <string name="buscar_alimento_titulo">Buscar alimento</string>
+    <string name="buscar_alimento_hint">Buscar por nombre, marca o código...</string>
+    <string name="buscar_alimento_sin_resultados">No se encontraron alimentos</string>
+    <string name="buscar_alimento_recientes">Búsquedas recientes</string>
+    <string name="buscar_alimento_frecuentes">Tus frecuentes</string>
+    <string name="buscar_alimento_crear_nuevo">Crear alimento nuevo</string>
+    <string name="buscar_alimento_porcion">Porción</string>
+    <string name="buscar_alimento_gramos">Gramos</string>
+
+    <!-- Quick Add -->
+    <string name="quick_add_titulo">Agregado rápido</string>
+    <string name="quick_add_calorias">Calorías</string>
+    <string name="quick_add_proteinas">Proteínas (g)</string>
+    <string name="quick_add_carbohidratos">Carbohidratos (g)</string>
+    <string name="quick_add_grasas">Grasas (g)</string>
+    <string name="quick_add_comida">Comida</string>
+    <string name="quick_add_guardar">Guardar</string>
+
+    <!-- Ejercicio -->
+    <string name="ejercicio_titulo">Ejercicio</string>
+    <string name="ejercicio_cardio">Cardio</string>
+    <string name="ejercicio_fuerza">Fuerza</string>
+    <string name="ejercicio_crossfit">CrossFit</string>
+    <string name="ejercicio_wod">WODs</string>
+    <string name="ejercicio_rutinas">Rutinas</string>
+    <string name="ejercicio_nuevo_cardio">Nuevo cardio</string>
+    <string name="ejercicio_nuevo_fuerza">Nueva fuerza</string>
+    <string name="ejercicio_nuevo_wod">Nuevo WOD</string>
+    <string name="ejercicio_crear_rutina">Crear rutina</string>
+    <string name="ejercicio_duracion">Duración (min)</string>
+    <string name="ejercicio_calorias_quemadas">Calorías quemadas</string>
+    <string name="ejercicio_series">Series</string>
+    <string name="ejercicio_repeticiones">Repeticiones</string>
+    <string name="ejercicio_peso">Peso (kg)</string>
+    <string name="ejercicio_rpe">RPE (1-10)</string>
+    <string name="ejercicio_buscar">Buscar ejercicio</string>
+    <string name="ejercicio_timer">Cronómetro WOD</string>
+
+    <!-- WOD Formats -->
+    <string name="wod_format_amrap">AMRAP</string>
+    <string name="wod_format_emom">EMOM</string>
+    <string name="wod_format_for_time">For Time</string>
+    <string name="wod_format_tabata">Tabata</string>
+
+    <!-- Nutrición -->
+    <string name="nutricion_titulo">Nutrición</string>
+    <string name="nutricion_resumen_diario">Resumen del día</string>
+    <string name="nutricion_metas">Metas</string>
+    <string name="nutricion_macros">Macros</string>
+    <string name="nutricion_micronutrientes">Micronutrientes</string>
+    <string name="nutricion_agua">Agua</string>
+    <string name="nutricion_metas_por_comida">Metas por comida</string>
+    <string name="nutricion_net_carbs">Net Carbs</string>
+    <string name="nutricion_net_carbs_descripcion">Carbohidratos netos = Carbs totales - Fibra</string>
+    <string name="nutricion_activar_net_carbs">Activar modo Net Carbs</string>
+    <string name="nutricion_metas_personalizadas_dia">Metas por día de la semana</string>
+    <string name="nutricion_macro_ajuste">%1$s por %2$s</string>
+
+    <!-- Progreso -->
+    <string name="progreso_titulo">Progreso</string>
+    <string name="progreso_peso">Peso</string>
+    <string name="progreso_medidas">Medidas</string>
+    <string name="progreso_fotos">Fotos</string>
+    <string name="progreso_graficos">Gráficos</string>
+    <string name="progreso_exportar">Exportar datos</string>
+    <string name="progreso_registrar_peso">Registrar peso</string>
+    <string name="progreso_peso_actual">Peso actual</string>
+    <string name="progreso_peso_objetivo">Objetivo</string>
+    <string name="progreso_diferencia">Diferencia</string>
+    <string name="progreso_tendencia">Tendencia</string>
+    <string name="progreso_semanal">Semanal</string>
+    <string name="progreso_mensual">Mensual</string>
+    <string name="progreso_agregar_foto">Agregar foto de progreso</string>
+    <string name="progreso_tipo_frente">Frente</string>
+    <string name="progreso_tipo_lado">Lado</string>
+    <string name="progreso_tipo_espejo">Espejo</string>
+    <string name="progreso_exportar_csv">Exportar CSV</string>
+    <string name="progreso_exportar_json">Exportar JSON</string>
+
+    <!-- Recetas -->
+    <string name="recetas_titulo">Recetas</string>
+    <string name="recetas_mis_recetas">Mis recetas</string>
+    <string name="recetas_crear">Crear receta</string>
+    <string name="recetas_importar">Importar de web</string>
+    <string name="recetas_colecciones">Colecciones</string>
+    <string name="recetas_nombre">Nombre de la receta</string>
+    <string name="recetas_descripcion">Descripción</string>
+    <string name="recetas_porciones">Porciones</string>
+    <string name="recetas_tiempo">Tiempo (min)</string>
+    <string name="recetas_ingredientes">Ingredientes</string>
+    <string name="recetas_instrucciones">Instrucciones</string>
+    <string name="recetas_agregar_ingrediente">Agregar ingrediente</string>
+    <string name="recetas_macros_por_porcion">Macros por porción</string>
+    <string name="recetas_lista_compras">Lista de compras</string>
+
+    <!-- Escaneo -->
+    <string name="escanear_titulo">Escanear</string>
+    <string name="escanear_codigo_barras">Código de barras</string>
+    <string name="escanear_comida">Comida (IA)</string>
+    <string name="escanear_apuntar_codigo">Apuntá al código de barras</string>
+    <string name="escanear_apuntar_comida">Apuntá la cámara a tu plato</string>
+    <string name="escanear_procesando">Analizando...</string>
+    <string name="escanear_resultado">Resultado del escaneo</string>
+    <string name="escanear_no_encontrado">No se encontró el alimento</string>
+    <string name="escanear_agregar_diario">Agregar al diario</string>
+
+    <!-- Agua -->
+    <string name="agua_titulo">Hidratación</string>
+    <string name="agua_meta_diaria">Meta diaria</string>
+    <string name="agua_consumido">Consumido</string>
+    <string name="agua_restante">Restante</string>
+    <string name="agua_agregar_vaso">Agregar vaso (250ml)</string>
+    <string name="agua_agregar_botella">Agregar botella (500ml)</string>
+    <string name="agua_agregar_personalizado">Cantidad personalizada</string>
+    <string name="agua_recordatorios">Recordatorios</string>
+    <string name="agua_meta_lograda">¡Meta de hidratación lograda! 💧</string>
+
+    <!-- Configuración -->
+    <string name="config_titulo">Configuración</string>
+    <string name="config_cuenta">Mi cuenta</string>
+    <string name="config_perfil">Perfil físico</string>
+    <string name="config_metas">Metas calóricas</string>
+    <string name="config_notificaciones">Notificaciones</string>
+    <string name="config_recordatorios_comida">Recordatorios de comida</string>
+    <string name="config_recordatorios_agua">Recordatorios de agua</string>
+    <string name="config_recordatorios_peso">Recordatorio de peso</string>
+    <string name="config_recordatorios_ejercicio">Recordatorio de ejercicio</string>
+    <string name="config_apariencia">Apariencia</string>
+    <string name="config_tema_claro">Claro</string>
+    <string name="config_tema_oscuro">Oscuro</string>
+    <string name="config_tema_sistema">Sistema</string>
+    <string name="config_idioma">Idioma</string>
+    <string name="config_unidades">Unidades</string>
+    <string name="config_unidades_metricas">Métrico (kg, cm)</string>
+    <string name="config_unidades_imperiales">Imperial (lb, ft/in)</string>
+    <string name="config_sincronizacion">Sincronización</string>
+    <string name="config_sincronizar_ahora">Sincronizar ahora</string>
+    <string name="config_ultima_sincronizacion">Última sync: %1$s</string>
+    <string name="config_sync_health">Health Connect</string>
+    <string name="config_exportar_datos">Exportar datos</string>
+    <string name="config_privacidad">Privacidad</string>
+    <string name="config_eliminar_cuenta">Eliminar cuenta</string>
+    <string name="config_acerca_de">Acerca de LuPeFit</string>
+    <string name="config_version">Versión %1$s</string>
+
+    <!-- Health Connect -->
+    <string name="health_connect_titulo">Health Connect</string>
+    <string name="health_connect_conectar">Conectar con Health Connect</string>
+    <string name="health_connect_desconectar">Desconectar</string>
+    <string name="health_connect_permisos">Permisos requeridos: pasos, calorías activas, ejercicio, frecuencia cardíaca, sueño</string>
+    <string name="health_connect_sincronizado">Sincronizado correctamente</string>
+    <string name="health_connect_error">Error al sincronizar con Health Connect</string>
+
+    <!-- Perfil / Auth -->
+    <string name="perfil_titulo">Mi perfil</string>
+    <string name="perfil_editar">Editar perfil</string>
+    <string name="perfil_cambiar_password">Cambiar contraseña</string>
+    <string name="perfil_password_actual">Contraseña actual</string>
+    <string name="perfil_password_nueva">Nueva contraseña</string>
+    <string name="perfil_password_confirmar">Confirmar nueva</string>
+    <string name="perfil_cerrar_sesion">Cerrar sesión</string>
+    <string name="perfil_sincronizar_cuenta">Sincronizar con la nube</string>
+    <string name="perfil_cuenta_sincronizada">Cuenta sincronizada</string>
+    <string name="perfil_cuenta_no_sincronizada">Cuenta local (no sincronizada)</string>
+    <string name="perfil_conectar_cuenta">Conectar cuenta</string>
+    <string name="perfil_desconectar_cuenta">Desconectar cuenta</string>
+
+    <!-- Insights -->
+    <string name="insights_titulo">Insights</string>
+    <string name="insights_semanal">Resumen semanal</string>
+    <string name="insights_tendencias">Tendencias</string>
+    <string name="insights_predicciones">Predicciones</string>
+    <string name="insights_patrones">Patrones de alimentación</string>
+    <string name="insights_recomendaciones">Recomendaciones</string>
+    <string name="insights_racha">Racha actual: %1$d días 🔥</string>
+
+    <!-- Planes -->
+    <string name="planes_titulo">Planes</string>
+    <string name="planes_comida">Planes de comida</string>
+    <string name="planes_entrenamiento">Planes de entrenamiento</string>
+    <string name="planes_mis_planes">Mis planes</string>
+    <string name="planes_crear">Crear plan</string>
+    <string name="planes_semanal">Plan semanal</string>
+    <string name="planes_quick_log">Registrar rápido del plan</string>
+
+    <!-- Rachas / Streaks -->
+    <string name="streak_titulo">Rachas</string>
+    <string name="streak_activa">Racha activa: %1$d días 🔥</string>
+    <string name="streak_roto">Racha rota. ¡A empezar de nuevo!</string>
+    <string name="streak_nueva">¡Nueva racha iniciada!</string>
+
+    <!-- Mood / Humor -->
+    <string name="mood_titulo">¿Cómo te sentís?</string>
+    <string name="mood_muy_bajo">Muy bajo</string>
+    <string name="mood_bajo">Bajo</string>
+    <string name="mood_neutro">Neutro</string>
+    <string name="mood_bueno">Bueno</string>
+    <string name="mood_excelente">Excelente</string>
+    <string name="mood_nota_placeholder">Notas sobre tu energía, digestión, sueño…"></string>
+
+    <!-- Voice Input -->
+    <string name="voice_escuchando">Escuchando…</string>
+    <string name="voice_procesando">Procesando…</string>
+    <string name="voice_toque_hablar">Tocá y hablá</string>
+    <string name="voice_ejemplo">Ej: "200 gramos de pechuga de pollo y 100 gramos de arroz"</string>
+    <string name="voice_confirmar">Confirmar alimentos detectados</string>
+    <string name="voice_error">No se pudo reconocer. Probá de nuevo.</string>
+
+    <!-- WOD Timer -->
+    <string name="wod_timer_iniciar">Iniciar</string>
+    <string name="wod_timer_pausar">Pausar</string>
+    <string name="wod_timer_reanudar">Reanudar</string>
+    <string name="wod_timer_ronda">Ronda %1$d</string>
+    <string name="wod_timer_finalizado">¡WOD completado!</string>
+    <string name="wod_timer_ronda_completada">Ronda completada</string>
+    <string name="wod_timer_ultimos_segundos">¡Últimos %1$d segundos!</string>
+    <string name="wod_timer_rondas_completadas">Rondas: %1$d</string>
+
+    <!-- Personal Records -->
+    <string name="pr_titulo">Mis Records (PRs)</string>
+    <string name="pr_nuevo_record">¡Nuevo Record Personal! 🏆</string>
+    <string name="pr_1rm">1RM</string>
+    <string name="pr_rep_max">%1$d RM</string>
+    <string name="pr_volumen">Volumen</string>
+    <string name="pr_tiempo">Tiempo</string>
+    <string name="pr_distancia">Distancia</string>
+
+    <!-- Errores / Estados vacíos -->
+    <string name="error_generico">Algo salió mal. Probá de nuevo.</string>
+    <string name="error_sin_conexion">Sin conexión. Trabajando en modo offline.</string>
+    <string name="error_sincronizacion">Error al sincronizar. Se reintentará automáticamente.</string>
+    <string name="vacio_sin_datos">No hay datos para mostrar</string>
+    <string name="cargando">Cargando...</string>
+    <string name="guardando">Guardando...</string>
+    <string name="sincronizando">Sincronizando...</string>
+    <string name="hecho">Hecho</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="editar">Editar</string>
+    <string name="guardar">Guardar</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="entendido">Entendido</string>
+
+    <!-- Unidades / Formatos -->
+    <string name="unidad_kcal">kcal</string>
+    <string name="unidad_gramos">g</string>
+    <string name="unidad_kg">kg</string>
+    <string name="unidad_cm">cm</string>
+    <string name="unidad_ml">ml</string>
+    <string name="unidad_litros">L</string>
+    <string name="unidad_minutos">min</string>
+    <string name="unidad_segundos">seg</string>
+    <string name="unidad_porcentaje">%%</string>
+    <string name="formato_fecha_corta">dd/MM/yyyy</string>
+    <string name="formato_fecha_larga">dd \'de\' MMMM \'de\' yyyy</string>
+    <string name="formato_hora">HH:mm</string>
+
+    <!-- Macros labels (para card_macro_summary) -->
+    <string name="macros_proteinas">Proteínas</string>
+    <string name="macros_carbohidratos">Carbohidratos</string>
+    <string name="macros_grasas">Grasas</string>
+
+    <!-- Componentes base (view_header_date, sheet_base_container) -->
+    <string name="fecha_anterior">Fecha anterior</string>
+    <string name="fecha_siguiente">Fecha siguiente</string>
+    <string name="avatar_usuario">Avatar del usuario</string>
+
+    <!-- WOD Timer -->
+    <string name="wod_amrap">AMRAP %1$d min</string>
+    <string name="wod_emom">EMOM %1$d min</string>
+    <string name="wod_for_time">For Time</string>
+    <string name="wod_tabata">Tabata (%1$d rondas)</string>
+
+    <!-- Health Connect Permissions -->
+    <string name="health_permission_steps">Pasos diarios</string>
+    <string name="health_permission_calories">Calorías activas</string>
+    <string name="health_permission_exercise">Ejercicios</string>
+    <string name="health_permission_heart_rate">Frecuencia cardíaca</string>
+    <string name="health_permission_sleep">Sueño</string>
+</resources>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================================
+         LUPEFIT - SISTEMA DE COLOR MATERIAL 3 (Dark Theme)
+         Fuente: UI_DESIGN_SYSTEM.md v1.0-v4.0
+         ============================================================ -->
+
+    <!-- Identidad Principal -->
+    <color name="md_theme_primary">#6CDBAC</color>
+    <color name="md_theme_onPrimary">#003826</color>
+    <color name="md_theme_primaryContainer">#005138</color>
+    <color name="md_theme_onPrimaryContainer">#89F8C7</color>
+
+    <!-- Secundarios y Superficies -->
+    <color name="md_theme_secondary">#B3CCBE</color>
+    <color name="md_theme_onSecondary">#1F352A</color>
+    <color name="md_theme_secondaryContainer">#354B40</color>
+    <color name="md_theme_onSecondaryContainer">#CFE9D9</color>
+
+    <color name="md_theme_background">#0F1512</color>
+    <color name="md_theme_onBackground">#DFE4DF</color>
+    <color name="md_theme_surface">#171D1A</color>
+    <color name="md_theme_onSurface">#DFE4DF</color>
+    <color name="md_theme_surfaceVariant">#404943</color>
+    <color name="md_theme_onSurfaceVariant">#BFC9C2</color>
+    <color name="md_theme_outline">#8A938C</color>
+    <color name="md_theme_outlineVariant">#4A4D48</color>
+
+    <!-- Inversos (Material 3) -->
+    <color name="md_theme_inverse_surface">#F5FBF6</color>
+    <color name="md_theme_inverse_on_surface">#0F1512</color>
+    <color name="md_theme_inverse_primary">#005138</color>
+
+    <!-- Semánticos: Macronutrientes -->
+    <color name="macro_protein">#60A5FA</color>
+    <color name="macro_protein_track">#1E3A8A</color>
+    <color name="macro_carbs">#FBBF24</color>
+    <color name="macro_carbs_track">#78350F</color>
+    <color name="macro_fat">#A78BFA</color>
+    <color name="macro_fat_track">#4C1D95</color>
+
+    <!-- Semánticos: Hidratación y Estados -->
+    <color name="water_primary">#38BDF8</color>
+    <color name="water_track">#0C4A6E</color>
+    <color name="status_success">#4ADE80</color>
+    <color name="status_error">#FFB4AB</color>
+    <color name="status_warning">#FBBF24</color>
+
+    <!-- Funcionalidades Extra v2.0-v4.0 -->
+    <color name="crossfit_accent">#FB923C</color>
+    <color name="streak_active">#FBBF24</color>
+    <color name="mood_positive">#34D399</color>
+    <color name="mood_neutral">#818CF8</color>
+    <color name="mood_low">#FB7185</color>
+
+    <!-- Alias compatibilidad -->
+    <color name="colorPrimary">@color/md_theme_primary</color>
+    <color name="colorOnPrimary">@color/md_theme_onPrimary</color>
+    <color name="colorPrimaryContainer">@color/md_theme_primaryContainer</color>
+    <color name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</color>
+    <color name="colorSecondary">@color/md_theme_secondary</color>
+    <color name="colorOnSecondary">@color/md_theme_onSecondary</color>
+    <color name="colorSecondaryContainer">@color/md_theme_secondaryContainer</color>
+    <color name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</color>
+    <color name="colorBackground">@color/md_theme_background</color>
+    <color name="colorOnBackground">@color/md_theme_onBackground</color>
+    <color name="colorSurface">@color/md_theme_surface</color>
+    <color name="colorOnSurface">@color/md_theme_onSurface</color>
+    <color name="colorSurfaceVariant">@color/md_theme_surfaceVariant</color>
+    <color name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</color>
+    <color name="colorOutline">@color/md_theme_outline</color>
+    <color name="colorError">@color/status_error</color>
+    <color name="colorOnError">@color/md_theme_onPrimary</color>
+</resources>

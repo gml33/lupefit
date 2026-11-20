@@ -1,0 +1,102 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.lupefit.app'
+    compileSdk = libs.versions.compileSdk.get().toInteger()
+
+    defaultConfig {
+        applicationId "com.lupefit.app"
+        minSdk = libs.versions.minSdk.get().toInteger()
+        targetSdk = libs.versions.targetSdk.get().toInteger()
+        versionCode = 1
+        versionName = "1.0.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{DEPENDENCIES,LICENSE,LICENSE.txt,NOTICE,NOTICE.txt}"
+        }
+    }
+}
+
+dependencies {
+    // AndroidX Core
+    implementation libs.androidx.core
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.activity
+    implementation libs.androidx.fragment
+    implementation libs.androidx.lifecycle.viewmodel
+    implementation libs.androidx.lifecycle.livedata
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.recyclerview
+    implementation libs.androidx.swiperefreshlayout
+
+    // Core UI module
+    implementation project(":core:core-ui")
+
+    // Material Design 3
+    implementation libs.material
+
+    // Navigation
+    implementation libs.navigation.fragment
+    implementation libs.navigation.ui
+
+    // Room Database
+    implementation libs.room.runtime
+    annotationProcessor libs.room.compiler
+    implementation libs.room.ktx
+
+    // WorkManager
+    implementation libs.workmanager.runtime
+
+    // Health Connect
+    implementation libs.health.connect
+
+    // Play Services Location
+    implementation libs.play.services.location
+
+    // MPAndroidChart
+    implementation libs.mpandroidchart
+
+    // CameraX
+    implementation libs.camerax.core
+    implementation libs.camerax.camera2
+    implementation libs.camerax.lifecycle
+    implementation libs.camerax.view
+
+    // ML Kit Barcode Scanning
+    implementation libs.mlkit.barcode
+
+    // CircleImageView
+    implementation libs.circleimageview
+
+    // Lottie
+    implementation libs.lottie
+
+    // Guava ListenableFuture
+    implementation libs.guava
+
+    // Test
+    testImplementation libs.junit
+    androidTestImplementation libs.espresso.core
+}

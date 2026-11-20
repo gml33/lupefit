@@ -1,9 +1,9 @@
 # Avances - LuPeFit: Replicación y Rediseño Completo
 
-## Estado Actual: **DISEÑO COMPLETADO** ✅ - Listo para Implementación
+## Estado Actual: **PASO 1 - ESQUELETO BASE COMPILABLE COMPLETADO** ✅
 
 ### Fecha de Inicio: 2026-11-20
-### Fase Actual: Implementación (Próxima)
+### Fase Actual: Implementación - Paso 1 Completado
 
 ---
 
@@ -45,7 +45,7 @@
 ### ✅ Fase 2: Diseño Arquitectónico LuPeFit (COMPLETA)
 
 #### Hito 10: Definición de Stack y Arquitectura
-- **Frontend**: Java + XML Views (tradicional), Feature-modular (Enfoque A)
+- **Frontend**: Java 17+ + XML Views (tradicional), Feature-modular (Enfoque A)
 - **Backend**: Python + FastAPI + PostgreSQL (Docker)
 - **Auth**: Email + password (local + sync)
 - **Sync**: Offline-first (Room + WorkManager)
@@ -53,82 +53,106 @@
 - **Premium**: Eliminado - todas las features GRATIS
 
 #### Hito 11: Capa de Datos (core-data) - Room Schema
-- 13 entidades: Usuario, PerfilNutricional, Alimento, EntradaDiario, Ejercicio, EntradaEjercicio, Peso, Medida, FotoProgreso, Receta, IngredienteReceta, Agua, Configuracion, SyncQueue
+- 14 entidades: User, FoodLog, WorkoutLog, WorkoutSet, Exercise, Food, Recipe, RecipeIngredient, WaterLog, ProgressPhoto, PersonalRecordEntity, GlucoseLog, MoodEntry, UserNote, WeatherSnapshot, Streak
 - DAOs + Repositories + SyncQueue con reintentos exponenciales
 - FTS5 en alimentos para búsqueda
 
 #### Hito 12: Capa de Dominio (core-domain)
-- Entidades de dominio puras (Kotlin data classes)
-- 10 interfaces Repository
-- 10+ Use Cases principales (Auth, Diario, Ejercicio, Progreso, Recetas, Sync, Export)
+- Entidades de dominio puras (Java)
+- 14 interfaces Repository
+- 7+ Use Cases principales (FoodLog, WorkoutLog, PersonalRecord, GlucoseLog, MoodEntry, UserNote, UserProfile)
 
-#### Hito 13: Capa de Red & Sincronización (core-network, core-sync)
+#### Hito 13: Capa de Red & Sincronización (core-network, core-sync) - PENDIENTE
 - Retrofit API Service con 30+ endpoints
 - Sync Batch endpoint bidireccional (/sync/batch)
 - WorkManager SyncWorker (15 min + connectivity trigger)
 - Estrategia de conflictos: Server-wins / Merge / Latest-wins por entidad
 
-#### Hito 14: Backend FastAPI + Docker
+#### Hito 14: Backend FastAPI + Docker - PENDIENTE
 - Estructura completa: models, schemas, api/v1, services, tasks
 - SQLAlchemy models con UUID, índices, full-text search
 - JWT Auth (access/refresh tokens, bcrypt)
 - docker-compose.yml: postgres, redis, backend, celery-worker, celery-beat
 - Sync batch endpoint con versionado global
 
-#### Hito 15: Feature Modules UI & Navigation
+#### Hito 15: Feature Modules UI & Navigation - PENDIENTE
 - 11 feature modules (diario, ejercicio, nutricion, progreso, recetas, escaneo, agua, configuracion, perfil, insights, planes)
 - Navigation graphs por feature (XML)
-- Bottom Nav: Diario | Ejercicio | Nutrición | Progreso | Más
+- Bottom Nav: Inicio | Tendencias | [FAB] | Planes | Perfil
 - Sin premium/upsell modules
 
-#### Hito 16: UI - Tema Material 3 Completo (core-ui)
-**Paleta LuPeFit (Dirección Visual):**
+#### Hito 16: UI - Tema Material 3 Completo (core:core-ui) ✅
+**Paleta LuPeFit Oficial (Tokens `md_theme_*`):**
 | Color | Light | Dark | Uso |
 |-------|-------|------|-----|
-| Primary | `#167D62` | `#B7D86B` | Verde petróleo - Acciones principales |
-| Primary Container | `#B7D86B` | `#167D62` | Verde lima suave - Contenedores |
-| Secondary | `#F2A541` | `#F2A541` | Ámbar - Actividad, destacados |
-| Surface | `#FFFFFF` | `#1E1E1E` | Tarjetas |
-| Background | `#F6F8F5` | `#121212` | Fondo |
-| On Surface | `#18211D` | `#F6F8F5` | Texto principal |
-| On Surface Variant | `#66736D` | `#B7B9B5` | Texto secundario |
-| Error | `#B3261E` | `#F2B8B5` | Solo errores |
+| Primary | `#006C4C` | `#6CDBAC` | Verde petróleo - Acciones principales |
+| Primary Container | `#89F8C7` | `#005138` | Contenedores primarios |
+| Secondary | `#4D6357` | `#B3CCBE` | Secundarios |
+| Secondary Container | `#CFE9D9` | `#354B40` | Contenedores secundarios |
+| Background | `#F5FBF6` | `#0F1512` | Fondo app |
+| Surface | `#FFFFFF` | `#171D1A` | Tarjetas |
+| On Surface | `#171D1A` | `#DFE4DF` | Texto principal |
+| On Surface Variant | `#404943` | `#BFC9C2` | Texto secundario |
+| Outline | `#707973` | `#8A938C` | Bordes |
+| Error | `#BA1A1A` | `#FFB4AB` | Solo errores |
 
-- **Tipografía**: Material 3 Type Scale (Display/Headline/Title/Body/Label)
-- **Formas**: 4dp, 8dp, 12dp, 16dp, 28dp
+**Tokens Semánticos (Macros, Hidratación, Estados):**
+- Protein: `#2563EB` / `#60A5FA` (track: `#DBEAFE` / `#1E3A8A`)
+- Carbs: `#D97706` / `#FBBF24` (track: `#FEF3C7` / `#78350F`)
+- Fat: `#7C3AED` / `#A78BFA` (track: `#EDE9FE` / `#4C1D95`)
+- Water: `#0284C7` / `#38BDF8`
+- Success: `#16A34A` / `#4ADE80`
+- Warning: `#F59E0B` / `#FBBF24`
+
+**Tokens Funcionalidades Extra (v2.0-v4.0):**
+- CrossFit: `#EA580C` / `#FB923C`
+- Streak: `#F59E0B` / `#FBBF24`
+- Mood Positive: `#10B981` / `#34D399`
+- Mood Neutral: `#6366F1` / `#818CF8`
+- Mood Low: `#F43F5E` / `#FB7185`
+
+- **Tipografía**: Material 3 Type Scale (15 estilos: Display/Headline/Title/Body/Label)
+- **Formas**: ExtraSmall 4dp, Small 8dp, Medium 12dp, Large 16dp, Card 24dp, ExtraLarge 28dp, Pill 50%, ProgressTrack 8dp
 - **Espaciado**: Escala 4dp (2-48dp)
-- **Componentes**: 25+ widget styles (Button, FAB, TextInput, Chip, NavBar, Card, Dialog, Progress, Switch, Slider, Tooltip, Snackbar, Toolbar)
-- **Modo oscuro**: Completo (values-night/colors.xml + themes.xml)
+- **Componentes**: 20+ widget styles (Button Filled/Tonal/Outlined, FAB, TextInput, Chip Assist/Filter/Choice, BottomNavigation, BottomSheet, AlertDialog, CardView Elevated/Outlined, Circular/LinearProgress, Switch, CheckBox, RadioButton, Slider, Tooltip, Snackbar)
+- **Modo oscuro**: Completo (values-night/colors.xml + themes.xml con DayNight auto-switch)
+- **Elevation**: 0-1dp + stroke 1dp dark mode (tokens `md_theme_*`)
 
-#### Hito 17: Strings - Castellano Argentino
-- Archivo: `core-ui/src/main/res/values-es-rAR/strings.xml`
-- 200+ strings localizadas (Auth, Diario, Ejercicio, Nutrición, Progreso, Recetas, Escaneo, Agua, Config, Perfil, Insights, Planes, Errores, Unidades)
+#### Hito 17: 4 Componentes Base Obligatorios ✅
+1. `view_header_date.xml` - Selector fecha + avatar (Material 3)
+2. `card_macro_summary.xml` - CircularProgress 150dp/14dp + 3 LinearProgress 10dp (macro rings)
+3. `item_log_entry.xml` - Icono circular + título 15sp Bold + subtítulo 13sp + valor derecha
+4. `sheet_base_container.xml` - Píldora arrastre + título 18sp Bold + botón ancho completo
+
+#### Hito 18: Drawables Base ✅
+- `ic_chevron_left.xml` / `ic_chevron_right.xml`
+- `ic_avatar_placeholder.xml` / `ic_food_placeholder.xml`
+- `bg_rounded_xs.xml` (4dp)
+- `nav_active_indicator.xml`
+- `splash_background.xml`
+
+#### Hito 19: Strings - Castellano Argentino ✅
+- Archivo: `core/core-ui/src/main/res/values-es-rAR/strings.xml`
+- 365 strings localizadas (App, Auth, Diario, Ejercicio, Nutrición, Progreso, Recetas, Escaneo, Agua, Config, Perfil, Insights, Planes, Errores, Unidades, Macros, Accesibilidad)
 - Formato fecha: dd/MM/yyyy, hora: HH:mm
 - Términos: "Registrate", "Entrar", "Probá", "Tocá", "Apuntá", "Almuerzo", "Merienda"
 
-#### Hito 18: Documentación Actualizada (features.md v2)
+#### Hito 20: Documentación Actualizada (features.md v3) ✅
 - Arquitectura LuPeFit completa
-- Module map actualizado (11 features, sin premium)
-- Paleta de colores documentada
-- Schema Room documentado
-- Backend endpoints documentados
-- Native libs replacement plan
+- Module map actualizado (app + 2 core + 11 feature = 14 módulos)
+- Paleta de colores documentada (tokens `md_theme_*`)
+- Schema Room documentado (14 entidades + offline-first fields)
+- Build gradle configurado
 
-#### Hito 19: Alineación con UI_DESIGN_SYSTEM (Fuente de Verdad) ✅
-- **core-ui/** completamente reescrito para coincidir con UI_DESIGN_SYSTEM.md
-- **Paleta oficial**: Tokens `md_theme_*` (Primary `#006C4C`, Secondary `#4D6357`, etc.)
-- **Regla de Oro**: Cero hex hardcodeado - solo `@color/md_theme_*` / `?attr/`
-- **Formas exactas**: Card 24dp, List items 16dp, Buttons pill (50%), BottomSheet 28dp, Progress track 8dp
-- **Elevation**: 0-1dp + stroke 1dp dark mode
-- **4 Componentes base obligatorios creados**:
-  1. `view_header_date.xml` - Selector fecha + avatar
-  2. `card_macro_summary.xml` - CircularProgress 150dp/14dp + 3 LinearProgress 10dp
-  3. `item_log_entry.xml` - Icono circular + título 15sp Bold + subtítulo 13sp + valor derecha
-  4. `sheet_base_container.xml` - Píldora arrastre + título 18sp Bold + botón ancho completo
-- **Drawables base**: ic_chevron_left/right, ic_avatar_placeholder, ic_food_placeholder, bg_rounded_xs
-- **Strings**: macros labels, fecha_anterior/siguiente, avatar_usuario
-- **build.gradle.kts** + proguard-rules + consumer-rules para módulo core-ui
-- **Convención nomenclatura estricta**: `[Modulo][Nombre]Fragment` → `fragment_[modulo]_[nombre].xml`
+#### Hito 21: **PASO 1 - Esqueleto Base Compilable** ✅
+- **build.gradle (app)**: Material 3, Room (annotationProcessor), Health Connect, WorkManager, Play Services Location, MPAndroidChart
+- **MyApplication.java** + **AppContainer.java**: Inyección de Dependencias Manual (sin Hilt/Dagger/KAPT)
+- **AppDatabase.java** + **14 Entidades Room** con campos offline-first (isSynced, syncAction, serverId, timestamp, lastModified)
+- **14 DAOs** con queries LiveData
+- **14 Repositories** (stubs) + **5 Engines** (stubs) + **7 UseCases** (stubs)
+- **core:core-ui** module: Tema completo, 4 componentes base, drawables, strings AR
+- **attrs.xml**: Atributos Material 3 inversos (colorInverseSurface, colorInverseOnSurface, etc.)
+- **APK Debug generado exitosamente** (`./gradlew :app:assembleDebug` → BUILD SUCCESSFUL)
 
 ---
 
@@ -146,25 +170,42 @@
 9. `apktool_out/assets/config/upsell.json` (6KB)
 
 ### Diseño LuPeFit (Fase 2)
-10. `features.md` - v2: **Arquitectura LuPeFit completa**
-11. `core-ui/src/main/res/values/colors.xml` - Paleta light (tokens `md_theme_*`)
-12. `core-ui/src/main/res/values-night/colors.xml` - Paleta dark (tokens `md_theme_*`)
-13. `core-ui/src/main/res/values/themes.xml` - Tema Material 3 light
-14. `core-ui/src/main/res/values-night/themes.xml` - Tema Material 3 dark
-15. `core-ui/src/main/res/values/styles.xml` - 25+ widget styles (UI_DESIGN_SYSTEM specs)
-16. `core-ui/src/main/res/values/dimens.xml` - Espaciado, elevation, icon sizes, touch targets
-17. `core-ui/src/main/res/color/*.xml` - 12 color state lists
-18. `core-ui/src/main/res/drawable/nav_active_indicator.xml`
-19. `core-ui/src/main/res/drawable/splash_background.xml` + `_night.xml`
-20. `core-ui/src/main/res/values-es-rAR/strings.xml` - 200+ strings argentino
-21. `core-ui/src/main/res/layout/view_header_date.xml` - Componente base 1
-22. `core-ui/src/main/res/layout/card_macro_summary.xml` - Componente base 2
-23. `core-ui/src/main/res/layout/item_log_entry.xml` - Componente base 3
-24. `core-ui/src/main/res/layout/sheet_base_container.xml` - Componente base 4
-25. `core-ui/src/main/res/drawable/ic_chevron_left.xml` / `ic_chevron_right.xml`
-26. `core-ui/src/main/res/drawable/ic_avatar_placeholder.xml` / `ic_food_placeholder.xml`
-27. `core-ui/src/main/res/drawable/bg_rounded_xs.xml`
-28. `core-ui/build.gradle.kts` + `proguard-rules.pro` + `consumer-rules.pro`
+10. `features.md` - v3: **Arquitectura LuPeFit completa**
+11. `core/core-ui/src/main/res/values/colors.xml` - Paleta light (tokens `md_theme_*`)
+12. `core/core-ui/src/main/res/values-night/colors.xml` - Paleta dark (tokens `md_theme_*`)
+13. `core/core-ui/src/main/res/values/themes.xml` - Tema Material 3 light (480+ líneas)
+14. `core/core-ui/src/main/res/values-night/themes.xml` - Tema Material 3 dark
+15. `core/core-ui/src/main/res/values/styles.xml` - 20+ widget styles (UI_DESIGN_SYSTEM specs)
+16. `core/core-ui/src/main/res/values/dimens.xml` - Espaciado, elevation, icon sizes, touch targets
+17. `core/core-ui/src/main/res/color/*.xml` - 12 color state lists
+18. `core/core-ui/src/main/res/drawable/nav_active_indicator.xml`
+19. `core/core-ui/src/main/res/drawable/splash_background.xml`
+20. `core/core-ui/src/main/res/values-es-rAR/strings.xml` - 365 strings argentino
+21. `core/core-ui/src/main/res/layout/view_header_date.xml` - Componente base 1
+22. `core/core-ui/src/main/res/layout/card_macro_summary.xml` - Componente base 2
+23. `core/core-ui/src/main/res/layout/item_log_entry.xml` - Componente base 3
+24. `core/core-ui/src/main/res/layout/sheet_base_container.xml` - Componente base 4
+25. `core/core-ui/src/main/res/drawable/ic_chevron_left.xml` / `ic_chevron_right.xml`
+26. `core/core-ui/src/main/res/drawable/ic_avatar_placeholder.xml` / `ic_food_placeholder.xml`
+27. `core/core-ui/src/main/res/drawable/bg_rounded_xs.xml`
+28. `core/core-ui/build.gradle.kts` + `proguard-rules.pro` + `consumer-rules.pro`
+
+### Paso 1 - Esqueleto Base (App Module)
+29. `app/build.gradle` - Dependencias completas (Material 3, Room, Health Connect, WorkManager, Play Services Location, MPAndroidChart, CameraX, ML Kit, Lottie, CircleImageView)
+30. `app/src/main/java/com/lupefit/app/MyApplication.java` - Application class
+31. `app/src/main/java/com/lupefit/app/AppContainer.java` - Manual DI Container (218 líneas)
+32. `app/src/main/java/com/lupefit/app/data/local/AppDatabase.java` - Room Database singleton
+33. `app/src/main/java/com/lupefit/app/data/local/entity/*.java` - 14 Entidades (offline-first)
+34. `app/src/main/java/com/lupefit/app/data/local/dao/*.java` - 14 DAOs (LiveData queries)
+35. `app/src/main/java/com/lupefit/app/data/local/converters/TypeConverters.java` - TypeConverters
+36. `app/src/main/java/com/lupefit/app/domain/repository/*.java` - 14 Repositories (stubs)
+37. `app/src/main/java/com/lupefit/app/domain/engine/*.java` - 5 Engines (stubs)
+38. `app/src/main/java/com/lupefit/app/domain/usecase/*.java` - 7 UseCases (stubs)
+39. `app/src/main/res/values/attrs.xml` - Atributos Material 3 custom
+40. `app/src/main/res/xml/data_extraction_rules.xml` + `backup_rules.xml`
+41. `app/src/main/res/values/strings.xml` - app_name
+42. `app/src/main/res/mipmap-*/ic_launcher*.xml` - Iconos vectoriales
+43. `app/src/main/AndroidManifest.xml` - Permisos, Activities, Providers, Health Connect meta-data
 
 ---
 
@@ -172,15 +213,16 @@
 
 ### Arquitectura
 - **Pattern**: Clean Architecture por feature module
-- **Módulos**: app + 5 core + 11 feature = 17 módulos Gradle
+- **Módulos Gradle**: app + core:core-domain + core:core-ui = **3 módulos actuales** (simplificado de 14 planeados para Paso 1)
 - **Offline-first**: Room + WorkManager sync bidireccional
-- **Multi-DEX**: Preparado para 12+ DEX si crece
+- **Stack**: Java 17+, XML Views, ViewBinding, Room (annotationProcessor), Material 3
 
-### Base de Datos (13 entidades)
-- Usuario, PerfilNutricional, Alimento (FTS5), EntradaDiario, Ejercicio, EntradaEjercicio
-- Peso, Medida, FotoProgreso, Receta, IngredienteReceta, Agua, Configuracion, SyncQueue
+### Base de Datos (14 entidades + Streak = 15)
+- User, FoodLog, WorkoutLog, WorkoutSet, Exercise, Food, Recipe, RecipeIngredient
+- WaterLog, ProgressPhoto, PersonalRecordEntity, GlucoseLog, MoodEntry, UserNote, WeatherSnapshot, Streak
+- **Todas con offline-first**: `isSynced` (boolean), `syncAction` (CREATE/UPDATE/DELETE), `serverId` (String), `timestamp` (long), `lastModified` (long)
 
-### Backend (FastAPI + PostgreSQL)
+### Backend (FastAPI + PostgreSQL) - PENDIENTE
 - 30+ endpoints REST organizados por feature
 - Sync batch endpoint versionado
 - JWT Auth (access 30min, refresh 7d)
@@ -202,29 +244,16 @@ Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Fac
 
 ---
 
-## Próximos Pasos: Implementación
+## Próximos Pasos: Implementación Continua
 
-### 1. Setup Proyecto Gradle
-```kotlin
-// settings.gradle.kts
-include(":app")
-include(":core:core-data", ":core:core-domain", ":core:core-network", ":core:core-ui", ":core:core-sync")
-include(":feature:feature-diario", ":feature:feature-ejercicio", ":feature:feature-nutricion",
-        ":feature:feature-progreso", ":feature:feature-recetas", ":feature:feature-escaneo",
-        ":feature:feature-agua", ":feature:feature-configuracion", ":feature:feature-perfil",
-        ":feature:feature-insights", ":feature:feature-planes")
-```
+### PASO 2: Core Network & Sync Modules
+1. `core:core-network` - Retrofit, API Service, DTOs, SyncEngine
+2. `core:core-sync` - WorkManager SyncWorker, ConflictResolution
+3. Backend FastAPI + Docker Compose
 
-### 2. Core Modules (orden de dependencias)
-1. `core-domain` (sin deps) → Entidades, Repository interfaces, Use Cases
-2. `core-data` (depende core-domain) → Room, DAOs, RepositoryImpl, SyncQueue
-3. `core-network` (depende core-domain) → Retrofit, API Service, DTOs, SyncEngine
-4. `core-sync` (depende core-data, core-network) → WorkManager, ConflictResolution
-5. `core-ui` (sin deps) → Tema, Styles, Strings, Base Views, Navigation helpers
-
-### 3. Feature Modules (cada uno: data, domain, presentation)
+### PASO 3: Feature Modules (11 módulos)
 - `feature-diario` → DiarioFragment, BuscarAlimento, QuickAdd, EscanearCodigoBarras
-- `feature-ejercicio` → Lista, Buscar, Nuevo, Rutinas
+- `feature-ejercicio` → Lista, Buscar, Nuevo, Rutinas, WOD CrossFit, Timer
 - `feature-nutricion` → Resumen, Metas, Macros, Gráficos (MPAndroidChart)
 - `feature-progreso` → Peso, Medidas, Fotos, Exportar, Gráficos
 - `feature-recetas` → Lista, Crear, Importar, Detalle, Colecciones
@@ -235,26 +264,24 @@ include(":feature:feature-diario", ":feature:feature-ejercicio", ":feature:featu
 - `feature-insights` → Semanal, Tendencias, Predicciones, Patrones
 - `feature-planes` → Comida, Entrenamiento, Mis Planes, Quick Log
 
-### 4. App Module
-- `LuPeFitApplication` (Hilt)
-- `MainActivity` + Bottom Navigation (5 tabs)
-- Navigation Host + Deep Links
-- Splash Screen API
-
-### 5. Backend
-- FastAPI project structure
-- SQLAlchemy models + Alembic migrations
-- Pydantic schemas
-- JWT Auth endpoints
-- Sync batch endpoint
-- Docker + docker-compose
-- CI/CD GitHub Actions
+### PASO 4: Advanced Features (v2.0-v4.0)
+- Health Connect Integration (Steps, Active Calories, Exercise Sessions, Heart Rate)
+- Voice Logging (SpeechRecognizer + Whisper Strategy)
+- CrossFit WOD Module (AMRAP, EMOM, For Time, Tabata) + Timer
+- Dynamic Macros (Ciclado por gasto energético)
+- Streak Manager (Rachas diarias)
+- Mood Tracking + User Notes
 
 ---
 
 ## Comandos de Referencia
 
 ```bash
+# Build proyecto completo
+cd /Users/marcelo/Desktop/Desarrollos/006
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
+./gradlew :app:assembleDebug
+
 # Ver estructura MFP analizada
 find /Users/marcelo/Desktop/Desarrollos/006/apktool_out -type f -name "*.xml" | grep -E "(navigation|manifest)"
 
@@ -269,14 +296,15 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 
 ## Notas para Retomar
 
-**Archivos clave**:
-1. `features.md` - Arquitectura LuPeFit completa (v2)
+**Archivos clave:**
+1. `features.md` - Arquitectura LuPeFit completa (v3)
 2. `avances.md` - Este historial
-3. `core-ui/` - Tema Material 3 completo listo para usar
-4. `apktool_out/` / `jadx_out/` - Referencia MFP (regenerables)
+3. `core/core-ui/` - Tema Material 3 completo listo para usar
+4. `app/` - Esqueleto base compilable (Paso 1 completado)
+5. `apktool_out/` / `jadx_out/` - Referencia MFP (regenerables)
 
-**Estado**: **Diseño 100% completo**. Próximo: **Implementación Gradle + Core Modules**.
+**Estado**: **Paso 1 (Esqueleto Base) 100% completo y compilando**. Próximo: **Paso 2 - Core Network & Sync + Backend**.
 
 ---
 
-*Última actualización: 2026-11-20 - Fase 2 completada, listo para implementar*
+*Última actualización: 2026-11-20 - Paso 1 completado, BUILD SUCCESSFUL, listo para Paso 2*
