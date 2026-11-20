@@ -14,15 +14,15 @@
 
 | Light Mode | Dark Mode |
 |:----------:|:---------:|
-| ![Light](docs/screenshots/home_light.png) | ![Dark](docs/screenshots/home_dark.png) |
+| ![Light](docs/screenshots/home_light.svg) | ![Dark](docs/screenshots/home_dark.svg) |
 | *Dashboard Principal* | *Dashboard Principal (Oscuro)* |
-| ![Diario](docs/screenshots/diario_light.png) | ![Diario Dark](docs/screenshots/diario_dark.png) |
+| ![Diario](docs/screenshots/diario_light.svg) | ![Diario Dark](docs/screenshots/diario_dark.svg) |
 | *Diario de Alimentos* | *Diario de Alimentos (Oscuro)* |
-| ![Ejercicio](docs/screenshots/ejercicio_light.png) | ![Ejercicio Dark](docs/screenshots/ejercicio_dark.png) |
+| ![Ejercicio](docs/screenshots/ejercicio_light.svg) | ![Ejercicio Dark](docs/screenshots/ejercicio_dark.svg) |
 | *Registro de Ejercicios* | *Registro de Ejercicios (Oscuro)* |
-| ![Nutrición](docs/screenshots/nutricion_light.png) | ![Nutrición Dark](docs/screenshots/nutricion_dark.png) |
+| ![Nutrición](docs/screenshots/nutricion_light.svg) | ![Nutrición Dark](docs/screenshots/nutricion_dark.svg) |
 | *Resumen de Macronutrientes* | *Resumen de Macronutrientes (Oscuro)* |
-| ![Progreso](docs/screenshots/progreso_light.png) | ![Progreso Dark](docs/screenshots/progreso_dark.png) |
+| ![Progreso](docs/screenshots/progreso_light.svg) | ![Progreso Dark](docs/screenshots/progreso_dark.svg) |
 | *Gráficos de Progreso* | *Gráficos de Progreso (Oscuro)* |
 
 > **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 1 - Esqueleto Base**.

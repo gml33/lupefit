@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="720" viewBox="0 0 400 720">
+  <rect width="400" height="720" fill="#F5FBF6"/>
+  <!-- Status bar -->
+  <rect x="0" y="0" width="400" height="24" fill="#F5FBF6"/>
+  <text x="20" y="18" font-family="system-ui" font-size="12" fill="#171D1A">9:41</text>
+  <text x="340" y="18" font-family="system-ui" font-size="12" fill="#171D1A">🔋 100%</text>
+  <!-- Toolbar -->
+  <rect x="0" y="24" width="400" height="64" fill="#FFFFFF"/>
+  <text x="24" y="62" font-family="system-ui" font-size="20" font-weight="bold" fill="#171D1A">LuPeFit</text>
+  <circle cx="360" cy="56" r="20" fill="#006C4C"/>
+  <text x="360" y="61" font-family="system-ui" font-size="16" fill="#FFFFFF" text-anchor="middle">+</text>
+  <!-- Date header -->
+  <rect x="0" y="88" width="400" height="60" fill="#FFFFFF"/>
+  <text x="24" y="118" font-family="system-ui" font-size="16" fill="#171D1A">Hoy, 20 de noviembre</text>
+  <text x="24" y="136" font-family="system-ui" font-size="13" fill="#404943">Miércoles • 2.345 kcal / 2.500 kcal</text>
+  <!-- Macro rings -->
+  <rect x="16" y="160" width="368" height="180" fill="#FFFFFF" rx="24"/>
+  <text x="40" y="188" font-family="system-ui" font-size="16" font-weight="600" fill="#171D1A">Macronutrientes</text>
+  <!-- Protein ring -->
+  <circle cx="100" cy="270" r="50" stroke="#DBEAFE" stroke-width="14" fill="none"/>
+  <circle cx="100" cy="270" r="50" stroke="#2563EB" stroke-width="14" fill="none" stroke-dasharray="314" stroke-dashoffset="94" stroke-linecap="round"/>
+  <text x="100" y="268" font-family="system-ui" font-size="14" font-weight="bold" fill="#2563EB" text-anchor="middle">145g</text>
+  <text x="100" y="286" font-family="system-ui" font-size="10" fill="#404943" text-anchor="middle">Proteínas</text>
+  <text x="100" y="310" font-family="system-ui" font-size="11" fill="#2563EB" text-anchor="middle">72%</text>
+  <!-- Carbs ring -->
+  <circle cx="200" cy="270" r="50" stroke="#FEF3C7" stroke-width="14" fill="none"/>
+  <circle cx="200" cy="270" r="50" stroke="#D97706" stroke-width="14" fill="none" stroke-dasharray="314" stroke-dashoffset="125" stroke-linecap="round"/>
+  <text x="200" y="268" font-family="system-ui" font-size="14" font-weight="bold" fill="#D97706" text-anchor="middle">210g</text>
+  <text x="200" y="286" font-family="system-ui" font-size="10" fill="#404943" text-anchor="middle">Carbs</text>
+  <text x="200" y="310" font-family="system-ui" font-size="11" fill="#D97706" text-anchor="middle">65%</text>
+  <!-- Fat ring -->
+  <circle cx="300" cy="270" r="50" stroke="#EDE9FE" stroke-width="14" fill="none"/>
+  <circle cx="300" cy="270" r="50" stroke="#7C3AED" stroke-width="14" fill="none" stroke-dasharray="314" stroke-dashoffset="78" stroke-linecap="round"/>
+  <text x="300" y="268" font-family="system-ui" font-size="14" font-weight="bold" fill="#7C3AED" text-anchor="middle">78g</text>
+  <text x="300" y="286" font-family="system-ui" font-size="10" fill="#404943" text-anchor="middle">Grasas</text>
+  <text x="300" y="310" font-family="system-ui" font-size="11" fill="#7C3AED" text-anchor="middle">81%</text>
+  <!-- Water card -->
+  <rect x="16" y="356" width="368" height="100" fill="#E0F2FE" rx="16"/>
+  <circle cx="60" cy="406" r="28" fill="#0284C7"/>
+  <text x="60" y="411" font-family="system-ui" font-size="18" fill="#FFFFFF" text-anchor="middle">💧</text>
+  <text x="110" y="392" font-family="system-ui" font-size="16" font-weight="600" fill="#0284C7">Hidratación</text>
+  <text x="110" y="410" font-family="system-ui" font-size="24" font-weight="bold" fill="#0284C7">2.1 / 3.0 L</text>
+  <rect x="110" y="420" width="200" height="8" rx="4" fill="#BAE6FD"/>
+  <rect x="110" y="420" width="140" height="8" rx="4" fill="#0284C7"/>
+  <text x="330" y="410" font-family="system-ui" font-size="12" fill="#404943">70%</text>
+  <!-- Quick actions -->
+  <rect x="16" y="472" width="368" height="160" fill="#FFFFFF" rx="24"/>
+  <text x="40" y="500" font-family="system-ui" font-size="16" font-weight="600" fill="#171D1A">Accesos Rápidos</text>
+  <!-- Add food -->
+  <rect x="32" y="520" width="156" height="96" rx="16" fill="#F5FBF6" stroke="#C4C7C3"/>
+  <circle cx="110" cy="550" r="24" fill="#89F8C7"/>
+  <text x="110" y="555" font-family="system-ui" font-size="18" fill="#006C4C" text-anchor="middle">+</text>
+  <text x="110" y="590" font-family="system-ui" font-size="13" font-weight="600" fill="#171D1A" text-anchor="middle">Comida</text>
+  <text x="110" y="608" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">Registrar alimento</text>
+  <!-- Add workout -->
+  <rect x="212" y="520" width="156" height="96" rx="16" fill="#F5FBF6" stroke="#C4C7C3"/>
+  <circle cx="290" cy="550" r="24" fill="#DBEAFE"/>
+  <text x="290" y="555" font-family="system-ui" font-size="18" fill="#2563EB" text-anchor="middle">🏃</text>
+  <text x="290" y="590" font-family="system-ui" font-size="13" font-weight="600" fill="#171D1A" text-anchor="middle">Ejercicio</text>
+  <text x="290" y="608" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">Registrar entrenamiento</text>
+  <!-- Bottom nav -->
+  <rect x="0" y="680" width="400" height="40" fill="#FFFFFF"/>
+  <text x="40" y="706" font-family="system-ui" font-size="11" fill="#006C4C" text-anchor="middle">🏠</text>
+  <text x="120" y="706" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">📈</text>
+  <circle cx="200" cy="692" r="24" fill="#006C4C"/>
+  <text x="200" y="697" font-family="system-ui" font-size="16" fill="#FFFFFF" text-anchor="middle">+</text>
+  <text x="280" y="706" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">📋</text>
+  <text x="360" y="706" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">👤</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="720" viewBox="0 0 400 720">
+  <rect width="400" height="720" fill="#0F1512"/>
+  <rect x="0" y="0" width="400" height="24" fill="#0F1512"/>
+  <text x="20" y="18" font-family="system-ui" font-size="12" fill="#DFE4DF">9:41</text>
+  <text x="340" y="18" font-family="system-ui" font-size="12" fill="#DFE4DF">🔋 100%</text>
+  <rect x="0" y="24" width="400" height="64" fill="#171D1A"/>
+  <text x="24" y="62" font-family="system-ui" font-size="20" font-weight="bold" fill="#DFE4DF">Progreso</text>
+  <circle cx="360" cy="56" r="20" fill="#6CDBAC"/>
+  <text x="360" y="61" font-family="system-ui" font-size="16" fill="#003826" text-anchor="middle">📤</text>
+  <rect x="0" y="88" width="400" height="48" fill="#171D1A"/>
+  <rect x="20" y="96" width="120" height="32" rx="16" fill="#6CDBAC"/>
+  <text x="80" y="117" font-family="system-ui" font-size="13" font-weight="600" fill="#003826" text-anchor="middle">📊 Peso</text>
+  <text x="200" y="117" font-family="system-ui" font-size="13" fill="#BFC9C2" text-anchor="middle">📏 Medidas</text>
+  <text x="300" y="117" font-family="system-ui" font-size="13" fill="#BFC9C2" text-anchor="middle">📸 Fotos</text>
+  <rect x="16" y="148" width="368" height="280" fill="#171D1A" rx="24" stroke="#4A4D48"/>
+  <text x="40" y="176" font-family="system-ui" font-size="16" font-weight="600" fill="#DFE4DF">Evolución de Peso (90 días)</text>
+  <polyline points="40,380 70,360 100,350 130,340 160,335 190,330 220,325 250,320 280,315 310,310 340,308 370,306" fill="none" stroke="#6CDBAC" stroke-width="3"/>
+  <circle cx="40" cy="380" r="5" fill="#6CDBAC"/>
+  <circle cx="70" cy="360" r="5" fill="#6CDBAC"/>
+  <circle cx="100" cy="350" r="5" fill="#6CDBAC"/>
+  <circle cx="130" cy="340" r="5" fill="#6CDBAC"/>
+  <circle cx="160" cy="335" r="5" fill="#6CDBAC"/>
+  <circle cx="190" cy="330" r="5" fill="#6CDBAC"/>
+  <circle cx="220" cy="325" r="5" fill="#6CDBAC"/>
+  <circle cx="250" cy="320" r="5" fill="#6CDBAC"/>
+  <circle cx="280" cy="315" r="5" fill="#6CDBAC"/>
+  <circle cx="310" cy="310" r="5" fill="#6CDBAC"/>
+  <circle cx="340" cy="308" r="5" fill="#6CDBAC"/>
+  <circle cx="370" cy="306" r="5" fill="#6CDBAC"/>
+  <text x="40" y="410" font-family="system-ui" font-size="10" fill="#BFC9C2" text-anchor="middle">Ene</text>
+  <text x="130" y="410" font-family="system-ui" font-size="10" fill="#BFC9C2" text-anchor="middle">Feb</text>
+  <text x="220" y="410" font-family="system-ui" font-size="10" fill="#BFC9C2" text-anchor="middle">Mar</text>
+  <text x="310" y="410" font-family="system-ui" font-size="10" fill="#BFC9C2" text-anchor="middle">Abr</text>
+  <text x="370" y="410" font-family="system-ui" font-size="10" fill="#BFC9C2" text-anchor="middle">May</text>
+  <text x="20" y="250" font-family="system-ui" font-size="10" fill="#BFC9C2" text-anchor="middle">85kg</text>
+  <text x="20" y="310" font-family="system-ui" font-size="10" fill="#BFC9C2" text-anchor="middle">80kg</text>
+  <text x="20" y="370" font-family="system-ui" font-size="10" fill="#BFC9C2" text-anchor="middle">75kg</text>
+  <rect x="16" y="450" width="368" height="110" fill="#0F1512" rx="16"/>
+  <text x="40" y="476" font-family="system-ui" font-size="14" font-weight="600" fill="#DFE4DF">Estadísticas</text>
+  <rect x="40" y="490" width="100" height="60" rx="12" fill="#171D1A" stroke="#4A4D48"/>
+  <text x="90" y="512" font-family="system-ui" font-size="11" fill="#BFC9C2" text-anchor="middle">Peso actual</text>
+  <text x="90" y="532" font-family="system-ui" font-size="20" font-weight="bold" fill="#DFE4DF" text-anchor="middle">78.5 kg</text>
+  <rect x="150" y="490" width="100" height="60" rx="12" fill="#171D1A" stroke="#4A4D48"/>
+  <text x="200" y="512" font-family="system-ui" font-size="11" fill="#BFC9C2" text-anchor="middle">Cambio 30d</text>
+  <text x="200" y="532" font-family="system-ui" font-size="20" font-weight="bold" fill="#4ADE80" text-anchor="middle">-2.3 kg</text>
+  <rect x="260" y="490" width="100" height="60" rx="12" fill="#171D1A" stroke="#4A4D48"/>
+  <text x="310" y="512" font-family="system-ui" font-size="11" fill="#BFC9C2" text-anchor="middle">IMC</text>
+  <text x="310" y="532" font-family="system-ui" font-size="20" font-weight="bold" fill="#DFE4DF" text-anchor="middle">24.2</text>
+  <rect x="16" y="572" width="368" height="90" fill="#171D1A" rx="24" stroke="#4A4D48"/>
+  <text x="40" y="598" font-family="system-ui" font-size="14" font-weight="600" fill="#DFE4DF">Exportar Datos</text>
+  <rect x="40" y="610" width="140" height="40" rx="20" fill="#6CDBAC"/>
+  <text x="110" y="637" font-family="system-ui" font-size="13" font-weight="600" fill="#003826" text-anchor="middle">📊 CSV</text>
+  <rect x="200" y="610" width="140" height="40" rx="20" fill="#171D1A" stroke="#4A4D48"/>
+  <text x="270" y="637" font-family="system-ui" font-size="13" font-weight="600" fill="#DFE4DF" text-anchor="middle">📄 JSON</text>
+  <rect x="0" y="680" width="400" height="40" fill="#171D1A"/>
+  <text x="40" y="706" font-family="system-ui" font-size="11" fill="#6CDBAC" text-anchor="middle">🏠</text>
+  <text x="120" y="706" font-family="system-ui" font-size="11" fill="#BFC9C2" text-anchor="middle">📈</text>
+  <circle cx="200" cy="692" r="24" fill="#6CDBAC"/>
+  <text x="200" y="697" font-family="system-ui" font-size="16" fill="#003826" text-anchor="middle">+</text>
+  <text x="280" y="706" font-family="system-ui" font-size="11" fill="#BFC9C2" text-anchor="middle">📋</text>
+  <text x="360" y="706" font-family="system-ui" font-size="11" fill="#BFC9C2" text-anchor="middle">👤</text>
+</svg>

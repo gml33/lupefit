@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="720" viewBox="0 0 400 720">
+  <rect width="400" height="720" fill="#F5FBF6"/>
+  <rect x="0" y="0" width="400" height="24" fill="#F5FBF6"/>
+  <text x="20" y="18" font-family="system-ui" font-size="12" fill="#171D1A">9:41</text>
+  <text x="340" y="18" font-family="system-ui" font-size="12" fill="#171D1A">🔋 100%</text>
+  <rect x="0" y="24" width="400" height="64" fill="#FFFFFF"/>
+  <text x="24" y="62" font-family="system-ui" font-size="20" font-weight="bold" fill="#171D1A">Ejercicio</text>
+  <circle cx="360" cy="56" r="20" fill="#006C4C"/>
+  <text x="360" y="61" font-family="system-ui" font-size="16" fill="#FFFFFF" text-anchor="middle">+</text>
+  <!-- Tabs -->
+  <rect x="0" y="88" width="400" height="48" fill="#FFFFFF"/>
+  <rect x="20" y="96" width="160" height="32" rx="16" fill="#006C4C"/>
+  <text x="100" y="117" font-family="system-ui" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">🏋️ Fuerza</text>
+  <text x="260" y="117" font-family="system-ui" font-size="13" fill="#404943" text-anchor="middle">🏃 Cardio</text>
+  <text x="340" y="117" font-family="system-ui" font-size="13" fill="#404943" text-anchor="middle">⚡ WOD</text>
+  <!-- Exercise list -->
+  <rect x="16" y="148" width="368" height="120" fill="#FFFFFF" rx="24" stroke="#C4C7C3"/>
+  <text x="40" y="176" font-family="system-ui" font-size="15" font-weight="600" fill="#171D1A">Press de Banca</text>
+  <text x="40" y="196" font-family="system-ui" font-size="12" fill="#404943">Pecho • Empuje horizontal • Barra</text>
+  <rect x="40" y="212" width="100" height="28" rx="14" fill="#DBEAFE"/>
+  <text x="90" y="231" font-family="system-ui" font-size="11" font-weight="600" fill="#2563EB" text-anchor="middle">3 series × 10 reps</text>
+  <text x="220" y="231" font-family="system-ui" font-size="11" fill="#404943">80 kg</text>
+  <text x="340" y="231" font-family="system-ui" font-size="11" fill="#006C4C" font-weight="600" text-anchor="end">2.400 kg vol</text>
+  <rect x="16" y="280" width="368" height="120" fill="#FFFFFF" rx="24" stroke="#C4C7C3"/>
+  <text x="40" y="308" font-family="system-ui" font-size="15" font-weight="600" fill="#171D1A">Sentadilla Libre</text>
+  <text x="40" y="328" font-family="system-ui" font-size="12" fill="#404943">Piernas • Sentadilla • Barra</text>
+  <rect x="40" y="344" width="100" height="28" rx="14" fill="#FEF3C7"/>
+  <text x="90" y="363" font-family="system-ui" font-size="11" font-weight="600" fill="#D97706" text-anchor="middle">4 series × 8 reps</text>
+  <text x="220" y="363" font-family="system-ui" font-size="11" fill="#404943">100 kg</text>
+  <text x="340" y="363" font-family="system-ui" font-size="11" fill="#006C4C" font-weight="600" text-anchor="end">3.200 kg vol</text>
+  <rect x="16" y="412" width="368" height="120" fill="#FFFFFF" rx="24" stroke="#C4C7C3"/>
+  <text x="40" y="440" font-family="system-ui" font-size="15" font-weight="600" fill="#171D1A">Dominadas</text>
+  <text x="40" y="460" font-family="system-ui" font-size="12" fill="#404943">Espalda • Tracción vertical • Cuerpo libre</text>
+  <rect x="40" y="476" width="100" height="28" rx="14" fill="#EDE9FE"/>
+  <text x="90" y="495" font-family="system-ui" font-size="11" font-weight="600" fill="#7C3AED" text-anchor="middle">3 series × 12 reps</text>
+  <text x="220" y="495" font-family="system-ui" font-size="11" fill="#404943">Peso corporal</text>
+  <text x="340" y="495" font-family="system-ui" font-size="11" fill="#006C4C" font-weight="600" text-anchor="end">36 reps tot</text>
+  <!-- Summary card -->
+  <rect x="16" y="544" width="368" height="120" fill="#F5FBF6" rx="16"/>
+  <text x="40" y="572" font-family="system-ui" font-size="14" font-weight="600" fill="#171D1A">Resumen de la sesión</text>
+  <text x="40" y="594" font-family="system-ui" font-size="12" fill="#404943">3 ejercicios • 10 series • 5.600 kg volumen</text>
+  <rect x="40" y="610" width="140" height="36" rx="18" fill="#006C4C"/>
+  <text x="110" y="634" font-family="system-ui" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">Finalizar</text>
+  <rect x="210" y="610" width="140" height="36" rx="18" fill="#FFFFFF" stroke="#C4C7C3"/>
+  <text x="280" y="634" font-family="system-ui" font-size="13" font-weight="600" fill="#171D1A" text-anchor="middle">+ Ejercicio</text>
+  <rect x="0" y="680" width="400" height="40" fill="#FFFFFF"/>
+  <text x="40" y="706" font-family="system-ui" font-size="11" fill="#006C4C" text-anchor="middle">🏠</text>
+  <text x="120" y="706" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">📈</text>
+  <circle cx="200" cy="692" r="24" fill="#006C4C"/>
+  <text x="200" y="697" font-family="system-ui" font-size="16" fill="#FFFFFF" text-anchor="middle">+</text>
+  <text x="280" y="706" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">📋</text>
+  <text x="360" y="706" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">👤</text>
+</svg>

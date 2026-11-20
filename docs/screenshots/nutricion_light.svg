@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="720" viewBox="0 0 400 720">
+  <rect width="400" height="720" fill="#F5FBF6"/>
+  <rect x="0" y="0" width="400" height="24" fill="#F5FBF6"/>
+  <text x="20" y="18" font-family="system-ui" font-size="12" fill="#171D1A">9:41</text>
+  <text x="340" y="18" font-family="system-ui" font-size="12" fill="#171D1A">🔋 100%</text>
+  <rect x="0" y="24" width="400" height="64" fill="#FFFFFF"/>
+  <text x="24" y="62" font-family="system-ui" font-size="20" font-weight="bold" fill="#171D1A">Nutrición</text>
+  <circle cx="360" cy="56" r="20" fill="#006C4C"/>
+  <text x="360" y="61" font-family="system-ui" font-size="16" fill="#FFFFFF" text-anchor="middle">⚙️</text>
+  <!-- Macro rings large -->
+  <rect x="16" y="100" width="368" height="220" fill="#FFFFFF" rx="24" stroke="#C4C7C3"/>
+  <text x="40" y="132" font-family="system-ui" font-size="18" font-weight="600" fill="#171D1A">Distribución de Macros</text>
+  <!-- Protein -->
+  <circle cx="100" cy="240" r="70" stroke="#DBEAFE" stroke-width="18" fill="none"/>
+  <circle cx="100" cy="240" r="70" stroke="#2563EB" stroke-width="18" fill="none" stroke-dasharray="440" stroke-dashoffset="123" stroke-linecap="round"/>
+  <text x="100" y="235" font-family="system-ui" font-size="20" font-weight="bold" fill="#2563EB" text-anchor="middle">145g</text>
+  <text x="100" y="255" font-family="system-ui" font-size="12" fill="#404943" text-anchor="middle">Proteínas</text>
+  <text x="100" y="275" font-family="system-ui" font-size="13" fill="#2563EB" text-anchor="middle">72% • 580 kcal</text>
+  <!-- Carbs -->
+  <circle cx="200" cy="240" r="70" stroke="#FEF3C7" stroke-width="18" fill="none"/>
+  <circle cx="200" cy="240" r="70" stroke="#D97706" stroke-width="18" fill="none" stroke-dasharray="440" stroke-dashoffset="154" stroke-linecap="round"/>
+  <text x="200" y="235" font-family="system-ui" font-size="20" font-weight="bold" fill="#D97706" text-anchor="middle">210g</text>
+  <text x="200" y="255" font-family="system-ui" font-size="12" fill="#404943" text-anchor="middle">Carbohidratos</text>
+  <text x="200" y="275" font-family="system-ui" font-size="13" fill="#D97706" text-anchor="middle">65% • 840 kcal</text>
+  <!-- Fat -->
+  <circle cx="300" cy="240" r="70" stroke="#EDE9FE" stroke-width="18" fill="none"/>
+  <circle cx="300" cy="240" r="70" stroke="#7C3AED" stroke-width="18" fill="none" stroke-dasharray="440" stroke-dashoffset="84" stroke-linecap="round"/>
+  <text x="300" y="235" font-family="system-ui" font-size="20" font-weight="bold" fill="#7C3AED" text-anchor="middle">78g</text>
+  <text x="300" y="255" font-family="system-ui" font-size="12" fill="#404943" text-anchor="middle">Grasas</text>
+  <text x="300" y="275" font-family="system-ui" font-size="13" fill="#7C3AED" text-anchor="middle">81% • 702 kcal</text>
+  <!-- Goals -->
+  <rect x="16" y="336" width="368" height="180" fill="#FFFFFF" rx="24" stroke="#C4C7C3"/>
+  <text x="40" y="364" font-family="system-ui" font-size="16" font-weight="600" fill="#171D1A">Metas Diarias</text>
+  <rect x="40" y="380" width="150" height="120" rx="16" fill="#F5FBF6"/>
+  <circle cx="115" cy="410" r="24" fill="#DBEAFE"/>
+  <text x="115" y="415" font-family="system-ui" font-size="16" fill="#2563EB" text-anchor="middle">P</text>
+  <text x="115" y="450" font-family="system-ui" font-size="12" font-weight="600" fill="#171D1A" text-anchor="middle">Proteínas</text>
+  <text x="115" y="468" font-family="system-ui" font-size="18" font-weight="bold" fill="#2563EB" text-anchor="middle">145 / 200g</text>
+  <text x="115" y="486" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">72%</text>
+  <rect x="200" y="380" width="150" height="120" rx="16" fill="#F5FBF6"/>
+  <circle cx="275" cy="410" r="24" fill="#FEF3C7"/>
+  <text x="275" y="415" font-family="system-ui" font-size="16" fill="#D97706" text-anchor="middle">C</text>
+  <text x="275" y="450" font-family="system-ui" font-size="12" font-weight="600" fill="#171D1A" text-anchor="middle">Carbs</text>
+  <text x="275" y="468" font-family="system-ui" font-size="18" font-weight="bold" fill="#D97706" text-anchor="middle">210 / 320g</text>
+  <text x="275" y="486" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">65%</text>
+  <rect x="360" y="380" width="150" height="120" rx="16" fill="#F5FBF6"/>
+  <text x="435" y="415" font-family="system-ui" font-size="16" fill="#7C3AED" text-anchor="middle">G</text>
+  <circle cx="435" cy="410" r="24" fill="#EDE9FE"/>
+  <text x="435" y="450" font-family="system-ui" font-size="12" font-weight="600" fill="#171D1A" text-anchor="middle">Grasas</text>
+  <text x="435" y="468" font-family="system-ui" font-size="18" font-weight="bold" fill="#7C3AED" text-anchor="middle">78 / 95g</text>
+  <text x="435" y="486" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">81%</text>
+  <!-- Net carbs toggle -->
+  <rect x="16" y="532" width="368" height="80" fill="#F5FBF6" rx="16"/>
+  <text x="40" y="558" font-family="system-ui" font-size="14" font-weight="600" fill="#171D1A">Modo Net Carbs</text>
+  <text x="40" y="576" font-family="system-ui" font-size="12" fill="#404943">Restar fibra: 185g net carbs (210g tot - 25g fibra)</text>
+  <rect x="280" y="550" width="72" height="32" rx="16" fill="#006C4C"/>
+  <circle cx="334" cy="566" r="12" fill="#FFFFFF"/>
+  <text x="340" y="570" font-family="system-ui" font-size="10" fill="#006C4C" text-anchor="middle">ON</text>
+  <rect x="0" y="680" width="400" height="40" fill="#FFFFFF"/>
+  <text x="40" y="706" font-family="system-ui" font-size="11" fill="#006C4C" text-anchor="middle">🏠</text>
+  <text x="120" y="706" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">📈</text>
+  <circle cx="200" cy="692" r="24" fill="#006C4C"/>
+  <text x="200" y="697" font-family="system-ui" font-size="16" fill="#FFFFFF" text-anchor="middle">+</text>
+  <text x="280" y="706" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">📋</text>
+  <text x="360" y="706" font-family="system-ui" font-size="11" fill="#404943" text-anchor="middle">👤</text>
+</svg>
