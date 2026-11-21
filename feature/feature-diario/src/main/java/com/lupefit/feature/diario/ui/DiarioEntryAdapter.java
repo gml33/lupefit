@@ -60,7 +60,7 @@ public class DiarioEntryAdapter extends RecyclerView.Adapter<DiarioEntryAdapter.
         }
 
         void bind(DiarioEntry entry) {
-            binding.tvFoodName.setText(entry.getNombre());
+            binding.tvFoodName.setText(entry.getFoodName());
             binding.tvCalories.setText(String.valueOf(entry.getCalorias()));
             binding.tvMealType.setText(entry.getTipoComida());
             binding.tvFoodDetails.setText(String.format(

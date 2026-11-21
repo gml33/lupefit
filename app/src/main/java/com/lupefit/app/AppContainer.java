@@ -19,27 +19,15 @@ import com.lupefit.app.data.local.dao.RecipeIngredientDao;
 import com.lupefit.app.data.local.dao.WaterLogDao;
 import com.lupefit.app.data.local.dao.ProgressPhotoDao;
 import com.lupefit.app.data.local.dao.FoodProductDao;
-import com.lupefit.app.domain.repository.FoodLogRepository;
-import com.lupefit.app.domain.repository.WorkoutLogRepository;
-import com.lupefit.app.domain.repository.PersonalRecordRepository;
-import com.lupefit.app.domain.repository.GlucoseLogRepository;
-import com.lupefit.app.domain.repository.MoodEntryRepository;
-import com.lupefit.app.domain.repository.UserNoteRepository;
-import com.lupefit.app.domain.repository.WeatherSnapshotRepository;
-import com.lupefit.app.domain.repository.StreakRepository;
-import com.lupefit.app.domain.repository.UserRepository;
-import com.lupefit.app.domain.repository.ExerciseRepository;
-import com.lupefit.app.domain.repository.FoodRepository;
-import com.lupefit.app.domain.repository.RecipeRepository;
-import com.lupefit.app.domain.repository.WaterLogRepository;
-import com.lupefit.app.domain.repository.ProgressPhotoRepository;
-import com.lupefit.app.data.local.repository.FoodCatalogRepository;
+import com.lupefit.app.data.local.repository.DiarioRepositoryImpl;
+import com.lupefit.app.data.local.repository.FoodCatalogRepositoryImpl;
 import com.lupefit.app.data.local.preferences.UserPreferencesManager;
 import com.lupefit.app.domain.engine.MacroCalculatorEngine;
 import com.lupefit.app.domain.engine.StreakManager;
 import com.lupefit.app.domain.engine.HealthConnectManager;
 import com.lupefit.app.domain.engine.SyncEngine;
 import com.lupefit.app.domain.engine.MacroCyclerEngine;
+import com.lupefit.app.domain.repository.FoodLogRepository;
 import com.lupefit.app.domain.usecase.FoodLogUseCase;
 import com.lupefit.app.domain.usecase.WorkoutLogUseCase;
 import com.lupefit.app.domain.usecase.PersonalRecordUseCase;
@@ -48,7 +36,11 @@ import com.lupefit.app.domain.usecase.MoodEntryUseCase;
 import com.lupefit.app.domain.usecase.UserNoteUseCase;
 import com.lupefit.app.domain.usecase.UserProfileUseCase;
 
+import com.lupefit.core.sync.worker.SyncWorkerFactory;
+import com.lupefit.core.sync.worker.SyncWorkerFactoryProvider;
 import com.lupefit.core.sync.queue.SyncQueueRepository;
+import com.lupefit.core.domain.repository.DiarioRepository;
+import com.lupefit.core.domain.repository.FoodCatalogRepository;
 import com.lupefit.core.network.api.LuPeFitApiService;
 import com.lupefit.core.network.NetworkModule;
 import com.lupefit.core.network.interceptor.AuthInterceptor;
@@ -83,21 +75,9 @@ public final class AppContainer {
     private volatile ProgressPhotoDao progressPhotoDao;
     private volatile FoodProductDao foodProductDao;
 
-    // Repositories
+    // Repositories (solo los implementados para feature-diario)
+    private volatile DiarioRepository diarioRepository;
     private volatile FoodLogRepository foodLogRepository;
-    private volatile WorkoutLogRepository workoutLogRepository;
-    private volatile PersonalRecordRepository personalRecordRepository;
-    private volatile GlucoseLogRepository glucoseLogRepository;
-    private volatile MoodEntryRepository moodEntryRepository;
-    private volatile UserNoteRepository userNoteRepository;
-    private volatile WeatherSnapshotRepository weatherSnapshotRepository;
-    private volatile StreakRepository streakRepository;
-    private volatile UserRepository userRepository;
-    private volatile ExerciseRepository exerciseRepository;
-    private volatile FoodRepository foodRepository;
-    private volatile RecipeRepository recipeRepository;
-    private volatile WaterLogRepository waterLogRepository;
-    private volatile ProgressPhotoRepository progressPhotoRepository;
     private volatile SyncQueueRepository syncQueueRepository;
     private volatile FoodCatalogRepository foodCatalogRepository;
 
@@ -114,12 +94,12 @@ public final class AppContainer {
 
     // UseCases
     private volatile FoodLogUseCase foodLogUseCase;
-    private volatile WorkoutLogUseCase workoutLogUseCase;
-    private volatile PersonalRecordUseCase personalRecordUseCase;
-    private volatile GlucoseLogUseCase glucoseLogUseCase;
-    private volatile MoodEntryUseCase moodEntryUseCase;
-    private volatile UserNoteUseCase userNoteUseCase;
-    private volatile UserProfileUseCase userProfileUseCase;
+    // private volatile WorkoutLogUseCase workoutLogUseCase;
+    // private volatile PersonalRecordUseCase personalRecordUseCase;
+    // private volatile GlucoseLogUseCase glucoseLogUseCase;
+    // private volatile MoodEntryUseCase moodEntryUseCase;
+    // private volatile UserNoteUseCase userNoteUseCase;
+    // private volatile UserProfileUseCase userProfileUseCase;
 
     public AppContainer(Context context) {
         this.context = context.getApplicationContext();
@@ -148,37 +128,26 @@ public final class AppContainer {
         progressPhotoDao = database.progressPhotoDao();
         foodProductDao = database.foodProductDao();
 
-        // Repositories
+        // Repositories (solo los implementados para feature-diario)
+        diarioRepository = new DiarioRepositoryImpl(context, getCurrentUserId());
         foodLogRepository = new FoodLogRepository(foodLogDao);
-        workoutLogRepository = new WorkoutLogRepository(workoutLogDao);
-        personalRecordRepository = new PersonalRecordRepository(personalRecordDao);
-        glucoseLogRepository = new GlucoseLogRepository(glucoseLogDao);
-        moodEntryRepository = new MoodEntryRepository(moodEntryDao);
-        userNoteRepository = new UserNoteRepository(userNoteDao);
-        weatherSnapshotRepository = new WeatherSnapshotRepository(weatherSnapshotDao);
-        streakRepository = new StreakRepository(streakDao);
-        userRepository = new UserRepository(userDao);
-        exerciseRepository = new ExerciseRepository(exerciseDao);
-        foodRepository = new FoodRepository(foodDao);
-        recipeRepository = new RecipeRepository(recipeDao, recipeIngredientDao);
-        waterLogRepository = new WaterLogRepository(waterLogDao);
-        progressPhotoRepository = new ProgressPhotoRepository(progressPhotoDao);
         syncQueueRepository = new SyncQueueRepository(database.syncQueueDao());
-        foodCatalogRepository = new FoodCatalogRepository(context, foodProductDao);
+        foodCatalogRepository = new FoodCatalogRepositoryImpl(context, foodProductDao);
 
         // Preferences
         userPreferencesManager = UserPreferencesManager.getInstance(context);
 
         // Engines
         macroCalculatorEngine = new MacroCalculatorEngine();
-        streakManager = new StreakManager(streakRepository, foodLogRepository, workoutLogRepository, waterLogRepository);
+        // TODO: streakManager necesita streakRepository, workoutLogRepository, waterLogRepository
+        // streakManager = new StreakManager(streakRepository, foodLogRepository, workoutLogRepository, waterLogRepository);
         healthConnectManager = new HealthConnectManager(context);
-        
+
         // App domain engine (for local sync logic)
-        syncEngine = new SyncEngine(context, foodLogRepository, workoutLogRepository, personalRecordRepository,
-                glucoseLogRepository, moodEntryRepository, userNoteRepository, weatherSnapshotRepository,
-                streakRepository, waterLogRepository, progressPhotoRepository, recipeRepository);
-        
+        syncEngine = new SyncEngine(context, foodLogRepository, null, null,
+                null, null, null, null,
+                null, null, null, null);
+
         // Core-network SyncEngine (for network sync)
         okhttp3.OkHttpClient httpClient = NetworkModule.createOkHttpClient(new AuthInterceptor());
         com.squareup.moshi.Moshi moshi = NetworkModule.createMoshi();
@@ -194,17 +163,23 @@ public final class AppContainer {
             ),
             new AuthInterceptor()
         );
-        
-        macroCyclerEngine = new MacroCyclerEngine(macroCalculatorEngine, workoutLogRepository, healthConnectManager);
 
-        // UseCases
+        macroCyclerEngine = new MacroCyclerEngine(macroCalculatorEngine, null, healthConnectManager);
+
+        // UseCases (solo los necesarios para feature-diario)
         foodLogUseCase = new FoodLogUseCase(foodLogRepository, macroCalculatorEngine, syncEngine);
-        workoutLogUseCase = new WorkoutLogUseCase(workoutLogRepository, macroCalculatorEngine, syncEngine, healthConnectManager);
-        personalRecordUseCase = new PersonalRecordUseCase(personalRecordRepository, exerciseRepository);
-        glucoseLogUseCase = new GlucoseLogUseCase(glucoseLogRepository, syncEngine);
-        moodEntryUseCase = new MoodEntryUseCase(moodEntryRepository, syncEngine);
-        userNoteUseCase = new UserNoteUseCase(userNoteRepository, syncEngine);
-        userProfileUseCase = new UserProfileUseCase(userRepository, macroCalculatorEngine);
+        // workoutLogUseCase = new WorkoutLogUseCase(workoutLogRepository, macroCalculatorEngine, syncEngine, healthConnectManager);
+        // personalRecordUseCase = new PersonalRecordUseCase(personalRecordRepository, exerciseRepository);
+        // glucoseLogUseCase = new GlucoseLogUseCase(glucoseLogRepository, syncEngine);
+        // moodEntryUseCase = new MoodEntryUseCase(moodEntryRepository, syncEngine);
+        // userNoteUseCase = new UserNoteUseCase(userNoteRepository, syncEngine);
+        // userProfileUseCase = new UserProfileUseCase(userRepository, macroCalculatorEngine);
+    }
+
+    private long getCurrentUserId() {
+        // TODO: Get actual logged-in user ID from UserRepository or preferences
+        // For now, return a default user ID (1)
+        return 1L;
     }
 
     // ==================== GETTERS ====================
@@ -228,37 +203,24 @@ public final class AppContainer {
     public ProgressPhotoDao getProgressPhotoDao() { return progressPhotoDao; }
     public FoodProductDao getFoodProductDao() { return foodProductDao; }
 
+    public DiarioRepository getDiarioRepository() { return diarioRepository; }
     public FoodLogRepository getFoodLogRepository() { return foodLogRepository; }
-    public WorkoutLogRepository getWorkoutLogRepository() { return workoutLogRepository; }
-    public PersonalRecordRepository getPersonalRecordRepository() { return personalRecordRepository; }
-    public GlucoseLogRepository getGlucoseLogRepository() { return glucoseLogRepository; }
-    public MoodEntryRepository getMoodEntryRepository() { return moodEntryRepository; }
-    public UserNoteRepository getUserNoteRepository() { return userNoteRepository; }
-    public WeatherSnapshotRepository getWeatherSnapshotRepository() { return weatherSnapshotRepository; }
-    public StreakRepository getStreakRepository() { return streakRepository; }
-    public UserRepository getUserRepository() { return userRepository; }
-    public ExerciseRepository getExerciseRepository() { return exerciseRepository; }
-    public FoodRepository getFoodRepository() { return foodRepository; }
-    public RecipeRepository getRecipeRepository() { return recipeRepository; }
-    public WaterLogRepository getWaterLogRepository() { return waterLogRepository; }
-    public ProgressPhotoRepository getProgressPhotoRepository() { return progressPhotoRepository; }
     public SyncQueueRepository getSyncQueueRepository() { return syncQueueRepository; }
     public FoodCatalogRepository getFoodCatalogRepository() { return foodCatalogRepository; }
 
     public UserPreferencesManager getUserPreferencesManager() { return userPreferencesManager; }
 
     public MacroCalculatorEngine getMacroCalculatorEngine() { return macroCalculatorEngine; }
-    public StreakManager getStreakManager() { return streakManager; }
     public HealthConnectManager getHealthConnectManager() { return healthConnectManager; }
     public SyncEngine getSyncEngine() { return syncEngine; }
     public com.lupefit.core.network.SyncEngine getNetworkSyncEngine() { return networkSyncEngine; }
     public MacroCyclerEngine getMacroCyclerEngine() { return macroCyclerEngine; }
 
     public FoodLogUseCase getFoodLogUseCase() { return foodLogUseCase; }
-    public WorkoutLogUseCase getWorkoutLogUseCase() { return workoutLogUseCase; }
-    public PersonalRecordUseCase getPersonalRecordUseCase() { return personalRecordUseCase; }
-    public GlucoseLogUseCase getGlucoseLogUseCase() { return glucoseLogUseCase; }
-    public MoodEntryUseCase getMoodEntryUseCase() { return moodEntryUseCase; }
-    public UserNoteUseCase getUserNoteUseCase() { return userNoteUseCase; }
-    public UserProfileUseCase getUserProfileUseCase() { return userProfileUseCase; }
+    // public WorkoutLogUseCase getWorkoutLogUseCase() { return workoutLogUseCase; }
+    // public PersonalRecordUseCase getPersonalRecordUseCase() { return personalRecordUseCase; }
+    // public GlucoseLogUseCase getGlucoseLogUseCase() { return glucoseLogUseCase; }
+    // public MoodEntryUseCase getMoodEntryUseCase() { return moodEntryUseCase; }
+    // public UserNoteUseCase getUserNoteUseCase() { return userNoteUseCase; }
+    // public UserProfileUseCase getUserProfileUseCase() { return userProfileUseCase; }
 }

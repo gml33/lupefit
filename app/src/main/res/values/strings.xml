@@ -18,6 +18,23 @@
     <string name="insights_title">Insights</string>
     <string name="planes_title">Planes</string>
 
+    <!-- Strings para feature-diario -->
+    <string name="hidratacion">Hidratación</string>
+    <string name="agregar_vaso">Agregar vaso</string>
+    <string name="vaso_250ml">Vaso 250ml</string>
+    <string name="calorias_totales">Calorías totales</string>
+    <string name="kcal_short">kcal</string>
+    <string name="kcal_value">0</string>
+    <string name="proteinas_short">P</string>
+    <string name="carbohidratos_short">CH</string>
+    <string name="grasas_short">G</string>
+    <string name="diario_vacio">Diario vacío</string>
+    <string name="toca_para_agregar_primer_alimento">Tocá para agregar tu primer alimento</string>
+    <string name="agregar_alimento">Agregar alimento</string>
+    <string name="food_name">Nombre del alimento</string>
+    <string name="food_details">Detalles del alimento</string>
+    <string name="weekly_budget_goal">Meta semanal</string>
+
     <!-- Escaneo de código de barras -->
     <string name="escaneo_guia_apunte_codigo">Apuntá el código de barras al recuadro</string>
     <string name="escaneo_linterna">Linterna</string>
@@ -99,7 +116,6 @@
     <string name="config_moneda_desc">Seleccioná tu moneda local</string>
 
     <!-- General -->
-    <string name="agregar_alimento">Agregar alimento</string>
     <string name="buscar_alimento">Buscar alimento</string>
     <string name="quick_add">Agregado rápido</string>
     <string name="registro_por_voz">Registro por voz</string>
@@ -132,7 +148,6 @@
     <string name="peso_envase">Peso del envase (g)</string>
     <string name="precio_desactualizado">Precio cargado hace %d días</string>
     <string name="enable_cost_tracking">Seguimiento de costos</string>
-    <string name="weekly_budget_goal">Meta semanal</string>
     <string name="currency_ars">ARS</string>
 
     <!-- Actions -->

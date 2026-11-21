@@ -6,23 +6,23 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     app:cardBackgroundColor="?attr/colorSurfaceContainer"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="@dimen/radius_card"
     app:cardElevation="0dp"
     app:strokeColor="?attr/colorOutline"
-    app:strokeWidth="1dp">
+    app:strokeWidth="@dimen/divider_thin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="@dimen/padding_card_list_item">
 
     <!-- Icono del alimento -->
     <ImageView
         android:id="@+id/ivFoodIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="12dp"
+        android:layout_width="@dimen/icon_lg"
+        android:layout_height="@dimen/icon_lg"
+        android:layout_marginEnd="@dimen/spacing_md"
         android:contentDescription="@string/diario_voz_alimento"
         android:src="@drawable/ic_food_generic"
         app:tint="?attr/colorOnSurfaceVariant" />

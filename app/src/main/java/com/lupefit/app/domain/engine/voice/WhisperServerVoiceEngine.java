@@ -5,8 +5,6 @@ import android.media.MediaRecorder;
 import android.os.Environment;
 import android.util.Log;
 
-import com.lupefit.app.data.local.repository.FoodCatalogRepository;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

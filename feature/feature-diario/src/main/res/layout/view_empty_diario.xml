@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/spacing_xl"
+        android:padding="@dimen/padding_screen"
         android:gravity="center">
 
         <ImageView
@@ -16,7 +16,7 @@
             android:src="@drawable/ic_food_placeholder"
             android:contentDescription="@string/agregar_alimento"
             android:tint="?attr/colorOnSurfaceVariant"
-            android:layout_marginBottom="@dimen/spacing_m" />
+            android:layout_marginBottom="@dimen/spacing_md" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
             android:text="@string/diario_vacio"
             android:textAppearance="?attr/textAppearanceHeadlineSmall"
             android:textColor="?attr/colorOnSurface"
-            android:layout_marginBottom="@dimen/spacing_s"
+            android:layout_marginBottom="@dimen/spacing_sm"
             android:gravity="center" />
 
         <TextView
@@ -34,15 +34,15 @@
             android:textAppearance="?attr/textAppearanceBodyMedium"
             android:textColor="?attr/colorOnSurfaceVariant"
             android:gravity="center"
-            android:layout_marginBottom="@dimen/spacing_l" />
+            android:layout_marginBottom="@dimen/spacing_lg" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFirstFood"
-            style="@style/Widget.Material3.Button.FilledButton"
+            style="@style/Widget.LuPeFit.Button.Filled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/agregar_alimento"
             android:icon="@drawable/ic_plus"
-            android:iconGravity="start" />
+            app:iconGravity="start" />
     </LinearLayout>
 </layout>

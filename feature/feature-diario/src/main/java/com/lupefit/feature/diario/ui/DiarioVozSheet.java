@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
-import com.lupefit.core.ui.R;
+import com.lupefit.feature.diario.R;
 import com.lupefit.feature.diario.databinding.SheetDiarioVozBinding;
 
 import java.util.ArrayList;
@@ -29,10 +29,12 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.lupefit.app.data.local.entity.FoodProduct;
-import com.lupefit.app.domain.engine.voice.NativeAndroidVoiceEngine;
-import com.lupefit.app.domain.engine.voice.VoiceFoodParser;
-import com.lupefit.app.domain.engine.voice.VoiceTranscriptionEngine;
+import com.lupefit.core.domain.engine.voice.NativeAndroidVoiceEngine;
+import com.lupefit.core.domain.engine.voice.VoiceFoodParser;
+import com.lupefit.core.domain.engine.voice.VoiceTranscriptionEngine;
+import com.lupefit.core.domain.model.FoodProduct;
+import com.lupefit.core.domain.provider.FoodCatalogRepositoryProvider;
+import com.lupefit.core.domain.repository.FoodCatalogRepository;
 
 /**
  * BottomSheet para registro rápido por voz (Hands-Free Logging).
@@ -63,10 +65,13 @@ public class DiarioVozSheet extends BottomSheetDialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         voiceEngine = new NativeAndroidVoiceEngine(requireContext());
-        foodParser = new VoiceFoodParser(
-                ((com.lupefit.app.MyApplication) requireActivity().getApplication())
-                        .getContainer().getFoodCatalogRepository()
-        );
+
+        // Obtener FoodCatalogRepository a través del provider (evita dependencia circular)
+        FoodCatalogRepositoryProvider provider =
+                (FoodCatalogRepositoryProvider) requireActivity().getApplication();
+        FoodCatalogRepository catalogRepository = provider.getFoodCatalogRepository();
+        foodParser = new VoiceFoodParser(catalogRepository);
+
         parserExecutor = Executors.newSingleThreadExecutor();
         mainHandler = new Handler(Looper.getMainLooper());
         setStyle(STYLE_NORMAL, com.lupefit.core.ui.R.style.Theme_LuPeFit_BottomSheetDialog);
@@ -234,17 +239,17 @@ public class DiarioVozSheet extends BottomSheetDialogFragment {
         pulseMiddleY.start();
 
         // Guardar referencias para cancelar
-        binding.btnMic.setTag(com.lupefit.core.ui.R.id.anim_pulse_outer, pulseOuter);
-        binding.btnMic.setTag(com.lupefit.core.ui.R.id.anim_pulse_outer_y, pulseOuterY);
-        binding.btnMic.setTag(com.lupefit.core.ui.R.id.anim_pulse_middle, pulseMiddle);
-        binding.btnMic.setTag(com.lupefit.core.ui.R.id.anim_pulse_middle_y, pulseMiddleY);
+        binding.btnMic.setTag(R.id.anim_pulse_outer, pulseOuter);
+        binding.btnMic.setTag(R.id.anim_pulse_outer_y, pulseOuterY);
+        binding.btnMic.setTag(R.id.anim_pulse_middle, pulseMiddle);
+        binding.btnMic.setTag(R.id.anim_pulse_middle_y, pulseMiddleY);
     }
 
     private void stopMicAnimation() {
-        ObjectAnimator a1 = (ObjectAnimator) binding.btnMic.getTag(com.lupefit.core.ui.R.id.anim_pulse_outer);
-        ObjectAnimator a2 = (ObjectAnimator) binding.btnMic.getTag(com.lupefit.core.ui.R.id.anim_pulse_outer_y);
-        ObjectAnimator a3 = (ObjectAnimator) binding.btnMic.getTag(com.lupefit.core.ui.R.id.anim_pulse_middle);
-        ObjectAnimator a4 = (ObjectAnimator) binding.btnMic.getTag(com.lupefit.core.ui.R.id.anim_pulse_middle_y);
+        ObjectAnimator a1 = (ObjectAnimator) binding.btnMic.getTag(R.id.anim_pulse_outer);
+        ObjectAnimator a2 = (ObjectAnimator) binding.btnMic.getTag(R.id.anim_pulse_outer_y);
+        ObjectAnimator a3 = (ObjectAnimator) binding.btnMic.getTag(R.id.anim_pulse_middle);
+        ObjectAnimator a4 = (ObjectAnimator) binding.btnMic.getTag(R.id.anim_pulse_middle_y);
 
         if (a1 != null) a1.cancel();
         if (a2 != null) a2.cancel();
@@ -290,7 +295,7 @@ public class DiarioVozSheet extends BottomSheetDialogFragment {
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(com.lupefit.feature.diario.R.layout.item_parsed_food, parent, false);
+                    .inflate(R.layout.item_parsed_food, parent, false);
             return new ViewHolder(view);
         }
 
@@ -320,16 +325,16 @@ public class DiarioVozSheet extends BottomSheetDialogFragment {
             }
 
             void bind(VoiceTranscriptionEngine.ParsedFoodItem item) {
-                tvFoodName.setText(item.foodName);
+                tvFoodName.setText(item.getFoodName());
                 tvFoodDetail.setText(String.format("%.0f g • %.0f kcal • P: %.0fg C: %.0fg G: %.0fg",
-                        item.grams, item.macros.kcal, item.macros.proteinG, item.macros.carbsG, item.macros.fatG));
+                        item.getGrams(), item.getMacros().kcal, item.getMacros().proteinG, item.getMacros().carbsG, item.getMacros().fatG));
 
                 // Calcular porcentajes para barras
-                double total = item.macros.proteinG + item.macros.carbsG + item.macros.fatG;
+                double total = item.getMacros().proteinG + item.getMacros().carbsG + item.getMacros().fatG;
                 if (total > 0) {
-                    float pPct = (float) (item.macros.proteinG / total * 100);
-                    float cPct = (float) (item.macros.carbsG / total * 100);
-                    float fPct = (float) (item.macros.fatG / total * 100);
+                    float pPct = (float) (item.getMacros().proteinG / total * 100);
+                    float cPct = (float) (item.getMacros().carbsG / total * 100);
+                    float fPct = (float) (item.getMacros().fatG / total * 100);
 
                     vProteinBar.setLayoutParams(new LinearLayout.LayoutParams(0, 4, pPct));
                     vCarbsBar.setLayoutParams(new LinearLayout.LayoutParams(0, 4, cPct));

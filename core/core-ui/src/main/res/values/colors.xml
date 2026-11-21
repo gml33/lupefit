@@ -47,6 +47,7 @@
     <!-- Semánticos: Hidratación y Estados -->
     <color name="water_primary">#0284C7</color>
     <color name="water_track">#E0F2FE</color>
+    <color name="water_track_light">@color/water_track</color>
     <color name="status_success">#16A34A</color>
     <color name="status_error">#BA1A1A</color>
     <color name="status_warning">#F59E0B</color>

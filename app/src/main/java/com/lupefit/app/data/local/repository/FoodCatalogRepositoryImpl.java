@@ -10,8 +10,10 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.lupefit.app.data.local.dao.FoodProductDao;
 import com.lupefit.app.data.local.entity.FoodProduct;
+import com.lupefit.core.domain.repository.FoodCatalogRepository;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,14 +27,15 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Repositorio del catálogo de alimentos - Offline-First con Open Food Facts.
+ * Implementación del repositorio del catálogo de alimentos - Offline-First con Open Food Facts.
+ * Implementa la interfaz FoodCatalogRepository del core-domain.
  * Flujo:
  * 1. Busca en Room local (instantáneo)
  * 2. Si no existe y hay red → consulta Open Food Facts API
  * 3. Guarda en Room para uso offline futuro
- * 4. Si no hay red o API falla → retorna null (UI manejará fallback)
+ * 4. Si no hay red o API falla → retorna error (UI manejará fallback)
  */
-public class FoodCatalogRepository {
+public class FoodCatalogRepositoryImpl implements FoodCatalogRepository {
 
     private static final String TAG = "FoodCatalogRepository";
     private static final String BASE_URL = "https://world.openfoodfacts.org/api/v0/product/";
@@ -44,7 +47,7 @@ public class FoodCatalogRepository {
     private final ExecutorService executor;
     private final Context context;
 
-    public FoodCatalogRepository(Context context, FoodProductDao productDao) {
+    public FoodCatalogRepositoryImpl(Context context, FoodProductDao productDao) {
         this.context = context.getApplicationContext();
         this.productDao = productDao;
         this.gson = new Gson();
@@ -56,6 +59,19 @@ public class FoodCatalogRepository {
                 .build();
 
         this.executor = Executors.newSingleThreadExecutor();
+    }
+
+    @Override
+    public void searchByName(String query, int limit, OnFoodSearchListener listener) {
+        if (query == null || query.trim().isEmpty()) {
+            listener.onResult(List.of(), null);
+            return;
+        }
+
+        // Buscar en local (sync para simplicidad en parser de voz)
+        List<FoodProduct> localResults = productDao.searchByNameSync(query.trim(), limit);
+        List<com.lupefit.core.domain.model.FoodProduct> domainResults = convertToDomainList(localResults);
+        listener.onResult(domainResults, null);
     }
 
     /**
@@ -83,21 +99,6 @@ public class FoodCatalogRepository {
             Log.d(TAG, "Sin red y no encontrado en local");
             callback.onResult(null);
         }
-    }
-
-    /**
-     * Busca productos por nombre (para búsqueda manual y parser de voz).
-     */
-    public void searchByName(String query, int limit, FoodProductListCallback callback) {
-        if (query == null || query.trim().isEmpty()) {
-            callback.onResult(List.of());
-            return;
-        }
-
-        // Buscar en local (LiveData para UI reactiva)
-        // Usamos sync para simplicidad en parser de voz
-        List<FoodProduct> results = productDao.searchByNameSync(query.trim(), limit);
-        callback.onResult(results);
     }
 
     /**
@@ -146,7 +147,7 @@ public class FoodCatalogRepository {
                         return;
                     }
 
-                    // Mapear a FoodProduct
+                    // Mapear a FoodProduct (Room entity)
                     FoodProduct product = mapToFoodProduct(barcode, ofResponse.product);
                     if (product != null) {
                         // Guardar en Room para uso offline
@@ -166,7 +167,7 @@ public class FoodCatalogRepository {
     }
 
     /**
-     * Mapea respuesta de Open Food Facts a entidad FoodProduct.
+     * Mapea respuesta de Open Food Facts a entidad FoodProduct (Room).
      */
     private FoodProduct mapToFoodProduct(String barcode, OpenFoodFactsProduct apiProduct) {
         if (apiProduct.product_name == null || apiProduct.product_name.trim().isEmpty()) {
@@ -191,6 +192,39 @@ public class FoodCatalogRepository {
         product.lastUpdated = System.currentTimeMillis();
 
         return product;
+    }
+
+    /**
+     * Convierte lista de Room entities a Domain models.
+     */
+    private List<com.lupefit.core.domain.model.FoodProduct> convertToDomainList(List<FoodProduct> entities) {
+        List<com.lupefit.core.domain.model.FoodProduct> result = new ArrayList<>(entities.size());
+        for (FoodProduct entity : entities) {
+            result.add(convertToDomain(entity));
+        }
+        return result;
+    }
+
+    /**
+     * Convierte Room entity a Domain model.
+     */
+    private com.lupefit.core.domain.model.FoodProduct convertToDomain(FoodProduct entity) {
+        com.lupefit.core.domain.model.FoodProduct domain = new com.lupefit.core.domain.model.FoodProduct();
+        domain.setId(String.valueOf(entity.id));
+        domain.setBarcode(entity.barcode);
+        domain.setName(entity.name);
+        domain.setBrand(entity.brand);
+        domain.setKcalPer100g(entity.kcalPer100g);
+        domain.setProteinPer100g(entity.proteinPer100g);
+        domain.setCarbsPer100g(entity.carbsPer100g);
+        domain.setFatPer100g(entity.fatPer100g);
+        domain.setDefaultServingGrams(entity.defaultServingGrams);
+        domain.setFreshFood(entity.isFreshFood);
+        domain.setLastUpdated(entity.lastUpdated);
+        domain.setReferencePrice(entity.referencePrice);
+        domain.setReferenceQuantityGrams(entity.referenceQuantityGrams);
+        domain.setPriceUpdatedAt(entity.priceUpdatedAt);
+        return domain;
     }
 
     /**
@@ -243,7 +277,7 @@ public class FoodCatalogRepository {
         httpClient.dispatcher().executorService().shutdown();
     }
 
-    // ==================== CALLBACKS ====================
+    // ==================== CALLBACKS LOCALES (para compatibilidad) ====================
 
     public interface FoodProductCallback {
         void onResult(FoodProduct product);

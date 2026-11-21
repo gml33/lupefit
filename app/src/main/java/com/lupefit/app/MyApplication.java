@@ -49,13 +49,15 @@ import com.lupefit.app.domain.usecase.UserProfileUseCase;
 import com.lupefit.core.sync.worker.SyncWorkerFactory;
 import com.lupefit.core.sync.worker.SyncWorkerFactoryProvider;
 import com.lupefit.core.sync.queue.SyncQueueRepository;
+import com.lupefit.core.domain.provider.DiarioRepositoryProvider;
+import com.lupefit.core.domain.provider.FoodCatalogRepositoryProvider;
 
 /**
  * Application principal - Inicializa el contenedor de dependencias manual (AppContainer).
  * No usa Dagger/Hilt/Kapt - Inyección 100% manual en Java 17+.
  * Implementa SyncWorkerFactoryProvider para proveer dependencias al SyncWorker.
  */
-public class MyApplication extends Application implements SyncWorkerFactoryProvider {
+public class MyApplication extends Application implements SyncWorkerFactoryProvider, DiarioRepositoryProvider, FoodCatalogRepositoryProvider {
 
     private static MyApplication instance;
     private AppContainer container;
@@ -96,5 +98,15 @@ public class MyApplication extends Application implements SyncWorkerFactoryProvi
     @Override
     public SyncWorkerFactory getSyncWorkerFactory() {
         return syncWorkerFactory;
+    }
+
+    @Override
+    public com.lupefit.core.domain.repository.DiarioRepository getDiarioRepository() {
+        return container.getDiarioRepository();
+    }
+
+    @Override
+    public com.lupefit.core.domain.repository.FoodCatalogRepository getFoodCatalogRepository() {
+        return container.getFoodCatalogRepository();
     }
 }

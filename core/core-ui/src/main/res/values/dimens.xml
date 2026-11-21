@@ -8,11 +8,17 @@
     <dimen name="spacing_xxs">2dp</dimen>
     <dimen name="spacing_xs">4dp</dimen>
     <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_s">8dp</dimen>
     <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_m">12dp</dimen>
     <dimen name="spacing_lg">16dp</dimen>
+    <dimen name="spacing_l">16dp</dimen>
     <dimen name="spacing_xl">24dp</dimen>
     <dimen name="spacing_xxl">32dp</dimen>
     <dimen name="spacing_xxxl">48dp</dimen>
+
+    <!-- Alias para compatibilidad con feature modules -->
+    <dimen name="spacing_md_alt">12dp</dimen>
 
     <!-- Márgenes estándar (UI_DESIGN_SYSTEM) -->
     <dimen name="margin_screen">16dp</dimen>
@@ -36,10 +42,12 @@
     <dimen name="radius_md">12dp</dimen>
     <dimen name="radius_lg">16dp</dimen>
     <dimen name="radius_card">24dp</dimen>
+    <dimen name="corner_card">24dp</dimen>
     <dimen name="radius_button">14dp</dimen>
     <dimen name="radius_pill">9999dp</dimen>
     <dimen name="radius_bottom_sheet">28dp</dimen>
     <dimen name="radius_progress_track">8dp</dimen>
+    <dimen name="corner_progress">8dp</dimen>
 
     <!-- Elevation (UI_DESIGN_SYSTEM: 0-1dp + stroke en dark) -->
     <dimen name="elevation_card">1dp</dimen>
@@ -48,12 +56,14 @@
     <dimen name="elevation_bottom_sheet">8dp</dimen>
     <dimen name="elevation_modal">12dp</dimen>
     <dimen name="elevation_dropdown">8dp</dimen>
+    <dimen name="elevation_sheet_handle">1dp</dimen>
 
     <!-- Icon sizes -->
     <dimen name="icon_xs">16dp</dimen>
     <dimen name="icon_sm">20dp</dimen>
     <dimen name="icon_md">24dp</dimen>
     <dimen name="icon_lg">32dp</dimen>
+    <dimen name="icon_l">32dp</dimen>
     <dimen name="icon_xl">48dp</dimen>
     <dimen name="icon_xxl">64dp</dimen>
 
@@ -64,10 +74,12 @@
     <!-- Divider -->
     <dimen name="divider_thin">1dp</dimen>
     <dimen name="divider_thick">2dp</dimen>
+    <dimen name="stroke_width">1dp</dimen>
 
     <!-- Progress (UI_DESIGN_SYSTEM) -->
     <dimen name="progress_thickness">14dp</dimen>
     <dimen name="progress_track_thickness">10dp</dimen>
+    <dimen name="progress_track_height">10dp</dimen>
     <dimen name="progress_track_corner_radius">8dp</dimen>
 
     <!-- CircularProgressIndicator macro card -->
@@ -111,4 +123,8 @@
     <!-- WOD Timer (view_wod_timer) -->
     <dimen name="wod_timer_text_size">48sp</dimen>
     <dimen name="wod_timer_button_size">56dp</dimen>
+
+    <!-- Bottom Sheet handle dimensions -->
+    <dimen name="sheet_drag_handle_width">40dp</dimen>
+    <dimen name="sheet_drag_handle_height">4dp</dimen>
 </resources>

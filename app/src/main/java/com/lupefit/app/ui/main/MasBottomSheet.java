@@ -34,9 +34,12 @@ public class MasBottomSheet extends BottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = NavHostFragment.findNavController(this);
-        setupRecyclerView();
+        // TODO: Implementar MasBottomSheet con recursos completos
+        // setupRecyclerView();
     }
 
+    // TODO: Implementar cuando estén disponibles los recursos de core-ui
+    /*
     private void setupRecyclerView() {
         binding.recyclerMas.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerMas.setAdapter(new MasOptionAdapter(option -> {
@@ -58,12 +61,6 @@ public class MasBottomSheet extends BottomSheetDialogFragment {
             default: return;
         }
         navController.navigate(actionId);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 
     static class MasOptionAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<MasOptionAdapter.ViewHolder> {
@@ -140,5 +137,12 @@ public class MasBottomSheet extends BottomSheetDialogFragment {
                 }
             }
         }
+    }
+    */
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

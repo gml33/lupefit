@@ -6,25 +6,25 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_m"
-        android:layout_marginVertical="@dimen/spacing_s"
-        app:cardCornerRadius="@dimen/corner_card"
+        android:layout_marginHorizontal="@dimen/margin_card"
+        android:layout_marginVertical="@dimen/spacing_sm"
+        app:cardCornerRadius="@dimen/radius_card"
         app:cardElevation="@dimen/elevation_card"
         app:cardBackgroundColor="?attr/colorSurface"
         app:strokeColor="?attr/colorOutline"
-        app:strokeWidth="@dimen/stroke_width">
+        app:strokeWidth="@dimen/divider_thin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/spacing_m">
+        android:padding="@dimen/padding_card">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/spacing_s">
+            android:layout_marginBottom="@dimen/spacing_sm">
 
             <TextView
                 android:layout_width="0dp"
@@ -46,14 +46,13 @@
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progressWater"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/progress_track_height"
+            android:layout_height="@dimen/progress_track_thickness"
             android:progress="0"
             android:max="2500"
             android:indeterminate="false"
             app:trackColor="@color/water_track_light"
             app:indicatorColor="@color/water_primary"
-            app:trackCornerRadius="@dimen/corner_progress"
-            app:indicatorCornerRadius="@dimen/corner_progress" />
+            app:trackCornerRadius="@dimen/radius_progress_track" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,24 +62,23 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddWater"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.LuPeFit.Button.Outlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/agregar_vaso"
                 android:icon="@drawable/ic_plus"
-                android:iconGravity="start" />
+                app:iconGravity="start" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnQuickWater"
-                style="@style/Widget.Material3.Button.FilledButton"
+                style="@style/Widget.LuPeFit.Button.Filled"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="@dimen/spacing_s"
+                android:layout_marginStart="@dimen/spacing_sm"
                 android:text="@string/vaso_250ml"
-                android:icon="@drawable/ic_water_drop"
-                android:iconGravity="start" />
+                app:iconGravity="start" />
         </LinearLayout>
     </LinearLayout>
     </androidx.cardview.widget.CardView>

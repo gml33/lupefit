@@ -3,7 +3,7 @@ package com.lupefit.app.domain.engine.voice;
 import android.util.Log;
 
 import com.lupefit.app.data.local.entity.FoodProduct;
-import com.lupefit.app.data.local.repository.FoodCatalogRepository;
+import com.lupefit.app.data.local.repository.FoodCatalogRepositoryImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,8 +24,7 @@ import java.util.regex.Pattern;
 public class VoiceFoodParser {
 
     private static final String TAG = "VoiceFoodParser";
-
-    private final FoodCatalogRepository catalogRepository;
+    private final FoodCatalogRepositoryImpl catalogRepository;
 
     // Patrones para extraer cantidad y unidad
     private static final Pattern QUANTITY_PATTERN = Pattern.compile(
@@ -44,7 +43,7 @@ public class VoiceFoodParser {
             "me", "te", "se", "nos", "le", "les", "lo", "la", "los", "las"
     );
 
-    public VoiceFoodParser(FoodCatalogRepository catalogRepository) {
+    public VoiceFoodParser(FoodCatalogRepositoryImpl catalogRepository) {
         this.catalogRepository = catalogRepository;
     }
 
@@ -166,13 +165,13 @@ public class VoiceFoodParser {
      * Busca el alimento en el catálogo (síncrono para uso en background).
      */
     private FoodProduct searchFood(String foodName) {
-        final FoodProduct[] result = {null};
+        final com.lupefit.core.domain.model.FoodProduct[] domainResult = {null};
         final CountDownLatch latch = new CountDownLatch(1);
 
-        catalogRepository.searchByName(foodName, 5, products -> {
-            if (!products.isEmpty()) {
+        catalogRepository.searchByName(foodName, 5, (products, error) -> {
+            if (products != null && !products.isEmpty()) {
                 // Tomar el mejor match (el primero ya está ordenado por relevancia)
-                result[0] = products.get(0);
+                domainResult[0] = products.get(0);
             }
             latch.countDown();
         });
@@ -183,7 +182,12 @@ public class VoiceFoodParser {
             Thread.currentThread().interrupt();
         }
 
-        return result[0];
+        if (domainResult[0] == null) {
+            return null;
+        }
+
+        // Convertir domain model a Room entity
+        return convertToEntity(domainResult[0]);
     }
 
     /**
@@ -231,5 +235,27 @@ public class VoiceFoodParser {
             this.unit = unit;
             this.foodName = foodName;
         }
+    }
+
+    /**
+     * Convierte domain model (core) a Room entity (app).
+     */
+    private com.lupefit.app.data.local.entity.FoodProduct convertToEntity(com.lupefit.core.domain.model.FoodProduct domain) {
+        com.lupefit.app.data.local.entity.FoodProduct entity = new com.lupefit.app.data.local.entity.FoodProduct();
+        entity.id = Integer.parseInt(domain.getId());
+        entity.barcode = domain.getBarcode();
+        entity.name = domain.getName();
+        entity.brand = domain.getBrand();
+        entity.kcalPer100g = domain.getKcalPer100g();
+        entity.proteinPer100g = domain.getProteinPer100g();
+        entity.carbsPer100g = domain.getCarbsPer100g();
+        entity.fatPer100g = domain.getFatPer100g();
+        entity.defaultServingGrams = domain.getDefaultServingGrams();
+        entity.isFreshFood = domain.isFreshFood();
+        entity.lastUpdated = domain.getLastUpdated();
+        entity.referencePrice = domain.getReferencePrice();
+        entity.referenceQuantityGrams = domain.getReferenceQuantityGrams();
+        entity.priceUpdatedAt = domain.getPriceUpdatedAt();
+        return entity;
     }
 }

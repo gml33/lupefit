@@ -1,19 +1,53 @@
 package com.lupefit.feature.diario.viewmodel;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.lupefit.core.domain.provider.DiarioRepositoryProvider;
 import com.lupefit.core.domain.model.DiarioEntry;
 import com.lupefit.core.domain.model.MacroTotals;
+import com.lupefit.core.domain.repository.DiarioRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DiarioHomeViewModel extends ViewModel {
 
-    private final MutableLiveData<List<DiarioEntry>> diarioEntries = new MutableLiveData<>(new ArrayList<>());
-    private final MutableLiveData<MacroTotals> totales = new MutableLiveData<>(new MacroTotals(0, 0, 0, 0));
+    private final DiarioRepository repository;
+    private final LiveData<List<DiarioEntry>> diarioEntries;
+    private final LiveData<MacroTotals> totales;
+
+    public DiarioHomeViewModel(DiarioRepository repository, long userId) {
+        this.repository = repository;
+        this.diarioEntries = repository.getEntriesForDate(getTodayDateKey());
+        this.totales = repository.getDailyTotals(getTodayDateKey());
+    }
+
+    public static class Factory implements ViewModelProvider.Factory {
+        private final Context context;
+        private final long userId;
+
+        public Factory(Context context, long userId) {
+            this.context = context;
+            this.userId = userId;
+        }
+
+        @NonNull
+        @Override
+        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            if (modelClass.isAssignableFrom(DiarioHomeViewModel.class)) {
+                com.lupefit.core.domain.provider.DiarioRepositoryProvider provider =
+                    (com.lupefit.core.domain.provider.DiarioRepositoryProvider) context.getApplicationContext();
+                DiarioRepository repository = provider.getDiarioRepository();
+                return (T) new DiarioHomeViewModel(repository, userId);
+            }
+            throw new IllegalArgumentException("Unknown ViewModel class");
+        }
+    }
 
     public LiveData<List<DiarioEntry>> getDiarioEntries() {
         return diarioEntries;
@@ -24,26 +58,26 @@ public class DiarioHomeViewModel extends ViewModel {
     }
 
     public void loadDiarioDelDia() {
-        // TODO: Load from Repository
-        // For now, set mock data
-        totales.setValue(new MacroTotals(1850, 120, 180, 75));
+        // Repository already loads data via LiveData
+        // This method can be used to trigger refresh if needed
     }
 
     public void addEntry(DiarioEntry entry) {
-        List<DiarioEntry> current = new ArrayList<>(diarioEntries.getValue());
-        current.add(0, entry);
-        diarioEntries.setValue(current);
-        recalculateTotals(current);
+        repository.insert(entry);
     }
 
-    private void recalculateTotals(List<DiarioEntry> entries) {
-        int cal = 0, prot = 0, carb = 0, fat = 0;
-        for (DiarioEntry e : entries) {
-            cal += e.getCalorias();
-            prot += e.getProteinas();
-            carb += e.getCarbohidratos();
-            fat += e.getGrasas();
-        }
-        totales.setValue(new MacroTotals(cal, prot, carb, fat));
+    public void updateEntry(DiarioEntry entry) {
+        repository.update(entry);
+    }
+
+    public void deleteEntry(DiarioEntry entry) {
+        repository.delete(entry);
+    }
+
+    private int getTodayDateKey() {
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        return cal.get(java.util.Calendar.YEAR) * 10000
+                + (cal.get(java.util.Calendar.MONTH) + 1) * 100
+                + cal.get(java.util.Calendar.DAY_OF_MONTH);
     }
 }

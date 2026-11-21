@@ -27,7 +27,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.lupefit.app.R;
 import com.lupefit.app.data.local.entity.FoodProduct;
-import com.lupefit.app.data.local.repository.FoodCatalogRepository;
+import com.lupefit.app.data.local.repository.FoodCatalogRepositoryImpl;
 import com.lupefit.app.databinding.FragmentEscaneoCodigoBarrasBinding;
 
 import java.util.concurrent.ExecutorService;
@@ -43,7 +43,7 @@ public class EscaneoCodigoBarrasFragment extends Fragment {
     private static final int REQUEST_CAMERA_PERMISSION = 1001;
 
     private FragmentEscaneoCodigoBarrasBinding binding;
-    private FoodCatalogRepository catalogRepository;
+    private FoodCatalogRepositoryImpl catalogRepository;
     private BarcodeAnalyzer barcodeAnalyzer;
     private ExecutorService cameraExecutor;
     private boolean hasCameraPermission = false;
@@ -51,7 +51,7 @@ public class EscaneoCodigoBarrasFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        catalogRepository = new FoodCatalogRepository(
+        catalogRepository = new FoodCatalogRepositoryImpl(
                 requireContext(),
                 ((com.lupefit.app.MyApplication) requireActivity().getApplication()).getContainer().getFoodProductDao()
         );
@@ -218,7 +218,7 @@ public class EscaneoCodigoBarrasFragment extends Fragment {
     }
 
     private void openCreateFoodFragment(String barcode) {
-        // TODO: Navegar a DiarioCrearAlimentoFragment con barcode prellenado
+        // TODO: Navegar a DiarioCrearAlimentoFragment con código prellenado
         Toast.makeText(requireContext(), "Abrir crear alimento con código: " + barcode, Toast.LENGTH_SHORT).show();
     }
 

@@ -91,6 +91,9 @@ public abstract class AppDatabase extends RoomDatabase {
     private static final String TAG = "AppDatabase";
     private static volatile AppDatabase INSTANCE;
 
+    // Executor para tareas de escritura en background
+    public static final ExecutorService databaseWriteExecutor = Executors.newSingleThreadExecutor();
+
     // Executor para tareas de inicialización (precarga JSON)
     private static final ExecutorService INIT_EXECUTOR = Executors.newSingleThreadExecutor();
 

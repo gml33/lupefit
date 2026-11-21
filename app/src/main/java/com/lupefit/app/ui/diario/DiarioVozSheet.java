@@ -23,6 +23,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
 import com.lupefit.app.R;
 import com.lupefit.app.data.local.entity.FoodProduct;
+import com.lupefit.app.data.local.repository.FoodCatalogRepositoryImpl;
 import com.lupefit.app.domain.engine.voice.NativeAndroidVoiceEngine;
 import com.lupefit.app.domain.engine.voice.VoiceFoodParser;
 import com.lupefit.app.domain.engine.voice.VoiceTranscriptionEngine;
@@ -63,7 +64,7 @@ public class DiarioVozSheet extends BottomSheetDialogFragment {
         super.onCreate(savedInstanceState);
         voiceEngine = new NativeAndroidVoiceEngine(requireContext());
         foodParser = new VoiceFoodParser(
-                ((com.lupefit.app.MyApplication) requireActivity().getApplication())
+                (FoodCatalogRepositoryImpl) ((com.lupefit.app.MyApplication) requireActivity().getApplication())
                         .getContainer().getFoodCatalogRepository()
         );
         parserExecutor = Executors.newSingleThreadExecutor();
@@ -233,17 +234,17 @@ public class DiarioVozSheet extends BottomSheetDialogFragment {
         pulseMiddleY.start();
 
         // Guardar referencias para cancelar
-        binding.btnMic.setTag(com.lupefit.app.R.id.anim_pulse_outer, pulseOuter);
-        binding.btnMic.setTag(com.lupefit.app.R.id.anim_pulse_outer_y, pulseOuterY);
-        binding.btnMic.setTag(com.lupefit.app.R.id.anim_pulse_middle, pulseMiddle);
-        binding.btnMic.setTag(com.lupefit.app.R.id.anim_pulse_middle_y, pulseMiddleY);
+        binding.btnMic.setTag(R.id.anim_pulse_outer, pulseOuter);
+        binding.btnMic.setTag(R.id.anim_pulse_outer_y, pulseOuterY);
+        binding.btnMic.setTag(R.id.anim_pulse_middle, pulseMiddle);
+        binding.btnMic.setTag(R.id.anim_pulse_middle_y, pulseMiddleY);
     }
 
     private void stopMicAnimation() {
-        ObjectAnimator a1 = (ObjectAnimator) binding.btnMic.getTag(com.lupefit.app.R.id.anim_pulse_outer);
-        ObjectAnimator a2 = (ObjectAnimator) binding.btnMic.getTag(com.lupefit.app.R.id.anim_pulse_outer_y);
-        ObjectAnimator a3 = (ObjectAnimator) binding.btnMic.getTag(com.lupefit.app.R.id.anim_pulse_middle);
-        ObjectAnimator a4 = (ObjectAnimator) binding.btnMic.getTag(com.lupefit.app.R.id.anim_pulse_middle_y);
+        ObjectAnimator a1 = (ObjectAnimator) binding.btnMic.getTag(R.id.anim_pulse_outer);
+        ObjectAnimator a2 = (ObjectAnimator) binding.btnMic.getTag(R.id.anim_pulse_outer_y);
+        ObjectAnimator a3 = (ObjectAnimator) binding.btnMic.getTag(R.id.anim_pulse_middle);
+        ObjectAnimator a4 = (ObjectAnimator) binding.btnMic.getTag(R.id.anim_pulse_middle_y);
 
         if (a1 != null) a1.cancel();
         if (a2 != null) a2.cancel();

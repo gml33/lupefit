@@ -6,29 +6,29 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_m"
+        android:layout_marginHorizontal="@dimen/margin_card"
         android:layout_marginVertical="@dimen/spacing_xs"
-        app:cardCornerRadius="@dimen/corner_item"
-        app:cardElevation="@dimen/elevation_item"
+        app:cardCornerRadius="@dimen/radius_card"
+        app:cardElevation="@dimen/elevation_card"
         app:cardBackgroundColor="?attr/colorSurface"
         app:strokeColor="?attr/colorOutline"
-        app:strokeWidth="@dimen/stroke_width">
+        app:strokeWidth="@dimen/divider_thin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/spacing_m">
+        android:padding="@dimen/padding_card_list_item">
 
         <!-- Icono circular con color por tipo de comida -->
-        <com.mikhaellopez.circularimageview.CircularImageView
+        <ImageView
             android:id="@+id/ivFoodIcon"
-            android:layout_width="@dimen/icon_l"
-            android:layout_height="@dimen/icon_l"
-            android:layout_marginEnd="@dimen/spacing_m"
+            android:layout_width="@dimen/icon_lg"
+            android:layout_height="@dimen/icon_lg"
+            android:layout_marginEnd="@dimen/spacing_md"
             android:src="@drawable/ic_food_generic"
-            android:background="?attr/colorSurfaceVariant"
-            app:civ_border="false"
+            android:background="@drawable/bg_circular_icon"
+            android:scaleType="centerCrop"
             tools:ignore="MissingClass" />
 
         <!-- Info principal -->
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="end"
-            android:layout_marginStart="@dimen/spacing_m">
+            android:layout_marginStart="@dimen/spacing_md">
 
             <TextView
                 android:id="@+id/tvCalories"
@@ -75,7 +75,7 @@
                 android:text="@string/kcal_value"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="?attr/colorOnSurface"
-                android:fontFamily="@font/roboto_mono"
+                android:fontFamily="monospace"
                 tools:text="330" />
 
             <TextView
@@ -87,7 +87,7 @@
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:layout_marginTop="@dimen/spacing_xxs"
                 android:background="?attr/colorSurfaceVariant"
-                android:paddingHorizontal="@dimen/spacing_s"
+                android:paddingHorizontal="@dimen/spacing_sm"
                 android:paddingVertical="@dimen/spacing_xxs"
                 tools:text="ALMUERZO" />
         </LinearLayout>
