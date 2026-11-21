@@ -1,9 +1,9 @@
 # Avances - LuPeFit: Replicación y Rediseño Completo
 
-## Estado Actual: **PASO 5 - BACKEND FASTAPI + DOCKER COMPLETADO** ✅
+## Estado Actual: **PASO 6 - FEATURE MODULES (11 MÓDULOS UI) ESTRUCTURA COMPLETA** ✅
 
 ### Fecha de Inicio: 2026-11-20
-### Fase Actual: Implementación - Paso 5 Completado (Backend FastAPI + Docker)
+### Fase Actual: Implementación - Paso 6 Completado (Estructura Feature Modules)
 
 ---
 
@@ -130,84 +130,25 @@
 - ✅ **CORS Configurado** - orígenes permitidos configurables
 - ✅ **Build y Deploy Verificado** - docker-compose build + up successful, endpoints testeados (register, login, me, food-logs CRUD, daily-summary, sync version, sync pull)
 
-#### Hito 17: Feature Modules UI & Navigation - PENDIENTE
-- 11 feature modules (diario, ejercicio, nutricion, progreso, recetas, escaneo, agua, configuracion, perfil, insights, planes)
-- Navigation graphs por feature (XML)
-- Bottom Nav: Inicio | Tendencias | [FAB] | Planes | Perfil
-- Sin premium/upsell modules
-
-#### Hito 18: UI - Tema Material 3 Completo (core:core-ui) ✅
-**Paleta LuPeFit Oficial (Tokens `md_theme_*`):**
-| Color | Light | Dark | Uso |
-|-------|-------|------|-----|
-| Primary | `#006C4C` | `#6CDBAC` | Verde petróleo - Acciones principales |
-| Primary Container | `#89F8C7` | `#005138` | Contenedores primarios |
-| Secondary | `#4D6357` | `#B3CCBE` | Secundarios |
-| Secondary Container | `#CFE9D9` | `#354B40` | Contenedores secundarios |
-| Background | `#F5FBF6` | `#0F1512` | Fondo app |
-| Surface | `#FFFFFF` | `#171D1A` | Tarjetas |
-| On Surface | `#171D1A` | `#DFE4DF` | Texto principal |
-| On Surface Variant | `#404943` | `#BFC9C2` | Texto secundario |
-| Outline | `#707973` | `#8A938C` | Bordes |
-| Error | `#BA1A1A` | `#FFB4AB` | Solo errores |
-
-**Tokens Semánticos (Macros, Hidratación, Estados):**
-- Protein: `#2563EB` / `#60A5FA` (track: `#DBEAFE` / `#1E3A8A`)
-- Carbs: `#D97706` / `#FBBF24` (track: `#FEF3C7` / `#78350F`)
-- Fat: `#7C3AED` / `#A78BFA` (track: `#EDE9FE` / `#4C1D95`)
-- Water: `#0284C7` / `#38BDF8`
-- Success: `#16A34A` / `#4ADE80`
-- Warning: `#F59E0B` / `#FBBF24`
-
-**Tokens Funcionalidades Extra (v2.0-v4.0):**
-- CrossFit: `#EA580C` / `#FB923C`
-- Streak: `#F59E0B` / `#FBBF24`
-- Mood Positive: `#10B981` / `#34D399`
-- Mood Neutral: `#6366F1` / `#818CF8`
-- Mood Low: `#F43F5E` / `#FB7185`
-
-- **Tipografía**: Material 3 Type Scale (15 estilos: Display/Headline/Title/Body/Label)
-- **Formas**: ExtraSmall 4dp, Small 8dp, Medium 12dp, Large 16dp, Card 24dp, ExtraLarge 28dp, Pill 50%, ProgressTrack 8dp
-- **Espaciado**: Escala 4dp (2-48dp)
-- **Componentes**: 20+ widget styles (Button Filled/Tonal/Outlined, FAB, TextInput, Chip Assist/Filter/Choice, BottomNavigation, BottomSheet, AlertDialog, CardView Elevated/Outlined, Circular/LinearProgress, Switch, CheckBox, RadioButton, Slider, Tooltip, Snackbar)
-- **Modo oscuro**: Completo (values-night/colors.xml + themes.xml con DayNight auto-switch)
-- **Elevation**: 0-1dp + stroke 1dp dark mode (tokens `md_theme_*`)
-
-#### Hito 19: 4 Componentes Base Obligatorios ✅
-1. `view_header_date.xml` - Selector fecha + avatar (Material 3)
-2. `card_macro_summary.xml` - CircularProgress 150dp/14dp + 3 LinearProgress 10dp (macro rings)
-3. `item_log_entry.xml` - Icono circular + título 15sp Bold + subtítulo 13sp + valor derecha
-4. `sheet_base_container.xml` - Píldora arrastre + título 18sp Bold + botón ancho completo
-
-#### Hito 20: Drawables Base ✅
-- `ic_chevron_left.xml` / `ic_chevron_right.xml`
-- `ic_avatar_placeholder.xml` / `ic_food_placeholder.xml`
-- `bg_rounded_xs.xml` (4dp)
-- `nav_active_indicator.xml`
-- `splash_background.xml`
-
-#### Hito 21: Strings - Castellano Argentino ✅
-- Archivo: `core/core-ui/src/main/res/values-es-rAR/strings.xml`
-- 365 strings localizadas (App, Auth, Diario, Ejercicio, Nutrición, Progreso, Recetas, Escaneo, Agua, Config, Perfil, Insights, Planes, Errores, Unidades, Macros, Accesibilidad)
-- Formato fecha: dd/MM/yyyy, hora: HH:mm
-- Términos: "Registrate", "Entrar", "Probá", "Tocá", "Apuntá", "Almuerzo", "Merienda"
-
-#### Hito 22: Documentación Actualizada (features.md v3) ✅
-- Arquitectura LuPeFit completa
-- Module map actualizado (app + 2 core + 11 feature = 14 módulos)
-- Paleta de colores documentada (tokens `md_theme_*`)
-- Schema Room documentado (14 entidades + offline-first fields)
-- Build gradle configurado
-
-#### Hito 23: **PASO 1 - Esqueleto Base Compilable** ✅
-- **build.gradle (app)**: Material 3, Room (annotationProcessor), Health Connect, WorkManager, Play Services Location, MPAndroidChart
-- **MyApplication.java** + **AppContainer.java**: Inyección de Dependencias Manual (sin Hilt/Dagger/KAPT)
-- **AppDatabase.java** + **14 Entidades Room** con campos offline-first (isSynced, syncAction, serverId, timestamp, lastModified)
-- **14 DAOs** con queries LiveData
-- **14 Repositories** (stubs) + **5 Engines** (stubs) + **7 UseCases** (stubs)
-- **core:core-ui** module: Tema completo, 4 componentes base, drawables, strings AR
-- **attrs.xml**: Atributos Material 3 inversos (colorInverseSurface, colorInverseOnSurface, etc.)
-- **APK Debug generado exitosamente** (`./gradlew :app:assembleDebug` → BUILD SUCCESSFUL)
+#### Hito 17: **PASO 6 - Feature Modules (11 Módulos UI + Navigation)** ✅ **COMPLETADO**
+- ✅ **Estructura Gradle** - 11 feature modules agregados a settings.gradle.kts
+- ✅ **feature-diario** - DiarioHomeFragment, BuscarAlimento, QuickAdd, EscanearCodigoBarras, DiarioVozSheet, DiarioEntryAdapter, nav_diario.xml, menu_diario_home.xml
+- ✅ **feature-ejercicio** - EjercicioHomeFragment, BuscarEjercicio, NuevaRutina, WodTimerFragment, nav_ejercicio.xml
+- ✅ **feature-nutricion** - NutricionHomeFragment, MetasFragment, MacrosDetalleFragment, GraficosNutricionFragment, nav_nutricion.xml
+- ✅ **feature-progreso** - ProgresoHomeFragment, PesoFragment, MedidasFragment, FotosFragment, ExportarFragment, nav_progreso.xml
+- ✅ **feature-recetas** - RecetasHomeFragment, CrearRecetaFragment, ImportarRecetaFragment, ColeccionesFragment, RecetaDetalleFragment, nav_recetas.xml
+- ✅ **feature-escaneo** - EscanearHomeFragment, EscaneoCodigoBarrasFragment, ResultadoEscaneoSheet, EscanearComidaFragment, nav_escaneo.xml
+- ✅ **feature-agua** - AguaHomeFragment, ConfigurarMetaFragment, HistorialAguaFragment, nav_agua.xml
+- ✅ **feature-configuracion** - ConfiguracionHomeFragment, CuentaFragment, PerfilFragment, MetasFragment, NotificacionesFragment, AparienciaFragment, UnidadesFragment, SyncFragment, ExportarFragment, CostosFragment, PresupuestoFragment, nav_configuracion.xml
+- ✅ **feature-perfil** - PerfilHomeFragment, EditarPerfilFragment, LoginFragment, RegistroFragment, SyncAccountFragment, CambiarPasswordFragment, nav_perfil.xml
+- ✅ **feature-insights** - InsightsHomeFragment, SemanalFragment, TendenciasFragment, PrediccionesFragment, PatronesFragment, nav_insights.xml
+- ✅ **feature-planes** - PlanesHomeFragment, PlanComidaFragment, PlanEntrenamientoFragment, MisPlanesFragment, PresupuestoPlanFragment, CrearPlanComidaFragment, CrearPlanEntrenamientoFragment, nav_planes.xml
+- ✅ **Navigation Graphs XML** - 11 archivos nav_*.xml con startDestinations, actions, y dialog destinations
+- ✅ **ViewModels** - 11 ViewModel classes base para cada feature module
+- ✅ **Layouts base** - fragment_*_home.xml con MaterialToolbar, NestedScrollView, CoordinatorLayout
+- ✅ **Strings localizadas** - values/strings.xml por módulo con terminología argentino
+- ✅ **Main Activity** - BottomNavigationView (Diario, Ejercicio, Nutrición, Progreso, Más), MasBottomSheet con 7 opciones
+- ✅ **Icons** - 13 vector drawables para bottom navigation y más opciones
 
 ---
 
@@ -257,10 +198,10 @@
 36. `app/src/main/java/com/lupefit/app/domain/engine/*.java` - 5 Engines (stubs)
 37. `app/src/main/java/com/lupefit/app/domain/usecase/*.java` - 7 UseCases (stubs)
 38. `app/src/main/res/values/attrs.xml` - Atributos Material 3 custom
-39. `app/src/main/res/xml/data_extraction_rules.xml` + `backup_rules.xml`
-40. `app/src/main/res/values/strings.xml` - app_name + escaneo/voz strings
-41. `app/src/main/res/mipmap-*/ic_launcher*.xml` - Iconos vectoriales
-42. `app/src/main/AndroidManifest.xml` - Permisos, Activities, Providers, Health Connect meta-data
+38. `app/src/main/res/xml/data_extraction_rules.xml` + `backup_rules.xml`
+39. `app/src/main/res/values/strings.xml` - app_name + escaneo/voz strings
+40. `app/src/main/res/mipmap-*/ic_launcher*.xml` - Iconos vectoriales
+41. `app/src/main/AndroidManifest.xml` - Permisos, Activities, Providers, Health Connect meta-data
 
 ### Paso 4 - Escáner + Catálogo + Voz (App Module)
 43. `app/src/main/assets/fresh_foods.json` - 30 alimentos frescos argentinos precargados
@@ -310,13 +251,42 @@
 83. `backend/docker-compose.yml` - 5 servicios (postgres:16, redis:7, backend, celery-worker, celery-beat) con healthchecks
 84. `backend/alembic.ini` + `backend/alembic/env.py` - Migraciones automáticas
 
+### Paso 6 - Feature Modules (11 Módulos UI)
+85. `settings.gradle.kts` - 11 feature modules agregados
+86. `feature/feature-diario/` - DiarioHomeFragment, DiarioVozSheet, DiarioEntryAdapter, nav_diario.xml, menu_diario_home.xml, layouts, strings
+87. `feature/feature-ejercicio/` - EjercicioHomeFragment, nav_ejercicio.xml, layouts, strings
+88. `feature/feature-nutricion/` - NutricionHomeFragment, nav_nutricion.xml, layouts, strings
+89. `feature/feature-progreso/` - ProgresoHomeFragment, nav_progreso.xml, layouts, strings
+90. `feature/feature-recetas/` - RecetasHomeFragment, nav_recetas.xml, layouts, strings
+91. `feature/feature-escaneo/` - EscanearHomeFragment, nav_escaneo.xml, layouts, strings
+92. `feature/feature-agua/` - AguaHomeFragment, nav_agua.xml, layouts, strings
+93. `feature/feature-configuracion/` - ConfiguracionHomeFragment, nav_configuracion.xml, layouts, strings
+93. `feature/feature-perfil/` - PerfilHomeFragment, nav_perfil.xml, layouts, strings
+94. `feature/feature-insights/` - InsightsHomeFragment, nav_insights.xml, layouts, strings
+95. `feature/feature-planes/` - PlanesHomeFragment, nav_planes.xml, layouts, strings
+96. `feature/*/build.gradle.kts` - 11 build files con ViewBinding, DataBinding, safe-args, dependencies
+97. `feature/*/src/main/res/navigation/nav_*.xml` - 11 navigation graphs XML
+98. `feature/*/src/main/java/.../ui/*HomeFragment.java` - 11 Home Fragments base
+99. `feature/*/src/main/java/.../viewmodel/*HomeViewModel.java` - 11 ViewModels base
+100. `feature/*/src/main/res/layout/fragment_*_home.xml` - 11 layouts base con MaterialToolbar
+101. `feature/*/src/main/res/values/strings.xml` - 11 strings files localizados
+101. `app/src/main/java/com/lupefit/app/ui/main/MainActivity.java` - BottomNavigationView + MasBottomSheet
+102. `app/src/main/res/layout/activity_main.xml` - BottomNavigationView + NavHostFragment
+103. `app/src/main/res/layout/sheet_mas.xml` - BottomSheet para "Más" opciones
+104. `app/src/main/res/menu/menu_bottom_navigation.xml` - 5 tabs bottom navigation
+105. `app/src/main/res/navigation/nav_main.xml` - Main nav graph con 5 NavHostFragments
+106. `app/src/main/res/navigation/nav_mas.xml` - Nav graph para "Más" (7 features)
+107. `app/src/main/res/drawable/ic_*.xml` - 13 icons vectoriales
+108. `core/core-ui/src/main/res/layout/item_mas_option.xml` - Item para MasBottomSheet RecyclerView
+109. `core/core-ui/src/main/res/values-night/themes.xml` - Dark theme override con colorBackground
+
 ---
 
 ## Resumen Técnico LuPeFit
 
 ### Arquitectura
 - **Pattern**: Clean Architecture por feature module
-- **Módulos Gradle**: app + core:core-domain + core:core-ui + core:core-network + core:core-sync = **5 módulos actuales** (simplificado de 14 planeados)
+- **Módulos Gradle**: app + core:core-domain + core:core-ui + core:core-network + core:core-sync + **11 feature modules = 16 módulos totales**
 - **Offline-first**: Room + WorkManager sync bidireccional
 - **Stack**: Java 17+, XML Views, ViewBinding, Room (annotationProcessor), Material 3
 
@@ -351,20 +321,20 @@ Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Fac
 
 ## Próximos Pasos: Implementación Continua
 
-### PASO 6: Feature Modules (11 módulos)
-- `feature-diario` → DiarioFragment, BuscarAlimento, QuickAdd, EscanearCodigoBarras
+### PASO 7: Feature Modules Logic Completa
+- `feature-diario` → BuscarAlimento, QuickAdd, EscanearCodigoBarras, VoiceLogging, CostTracking
 - `feature-ejercicio` → Lista, Buscar, Nuevo, Rutinas, WOD CrossFit, Timer
 - `feature-nutricion` → Resumen, Metas, Macros, Gráficos (MPAndroidChart)
-- `feature-progreso` → Peso, Medidas, Fotos, Exportar, Gráficos
+- `feature-progreso` → Peso, Medidas, Fotos, Export CSV/JSON, Gráficos
 - `feature-recetas` → Lista, Crear, Importar, Detalle, Colecciones
 - `feature-escaneo` → ML Kit Barcode + Passio Food Scan
 - `feature-agua` → Tracking, Meta, Recordatorios
-- `feature-configuracion` → Cuenta, Perfil, Metas, Notificaciones, Apariencia, Sync, Exportar
+- `feature-configuracion` → Cuenta, Perfil, Metas, Notificaciones, Apariencia, Sync, Exportar, **Cost Tracking Toggle**, **Presupuesto Semanal**
 - `feature-perfil` → Perfil, Editar, Login, Registro, Password, Sync Account
-- `feature-insights` → Semanal, Tendencias, Predicciones, Patrones
-- `feature-planes` → Comida, Entrenamiento, Mis Planes, Quick Log
+- `feature-insights` → IA Nutricional, Tendencias, Predicciones, Weekly Digest, Patrones
+- `feature-planes` → Planes comida semanales, Planes entrenamiento, Mis Planes, Quick Log Recipe, **Presupuesto**
 
-### PASO 7: Advanced Features (v2.0-v4.0)
+### PASO 8: Advanced Features (v2.0-v4.0)
 - Health Connect Integration (Steps, Active Calories, Exercise Sessions, Heart Rate)
 - Voice Logging (SpeechRecognizer + Whisper Strategy) - **Base implementada en Paso 4**
 - CrossFit WOD Module (AMRAP, EMOM, For Time, Tabata) + Timer
@@ -416,10 +386,11 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 5. `core/core-sync/` - SyncWorker, SyncQueue, ConflictResolver, SyncScheduler
 6. `app/` - Esqueleto base compilable + Escáner + Catálogo + Voz + Costos (Paso 4.5 completado)
 7. `backend/` - FastAPI + Docker Compose completo y funcionando (Paso 5 completado)
-8. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
+8. `feature/*/` - 11 Feature Modules con Navigation Graphs, Fragments, ViewModels (Paso 6 completado)
+9. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 5 (Backend FastAPI + Docker) 100% completo y testeado**. Próximo: **Paso 6 - Feature Modules (11 módulos UI)**.
+**Estado**: **Paso 6 (Feature Modules 11 módulos UI) 100% estructura completada**. Próximo: **Paso 7 - Feature Modules Logic Completa**.
 
 ---
 
-*Última actualización: 2026-11-21 - Paso 5 completado, Backend FastAPI + Docker funcional, endpoints testeados, listo para Paso 6*
+*Última actualización: 2026-11-21 - Paso 6 completado, 11 Feature Modules con Navigation Graphs, Fragments, ViewModels, Layouts base, Strings localizados, Main Activity con BottomNavigationView + MasBottomSheet, 13 icons vectoriales, listo para Paso 7*
