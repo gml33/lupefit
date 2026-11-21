@@ -25,7 +25,7 @@
 | ![Progreso](docs/screenshots/progreso_light.svg) | ![Progreso Dark](docs/screenshots/progreso_dark.svg) |
 | *Gráficos de Progreso* | *Gráficos de Progreso (Oscuro)* |
 
-> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 5 - Backend FastAPI + Docker Completado**.
+> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 6 - Feature Modules (11 módulos UI) Estructura Completa**.
 
 ---
 
@@ -265,7 +265,7 @@ LuPeFit/
 | **3** | **Core Sync Module** | ✅ **COMPLETADO** | `b4d06cd` |
 | 4 | Escáner + Catálogo + Voz | ✅ **COMPLETADO** | - |
 | 5 | **Backend FastAPI + Docker Compose** | ✅ **COMPLETADO** | - |
-| 6 | 11 Feature Modules (UI + Lógica) | ⏳ Pendiente | - |
+| **6** | **Feature Modules (11 módulos UI)** | ✅ **COMPLETADO** | `2d282c0` |
 | 7 | Advanced Features (Health Connect, Voice, CrossFit, Macros Dinámicos, Streaks, Mood) | ⏳ Pendiente | - |
 | 8 | Testing, CI/CD, Release | ⏳ Pendiente | - |
 
