@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs")  // Use Java version instead of Kotlin
 }
 
 android {
@@ -52,6 +53,7 @@ dependencies {
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.gridlayout)
 
     implementation(libs.mpandroidchart)
     implementation(libs.camerax.core)

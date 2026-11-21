@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lupefit.feature.ejercicio.viewmodel.BuscarEjercicioViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.BuscarEjercicioFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:title="@string/buscar_ejercicio"
+                app:navigationIcon="@drawable/ic_chevron_left"
+                app:menu="@menu/menu_buscar_ejercicio" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_m">
+
+                <!-- Search Bar -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/buscar_ejercicio_hint"
+                    app:startIconDrawable="@drawable/ic_search"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                    app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:imeOptions="actionSearch" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Chips filtro categoría -->
+                <TextView
+                    android:id="@+id/tvCategorias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_l"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:text="@string/buscar_categorias"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupCategorias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:singleSelection="true"
+                    app:selectionRequired="true" />
+
+                <!-- Chips filtro patrón -->
+                <TextView
+                    android:id="@+id/tvPatrones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_l"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:text="@string/buscar_patron"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupPatrones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:singleSelection="true"
+                    app:selectionRequired="true" />
+
+                <!-- Resultados -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvResultados"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="200dp"
+                    tools:listitem="@layout/item_ejercicio_search_result" />
+
+                <!-- Empty State -->
+                <include
+                    android:id="@+id/emptyState"
+                    layout="@layout/view_empty_ejercicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <!-- Loading -->
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@style/Widget.Material3.CircularProgressIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_xl"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

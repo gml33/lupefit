@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.lupefit.core.ui.R;
 import com.lupefit.feature.ejercicio.databinding.FragmentEjercicioHomeBinding;
@@ -36,6 +38,9 @@ public class EjercicioHomeFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
         viewModel = new ViewModelProvider(this).get(EjercicioHomeViewModel.class);
 
+        // Inicializar IDs de navegación
+        NavigationActions.init(navController);
+
         setupToolbar();
         setupClickListeners();
         setupObservers();
@@ -43,15 +48,32 @@ public class EjercicioHomeFragment extends Fragment {
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> navController.navigateUp());
-        binding.toolbar.setTitle("@string/ejercicio_title");
     }
 
     private void setupClickListeners() {
-        // TODO: Add click listeners for cards/buttons
+        // Quick action cards
+        binding.cardBuscarEjercicio.setOnClickListener(v -> {
+            navController.navigate(NavigationActions.ACTION_TO_BUSCAR_EJERCICIO);
+        });
+
+        binding.cardNuevaRutina.setOnClickListener(v -> {
+            navController.navigate(NavigationActions.ACTION_TO_NUEVA_RUTINA);
+        });
+
+        binding.cardWodTimer.setOnClickListener(v -> {
+            navController.navigate(NavigationActions.ACTION_TO_WOD_TIMER);
+        });
+
+        binding.cardMisRutinas.setOnClickListener(v -> {
+            navController.navigate(NavigationActions.ACTION_TO_RUTINA_DETALLE);
+        });
     }
 
     private void setupObservers() {
-        // TODO: Observe ViewModel LiveData
+        // TODO: Observe recent workouts LiveData from ViewModel
+        // For now, show empty state
+        binding.emptyState.getRoot().setVisibility(View.VISIBLE);
+        binding.rvRecentWorkouts.setVisibility(View.GONE);
     }
 
     @Override

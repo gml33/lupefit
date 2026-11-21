@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="exercise"
+            type="com.lupefit.core.domain.model.Exercise" />
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_s"
+        android:onClick="@{onClick}"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/corner_small"
+        app:cardElevation="@dimen/elevation_card"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_m">
+
+            <!-- Icono categoría -->
+            <View
+                android:id="@+id/vCategoryIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="@dimen/spacing_m"
+                android:background="@drawable/bg_circular_icon"
+                android:contentDescription="@string/exercise_icon" />
+
+            <!-- Info ejercicio -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvExerciseName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{exercise.name}"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvExerciseCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:text="@{exercise.category}"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_m"
+                        android:text="@{exercise.movementPattern}"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="@color/crossfit_accent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_m"
+                        android:text="@{exercise.equipment}"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{exercise.isBodyweight ? @string/equip_cuerpo_libre : @string/equip_barra}"
+                        android:checkable="false"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textAppearance="?attr/textAppearanceLabelSmall" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Flecha -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_chevron_right"
+                android:tint="?attr/colorOnSurfaceVariant" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

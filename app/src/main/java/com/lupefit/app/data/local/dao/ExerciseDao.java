@@ -50,6 +50,9 @@ public interface ExerciseDao {
     @Query("SELECT * FROM exercises WHERE name LIKE :query ORDER BY CASE WHEN isCustom = 0 THEN 0 ELSE 1 END, name LIMIT :limit")
     LiveData<List<Exercise>> searchByName(String query, int limit);
 
+    @Query("SELECT * FROM exercises WHERE name LIKE :query ORDER BY CASE WHEN isCustom = 0 THEN 0 ELSE 1 END, name LIMIT :limit")
+    List<Exercise> searchByNameSync(String query, int limit);
+
     @Query("SELECT * FROM exercises WHERE isSynced = 0 ORDER BY lastModified")
     LiveData<List<Exercise>> getUnsynced();
 

@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="androidx.gridlayout.widget.GridLayout" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,22 +43,230 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_m">
 
-                <!-- TODO: Add feature-specific content -->
+                <!-- Quick Actions Grid -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/ejercicio_title"
-                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:layout_marginBottom="@dimen/spacing_l" />
+                    android:text="@string/ejercicio_quick_actions"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:layout_marginBottom="@dimen/spacing_s" />
 
+                <androidx.gridlayout.widget.GridLayout
+                    android:id="@+id/gridQuickActions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_l"
+                    android:alignmentMode="alignMargins"
+                    android:columnCount="2"
+                    android:rowCount="2"
+                    android:useDefaultMargins="true"
+                    tools:listitem="@layout/item_quick_action">
+
+                    <!-- Card: Buscar Ejercicio -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardBuscarEjercicio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="@dimen/spacing_s"
+                        android:layout_rowWeight="1"
+                        app:cardCornerRadius="@dimen/corner_card"
+                        app:cardElevation="@dimen/elevation_card">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_l">
+
+                            <ImageView
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginBottom="@dimen/spacing_s"
+                                android:src="@drawable/ic_search"
+                                android:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/buscar_ejercicio"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textColor="?attr/colorOnSurface"
+                                android:gravity="center" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_xs"
+                                android:text="@string/buscar_ejercicio_hint"
+                                android:textAppearance="?attr/textAppearanceBodySmall"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:gravity="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card: Nueva Rutina -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardNuevaRutina"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="@dimen/spacing_s"
+                        android:layout_rowWeight="1"
+                        app:cardCornerRadius="@dimen/corner_card"
+                        app:cardElevation="@dimen/elevation_card">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_l">
+
+                            <ImageView
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginBottom="@dimen/spacing_s"
+                                android:src="@drawable/ic_add"
+                                android:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/nueva_rutina"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textColor="?attr/colorOnSurface"
+                                android:gravity="center" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_xs"
+                                android:text="@string/nueva_rutina_descripcion"
+                                android:textAppearance="?attr/textAppearanceBodySmall"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:gravity="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card: WOD Timer -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardWodTimer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="@dimen/spacing_s"
+                        android:layout_rowWeight="1"
+                        app:cardCornerRadius="@dimen/corner_card"
+                        app:cardElevation="@dimen/elevation_card">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_l">
+
+                            <ImageView
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginBottom="@dimen/spacing_s"
+                                android:src="@drawable/ic_timer"
+                                android:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/wod_timer"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textColor="?attr/colorOnSurface"
+                                android:gravity="center" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_xs"
+                                android:text="AMRAP, EMOM, For Time, Tabata"
+                                android:textAppearance="?attr/textAppearanceBodySmall"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:gravity="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card: Mis Rutinas -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardMisRutinas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="@dimen/spacing_s"
+                        android:layout_rowWeight="1"
+                        app:cardCornerRadius="@dimen/corner_card"
+                        app:cardElevation="@dimen/elevation_card">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_l">
+
+                            <ImageView
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginBottom="@dimen/spacing_s"
+                                android:src="@drawable/ic_list"
+                                android:tint="?attr/colorPrimary" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/rutina_detalle"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textColor="?attr/colorOnSurface"
+                                android:gravity="center" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_xs"
+                                android:text="Ver y gestionar rutinas"
+                                android:textAppearance="?attr/textAppearanceBodySmall"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:gravity="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </androidx.gridlayout.widget.GridLayout>
+
+                <!-- Recent Workouts Section -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Feature en desarrollo"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:gravity="center"
-                    android:padding="@dimen/spacing_xl" />
+                    android:layout_marginTop="@dimen/spacing_l"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:text="@string/ejercicio_recientes"
+                    android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvRecentWorkouts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_l"
+                    android:minHeight="150dp"
+                    tools:listitem="@layout/item_recent_workout" />
+
+                <!-- Empty State -->
+                <include
+                    android:id="@+id/emptyState"
+                    layout="@layout/view_empty_ejercicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

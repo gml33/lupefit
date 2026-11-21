@@ -1,7 +1,91 @@
 <resources>
     <string name="buscar_ejercicio">Buscar ejercicio</string>
     <string name="ejercicio_title">Ejercicio</string>
+    <string name="ejercicio_quick_actions">Accesos rápidos</string>
+    <string name="ejercicio_recientes">Entrenamientos recientes</string>
+    <string name="ejercicio_vacio_titulo">Sin entrenamientos</string>
+    <string name="ejercicio_vacio_subtitulo">Empezá tu primer entrenamiento tocando un acceso rápido</string>
+    <string name="ejercicio_primer_entrenamiento">Crear mi primer entrenamiento</string>
     <string name="nueva_rutina">Nueva rutina</string>
     <string name="rutina_detalle">Detalle de rutina</string>
     <string name="wod_timer">WOD Timer</string>
+
+    <!-- Buscar ejercicio -->
+    <string name="buscar_ejercicio_hint">Buscar por nombre, categoría…</string>
+    <string name="buscar_categorias">Categorías</string>
+    <string name="buscar_todas">Todas</string>
+    <string name="buscar_fuerza">Fuerza</string>
+    <string name="buscar_olimpico">Olímpico</string>
+    <string name="buscar_gymnastics">Gymnastics</string>
+    <string name="buscar_cardio">Cardio</string>
+    <string name="buscar_strongman">Strongman</string>
+    <string name="buscar_crossfit">CrossFit</string>
+    <string name="buscar_patron">Patrón</string>
+    <string name="buscar_equipamiento">Equipamiento</string>
+
+    <!-- Nueva rutina -->
+    <string name="nueva_rutina_titulo">Título de la rutina</string>
+    <string name="nueva_rutina_descripcion">Descripción (opcional)</string>
+    <string name="nueva_rutina_agregar_ejercicio">Añadir ejercicio</string>
+    <string name="nueva_rutina_tipo">Tipo de rutina</string>
+    <string name="nueva_rutina_guardar">Guardar rutina</string>
+
+    <!-- WOD Timer -->
+    <string name="wod_tipo">Tipo de WOD</string>
+    <string name="wod_amrap">AMRAP</string>
+    <string name="wod_emom">EMOM</string>
+    <string name="wod_for_time">For Time</string>
+    <string name="wod_tabata">Tabata</string>
+    <string name="wod_duracion">Duración (min)</string>
+    <string name="wod_rondas">Rondas</string>
+    <string name="wod_trabajo">Trabajo (seg)</string>
+    <string name="wod_descanso">Descanso (seg)</string>
+    <string name="wod_iniciar">Iniciar</string>
+    <string name="wod_pausar">Pausar</string>
+    <string name="wod_reiniciar">Reiniciar</string>
+    <string name="wod_tiempo_restante">Tiempo restante</string>
+    <string name="wod_ronda_actual">Ronda actual</string>
+    <string name="wod_preparate">¡Preparate!</string>
+    <string name="wod_trabajo_empezar">¡Trabajo!</string>
+    <string name="wod_descanso_empezar">Descanso</string>
+    <string name="wod_finalizado">¡Finalizado!</string>
+
+    <!-- Rutina detalle -->
+    <string name="rutina_ejercicios">Ejercicios</string>
+    <string name="rutina_series">Series</string>
+    <string name="rutina_reps">Reps</string>
+    <string name="rutina_peso">Peso</string>
+    <string name="rutina_rm">% 1RM</string>
+    <string name="rutina_descanso">Descanso</string>
+    <string name="rutina_iniciar">Iniciar rutina</string>
+
+    <!-- Categorías -->
+    <string name="cat_fuerza">Fuerza</string>
+    <string name="cat_olimpico">Olímpico</string>
+    <string name="cat_gymnastics">Gymnastics</string>
+    <string name="cat_cardio">Cardio</string>
+    <string name="cat_strongman">Strongman</string>
+    <string name="cat_crossfit">CrossFit</string>
+
+    <!-- Patrones de movimiento -->
+    <string name="patron_squat">Squat</string>
+    <string name="patron_hinge">Hinge</string>
+    <string name="patron_push_h">Push Horizontal</string>
+    <string name="patron_push_v">Push Vertical</string>
+    <string name="patron_pull_h">Pull Horizontal</string>
+    <string name="patron_pull_v">Pull Vertical</string>
+    <string name="patron_carry">Carry</string>
+    <string name="patron_core">Core</string>
+    <string name="patron_locomotion">Locomotion</string>
+
+    <!-- Equipamiento -->
+    <string name="equip_barra">Barra</string>
+    <string name="equip_mancuernas">Mancuernas</string>
+    <string name="equip_kettlebell">Kettlebell</string>
+    <string name="equip_maquina">Máquina</string>
+    <string name="equip_cuerpo_libre">Cuerpo libre</string>
+    <string name="equip_anillas">Anillas</string>
+    <string name="equip_cuerda">Cuerda</string>
+    <string name="equip_cajon">Cajón</string>
+    <string name="equip_medicina">Medicina</string>
 </resources>

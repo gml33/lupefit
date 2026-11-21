@@ -50,6 +50,7 @@ import com.lupefit.core.sync.worker.SyncWorkerFactory;
 import com.lupefit.core.sync.worker.SyncWorkerFactoryProvider;
 import com.lupefit.core.sync.queue.SyncQueueRepository;
 import com.lupefit.core.domain.provider.DiarioRepositoryProvider;
+import com.lupefit.core.domain.provider.ExerciseRepositoryProvider;
 import com.lupefit.core.domain.provider.FoodCatalogRepositoryProvider;
 
 /**
@@ -57,7 +58,7 @@ import com.lupefit.core.domain.provider.FoodCatalogRepositoryProvider;
  * No usa Dagger/Hilt/Kapt - Inyección 100% manual en Java 17+.
  * Implementa SyncWorkerFactoryProvider para proveer dependencias al SyncWorker.
  */
-public class MyApplication extends Application implements SyncWorkerFactoryProvider, DiarioRepositoryProvider, FoodCatalogRepositoryProvider {
+public class MyApplication extends Application implements SyncWorkerFactoryProvider, DiarioRepositoryProvider, ExerciseRepositoryProvider, FoodCatalogRepositoryProvider {
 
     private static MyApplication instance;
     private AppContainer container;
@@ -108,5 +109,10 @@ public class MyApplication extends Application implements SyncWorkerFactoryProvi
     @Override
     public com.lupefit.core.domain.repository.FoodCatalogRepository getFoodCatalogRepository() {
         return container.getFoodCatalogRepository();
+    }
+
+    @Override
+    public com.lupefit.core.domain.repository.ExerciseRepository getExerciseRepository() {
+        return container.getExerciseRepository();
     }
 }

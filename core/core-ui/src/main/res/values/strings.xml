@@ -1,6 +1,7 @@
 <resources>
     <!-- Content descriptions -->
     <string name="food_icon">Icono de alimento</string>
+    <string name="exercise_icon">Icono de ejercicio</string>
     <string name="chevron_left">Atrás</string>
     <string name="chevron_right">Siguiente</string>
     <string name="search">Buscar</string>
