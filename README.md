@@ -25,7 +25,7 @@
 | ![Progreso](docs/screenshots/progreso_light.svg) | ![Progreso Dark](docs/screenshots/progreso_dark.svg) |
 | *Gráficos de Progreso* | *Gráficos de Progreso (Oscuro)* |
 
-> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 6 - Feature Modules (11 módulos UI) Estructura Completa**.
+> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 6 - Feature Modules (11 módulos UI) Estructura Completa + Compilación Verificada**.
 
 ---
 
@@ -40,12 +40,12 @@
 ### 🏗️ **Arquitectura Sólida**
 | Capa | Tecnología | Estado |
 |------|------------|--------|
-| **UI** | Java 17+ + XML Views + ViewBinding | ✅ Paso 1 |
+| **UI** | Java 17+ + XML Views + ViewBinding + DataBinding | ✅ Paso 1 |
 | **Tema** | Material 3 (Tokens `md_theme_*`) | ✅ Paso 1 |
 | **BD Local** | Room (annotationProcessor) + Offline-First | ✅ Paso 1 |
 | **DI** | Manual (AppContainer) - Sin Hilt/Dagger | ✅ Paso 1 |
 | **Sync** | WorkManager + Backend propio | ✅ Paso 3 |
-| **Backend** | FastAPI + PostgreSQL + Docker | 🔄 Paso 4 |
+| **Backend** | FastAPI + PostgreSQL + Redis + Celery (Docker) | ✅ Paso 5 |
 
 ### 🌙 **Modo Oscuro Completo**
 - Switch automático (DayNight) + toggle manual
@@ -68,44 +68,70 @@
 | **Core Data (Room)** | 14 entidades + 14 DAOs + TypeConverters |
 | **Core Domain** | 14 Repositories + 5 Engines + 7 UseCases (stubs) |
 | **Core UI** | Tema M3 completo, 4 componentes base, drawables, strings AR |
-| **App Container** | DI Manual puro Java (218 líneas, zero reflection) |
+| **App Container** | DI Manual puro Java (218+ líneas, zero reflection) |
 
-### 🔄 **En Desarrollo (Paso 4)**
+### ✅ **Implementados (Paso 2-3 - Core Network & Sync)**
 | Módulo | Descripción |
 |--------|-------------|
-| **Core Network** | Retrofit, API Service, DTOs, SyncEngine |
-| **Backend** | FastAPI + PostgreSQL + Redis + Celery (Docker) |
+| **Core Network** | Retrofit, OkHttp, Moshi, API Service, DTOs, SyncEngine, AuthInterceptor |
+| **Core Sync** | WorkManager SyncWorker, SyncQueue, ConflictResolver (4 estrategias), SyncScheduler |
 
-### 📋 **Planificados (Pasos 5-6)**
+### ✅ **Implementados (Paso 4 - Escáner + Catálogo + Voz + Costos)**
+| Funcionalidad | Descripción |
+|---------------|-------------|
+| **FoodProduct Entity** | Catálogo offline-first con macros, `isFreshFood`, Parcelable |
+| **Precarga JSON** | 30 alimentos frescos argentinos (carnes, huevos, lácteos, cereales, frutas, verduras) |
+| **CameraX + ML Kit** | Escaneo códigos de barras (EAN-13, EAN-8, UPC-A, UPC-E) con overlay Material 3 |
+| **FoodCatalogRepository** | Offline-First: Room → Open Food Facts API → Guarda en Room → Fallback manual |
+| **VoiceTranscriptionEngine** | Strategy Pattern: SpeechRecognizer nativo `es-AR` + Whisper Server (MediaRecorder + OkHttp) |
+| **VoiceFoodParser** | NLP español: "200 gramos de pollo y 100 de arroz" → extrae cantidad/unidad, busca catálogo, calcula macros |
+| **DiarioVozSheet** | BottomSheet 28dp, micrófono animado (anillos pulsantes), transcripción live, lista editable con barras macro P/C/G |
+| **ResultadoEscaneoSheet** | Producto detectado, selector gramos (+/- chips 100g/porción/200g), resumen calculado dinámico |
+| **Cost Tracking** | `referencePrice`, `referenceQuantityGrams`, `priceUpdatedAt`, badge precio desactualizado (>30 días) |
+| **Presupuesto Semanal** | Meta configurable, LinearProgressIndicator, estado vs meta, items sin precio |
 
-#### **Feature Modules (11 módulos)**
-| Módulo | Funcionalidades Clave |
-|--------|----------------------|
-| **feature-diario** | Búsqueda alimentos, Quick Add, Escaneo código barras, Timestamps por comida, Macros por comida |
-| **feature-ejercicio** | Cardio/Fuerza, Rutinas, **WOD CrossFit (AMRAP/EMOM/For Time/Tabata)**, Timer fullscreen con alertas sonoras/vibración |
-| **feature-nutricion** | Resumen macros circular, Metas por comida, Net Carbs mode, Gráficos MPAndroidChart |
-| **feature-progreso** | Peso, Medidas, Fotos progreso, **Export CSV/JSON**, Gráficos tendencia |
-| **feature-recetas** | Crear, Importar URL, Ingredientes, Macros, **Colecciones de recetas** |
-| **feature-escaneo** | **ML Kit Barcode** + **Passio Food Scan (IA)** |
-| **feature-agua** | Tracking hidratación, Meta diaria, Recordatorios |
-| **feature-configuracion** | Cuenta, Perfil, Metas, Notificaciones, Apariencia, Sync, Exportar datos |
-| **feature-perfil** | Auth local (email/password), Sync account, Dashboard personalizable |
-| **feature-insights** | **IA Nutricional**, Tendencias, Predicciones, Weekly digest, Patrones |
-| **feature-planes** | Planes comida semanales, Planes entrenamiento, Quick log recipe |
+### ✅ **Implementados (Paso 5 - Backend FastAPI + Docker)**
+| Componente | Descripción |
+|------------|-------------|
+| **17 SQLAlchemy Models** | User, FoodLog, WorkoutLog, WorkoutSet, Exercise, Food, FoodProduct, Recipe, RecipeIngredient, WaterLog, ProgressPhoto, PersonalRecord, GlucoseLog, MoodEntry, UserNote, WeatherSnapshot, Streak, SyncQueue |
+| **15 Pydantic Schemas** | Request/Response para todas las entidades |
+| **16 Routers API v1** | Auth, Users, FoodLogs, WorkoutLogs, Exercises, Foods, Recipes, WaterLogs, ProgressPhotos, PersonalRecords, GlucoseLogs, MoodEntries, UserNotes, WeatherSnapshots, Streaks, Sync |
+| **JWT Auth** | RS256, access 30min, refresh 7d, bcrypt |
+| **Sync Batch** | Versionado global, resolución conflictos (4 estrategias), pull changes |
+| **Docker Compose** | 5 servicios: postgres:16, redis:7, backend (uvicorn 4 workers), celery-worker, celery-beat |
 
-#### **Advanced Features (v2.0-v4.0)**
-| Feature | Descripción |
-|---------|-------------|
-| **Health Connect** | Pasos, Calorías activas, Sesiones ejercicio, Frecuencia cardíaca |
-| **Voice Logging** | SpeechRecognizer nativo + estrategia Whisper, onda visual, confirmación editable |
-| **Dynamic Macros** | Recalculo automático carbs/proteína según gasto calórico (WOD + Health Connect) |
-| **Streak Manager** | Rachas diarias con gamificación visual |
-| **Mood Tracking** | 5 niveles (Muy bajo → Excelente) correlacionado con nutrición/entrenamiento |
-| **User Notes** | Notas libres vinculadas a fecha/contexto |
+### ✅ **Implementados (Paso 6 - Feature Modules: 11 módulos UI)**
+| Módulo | Funcionalidades Clave | Estructura |
+|--------|----------------------|------------|
+| **feature-diario** | Búsqueda alimentos, Quick Add, Escaneo código barras, Voz, Timestamps por comida, Macros por comida | DiarioHomeFragment, DiarioVozSheet, DiarioEntryAdapter, nav_diario.xml |
+| **feature-ejercicio** | Cardio/Fuerza, Rutinas, WOD CrossFit (AMRAP/EMOM/For Time/Tabata), Timer fullscreen | EjercicioHomeFragment, nav_ejercicio.xml |
+| **feature-nutricion** | Resumen macros circular, Metas por comida, Net Carbs mode, Gráficos MPAndroidChart | NutricionHomeFragment, nav_nutricion.xml |
+| **feature-progreso** | Peso, Medidas, Fotos progreso, Export CSV/JSON, Gráficos tendencia | ProgresoHomeFragment, nav_progreso.xml |
+| **feature-recetas** | Crear, Importar URL, Ingredientes, Macros, Colecciones de recetas | RecetasHomeFragment, nav_recetas.xml |
+| **feature-escaneo** | ML Kit Barcode + Passio Food Scan (IA) | EscanearHomeFragment, nav_escaneo.xml |
+| **feature-agua** | Tracking hidratación, Meta diaria, Recordatorios | AguaHomeFragment, nav_agua.xml |
+| **feature-configuracion** | Cuenta, Perfil, Metas, Notificaciones, Apariencia, Sync, Exportar, Costos, Presupuesto | ConfiguracionHomeFragment, nav_configuracion.xml |
+| **feature-perfil** | Auth local (email/password), Sync account, Dashboard personalizable | PerfilHomeFragment, nav_perfil.xml |
+| **feature-insights** | IA Nutricional, Tendencias, Predicciones, Weekly digest, Patrones | InsightsHomeFragment, nav_insights.xml |
+| **feature-planes** | Planes comida semanales, Planes entrenamiento, Quick log recipe, Presupuesto | PlanesHomeFragment, nav_planes.xml |
+
+**Infraestructura común por módulo:**
+- Navigation Graph XML (`nav_*.xml`) con startDestinations, actions, dialog destinations
+- ViewModel base (`*HomeViewModel.java`)
+- Fragment Home base (`*HomeFragment.java`) con MaterialToolbar, NestedScrollView, CoordinatorLayout
+- Layouts base (`fragment_*_home.xml`)
+- Strings localizadas (`values/strings.xml` con terminología argentino)
+
+### 📋 **Planificados (Paso 7-8)**
+| Paso | Descripción |
+|------|-------------|
+| **7** | Feature Modules Logic Completa (BuscarAlimento, QuickAdd, WOD Timer, MPAndroidChart, etc.) |
+| **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood |
+| **9** | Testing, CI/CD, Release |
 
 ---
 
-## 🗄️ Base de Datos (Room) - 14 Entidades Offline-First
+## 🗄️ Base de Datos (Room) - 15 Entidades Offline-First
 
 Todas las entidades incluyen campos de sincronización:
 ```java
@@ -135,6 +161,7 @@ long lastModified = System.currentTimeMillis(); // Última modificación
 | **UserNote** | Notas libres | userId + dateKey |
 | **WeatherSnapshot** | Clima correlacionado rendimiento | dateKey + timestamp |
 | **Streak** | Rachas diarias | userId + dateKey |
+| **FoodProduct** | Catálogo offline-first (sin sync fields, solo lectura local) + **costos opcionales** | barcode (unique), name, is_fresh_food |
 
 ---
 
@@ -209,20 +236,50 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
 # app/build/outputs/apk/debug/app-debug.apk
 ```
 
+### Backend (Docker)
+```bash
+cd backend
+docker-compose build
+docker-compose up -d
+
+# Ver logs
+docker-compose logs -f backend
+
+# Test endpoints
+curl http://localhost:8000/health
+curl -X POST http://localhost:8000/api/v1/auth/register -H "Content-Type: application/json" -d '{"email": "test@lupefit.app", "password": "testpass123"}'
+```
+
 ### Estructura del Proyecto
 ```text
 LuPeFit/
 ├── app/                          # Módulo principal
 │   ├── src/main/java/com/lupefit/app/
-│   │   ├── MyApplication.java           # Application class
+│   │   ├── MyApplication.java           # Application class + SyncWorkerFactoryProvider
 │   │   ├── AppContainer.java            # Manual DI (218+ líneas)
-│   │   ├── data/local/                  # Room DB, Entities, DAOs
+│   │   ├── data/local/                  # Room DB, Entities, DAOs, Repositories
+│   │   │   ├── entity/                  # 15 Entidades Room (offline-first)
+│   │   │   ├── dao/                     # 15 DAOs con LiveData queries
+│   │   │   ├── repository/              # DiarioRepositoryImpl, FoodCatalogRepositoryImpl
+│   │   │   ├── mapper/                  # DiarioMapper
+│   │   │   └── preferences/             # UserPreferencesManager
 │   │   ├── domain/                      # Repositories, Engines, UseCases
-│   │   └── ui/                          # Activities, Fragments (pendiente)
-│   ├── src/main/res/                    # Recursos app (attrs, xml, mipmap)
+│   │   │   ├── engine/                  # MacroCalculator, StreakManager, HealthConnect, SyncEngine, Voice, Budget
+│   │   │   ├── repository/              # 14 Repository interfaces
+│   │   │   └── usecase/                 # 7 UseCases
+│   │   └── ui/                          # Activities, Fragments, Sheets
+│   │       ├── diario/                  # DiarioVozSheet
+│   │       ├── escaneo/                 # EscaneoCodigoBarrasFragment, ResultadoEscaneoSheet
+│   │       └── main/                    # MainActivity, MasBottomSheet
+│   ├── src/main/res/                    # Recursos app (attrs, xml, mipmap, navigation, drawable)
 │   └── build.gradle                     # Dependencias app
 ├── core/
-│   ├── core-domain/              # Entidades dominio, interfaces
+│   ├── core-domain/              # Entidades dominio, interfaces, providers
+│   │   ├── src/main/java/com/lupefit/core/domain/
+│   │   │   ├── model/                  # DiarioEntry, FoodProduct, MacroTotals
+│   │   │   ├── repository/             # DiarioRepository, FoodCatalogRepository
+│   │   │   ├── engine/voice/           # VoiceTranscriptionEngine, NativeAndroidVoiceEngine, VoiceFoodParser
+│   │   │   └── provider/               # Repository Providers
 │   │   └── build.gradle.kts
 │   ├── core-ui/                  # Tema M3, Styles, Components, Strings AR
 │   │   ├── src/main/res/
@@ -242,10 +299,28 @@ LuPeFit/
 │   │   └── build.gradle.kts
 │   └── core-sync/                # WorkManager, SyncQueue, ConflictResolver ✅
 │       └── build.gradle.kts
+├── feature/                      # 11 Feature Modules
+│   ├── feature-diario/           # DiarioHomeFragment, DiarioVozSheet, nav_diario.xml
+│   ├── feature-ejercicio/        # EjercicioHomeFragment, nav_ejercicio.xml
+│   ├── feature-nutricion/        # NutricionHomeFragment, nav_nutricion.xml
+│   ├── feature-progreso/         # ProgresoHomeFragment, nav_progreso.xml
+│   ├── feature-recetas/          # RecetasHomeFragment, nav_recetas.xml
+│   ├── feature-escaneo/          # EscanearHomeFragment, nav_escaneo.xml
+│   ├── feature-agua/             # AguaHomeFragment, nav_agua.xml
+│   ├── feature-configuracion/    # ConfiguracionHomeFragment, nav_configuracion.xml
+│   ├── feature-perfil/           # PerfilHomeFragment, nav_perfil.xml
+│   ├── feature-insights/         # InsightsHomeFragment, nav_insights.xml
+│   └── feature-planes/           # PlanesHomeFragment, nav_planes.xml
+├── backend/                      # FastAPI + PostgreSQL + Docker
+│   ├── app/                      # models, schemas, api/v1/endpoints, core
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── alembic/
 ├── gradle/
 │   ├── libs.versions.toml        # Version Catalog
 │   └── wrapper/                  # Gradle 8.11.1
-├── settings.gradle.kts           # include(:app, :core:core-domain, :core:core-ui, :core:core-network, :core:core-sync)
+├── settings.gradle.kts           # include(:app, :core:core-domain, :core:core-ui, :core:core-network, :core:core-sync, :feature:feature-*)
 ├── build.gradle.kts              # Root plugins
 ├── gradle.properties             # JVM args, Android configs
 ├── UI_DESIGN_SYSTEM.md           # Fuente de verdad diseño
@@ -263,21 +338,65 @@ LuPeFit/
 | **1** | **Esqueleto Base Compilable** | ✅ **COMPLETADO** | `d9942ea` |
 | **2** | **Core Network Module** | ✅ **COMPLETADO** | `9414165` |
 | **3** | **Core Sync Module** | ✅ **COMPLETADO** | `b4d06cd` |
-| 4 | Escáner + Catálogo + Voz | ✅ **COMPLETADO** | - |
-| 5 | **Backend FastAPI + Docker Compose** | ✅ **COMPLETADO** | - |
-| **6** | **Feature Modules (11 módulos UI)** | ✅ **COMPLETADO** | `2d282c0` |
+| **4** | **Escáner + Catálogo + Voz + Costos** | ✅ **COMPLETADO** | `a96505d` |
+| **5** | **Backend FastAPI + Docker Compose** | ✅ **COMPLETADO** | - |
+| **6** | **Feature Modules (11 módulos UI)** | ✅ **COMPLETADO** | `a96505d` |
 | 7 | Advanced Features (Health Connect, Voice, CrossFit, Macros Dinámicos, Streaks, Mood) | ⏳ Pendiente | - |
 | 8 | Testing, CI/CD, Release | ⏳ Pendiente | - |
 
 ### ✅ Paso 1 - Entregables Verificados
 - [x] `build.gradle` (app) con dependencias exactas
 - [x] `MyApplication.java` + `AppContainer.java` (DI Manual)
-- [x] `AppDatabase.java` + 14 Entidades Room (offline-first)
-- [x] 14 DAOs con LiveData queries
+- [x] `AppDatabase.java` + 15 Entidades Room (offline-first)
+- [x] 15 DAOs con LiveData queries
 - [x] 14 Repositories + 5 Engines + 7 UseCases (stubs compilables)
 - [x] `core:core-ui` - Tema M3 completo + 4 componentes base
 - [x] `attrs.xml` - Atributos Material 3 custom
 - [x] **APK Debug compila y genera exitosamente** (`./gradlew :app:assembleDebug`)
+
+### ✅ Paso 4 - Entregables Verificados
+- [x] `FoodProduct` Entity + DAO con búsqueda relevancia + índices
+- [x] `fresh_foods.json` - 30 alimentos frescos argentinos precargados
+- [x] `AppDatabase` Callback onCreate - precarga automática primer arranque
+- [x] CameraX + ML Kit Barcode Scanner - PreviewView full-screen, overlay redondeado
+- [x] `FoodCatalogRepository` Offline-First - Room → Open Food Facts → Room → Fallback
+- [x] `VoiceTranscriptionEngine` Strategy Pattern - interfaz + Listener + ParsedFoodItem
+- [x] `NativeAndroidVoiceEngine` - SpeechRecognizer nativo `es-AR`, resultados parciales
+- [x] `WhisperServerVoiceEngine` - MediaRecorder MPEG-4 AAC 16kHz + OkHttp Multipart
+- [x] `VoiceFoodParser` - NLP español, extrae cantidad/unidad, busca catálogo, calcula macros
+- [x] `DiarioVozSheet` - BottomSheet 28dp, micrófono animado, transcripción live, lista editable
+- [x] `ResultadoEscaneoSheet` - Producto detectado, selector gramos, resumen calculado
+- [x] Layouts XML Material 3 - sheet_resultado_escaneo.xml, sheet_diario_voz.xml, item_parsed_food.xml, item_macro_mini.xml
+- [x] **Cost Tracking** - referencePrice, referenceQuantityGrams, priceUpdatedAt, badge >30 días
+- [x] **Presupuesto Semanal** - Meta configurable, LinearProgressIndicator, items sin precio
+- [x] `UserPreferencesManager` - Feature toggle `enable_cost_tracking`, `weekly_budget_goal`, `currency_code` (ARS)
+- [x] `CostBudgetEngine` - Motor completo: costo por porción, costo por 10g proteína, presupuesto semanal
+- [x] Integración DI - AppContainer: FoodProductDao, FoodCatalogRepository, UserPreferencesManager wireados
+- [x] **Build verificado**: BUILD SUCCESSFUL
+
+### ✅ Paso 5 - Entregables Verificados
+- [x] Estructura completa FastAPI - models, schemas, api/v1/endpoints, core
+- [x] 17 SQLAlchemy Models con UUID, índices, relaciones, timestamps, offline-first fields
+- [x] 15 Pydantic Schemas Request/Response
+- [x] 16 Routers API v1 (Auth, Users, FoodLogs, WorkoutLogs, Exercises, Foods, Recipes, WaterLogs, ProgressPhotos, PersonalRecords, GlucoseLogs, MoodEntries, UserNotes, WeatherSnapshots, Streaks, Sync)
+- [x] JWT Auth RS256, access 30min, refresh 7d, bcrypt
+- [x] Sync Batch Endpoint versionado con resolución conflictos
+- [x] Docker Compose 5 servicios con healthchecks
+- [x] Alembic Migrations configuradas
+- [x] Health Check `/health` endpoint
+- [x] CORS Configurado
+- [x] **Build y Deploy Verificado** - docker-compose build + up successful
+
+### ✅ Paso 6 - Entregables Verificados
+- [x] 11 Feature Modules agregados a settings.gradle.kts
+- [x] Navigation Graphs XML (11 archivos nav_*.xml)
+- [x] ViewModels base (11 clases)
+- [x] Home Fragments base (11 fragmentos)
+- [x] Layouts base con MaterialToolbar (11 layouts)
+- [x] Strings localizadas por módulo (11 archivos)
+- [x] Main Activity - BottomNavigationView (5 tabs) + MasBottomSheet (7 opciones)
+- [x] 13 Vector Drawables para navegación y más opciones
+- [x] **Build verificado**: BUILD SUCCESSFUL (`./gradlew :app:assembleDebug`)
 
 ---
 
@@ -304,7 +423,7 @@ services:
     build: ./backend
     ports: ["8000:8000"]
     environment:
-      DATABASE_URL: postgresql://lupefit:${DB_PASSWORD}@postgres:5432/lupefit
+      DATABASE_URL: postgresql://lupefit:***@postgres:5432/lupefit
       REDIS_URL: redis://redis:6379
       JWT_SECRET: ${JWT_SECRET}
     depends_on: [postgres, redis]
@@ -411,6 +530,8 @@ copies of the Software...
 - **MPAndroidChart** - Gráficos nutricionales
 - **ML Kit** - Escaneo códigos de barras
 - **Health Connect** - Datos de salud unificados
+- **Open Food Facts** - Base de datos alimentos abierta
+- **SpeechRecognizer** - Transcripción voz nativa Android
 
 ---
 
@@ -424,4 +545,4 @@ copies of the Software...
 
 > **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17 • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
-**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso6 | **Build**: `2d120f7` ✅
+**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso6 | **Build**: `a96505d` ✅
