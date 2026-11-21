@@ -56,7 +56,7 @@
 
 ## Multi-Módulo Gradle Structure
 
-### Estado Actual: **Paso 4.5 - 5 Módulos Activos** (Simplificado de 14 planeados)
+### Estado Actual: **Paso 5 - 6 Módulos Activos (Backend incluido)** (Simplificado de 14 planeados)
 
 ```
 LuPeFit/
@@ -69,7 +69,7 @@ LuPeFit/
 │   ├── core-ui/                  # Tema Material 3, Styles, Strings, Base Views, Components
 │   ├── core-network/             # Retrofit, API Service, DTOs, SyncEngine, NetworkModule ✅
 │   └── core-sync/                # WorkManager Sync, Conflict Resolution, Queue ✅
-└── backend/                      # FastAPI + PostgreSQL (repositorio separado - PENDIENTE)
+└── backend/                      # FastAPI + PostgreSQL + Docker ✅ **COMPLETADO**
 ```
 
 ### Módulos Planificados para Pasos Posteriores
@@ -240,12 +240,11 @@ Completo en `core-ui/src/main/res/values-es-rAR/strings.xml`:
 
 ## Próximos Pasos: Implementación
 
-1. **PASO 5 - Backend FastAPI + Docker Compose** (PostgreSQL, Redis, Celery, Sync batch endpoint, JWT Auth)
-2. **PASO 6 - Feature Modules UI** (11 módulos con Navigation graphs XML)
-3. **PASO 7 - Advanced Features** (Health Connect, CrossFit WOD, Dynamic Macros, Streaks, Mood, Notes)
-4. **Testing** (Unit, Integration, UI)
-5. **CI/CD** (GitHub Actions, Docker build, Deploy)
+1. **PASO 6 - Feature Modules UI** (11 módulos con Navigation graphs XML)
+2. **PASO 7 - Advanced Features** (Health Connect, CrossFit WOD, Dynamic Macros, Streaks, Mood, Notes)
+3. **Testing** (Unit, Integration, UI)
+4. **CI/CD** (GitHub Actions, Docker build, Deploy)
+*Última actualización: 2026-11-21 - Paso 5 completado, Backend FastAPI + Docker funcional, endpoints testeados, listo para Paso 6*
 
 ---
 
-*Última actualización: 2026-11-20 - Paso 4.5 completado, BUILD SUCCESSFUL, listo para Paso 5*

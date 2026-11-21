@@ -25,7 +25,7 @@
 | ![Progreso](docs/screenshots/progreso_light.svg) | ![Progreso Dark](docs/screenshots/progreso_dark.svg) |
 | *Gráficos de Progreso* | *Gráficos de Progreso (Oscuro)* |
 
-> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 3 - Core Sync Module Completado**.
+> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 5 - Backend FastAPI + Docker Completado**.
 
 ---
 
@@ -263,10 +263,11 @@ LuPeFit/
 | **1** | **Esqueleto Base Compilable** | ✅ **COMPLETADO** | `d9942ea` |
 | **2** | **Core Network Module** | ✅ **COMPLETADO** | `9414165` |
 | **3** | **Core Sync Module** | ✅ **COMPLETADO** | `b4d06cd` |
-| 4 | Backend FastAPI + Docker Compose | 🔄 En progreso | - |
-| 5 | 11 Feature Modules (UI + Lógica) | ⏳ Pendiente | - |
-| 6 | Advanced Features (Health Connect, Voice, CrossFit, Macros Dinámicos, Streaks, Mood) | ⏳ Pendiente | - |
-| 7 | Testing, CI/CD, Release | ⏳ Pendiente | - |
+| 4 | Escáner + Catálogo + Voz | ✅ **COMPLETADO** | - |
+| 5 | **Backend FastAPI + Docker Compose** | ✅ **COMPLETADO** | - |
+| 6 | 11 Feature Modules (UI + Lógica) | ⏳ Pendiente | - |
+| 7 | Advanced Features (Health Connect, Voice, CrossFit, Macros Dinámicos, Streaks, Mood) | ⏳ Pendiente | - |
+| 8 | Testing, CI/CD, Release | ⏳ Pendiente | - |
 
 ### ✅ Paso 1 - Entregables Verificados
 - [x] `build.gradle` (app) con dependencias exactas
@@ -280,10 +281,10 @@ LuPeFit/
 
 ---
 
-## 🐳 Backend (Próximo - Paso 4)
+## 🐳 Backend (Paso 5 - COMPLETADO)
 
 ```yaml
-# docker-compose.yml (planificado)
+# docker-compose.yml (implementado)
 services:
   postgres:
     image: postgres:16-alpine
@@ -319,7 +320,7 @@ services:
     depends_on: [redis, postgres]
 ```
 
-**Endpoints Principales (Planificados):**
+**Endpoints Principales (Implementados):**
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
 | POST | `/api/v1/auth/register` | Registro email/password |
