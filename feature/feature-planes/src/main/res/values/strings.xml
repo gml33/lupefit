@@ -1,0 +1,9 @@
+<resources>
+    <string name="crear_plan_comida">Crear plan de comida</string>
+    <string name="crear_plan_entrenamiento">Crear plan de entrenamiento</string>
+    <string name="mis_planes">Mis planes</string>
+    <string name="plan_comida_semanal">Plan de comida semanal</string>
+    <string name="plan_entrenamiento">Plan de entrenamiento</string>
+    <string name="planes_title">Planes</string>
+    <string name="presupuesto_plan">Presupuesto del plan</string>
+</resources>

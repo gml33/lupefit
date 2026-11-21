@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_perfil"
+    app:startDestination="@id/perfilHomeFragment">
+
+    <fragment
+        android:id="@+id/perfilHomeFragment"
+        android:name="com.lupefit.feature.perfil.ui.PerfilHomeFragment"
+        android:label="@string/perfil_title"
+        tools:layout="@layout/fragment_perfil_home">
+        <action
+            android:id="@+id/action_perfilHomeFragment_to_editarPerfilFragment"
+            app:destination="@id/editarPerfilFragment" />
+        <action
+            android:id="@+id/action_perfilHomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_perfilHomeFragment_to_registroFragment"
+            app:destination="@id/registroFragment" />
+        <action
+            android:id="@+id/action_perfilHomeFragment_to_syncAccountFragment"
+            app:destination="@id/syncAccountFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editarPerfilFragment"
+        android:name="com.lupefit.feature.perfil.ui.EditarPerfilFragment"
+        android:label="@string/editar_perfil"
+        tools:layout="@layout/fragment_editar_perfil" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.lupefit.feature.perfil.ui.LoginFragment"
+        android:label="@string/entrar"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/registroFragment"
+        android:name="com.lupefit.feature.perfil.ui.RegistroFragment"
+        android:label="@string/registrate"
+        tools:layout="@layout/fragment_registro" />
+
+    <fragment
+        android:id="@+id/syncAccountFragment"
+        android:name="com.lupefit.feature.perfil.ui.SyncAccountFragment"
+        android:label="@string/sync_account"
+        tools:layout="@layout/fragment_sync_account" />
+
+    <fragment
+        android:id="@+id/cambiarPasswordFragment"
+        android:name="com.lupefit.feature.perfil.ui.CambiarPasswordFragment"
+        android:label="@string/cambiar_password"
+        tools:layout="@layout/fragment_cambiar_password" />
+</navigation>

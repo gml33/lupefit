@@ -1,0 +1,7 @@
+<resources>
+    <string name="insights_title">Insights</string>
+    <string name="patrones">Patrones</string>
+    <string name="predicciones">Predicciones</string>
+    <string name="resumen_semanal">Resumen semanal</string>
+    <string name="tendencias">Tendencias</string>
+</resources>

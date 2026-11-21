@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_diario"
+    app:startDestination="@id/diarioHomeFragment">
+
+    <fragment
+        android:id="@+id/diarioHomeFragment"
+        android:name="com.lupefit.feature.diario.ui.DiarioHomeFragment"
+        android:label="@string/diario_title"
+        tools:layout="@layout/fragment_diario_home">
+        <action
+            android:id="@+id/action_diarioHomeFragment_to_buscarAlimentoFragment"
+            app:destination="@id/buscarAlimentoFragment" />
+        <action
+            android:id="@+id/action_diarioHomeFragment_to_quickAddFragment"
+            app:destination="@id/quickAddFragment" />
+        <action
+            android:id="@+id/action_diarioHomeFragment_to_escanearCodigoBarrasFragment"
+            app:destination="@id/escanearCodigoBarrasFragment" />
+        <action
+            android:id="@+id/action_diarioHomeFragment_to_diarioVozSheet"
+            app:destination="@id/diarioVozSheet" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/buscarAlimentoFragment"
+        android:name="com.lupefit.feature.diario.ui.BuscarAlimentoFragment"
+        android:label="@string/buscar_alimento"
+        tools:layout="@layout/fragment_buscar_alimento" />
+
+    <fragment
+        android:id="@+id/quickAddFragment"
+        android:name="com.lupefit.feature.diario.ui.QuickAddFragment"
+        android:label="@string/quick_add"
+        tools:layout="@layout/fragment_quick_add" />
+
+    <fragment
+        android:id="@+id/escanearCodigoBarrasFragment"
+        android:name="com.lupefit.feature.diario.ui.EscaneoCodigoBarrasFragment"
+        android:label="@string/escanear_codigo_barras"
+        tools:layout="@layout/fragment_escaneo_codigo_barras" />
+
+    <dialog
+        android:id="@+id/diarioVozSheet"
+        android:name="com.lupefit.feature.diario.ui.DiarioVozSheet"
+        android:label="@string/registro_por_voz"
+        tools:layout="@layout/sheet_diario_voz" />
+
+    <dialog
+        android:id="@+id/resultadoEscaneoSheet"
+        android:name="com.lupefit.feature.diario.ui.ResultadoEscaneoSheet"
+        android:label="@string/resultado_escaneo"
+        tools:layout="@layout/sheet_resultado_escaneo" />
+
+    <fragment
+        android:id="@+id/diarioCrearAlimentoFragment"
+        android:name="com.lupefit.feature.diario.ui.DiarioCrearAlimentoFragment"
+        android:label="@string/crear_alimento"
+        tools:layout="@layout/fragment_diario_crear_alimento" />
+
+    <fragment
+        android:id="@+id/editarPorcionSheet"
+        android:name="com.lupefit.feature.diario.ui.EditarPorcionSheet"
+        android:label="@string/editar_porcion"
+        tools:layout="@layout/sheet_editar_porcion" />
+</navigation>

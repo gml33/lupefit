@@ -1,0 +1,7 @@
+<resources>
+    <string name="buscar_ejercicio">Buscar ejercicio</string>
+    <string name="ejercicio_title">Ejercicio</string>
+    <string name="nueva_rutina">Nueva rutina</string>
+    <string name="rutina_detalle">Detalle de rutina</string>
+    <string name="wod_timer">WOD Timer</string>
+</resources>

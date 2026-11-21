@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_insights"
+    app:startDestination="@id/insightsHomeFragment">
+
+    <fragment
+        android:id="@+id/insightsHomeFragment"
+        android:name="com.lupefit.feature.insights.ui.InsightsHomeFragment"
+        android:label="@string/insights_title"
+        tools:layout="@layout/fragment_insights_home">
+        <action
+            android:id="@+id/action_insightsHomeFragment_to_semanalFragment"
+            app:destination="@id/semanalFragment" />
+        <action
+            android:id="@+id/action_insightsHomeFragment_to_tendenciasFragment"
+            app:destination="@id/tendenciasFragment" />
+        <action
+            android:id="@+id/action_insightsHomeFragment_to_prediccionesFragment"
+            app:destination="@id/prediccionesFragment" />
+        <action
+            android:id="@+id/action_insightsHomeFragment_to_patronesFragment"
+            app:destination="@id/patronesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/semanalFragment"
+        android:name="com.lupefit.feature.insights.ui.SemanalFragment"
+        android:label="@string/resumen_semanal"
+        tools:layout="@layout/fragment_semanal" />
+
+    <fragment
+        android:id="@+id/tendenciasFragment"
+        android:name="com.lupefit.feature.insights.ui.TendenciasFragment"
+        android:label="@string/tendencias"
+        tools:layout="@layout/fragment_tendencias" />
+
+    <fragment
+        android:id="@+id/prediccionesFragment"
+        android:name="com.lupefit.feature.insights.ui.PrediccionesFragment"
+        android:label="@string/predicciones"
+        tools:layout="@layout/fragment_predicciones" />
+
+    <fragment
+        android:id="@+id/patronesFragment"
+        android:name="com.lupefit.feature.insights.ui.PatronesFragment"
+        android:label="@string/patrones"
+        tools:layout="@layout/fragment_patrones" />
+</navigation>

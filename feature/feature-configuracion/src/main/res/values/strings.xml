@@ -1,0 +1,13 @@
+<resources>
+    <string name="apariencia">Apariencia</string>
+    <string name="configuracion_title">Configuración</string>
+    <string name="cuenta">Cuenta</string>
+    <string name="exportar_datos">Exportar datos</string>
+    <string name="metas_personalizadas">Metas personalizadas</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="perfil">Perfil</string>
+    <string name="presupuesto_semanal">Presupuesto semanal</string>
+    <string name="seguimiento_costos">Seguimiento de costos</string>
+    <string name="sincronizacion">Sincronización</string>
+    <string name="unidades">Unidades</string>
+</resources>

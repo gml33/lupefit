@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="?attr/colorSurfaceContainer"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeColor="?attr/colorOutline"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+    <!-- Icono del alimento -->
+    <ImageView
+        android:id="@+id/ivFoodIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="@string/diario_voz_alimento"
+        android:src="@drawable/ic_food_generic"
+        app:tint="?attr/colorOnSurfaceVariant" />
+
+    <!-- Info del alimento -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvFoodName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Nombre del alimento"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvFoodDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="200 g • 330 kcal • P: 62g C: 0g G: 7g"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="12sp" />
+
+        <!-- Barra de macros mini -->
+        <LinearLayout
+            android:id="@+id/llMacroBar"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <View
+                android:id="@+id/vProteinBar"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="30"
+                android:background="@color/macro_protein" />
+
+            <View
+                android:id="@+id/vCarbsBar"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="40"
+                android:background="@color/macro_carbs" />
+
+            <View
+                android:id="@+id/vFatBar"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:layout_weight="30"
+                android:background="@color/macro_fat" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Botón editar/eliminar -->
+    <ImageButton
+        android:id="@+id/btnEditFood"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/diario_voz_editar"
+        android:src="@drawable/ic_edit" />
+
+</LinearLayout>
+</androidx.cardview.widget.CardView>

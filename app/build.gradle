@@ -30,6 +30,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 
     packagingOptions {
@@ -55,6 +56,19 @@ dependencies {
     implementation project(":core:core-ui")
     implementation project(":core:core-network")
     implementation project(":core:core-sync")
+
+    // Feature modules (Paso 6)
+    implementation project(":feature:feature-diario")
+    implementation project(":feature:feature-ejercicio")
+    implementation project(":feature:feature-nutricion")
+    implementation project(":feature:feature-progreso")
+    implementation project(":feature:feature-recetas")
+    implementation project(":feature:feature-escaneo")
+    implementation project(":feature:feature-agua")
+    implementation project(":feature:feature-configuracion")
+    implementation project(":feature:feature-perfil")
+    implementation project(":feature:feature-insights")
+    implementation project(":feature:feature-planes")
 
     // Material Design 3
     implementation libs.material

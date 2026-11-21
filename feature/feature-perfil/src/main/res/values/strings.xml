@@ -1,0 +1,8 @@
+<resources>
+    <string name="cambiar_password">Cambiar contraseña</string>
+    <string name="editar_perfil">Editar perfil</string>
+    <string name="entrar">Entrar</string>
+    <string name="perfil_title">Perfil</string>
+    <string name="registrate">Registrate</string>
+    <string name="sync_account">Sincronizar cuenta</string>
+</resources>

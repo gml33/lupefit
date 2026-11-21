@@ -1,0 +1,7 @@
+<resources>
+    <string name="agregar_vaso">Agregar vaso</string>
+    <string name="agua_title">Hidratación</string>
+    <string name="configurar_meta_agua">Configurar meta de agua</string>
+    <string name="historial_agua">Historial de agua</string>
+    <string name="vaso_250ml">Vaso 250ml</string>
+</resources>

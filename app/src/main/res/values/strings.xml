@@ -2,6 +2,22 @@
 <resources>
     <string name="app_name">LuPeFit</string>
 
+    <!-- Bottom Navigation -->
+    <string name="diario_title">Diario</string>
+    <string name="ejercicio_title">Ejercicio</string>
+    <string name="nutricion_title">Nutrición</string>
+    <string name="progreso_title">Progreso</string>
+    <string name="mas">Más</string>
+
+    <!-- Mas Bottom Sheet Options -->
+    <string name="recetas_title">Recetas</string>
+    <string name="escanear_codigo_barras">Escaneo</string>
+    <string name="agua_title">Hidratación</string>
+    <string name="configuracion_title">Configuración</string>
+    <string name="perfil_title">Perfil</string>
+    <string name="insights_title">Insights</string>
+    <string name="planes_title">Planes</string>
+
     <!-- Escaneo de código de barras -->
     <string name="escaneo_guia_apunte_codigo">Apuntá el código de barras al recuadro</string>
     <string name="escaneo_linterna">Linterna</string>
@@ -65,7 +81,6 @@
     <string name="costo_estimado_diario">Hoy: %1$s est.</string>
 
     <!-- Presupuesto Semanal -->
-    <string name="presupuesto_semanal">Presupuesto semanal</string>
     <string name="presupuesto_meta_no_definida">Sin meta definida</string>
     <string name="presupuesto_editar_meta">Editar meta</string>
     <string name="presupuesto_acumulado_cero">$0</string>
@@ -82,4 +97,50 @@
     <string name="config_presupuesto_semanal_desc">Definí tu meta de gasto semanal en alimentos</string>
     <string name="config_moneda">Moneda</string>
     <string name="config_moneda_desc">Seleccioná tu moneda local</string>
+
+    <!-- General -->
+    <string name="agregar_alimento">Agregar alimento</string>
+    <string name="buscar_alimento">Buscar alimento</string>
+    <string name="quick_add">Agregado rápido</string>
+    <string name="registro_por_voz">Registro por voz</string>
+    <string name="crear_alimento">Crear alimento</string>
+    <string name="editar_porcion">Editar porción</string>
+    <string name="resultado_escaneo">Resultado del escaneo</string>
+    <string name="historial_escaneos">Historial de escaneos</string>
+    <string name="escanear_comida_ia">Escanear comida (IA)</string>
+    <string name="apuntar_codigo_barras">Apuntá el código de barras al recuadro</string>
+    <string name="ingreso_manual">Ingreso manual</string>
+    <string name="no_encontrado">No encontrado</string>
+    <string name="probá_de_nuevo">Probá de nuevo</string>
+    <string name="sin_conexion_offline">Sin conexión. Trabajando en modo offline.</string>
+    <string name="completar_diario">Completar diario</string>
+    <string name="macro_protein">Proteínas</string>
+    <string name="macro_carbs">Carbohidratos</string>
+    <string name="macro_fat">Grasas</string>
+    <string name="kcal">kcal</string>
+    <string name="gramos">g</string>
+    <string name="ml">ml</string>
+    <string name="porcion">porción</string>
+    <string name="desayuno">Desayuno</string>
+    <string name="almuerzo">Almuerzo</string>
+    <string name="merienda">Merienda</string>
+    <string name="cena">Cena</string>
+    <string name="otro">Otro</string>
+    <string name="costo_estimado">Costo estimado</string>
+    <string name="seguimiento_costos">Seguimiento de costos</string>
+    <string name="precio_referencia">Precio de referencia</string>
+    <string name="peso_envase">Peso del envase (g)</string>
+    <string name="precio_desactualizado">Precio cargado hace %d días</string>
+    <string name="enable_cost_tracking">Seguimiento de costos</string>
+    <string name="weekly_budget_goal">Meta semanal</string>
+    <string name="currency_ars">ARS</string>
+
+    <!-- Actions -->
+    <string name="agregar">Agregar</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="aceptar">Aceptar</string>
 </resources>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_m"
+        android:layout_marginVertical="@dimen/spacing_xs"
+        app:cardCornerRadius="@dimen/corner_item"
+        app:cardElevation="@dimen/elevation_item"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:strokeColor="?attr/colorOutline"
+        app:strokeWidth="@dimen/stroke_width">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_m">
+
+        <!-- Icono circular con color por tipo de comida -->
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/ivFoodIcon"
+            android:layout_width="@dimen/icon_l"
+            android:layout_height="@dimen/icon_l"
+            android:layout_marginEnd="@dimen/spacing_m"
+            android:src="@drawable/ic_food_generic"
+            android:background="?attr/colorSurfaceVariant"
+            app:civ_border="false"
+            tools:ignore="MissingClass" />
+
+        <!-- Info principal -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvFoodName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/food_name"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="Pollo a la plancha" />
+
+            <TextView
+                android:id="@+id/tvFoodDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/food_details"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginTop="@dimen/spacing_xxs"
+                tools:text="200g • 330 kcal • P: 62g C: 0g G: 7g" />
+        </LinearLayout>
+
+        <!-- Valor calórico + menú -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end"
+            android:layout_marginStart="@dimen/spacing_m">
+
+            <TextView
+                android:id="@+id/tvCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kcal_value"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:fontFamily="@font/roboto_mono"
+                tools:text="330" />
+
+            <TextView
+                android:id="@+id/tvMealType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/almuerzo"
+                android:textAppearance="?attr/textAppearanceLabelSmall"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginTop="@dimen/spacing_xxs"
+                android:background="?attr/colorSurfaceVariant"
+                android:paddingHorizontal="@dimen/spacing_s"
+                android:paddingVertical="@dimen/spacing_xxs"
+                tools:text="ALMUERZO" />
+        </LinearLayout>
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

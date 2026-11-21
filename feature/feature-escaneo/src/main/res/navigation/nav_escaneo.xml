@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_escaneo"
+    app:startDestination="@id/escanearCodigoBarrasFragment">
+
+    <fragment
+        android:id="@+id/escanearCodigoBarrasFragment"
+        android:name="com.lupefit.feature.escaneo.ui.EscaneoCodigoBarrasFragment"
+        android:label="@string/escanear_codigo_barras"
+        tools:layout="@layout/fragment_escaneo_codigo_barras">
+        <action
+            android:id="@+id/action_escanearCodigoBarrasFragment_to_resultadoEscaneoSheet"
+            app:destination="@id/resultadoEscaneoSheet" />
+        <action
+            android:id="@+id/action_escanearCodigoBarrasFragment_to_escanearComidaFragment"
+            app:destination="@id/escanearComidaFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/resultadoEscaneoSheet"
+        android:name="com.lupefit.feature.escaneo.ui.ResultadoEscaneoSheet"
+        android:label="@string/resultado_escaneo"
+        tools:layout="@layout/sheet_resultado_escaneo" />
+
+    <fragment
+        android:id="@+id/escanearComidaFragment"
+        android:name="com.lupefit.feature.escaneo.ui.EscanearComidaFragment"
+        android:label="@string/escanear_comida_ia"
+        tools:layout="@layout/fragment_escanear_comida" />
+
+    <fragment
+        android:id="@+id/historialEscaneosFragment"
+        android:name="com.lupefit.feature.escaneo.ui.HistorialEscaneosFragment"
+        android:label="@string/historial_escaneos"
+        tools:layout="@layout/fragment_historial_escaneos" />
+</navigation>

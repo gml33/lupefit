@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/diarioNavHostFragment">
+
+    <!-- Diario (Home) -->
+    <fragment
+        android:id="@+id/diarioNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/diario_title"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_diario"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Ejercicio -->
+    <fragment
+        android:id="@+id/ejercicioNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/ejercicio_title"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_ejercicio"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Nutrición -->
+    <fragment
+        android:id="@+id/nutricionNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/nutricion_title"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_nutricion"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Progreso -->
+    <fragment
+        android:id="@+id/progresoNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/progreso_title"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_progreso"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Más (Menu drawer or bottom sheet) -->
+    <fragment
+        android:id="@+id/masNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/mas"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_mas"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Global actions -->
+    <action
+        android:id="@+id/action_global_diario"
+        app:destination="@id/diarioNavHostFragment"
+        app:popUpTo="@id/nav_main"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_ejercicio"
+        app:destination="@id/ejercicioNavHostFragment"
+        app:popUpTo="@id/nav_main"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_nutricion"
+        app:destination="@id/nutricionNavHostFragment"
+        app:popUpTo="@id/nav_main"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_progreso"
+        app:destination="@id/progresoNavHostFragment"
+        app:popUpTo="@id/nav_main"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_mas"
+        app:destination="@id/masNavHostFragment"
+        app:popUpTo="@id/nav_main"
+        app:popUpToInclusive="true" />
+</navigation>

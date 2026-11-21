@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_m"
+        android:gravity="center_vertical"
+        android:background="?attr/selectableItemBackground"
+        android:layout_marginHorizontal="@dimen/spacing_m"
+        android:layout_marginVertical="@dimen/spacing_xs"
+        tools:context=".ui.main.MasBottomSheet">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="@dimen/icon_l"
+            android:layout_height="@dimen/icon_l"
+            android:layout_marginEnd="@dimen/spacing_m"
+            android:scaleType="centerInside"
+            android:tint="?attr/colorOnSurface"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.LuPeFit.Circle"
+            tools:src="@drawable/ic_recetas" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorOnSurface"
+            tools:text="Recetas" />
+    </LinearLayout>
+</layout>

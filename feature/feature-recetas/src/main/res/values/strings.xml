@@ -1,0 +1,7 @@
+<resources>
+    <string name="colecciones">Colecciones</string>
+    <string name="crear_receta">Crear receta</string>
+    <string name="importar_receta">Importar receta</string>
+    <string name="receta_detalle">Detalle de receta</string>
+    <string name="recetas_title">Recetas</string>
+</resources>

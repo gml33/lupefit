@@ -1,0 +1,10 @@
+<resources>
+    <!-- App Theme - extends core-ui Theme.LuPeFit -->
+    <style name="Theme.LuPeFit" parent="com.lupefit.core.ui.Theme.LuPeFit">
+        <!-- App-specific customizations can go here -->
+    </style>
+
+    <style name="Theme.LuPeFit.Splash" parent="com.lupefit.core.ui.Theme.LuPeFit.Splash" />
+    <style name="Theme.LuPeFit.Toolbar" parent="com.lupefit.core.ui.Theme.LuPeFit.Toolbar" />
+    <style name="Theme.LuPeFit.BottomSheetDialog" parent="com.lupefit.core.ui.Theme.LuPeFit.BottomSheetDialog" />
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="exportar_datos">Exportar datos</string>
+    <string name="fotos_progreso">Fotos de progreso</string>
+    <string name="graficos_progreso">Gráficos de progreso</string>
+    <string name="medidas_corporales">Medidas corporales</string>
+    <string name="peso">Peso</string>
+    <string name="progreso_title">Progreso</string>
+</resources>

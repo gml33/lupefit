@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_nutricion"
+    app:startDestination="@id/nutricionHomeFragment">
+
+    <fragment
+        android:id="@+id/nutricionHomeFragment"
+        android:name="com.lupefit.feature.nutricion.ui.NutricionHomeFragment"
+        android:label="@string/nutricion_title"
+        tools:layout="@layout/fragment_nutricion_home">
+        <action
+            android:id="@+id/action_nutricionHomeFragment_to_metasFragment"
+            app:destination="@id/metasFragment" />
+        <action
+            android:id="@+id/action_nutricionHomeFragment_to_macrosDetalleFragment"
+            app:destination="@id/macrosDetalleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/metasFragment"
+        android:name="com.lupefit.feature.nutricion.ui.MetasFragment"
+        android:label="@string/metas_nutricionales"
+        tools:layout="@layout/fragment_metas" />
+
+    <fragment
+        android:id="@+id/macrosDetalleFragment"
+        android:name="com.lupefit.feature.nutricion.ui.MacrosDetalleFragment"
+        android:label="@string/macros_detalle"
+        tools:layout="@layout/fragment_macros_detalle" />
+
+    <fragment
+        android:id="@+id/graficosNutricionFragment"
+        android:name="com.lupefit.feature.nutricion.ui.GraficosNutricionFragment"
+        android:label="@string/graficos_nutricion"
+        tools:layout="@layout/fragment_graficos_nutricion" />
+</navigation>

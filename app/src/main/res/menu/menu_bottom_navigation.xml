@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_diario"
+        android:icon="@drawable/ic_diario"
+        android:title="@string/diario_title" />
+
+    <item
+        android:id="@+id/nav_ejercicio"
+        android:icon="@drawable/ic_ejercicio"
+        android:title="@string/ejercicio_title" />
+
+    <item
+        android:id="@+id/nav_nutricion"
+        android:icon="@drawable/ic_nutricion"
+        android:title="@string/nutricion_title" />
+
+    <item
+        android:id="@+id/nav_progreso"
+        android:icon="@drawable/ic_progreso"
+        android:title="@string/progreso_title" />
+
+    <item
+        android:id="@+id/nav_mas"
+        android:icon="@drawable/ic_more_horiz"
+        android:title="@string/mas" />
+</menu>

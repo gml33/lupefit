@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_mas"
+    app:startDestination="@id/recetasNavHostFragment">
+
+    <!-- Recetas -->
+    <fragment
+        android:id="@+id/recetasNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/recetas_title"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_recetas"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Escaneo -->
+    <fragment
+        android:id="@+id/escaneoNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/escanear_codigo_barras"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_escaneo"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Agua -->
+    <fragment
+        android:id="@+id/aguaNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/agua_title"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_agua"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Configuración -->
+    <fragment
+        android:id="@+id/configuracionNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/configuracion_title"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_configuracion"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Perfil -->
+    <fragment
+        android:id="@+id/perfilNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/perfil_title"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_perfil"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Insights -->
+    <fragment
+        android:id="@+id/insightsNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/insights_title"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_insights"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Planes -->
+    <fragment
+        android:id="@+id/planesNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:label="@string/planes_title"
+        tools:layout="@layout/fragment_nav_host">
+        <argument
+            android:name="navGraph"
+            android:value="@navigation/nav_planes"
+            app:argType="reference" />
+    </fragment>
+
+    <!-- Global actions -->
+    <action
+        android:id="@+id/action_global_recetas"
+        app:destination="@id/recetasNavHostFragment"
+        app:popUpTo="@id/nav_mas"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_escaneo"
+        app:destination="@id/escaneoNavHostFragment"
+        app:popUpTo="@id/nav_mas"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_agua"
+        app:destination="@id/aguaNavHostFragment"
+        app:popUpTo="@id/nav_mas"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_configuracion"
+        app:destination="@id/configuracionNavHostFragment"
+        app:popUpTo="@id/nav_mas"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_perfil"
+        app:destination="@id/perfilNavHostFragment"
+        app:popUpTo="@id/nav_mas"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_insights"
+        app:destination="@id/insightsNavHostFragment"
+        app:popUpTo="@id/nav_mas"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_planes"
+        app:destination="@id/planesNavHostFragment"
+        app:popUpTo="@id/nav_mas"
+        app:popUpToInclusive="true" />
+</navigation>

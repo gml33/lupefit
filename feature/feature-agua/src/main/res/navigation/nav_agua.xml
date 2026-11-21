@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_agua"
+    app:startDestination="@id/aguaHomeFragment">
+
+    <fragment
+        android:id="@+id/aguaHomeFragment"
+        android:name="com.lupefit.feature.agua.ui.AguaHomeFragment"
+        android:label="@string/agua_title"
+        tools:layout="@layout/fragment_agua_home">
+        <action
+            android:id="@+id/action_aguaHomeFragment_to_configurarMetaFragment"
+            app:destination="@id/configurarMetaFragment" />
+        <action
+            android:id="@+id/action_aguaHomeFragment_to_historialAguaFragment"
+            app:destination="@id/historialAguaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/configurarMetaFragment"
+        android:name="com.lupefit.feature.agua.ui.ConfigurarMetaFragment"
+        android:label="@string/configurar_meta_agua"
+        tools:layout="@layout/fragment_configurar_meta" />
+
+    <fragment
+        android:id="@+id/historialAguaFragment"
+        android:name="com.lupefit.feature.agua.ui.HistorialAguaFragment"
+        android:label="@string/historial_agua"
+        tools:layout="@layout/fragment_historial_agua" />
+</navigation>

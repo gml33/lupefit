@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_xl"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="@dimen/icon_xxl"
+            android:layout_height="@dimen/icon_xxl"
+            android:src="@drawable/ic_food_placeholder"
+            android:contentDescription="@string/agregar_alimento"
+            android:tint="?attr/colorOnSurfaceVariant"
+            android:layout_marginBottom="@dimen/spacing_m" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/diario_vacio"
+            android:textAppearance="?attr/textAppearanceHeadlineSmall"
+            android:textColor="?attr/colorOnSurface"
+            android:layout_marginBottom="@dimen/spacing_s"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toca_para_agregar_primer_alimento"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/spacing_l" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFirstFood"
+            style="@style/Widget.Material3.Button.FilledButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agregar_alimento"
+            android:icon="@drawable/ic_plus"
+            android:iconGravity="start" />
+    </LinearLayout>
+</layout>

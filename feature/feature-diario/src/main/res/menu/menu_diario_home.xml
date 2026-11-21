@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_add_food"
+        android:icon="@drawable/ic_plus"
+        android:title="@string/agregar_alimento"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_quick_add"
+        android:icon="@drawable/ic_flash_off"
+        android:title="@string/quick_add"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_scan_barcode"
+        android:icon="@drawable/ic_escaneo"
+        android:title="@string/escanear_codigo_barras"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_voice_log"
+        android:icon="@drawable/ic_mic"
+        android:title="@string/registro_por_voz"
+        app:showAsAction="ifRoom" />
+</menu>

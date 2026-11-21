@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_configuracion"
+    app:startDestination="@id/configuracionHomeFragment">
+
+    <fragment
+        android:id="@+id/configuracionHomeFragment"
+        android:name="com.lupefit.feature.configuracion.ui.ConfiguracionHomeFragment"
+        android:label="@string/configuracion_title"
+        tools:layout="@layout/fragment_configuracion_home">
+        <action
+            android:id="@+id/action_configuracionHomeFragment_to_cuentaFragment"
+            app:destination="@id/cuentaFragment" />
+        <action
+            android:id="@+id/action_configuracionHomeFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
+        <action
+            android:id="@+id/action_configuracionHomeFragment_to_metasFragment"
+            app:destination="@id/metasFragment" />
+        <action
+            android:id="@+id/action_configuracionHomeFragment_to_notificacionesFragment"
+            app:destination="@id/notificacionesFragment" />
+        <action
+            android:id="@+id/action_configuracionHomeFragment_to_aparienciaFragment"
+            app:destination="@id/aparienciaFragment" />
+        <action
+            android:id="@+id/action_configuracionHomeFragment_to_unidadesFragment"
+            app:destination="@id/unidadesFragment" />
+        <action
+            android:id="@+id/action_configuracionHomeFragment_to_syncFragment"
+            app:destination="@id/syncFragment" />
+        <action
+            android:id="@+id/action_configuracionHomeFragment_to_exportarFragment"
+            app:destination="@id/exportarFragment" />
+        <action
+            android:id="@+id/action_configuracionHomeFragment_to_costosFragment"
+            app:destination="@id/costosFragment" />
+        <action
+            android:id="@+id/action_configuracionHomeFragment_to_presupuestoFragment"
+            app:destination="@id/presupuestoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cuentaFragment"
+        android:name="com.lupefit.feature.configuracion.ui.CuentaFragment"
+        android:label="@string/cuenta"
+        tools:layout="@layout/fragment_cuenta" />
+
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.lupefit.feature.configuracion.ui.PerfilFragment"
+        android:label="@string/perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/metasFragment"
+        android:name="com.lupefit.feature.configuracion.ui.MetasFragment"
+        android:label="@string/metas_personalizadas"
+        tools:layout="@layout/fragment_metas" />
+
+    <fragment
+        android:id="@+id/notificacionesFragment"
+        android:name="com.lupefit.feature.configuracion.ui.NotificacionesFragment"
+        android:label="@string/notificaciones"
+        tools:layout="@layout/fragment_notificaciones" />
+
+    <fragment
+        android:id="@+id/aparienciaFragment"
+        android:name="com.lupefit.feature.configuracion.ui.AparienciaFragment"
+        android:label="@string/apariencia"
+        tools:layout="@layout/fragment_apariencia" />
+
+    <fragment
+        android:id="@+id/unidadesFragment"
+        android:name="com.lupefit.feature.configuracion.ui.UnidadesFragment"
+        android:label="@string/unidades"
+        tools:layout="@layout/fragment_unidades" />
+
+    <fragment
+        android:id="@+id/syncFragment"
+        android:name="com.lupefit.feature.configuracion.ui.SyncFragment"
+        android:label="@string/sincronizacion"
+        tools:layout="@layout/fragment_sync" />
+
+    <fragment
+        android:id="@+id/exportarFragment"
+        android:name="com.lupefit.feature.configuracion.ui.ExportarFragment"
+        android:label="@string/exportar_datos"
+        tools:layout="@layout/fragment_exportar" />
+
+    <fragment
+        android:id="@+id/costosFragment"
+        android:name="com.lupefit.feature.configuracion.ui.CostosFragment"
+        android:label="@string/seguimiento_costos"
+        tools:layout="@layout/fragment_costos" />
+
+    <fragment
+        android:id="@+id/presupuestoFragment"
+        android:name="com.lupefit.feature.configuracion.ui.PresupuestoFragment"
+        android:label="@string/presupuesto_semanal"
+        tools:layout="@layout/fragment_presupuesto" />
+</navigation>

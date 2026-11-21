@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_progreso"
+    app:startDestination="@id/progresoHomeFragment">
+
+    <fragment
+        android:id="@+id/progresoHomeFragment"
+        android:name="com.lupefit.feature.progreso.ui.ProgresoHomeFragment"
+        android:label="@string/progreso_title"
+        tools:layout="@layout/fragment_progreso_home">
+        <action
+            android:id="@+id/action_progresoHomeFragment_to_pesoFragment"
+            app:destination="@id/pesoFragment" />
+        <action
+            android:id="@+id/action_progresoHomeFragment_to_medidasFragment"
+            app:destination="@id/medidasFragment" />
+        <action
+            android:id="@+id/action_progresoHomeFragment_to_fotosFragment"
+            app:destination="@id/fotosFragment" />
+        <action
+            android:id="@+id/action_progresoHomeFragment_to_exportarFragment"
+            app:destination="@id/exportarFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pesoFragment"
+        android:name="com.lupefit.feature.progreso.ui.PesoFragment"
+        android:label="@string/peso"
+        tools:layout="@layout/fragment_peso" />
+
+    <fragment
+        android:id="@+id/medidasFragment"
+        android:name="com.lupefit.feature.progreso.ui.MedidasFragment"
+        android:label="@string/medidas_corporales"
+        tools:layout="@layout/fragment_medidas" />
+
+    <fragment
+        android:id="@+id/fotosFragment"
+        android:name="com.lupefit.feature.progreso.ui.FotosFragment"
+        android:label="@string/fotos_progreso"
+        tools:layout="@layout/fragment_fotos" />
+
+    <fragment
+        android:id="@+id/exportarFragment"
+        android:name="com.lupefit.feature.progreso.ui.ExportarFragment"
+        android:label="@string/exportar_datos"
+        tools:layout="@layout/fragment_exportar" />
+
+    <fragment
+        android:id="@+id/graficosProgresoFragment"
+        android:name="com.lupefit.feature.progreso.ui.GraficosProgresoFragment"
+        android:label="@string/graficos_progreso"
+        tools:layout="@layout/fragment_graficos_progreso" />
+</navigation>
