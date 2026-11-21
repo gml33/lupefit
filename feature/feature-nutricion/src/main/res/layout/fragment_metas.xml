@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lupefit.feature.nutricion.viewmodel.MetasViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.MetasFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:title="@string/metas_nutricionales"
+                app:navigationIcon="@drawable/ic_chevron_left" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_m">
+
+                <!-- Calorías -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilMetaCalorias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/meta_calorias"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                    app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMetaCalorias"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@{String.valueOf(viewModel.metaCalorias)}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Proteínas -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilMetaProteinas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:hint="@string/meta_proteinas"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                    app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMetaProteinas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@{String.valueOf(viewModel.metaProteinas)}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Carbohidratos -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilMetaCarbohidratos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:hint="@string/meta_carbohidratos"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                    app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMetaCarbohidratos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@{String.valueOf(viewModel.metaCarbohidratos)}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Grasas -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilMetaGrasas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:hint="@string/meta_grasas"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                    app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMetaGrasas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@{String.valueOf(viewModel.metaGrasas)}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Fibra -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilMetaFibra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:hint="@string/meta_fibra"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                    app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMetaFibra"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@{String.valueOf(viewModel.metaFibra)}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Agua -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilMetaAgua"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:hint="@string/meta_agua"
+                    app:boxBackgroundMode="outline"
+                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                    app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMetaAgua"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@{String.valueOf(viewModel.metaAgua)}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Net Carbs Toggle -->
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchNetCarbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_l"
+                    android:text="@string/modo_net_carbs"
+                    android:checked="@={viewModel.netCarbsMode}" />
+
+                <!-- Botón guardar -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGuardar"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xl"
+                    android:layout_marginBottom="@dimen/spacing_l"
+                    android:text="@string/meta_guardar"
+                    android:onClick="@{() -> viewModel.saveMetas()}" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -3,4 +3,53 @@
     <string name="macros_detalle">Detalle de macros</string>
     <string name="metas_nutricionales">Metas nutricionales</string>
     <string name="nutricion_title">Nutrición</string>
+
+    <!-- Nutrición Home -->
+    <string name="nutricion_resumen_diario">Resumen del día</string>
+    <string name="nutricion_macros_totales">Macros totales</string>
+    <string name="nutricion_calorias_restantes">Calorías restantes</string>
+    <string name="nutricion_metas_diarias">Metas diarias</string>
+    <string name="nutricion_ver_metas">Ver metas</string>
+    <string name="nutricion_ver_detalle">Ver detalle</string>
+    <string name="nutricion_graficos">Gráficos</string>
+    <string name="nutricion_sin_datos">Sin datos nutricionales hoy</string>
+    <string name="nutricion_agregar_alimento">Agregar alimento</string>
+
+    <!-- Macros -->
+    <string name="macro_proteinas">Proteínas</string>
+    <string name="macro_carbohidratos">Carbohidratos</string>
+    <string name="macro_grasas">Grasas</string>
+    <string name="macro_fibra">Fibra</string>
+    <string name="macro_azucar">Azúcar</string>
+    <string name="macro_sodio">Sodio</string>
+    <string name="macro_agua">Agua</string>
+
+    <!-- Metas -->
+    <string name="meta_calorias">Calorías</string>
+    <string name="meta_proteinas">Proteínas</string>
+    <string name="meta_carbohidratos">Carbohidratos</string>
+    <string name="meta_grasas">Grasas</string>
+    <string name="meta_fibra">Fibra</string>
+    <string name="meta_agua">Agua (vasos)</string>
+    <string name="meta_guardar">Guardar metas</string>
+    <string name="meta_porcentaje">% de la meta</string>
+    <string name="meta_completada">Meta completada</string>
+
+    <!-- Gráficos -->
+    <string name="grafico_tendencia_calorias">Tendencia calorías (7 días)</string>
+    <string name="grafico_distribucion_macros">Distribución de macros</string>
+    <string name="grafico_proteinas_tendencia">Tendencia proteínas</string>
+    <string name="grafico_carbohidratos_tendencia">Tendencia carbohidratos</string>
+    <string name="grafico_grasas_tendencia">Tendencia grasas</string>
+
+    <!-- Net Carbs -->
+    <string name="net_carbs">Net Carbs</string>
+    <string name="modo_net_carbs">Modo Net Carbs</string>
+    <string name="carbohidratos_totales">Carbohidratos totales</string>
+    <string name="fibra_restada">Fibra restada</string>
+
+    <!-- Empty state -->
+    <string name="nutricion_vacio_titulo">Sin datos nutricionales</string>
+    <string name="nutricion_vacio_subtitulo">Registrá tus alimentos en el Diario para ver tu resumen nutricional</string>
+    <string name="nutricion_ir_diario">Ir al Diario</string>
 </resources>

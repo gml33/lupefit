@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_nutricionHomeFragment_to_macrosDetalleFragment"
             app:destination="@id/macrosDetalleFragment" />
+        <action
+            android:id="@+id/action_nutricionHomeFragment_to_graficosNutricionFragment"
+            app:destination="@id/graficosNutricionFragment" />
     </fragment>
 
     <fragment

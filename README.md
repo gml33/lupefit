@@ -122,7 +122,7 @@
 - Layouts base (`fragment_*_home.xml`)
 - Strings localizadas (`values/strings.xml` con terminología argentino)
 
-### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio)**
+### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion)**
 
 #### **feature-diario Logic** ✅ COMPLETADO
 | Componente | Descripción |
@@ -147,10 +147,24 @@
 | **BuscarEjercicioViewModel** | Búsqueda con filtros categoría/patrón, LiveData |
 | **NavigationActions** | Inicialización IDs navegación via reflexión `R.id.action_*` |
 
+#### **feature-nutricion Logic** ✅ COMPLETADO
+| Componente | Descripción |
+|------------|-------------|
+| **NutricionHomeFragment** | Resumen macro circular, metas diarias, acciones rápidas, empty state |
+| **MetasFragment** | Configuración metas calóricas, macros, fibra, agua, toggle Net Carbs |
+| **MacrosDetalleFragment** | Detalle macros con % de meta, net carbs toggle, micronutrientes |
+| **GraficosNutricionFragment** | Gráficos MPAndroidChart: tendencia calorías 7/30/90 días, distribución macro (pie), tendencias P/C/G |
+| **NutricionHomeViewModel** | Totales diarios via DiarioRepository, LiveData, empty state handling |
+| **MetasViewModel** | Metas persistidas en SharedPreferences, TextWatchers para two-way binding |
+| **MacrosDetalleViewModel** | Macro details con % de meta, net carbs toggle, micronutrientes placeholder |
+| **GraficosNutricionViewModel** | Period selector (7/30/90 días), mock data para gráficos MPAndroidChart |
+| **Layouts** | fragment_nutricion_home, fragment_metas, fragment_macros_detalle, fragment_graficos_nutricion, view_empty_nutricion, item_macro_detail, item_micro_detail |
+| **Modelos** | MacroDetail, MicroDetail |
+
 ### 📋 **Planificados (Paso 7 - Resto / Paso 8-9)**
 | Paso | Descripción |
 |------|-------------|
-| **7 (resto)** | feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes |
+| **7 (resto)** | feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes |
 | **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood |
 | **9** | Testing, CI/CD, Release |
 
@@ -598,4 +612,4 @@ copies of the Software...
 
 > **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17 • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
-**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso7-ejercicio | **Build**: `0f7a83d` ✅
+**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso7-nutricion | **Build**: `latest` ✅
