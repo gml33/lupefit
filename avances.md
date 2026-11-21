@@ -1,9 +1,9 @@
 # Avances - LuPeFit: Replicación y Rediseño Completo
 
-## Estado Actual: **PASO 4.5 - COSTOS + PRESUPUESTO NUTRICIONAL COMPLETADO** ✅
+## Estado Actual: **PASO 5 - BACKEND FASTAPI + DOCKER COMPLETADO** ✅
 
 ### Fecha de Inicio: 2026-11-20
-### Fase Actual: Implementación - Paso 4.5 Completado (Costs + Budget)
+### Fase Actual: Implementación - Paso 5 Completado (Backend FastAPI + Docker)
 
 ---
 
@@ -117,12 +117,18 @@
 - ✅ **Strings** - costo_*, presupuesto_*, config_* agregados
 - ✅ **Build verificado**: BUILD SUCCESSFUL
 
-#### Hito 16: Backend FastAPI + Docker - PENDIENTE
-- Estructura completa: models, schemas, api/v1, services, tasks
-- SQLAlchemy models con UUID, índices, full-text search
-- JWT Auth (access/refresh tokens, bcrypt)
-- docker-compose.yml: postgres, redis, backend, celery-worker, celery-beat
-- Sync batch endpoint con versionado global
+#### Hito 16: **PASO 5 - Backend FastAPI + Docker Compose** ✅ **COMPLETADO**
+- ✅ **Estructura completa FastAPI** - models, schemas, api/v1/endpoints, core (database, security, config)
+- ✅ **16 SQLAlchemy Models** - User, FoodLog, WorkoutLog, WorkoutSet, Exercise, Food, FoodProduct, Recipe, RecipeIngredient, WaterLog, ProgressPhoto, PersonalRecord, GlucoseLog, MoodEntry, UserNote, WeatherSnapshot, Streak, SyncQueue (17 con UUID, índices, relaciones, timestamps, campos offline-first)
+- ✅ **15 Pydantic Schemas** - Request/Response para Auth, User, FoodLog, WorkoutLog, Exercise, Food, FoodProduct, Recipe, WaterLog, ProgressPhoto, PersonalRecord, GlucoseLog, MoodEntry, UserNote, WeatherSnapshot, Streak, Sync
+- ✅ **API v1 Endpoints (16 routers)** - Auth (register, login, refresh, me), Users (me GET/PATCH, change-password, delete), FoodLogs (CRUD + daily-summary), WorkoutLogs, Exercises, Foods, Recipes, WaterLogs, ProgressPhotos, PersonalRecords, GlucoseLogs, MoodEntries, UserNotes, WeatherSnapshots, Streaks, Sync (batch, version, pull)
+- ✅ **JWT Auth** - RS256 (configurable), access 30min, refresh 7d, bcrypt password hashing
+- ✅ **Sync Batch Endpoint** - `/api/v1/sync/batch` con versionado global, resolución conflictos (4 estrategias por entidad), pull changes
+- ✅ **Docker Compose** - 5 servicios: postgres:16, redis:7, backend (uvicorn 4 workers), celery-worker, celery-beat
+- ✅ **Alembic Migrations** - Configuración para migraciones automáticas
+- ✅ **Health Check** - `/health` endpoint
+- ✅ **CORS Configurado** - orígenes permitidos configurables
+- ✅ **Build y Deploy Verificado** - docker-compose build + up successful, endpoints testeados (register, login, me, food-logs CRUD, daily-summary, sync version, sync pull)
 
 #### Hito 17: Feature Modules UI & Navigation - PENDIENTE
 - 11 feature modules (diario, ejercicio, nutricion, progreso, recetas, escaneo, agua, configuracion, perfil, insights, planes)
@@ -236,45 +242,45 @@
 24. `core/core-ui/src/main/res/layout/sheet_base_container.xml` - Componente base 4
 25. `core/core-ui/src/main/res/drawable/ic_chevron_left.xml` / `ic_chevron_right.xml`
 26. `core/core-ui/src/main/res/drawable/ic_avatar_placeholder.xml` / `ic_food_placeholder.xml`
-27. `core/core-ui/src/main/res/drawable/bg_rounded_xs.xml`
-28. `core/core-ui/build.gradle.kts` + `proguard-rules.pro` + `consumer-rules.pro`
+26. `core/core-ui/src/main/res/drawable/bg_rounded_xs.xml`
+27. `core/core-ui/build.gradle.kts` + `proguard-rules.pro` + `consumer-rules.pro`
 
 ### Paso 1 - Esqueleto Base (App Module)
-29. `app/build.gradle` - Dependencias completas (Material 3, Room, Health Connect, WorkManager, Play Services Location, MPAndroidChart, CameraX, ML Kit, Lottie, CircleImageView)
-30. `app/src/main/java/com/lupefit/app/MyApplication.java` - Application class
-31. `app/src/main/java/com/lupefit/app/AppContainer.java` - Manual DI Container (218+ líneas)
-32. `app/src/main/java/com/lupefit/app/data/local/AppDatabase.java` - Room Database singleton
-33. `app/src/main/java/com/lupefit/app/data/local/entity/*.java` - 15 Entidades (offline-first)
-34. `app/src/main/java/com/lupefit/app/data/local/dao/*.java` - 15 DAOs (LiveData queries)
-35. `app/src/main/java/com/lupefit/app/data/local/converters/TypeConverters.java` - TypeConverters
-36. `app/src/main/java/com/lupefit/app/domain/repository/*.java` - 14 Repositories (stubs)
-37. `app/src/main/java/com/lupefit/app/domain/engine/*.java` - 5 Engines (stubs)
-38. `app/src/main/java/com/lupefit/app/domain/usecase/*.java` - 7 UseCases (stubs)
-39. `app/src/main/res/values/attrs.xml` - Atributos Material 3 custom
-40. `app/src/main/res/xml/data_extraction_rules.xml` + `backup_rules.xml`
-41. `app/src/main/res/values/strings.xml` - app_name + escaneo/voz strings
-42. `app/src/main/res/mipmap-*/ic_launcher*.xml` - Iconos vectoriales
-43. `app/src/main/AndroidManifest.xml` - Permisos, Activities, Providers, Health Connect meta-data
+28. `app/build.gradle` - Dependencias completas (Material 3, Room, Health Connect, WorkManager, Play Services Location, MPAndroidChart, CameraX, ML Kit, Lottie, CircleImageView)
+29. `app/src/main/java/com/lupefit/app/MyApplication.java` - Application class
+30. `app/src/main/java/com/lupefit/app/AppContainer.java` - Manual DI Container (218+ líneas)
+31. `app/src/main/java/com/lupefit/app/data/local/AppDatabase.java` - Room Database singleton
+32. `app/src/main/java/com/lupefit/app/data/local/entity/*.java` - 15 Entidades (offline-first)
+33. `app/src/main/java/com/lupefit/app/data/local/dao/*.java` - 15 DAOs (LiveData queries)
+34. `app/src/main/java/com/lupefit/app/data/local/converters/TypeConverters.java` - TypeConverters
+35. `app/src/main/java/com/lupefit/app/domain/repository/*.java` - 14 Repositories (stubs)
+36. `app/src/main/java/com/lupefit/app/domain/engine/*.java` - 5 Engines (stubs)
+37. `app/src/main/java/com/lupefit/app/domain/usecase/*.java` - 7 UseCases (stubs)
+38. `app/src/main/res/values/attrs.xml` - Atributos Material 3 custom
+39. `app/src/main/res/xml/data_extraction_rules.xml` + `backup_rules.xml`
+40. `app/src/main/res/values/strings.xml` - app_name + escaneo/voz strings
+41. `app/src/main/res/mipmap-*/ic_launcher*.xml` - Iconos vectoriales
+42. `app/src/main/AndroidManifest.xml` - Permisos, Activities, Providers, Health Connect meta-data
 
 ### Paso 4 - Escáner + Catálogo + Voz (App Module)
-44. `app/src/main/assets/fresh_foods.json` - 30 alimentos frescos argentinos precargados
-45. `app/src/main/java/com/lupefit/app/data/local/entity/FoodProduct.java` - Entity Room + Parcelable
-46. `app/src/main/java/com/lupefit/app/data/local/dao/FoodProductDao.java` - DAO con búsqueda relevancia
-47. `app/src/main/java/com/lupefit/app/data/local/repository/FoodCatalogRepository.java` - Offline-First OpenFoodFacts
-48. `app/src/main/java/com/lupefit/app/ui/escaneo/BarcodeAnalyzer.java` - ML Kit analyzer anti-duplicados
-49. `app/src/main/java/com/lupefit/app/ui/escaneo/EscaneoCodigoBarrasFragment.java` - CameraX preview + permisos
-50. `app/src/main/java/com/lupefit/app/ui/escaneo/ResultadoEscaneoSheet.java` - BottomSheet selector gramos
-51. `app/src/main/java/com/lupefit/app/domain/engine/voice/VoiceTranscriptionEngine.java` - Strategy interface
-52. `app/src/main/java/com/lupefit/app/domain/engine/voice/NativeAndroidVoiceEngine.java` - SpeechRecognizer es-AR
-53. `app/src/main/java/com/lupefit/app/domain/engine/voice/WhisperServerVoiceEngine.java` - MediaRecorder + OkHttp
-54. `app/src/main/java/com/lupefit/app/domain/engine/voice/VoiceFoodParser.java` - NLP español + macros
-55. `app/src/main/java/com/lupefit/app/ui/diario/DiarioVozSheet.java` - BottomSheet micrófono animado + lista editable
-56. `app/src/main/res/layout/fragment_escaneo_codigo_barras.xml` - Preview + overlay recuadro
-57. `app/src/main/res/layout/sheet_resultado_escaneo.xml` - Producto + selector gramos + resumen
-58. `app/src/main/res/layout/sheet_diario_voz.xml` - Micrófono animado + transcripción + lista
-59. `app/src/main/res/layout/item_parsed_food.xml` - Card alimento + barras macro P/C/G
-60. `app/src/main/res/layout/item_macro_mini.xml` - Macro compacto para sheets
-61. `app/src/main/res/drawable/bg_focus_overlay.xml` - Overlay recuadro enfoque
+43. `app/src/main/assets/fresh_foods.json` - 30 alimentos frescos argentinos precargados
+44. `app/src/main/java/com/lupefit/app/data/local/entity/FoodProduct.java` - Entity Room + Parcelable
+45. `app/src/main/java/com/lupefit/app/data/local/dao/FoodProductDao.java` - DAO con búsqueda relevancia
+46. `app/src/main/java/com/lupefit/app/data/local/repository/FoodCatalogRepository.java` - Offline-First OpenFoodFacts
+47. `app/src/main/java/com/lupefit/app/ui/escaneo/BarcodeAnalyzer.java` - ML Kit analyzer anti-duplicados
+48. `app/src/main/java/com/lupefit/app/ui/escaneo/EscaneoCodigoBarrasFragment.java` - CameraX preview + permisos
+49. `app/src/main/java/com/lupefit/app/ui/escaneo/ResultadoEscaneoSheet.java` - BottomSheet selector gramos
+50. `app/src/main/java/com/lupefit/app/domain/engine/voice/VoiceTranscriptionEngine.java` - Strategy interface
+51. `app/src/main/java/com/lupefit/app/domain/engine/voice/NativeAndroidVoiceEngine.java` - SpeechRecognizer es-AR
+52. `app/src/main/java/com/lupefit/app/domain/engine/voice/WhisperServerVoiceEngine.java` - MediaRecorder + OkHttp
+53. `app/src/main/java/com/lupefit/app/domain/engine/voice/VoiceFoodParser.java` - NLP español + macros
+54. `app/src/main/java/com/lupefit/app/ui/diario/DiarioVozSheet.java` - BottomSheet micrófono animado + lista editable
+55. `app/src/main/res/layout/fragment_escaneo_codigo_barras.xml` - Preview + overlay recuadro
+56. `app/src/main/res/layout/sheet_resultado_escaneo.xml` - Producto + selector gramos + resumen
+57. `app/src/main/res/layout/sheet_diario_voz.xml` - Micrófono animado + transcripción + lista
+58. `app/src/main/res/layout/item_parsed_food.xml` - Card alimento + barras macro P/C/G
+59. `app/src/main/res/layout/item_macro_mini.xml` - Macro compacto para sheets
+60. `app/src/main/res/drawable/bg_focus_overlay.xml` - Overlay recuadro enfoque
 61. `app/src/main/res/drawable/bg_mic_ring.xml` - Anillo micrófono animado
 62. `app/src/main/res/drawable/bg_input_outline.xml` - Input outline style
 63. `app/src/main/res/drawable/ic_flash_off.xml`, `ic_plus.xml`, `ic_minus.xml`, `ic_mic.xml`, `ic_edit.xml`, `ic_food_generic.xml`
@@ -291,6 +297,19 @@
 72. `app/src/main/java/com/lupefit/app/AppContainer.java` - UserPreferencesManager wireado
 73. `app/src/main/res/values/strings.xml` - costo_*, presupuesto_*, config_* agregados
 
+### Paso 5 - Backend FastAPI + Docker (Backend Module)
+74. `backend/app/main.py` - FastAPI app con lifespan, CORS, health check
+75. `backend/app/core/config.py` - Settings (pydantic-settings, env vars)
+76. `backend/app/core/database.py` - Async SQLAlchemy engine, session, init_db
+77. `backend/app/core/security.py` - JWT (RS256), bcrypt, token creation/validation
+78. `backend/app/models/*.py` - 17 SQLAlchemy models con UUID, índices, relaciones, timestamps, offline-first fields
+79. `backend/app/schemas/*.py` - 15 Pydantic schemas (Request/Response)
+80. `backend/app/api/v1/endpoints/*.py` - 16 routers (auth, users, food_logs, workout_logs, exercises, foods, recipes, water_logs, progress_photos, personal_records, glucose_logs, mood_entries, user_notes, weather_snapshots, streaks, sync)
+81. `backend/requirements.txt` - fastapi, uvicorn, sqlalchemy, asyncpg, alembic, redis, celery, python-jose, passlib, bcrypt, pydantic, httpx, email-validator, prometheus-client
+82. `backend/Dockerfile` - Python 3.12-slim, non-root user, build dependencies
+83. `backend/docker-compose.yml` - 5 servicios (postgres:16, redis:7, backend, celery-worker, celery-beat) con healthchecks
+84. `backend/alembic.ini` + `backend/alembic/env.py` - Migraciones automáticas
+
 ---
 
 ## Resumen Técnico LuPeFit
@@ -301,17 +320,18 @@
 - **Offline-first**: Room + WorkManager sync bidireccional
 - **Stack**: Java 17+, XML Views, ViewBinding, Room (annotationProcessor), Material 3
 
-### Base de Datos (15 entidades)
+### Base de Datos (15 entidades Android + 17 entidades Backend)
 - User, FoodLog, WorkoutLog, WorkoutSet, Exercise, Food, Recipe, RecipeIngredient
 - WaterLog, ProgressPhoto, PersonalRecordEntity, GlucoseLog, MoodEntry, UserNote, WeatherSnapshot, Streak, **FoodProduct**
 - **Todas con offline-first**: `isSynced` (boolean), `syncAction` (CREATE/UPDATE/DELETE), `serverId` (String), `timestamp` (long), `lastModified` (long)
 - **FoodProduct**: catálogo offline-first (sin sync fields, solo lectura local) + **costos opcionales**
 
-### Backend (FastAPI + PostgreSQL) - PENDIENTE
-- 30+ endpoints REST organizados por feature
-- Sync batch endpoint versionado
-- JWT Auth (access 30min, refresh 7d)
-- Docker: postgres, redis, backend, celery worker/beat
+### Backend (FastAPI + PostgreSQL) - **COMPLETADO**
+- 16 endpoints REST organizados por feature
+- Sync batch endpoint versionado con resolución conflictos
+- JWT Auth (access 30min, refresh 7d, RS256)
+- Docker: postgres:16, redis:7, backend (uvicorn 4 workers), celery-worker, celery-beat
+- Health checks, CORS, logging estructurado
 
 ### Native Libraries Reemplazo
 | Original | LuPeFit |
@@ -330,13 +350,6 @@ Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Fac
 ---
 
 ## Próximos Pasos: Implementación Continua
-
-### PASO 5: Backend FastAPI + Docker Compose
-1. Backend FastAPI + Docker Compose (PostgreSQL, Redis, Celery)
-2. SQLAlchemy models + Pydantic schemas
-3. JWT Auth endpoints
-4. Sync batch endpoint `/api/v1/sync/batch`
-5. docker-compose.yml con postgres, redis, backend, celery-worker, celery-beat
 
 ### PASO 6: Feature Modules (11 módulos)
 - `feature-diario` → DiarioFragment, BuscarAlimento, QuickAdd, EscanearCodigoBarras
@@ -364,10 +377,22 @@ Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Fac
 ## Comandos de Referencia
 
 ```bash
-# Build proyecto completo
+# Build proyecto completo (Android)
 cd /Users/marcelo/Desktop/Desarrollos/006
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
 ./gradlew :app:assembleDebug
+
+# Build y deploy backend
+cd /Users/marcelo/Desktop/Desarrollos/006/backend
+docker-compose build
+docker-compose up -d
+
+# Ver logs backend
+docker-compose logs -f backend
+
+# Test endpoints
+curl http://localhost:8000/health
+curl -X POST http://localhost:8000/api/v1/auth/register -H "Content-Type: application/json" -d '{"email": "test@lupefit.app", "password": "testpass123"}'
 
 # Ver estructura app referencia analizada
 find /Users/marcelo/Desktop/Desarrollos/006/apktool_out -type f -name "*.xml" | grep -E "(navigation|manifest)"
@@ -390,10 +415,11 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 4. `core/core-network/` - API Service, DTOs, SyncEngine, NetworkModule
 5. `core/core-sync/` - SyncWorker, SyncQueue, ConflictResolver, SyncScheduler
 6. `app/` - Esqueleto base compilable + Escáner + Catálogo + Voz + Costos (Paso 4.5 completado)
-7. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
+7. `backend/` - FastAPI + Docker Compose completo y funcionando (Paso 5 completado)
+8. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 4.5 (Costos + Presupuesto) 100% completo y compilando**. Próximo: **Paso 5 - Backend FastAPI + Docker**.
+**Estado**: **Paso 5 (Backend FastAPI + Docker) 100% completo y testeado**. Próximo: **Paso 6 - Feature Modules (11 módulos UI)**.
 
 ---
 
-*Última actualización: 2026-11-20 - Paso 4.5 completado, BUILD SUCCESSFUL, listo para Paso 5*
+*Última actualización: 2026-11-21 - Paso 5 completado, Backend FastAPI + Docker funcional, endpoints testeados, listo para Paso 6*
