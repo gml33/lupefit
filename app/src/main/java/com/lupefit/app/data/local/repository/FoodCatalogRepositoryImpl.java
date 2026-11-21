@@ -104,6 +104,15 @@ public class FoodCatalogRepositoryImpl implements FoodCatalogRepository {
     /**
      * Obtiene todos los alimentos frescos precargados.
      */
+    @Override
+    public void getFreshFoods(OnFreshFoodsListener listener) {
+        List<com.lupefit.core.domain.model.FoodProduct> foods = convertToDomainList(productDao.getAllFreshFoodsSync());
+        listener.onResult(foods);
+    }
+
+    /**
+     * Obtiene todos los alimentos frescos precargados (legacy callback).
+     */
     public void getFreshFoods(FoodProductListCallback callback) {
         List<FoodProduct> foods = productDao.getAllFreshFoodsSync();
         callback.onResult(foods);

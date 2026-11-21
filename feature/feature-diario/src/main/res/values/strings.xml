@@ -2,10 +2,25 @@
     <string name="almuerzo">Almuerzo</string>
     <string name="apuntar_codigo_barras">Apuntá el código de barras al recuadro</string>
     <string name="buscar_alimento">Buscar alimento</string>
+    <string name="buscar_alimento_hint">Buscar por nombre, marca…</string>
+    <string name="buscar_categorias">Categorías</string>
+    <string name="buscar_todas">Todas</string>
     <string name="cena">Cena</string>
     <string name="completar_diario">Completar diario</string>
     <string name="costo_estimado">Costo estimado</string>
     <string name="crear_alimento">Crear alimento</string>
+    <string name="crear_nombre">Nombre del alimento</string>
+    <string name="crear_marca">Marca (opcional)</string>
+    <string name="crear_codigo_barras">Código de barras (opcional)</string>
+    <string name="crear_macros_100g">Macros por 100g</string>
+    <string name="crear_kcal">Calorías (kcal)</string>
+    <string name="crear_proteinas">Proteínas (g)</string>
+    <string name="crear_carbohidratos">Carbohidratos (g)</string>
+    <string name="crear_grasas">Grasas (g)</string>
+    <string name="crear_porcion_defecto">Porción por defecto (g)</string>
+    <string name="crear_es_fresco">Es alimento fresco</string>
+    <string name="crear_guardar">Guardar alimento</string>
+    <string name="crear_escanear_codigo">Escanear código</string>
     <string name="currency_ars">ARS</string>
     <string name="desayuno">Desayuno</string>
     <string name="diario_title">Diario</string>
@@ -19,6 +34,12 @@
     <string name="diario_voz_lista_confirmar">Confirmar alimentos detectados</string>
     <string name="diario_voz_error">Error al procesar</string>
     <string name="editar_porcion">Editar porción</string>
+    <string name="editar_tipo_comida">Tipo de comida</string>
+    <string name="editar_gramos">Gramos</string>
+    <string name="editar_macros_por_100g">Macros por 100g</string>
+    <string name="editar_macros_calculados">Macros calculados</string>
+    <string name="editar_cancelar">Cancelar</string>
+    <string name="editar_confirmar">Confirmar</string>
     <string name="enable_cost_tracking">Seguimiento de costos</string>
     <string name="escanear_codigo_barras">Escanear código de barras</string>
     <string name="escanear_comida_ia">Escanear comida (IA)</string>
@@ -27,7 +48,10 @@
     <string name="ingreso_manual">Ingreso manual</string>
     <string name="kcal">kcal</string>
     <string name="kcal_short">kcal</string>
+    <string name="kcal_100g">kcal/100g</string>
     <string name="kcal_value">0</string>
+    <string name="limpiar_busqueda">Limpiar búsqueda</string>
+    <string name="limpiar_formulario">Limpiar formulario</string>
     <string name="macro_carbs">Carbohidratos</string>
     <string name="macro_carbs_short">CH</string>
     <string name="macro_fat">Grasas</string>
@@ -40,6 +64,8 @@
     <string name="otro">Otro</string>
     <string name="peso_envase">Peso del envase (g)</string>
     <string name="porcion">porción</string>
+    <string name="pre_entreno">Pre-entreno</string>
+    <string name="post_entreno">Post-entreno</string>
     <string name="precio_desactualizado">Precio cargado hace %d días</string>
     <string name="precio_referencia">Precio de referencia</string>
     <string name="presupuesto_semanal">Presupuesto semanal</string>
@@ -49,6 +75,10 @@
     <string name="grasas_short">G</string>
     <string name="calorias_totales">Calorías totales</string>
     <string name="quick_add">Agregado rápido</string>
+    <string name="quick_add_alimentos_frescos">Alimentos frescos</string>
+    <string name="quick_add_recientes">Recientes</string>
+    <string name="quick_add_favoritos">Favoritos</string>
+    <string name="quick_add_porcion">porción</string>
     <string name="registro_por_voz">Registro por voz</string>
     <string name="resultado_escaneo">Resultado del escaneo</string>
     <string name="seguimiento_costos">Seguimiento de costos</string>
@@ -58,4 +88,6 @@
     <string name="food_name">Nombre del alimento</string>
     <string name="food_details">Detalles del alimento</string>
     <string name="weekly_budget_goal">Meta semanal</string>
+    <string name="costo_precio_desactualizado">Precio desactualizado (%d días)</string>
+    <string name="costo_calculado_para">Costo calculado para %s: %s</string>
 </resources>

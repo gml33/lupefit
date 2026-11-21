@@ -389,8 +389,8 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 8. `feature/*/` - 11 Feature Modules con Navigation Graphs, Fragments, ViewModels (Paso 6 completado)
 9. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 6 (Feature Modules 11 módulos UI) 100% estructura completada + compilación verificada**. Próximo: **Paso 7 - Feature Modules Logic Completa**.
+**Estado**: **Paso 7 (Feature Modules Logic - feature-diario) COMPLETADO**. Próximo: **Paso 7 - Resto de Feature Modules Logic** (feature-ejercicio, feature-nutricion, etc.).
 
 ---
 
-*Última actualización: 2026-11-21 - Paso 6 completado, 11 Feature Modules con Navigation Graphs, Fragments, ViewModels, Layouts base, Strings localizados, Main Activity con BottomNavigationView + MasBottomSheet, 13 icons vectoriales. **Compilación verificada** (BUILD SUCCESSFUL) tras corregir integración core-domain/app (VoiceTranscriptionEngine, FoodCatalogRepository, FoodProduct domain/entity mapping), listo para Paso 7*
+*Última actualización: 2026-11-21 - **Paso 7 (feature-diario logic) COMPLETADO**: BuscarAlimentoFragment, QuickAddFragment, EditarPorcionSheet, DiarioCrearAlimentoFragment, integración con DiarioHomeFragment, DiarioVozSheet, EscaneoCodigoBarrasFragment, ResultadoEscaneoSheet. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 49.5 MB.*

@@ -1,0 +1,15 @@
+<resources>
+    <!-- Content descriptions -->
+    <string name="food_icon">Icono de alimento</string>
+    <string name="chevron_left">Atrás</string>
+    <string name="chevron_right">Siguiente</string>
+    <string name="search">Buscar</string>
+    <string name="scan">Escanear</string>
+    <string name="clear">Limpiar</string>
+
+    <!-- Macro shortcuts -->
+    <string name="kcal_100g">kcal/100g</string>
+    <string name="protein_short">g P</string>
+    <string name="carbs_short">g C</string>
+    <string name="fat_short">g G</string>
+</resources>

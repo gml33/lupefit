@@ -545,4 +545,4 @@ copies of the Software...
 
 > **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17 • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
-**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso6 | **Build**: `a96505d` ✅
+**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso7-diario | **Build**: `latest` ✅

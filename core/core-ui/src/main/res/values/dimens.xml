@@ -39,6 +39,7 @@
     <!-- Border radius (UI_DESIGN_SYSTEM) -->
     <dimen name="radius_xs">4dp</dimen>
     <dimen name="radius_sm">8dp</dimen>
+    <dimen name="corner_small">8dp</dimen>
     <dimen name="radius_md">12dp</dimen>
     <dimen name="radius_lg">16dp</dimen>
     <dimen name="radius_card">24dp</dimen>

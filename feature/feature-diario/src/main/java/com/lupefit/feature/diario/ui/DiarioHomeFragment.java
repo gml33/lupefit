@@ -21,7 +21,9 @@ import com.lupefit.feature.diario.databinding.CardMacroSummaryBinding;
 import com.lupefit.feature.diario.databinding.FragmentDiarioHomeBinding;
 import com.lupefit.feature.diario.databinding.ViewEmptyDiarioBinding;
 import com.lupefit.feature.diario.viewmodel.DiarioHomeViewModel;
+import com.lupefit.core.domain.model.DiarioEntry;
 import com.lupefit.core.domain.model.MacroTotals;
+import com.lupefit.core.domain.engine.voice.VoiceTranscriptionEngine;
 
 public class DiarioHomeFragment extends Fragment {
 
@@ -31,6 +33,7 @@ public class DiarioHomeFragment extends Fragment {
     private DiarioHomeViewModel viewModel;
     private NavController navController;
     private long currentUserId;
+    private int currentDateKey;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -45,6 +48,7 @@ public class DiarioHomeFragment extends Fragment {
 
         Context context = requireContext();
         currentUserId = getCurrentUserId();
+        currentDateKey = getTodayDateKey();
 
         // Los layouts incluidos con <layout> generan sus propios bindings
         macroBinding = binding.macroSummary;
@@ -67,18 +71,25 @@ public class DiarioHomeFragment extends Fragment {
         return 1L;
     }
 
+    private int getTodayDateKey() {
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        return cal.get(java.util.Calendar.YEAR) * 10000
+                + (cal.get(java.util.Calendar.MONTH) + 1) * 100
+                + cal.get(java.util.Calendar.DAY_OF_MONTH);
+    }
+
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> navController.navigateUp());
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.action_add_food) {
-                Toast.makeText(requireContext(), "Buscar alimento - próximamente", Toast.LENGTH_SHORT).show();
+                navigateToBuscarAlimento();
                 return true;
             } else if (itemId == R.id.action_quick_add) {
-                Toast.makeText(requireContext(), "Añadir rápido - próximamente", Toast.LENGTH_SHORT).show();
+                navigateToQuickAdd();
                 return true;
             } else if (itemId == R.id.action_scan_barcode) {
-                Toast.makeText(requireContext(), "Escanear código - próximamente", Toast.LENGTH_SHORT).show();
+                navigateToEscaneo();
                 return true;
             } else if (itemId == R.id.action_voice_log) {
                 showDiarioVozSheet();
@@ -128,19 +139,50 @@ public class DiarioHomeFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        binding.fabAddFood.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Añadir alimento - próximamente", Toast.LENGTH_SHORT).show();
-        });
+        binding.fabAddFood.setOnClickListener(v -> navigateToBuscarAlimento());
 
-        emptyBinding.btnFirstFood.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Añadir primer alimento - próximamente", Toast.LENGTH_SHORT).show();
-        });
+        emptyBinding.btnFirstFood.setOnClickListener(v -> navigateToBuscarAlimento());
+    }
+
+    private void navigateToBuscarAlimento() {
+        Bundle args = new Bundle();
+        args.putInt("dateKey", currentDateKey);
+        args.putString("mealType", "otro");
+        navController.navigate(R.id.action_diarioHomeFragment_to_buscarAlimentoFragment, args);
+    }
+
+    private void navigateToQuickAdd() {
+        Bundle args = new Bundle();
+        args.putInt("dateKey", currentDateKey);
+        args.putString("mealType", "otro");
+        navController.navigate(R.id.action_diarioHomeFragment_to_quickAddFragment, args);
+    }
+
+    private void navigateToEscaneo() {
+        // Use the existing EscaneoCodigoBarrasFragment from app module
+        navController.navigate(R.id.action_diarioHomeFragment_to_escanearCodigoBarrasFragment);
     }
 
     private void showDiarioVozSheet() {
         DiarioVozSheet sheet = new DiarioVozSheet();
         sheet.setOnFoodsLoggedListener(items -> {
-            // TODO: Handle logged foods from voice
+            // Handle logged foods from voice - add each to diary
+            for (VoiceTranscriptionEngine.ParsedFoodItem item : items) {
+                DiarioEntry entry = new DiarioEntry();
+                entry.setFoodName(item.getFoodName());
+                entry.setFoodId(""); // No ID for voice-parsed items
+                entry.setCantidad(item.getGrams());
+                entry.setTipoComida("otro");
+                entry.setDateKey(currentDateKey);
+                entry.setTimestamp(System.currentTimeMillis());
+
+                entry.setCalorias((int) item.getMacros().kcal);
+                entry.setProteinas(item.getMacros().proteinG);
+                entry.setCarbohidratos(item.getMacros().carbsG);
+                entry.setGrasas(item.getMacros().fatG);
+
+                viewModel.addEntry(entry);
+            }
             Toast.makeText(requireContext(), items.size() + " alimento(s) registrado(s) por voz", Toast.LENGTH_SHORT).show();
         });
         sheet.show(getChildFragmentManager(), "DiarioVozSheet");
