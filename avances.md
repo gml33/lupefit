@@ -389,8 +389,8 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 8. `feature/*/` - 11 Feature Modules con Navigation Graphs, Fragments, ViewModels (Paso 6 completado)
 9. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 7 (Feature Modules Logic - feature-diario) COMPLETADO**. Próximo: **Paso 7 - Resto de Feature Modules Logic** (feature-ejercicio, feature-nutricion, etc.).
+**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio) COMPLETADO**. Próximo: **Paso 7 - Resto de Feature Modules Logic** (feature-nutricion, feature-progreso, etc.).
 
 ---
 
-*Última actualización: 2026-11-21 - **Paso 7 (feature-diario logic) COMPLETADO**: BuscarAlimentoFragment, QuickAddFragment, EditarPorcionSheet, DiarioCrearAlimentoFragment, integración con DiarioHomeFragment, DiarioVozSheet, EscaneoCodigoBarrasFragment, ResultadoEscaneoSheet. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 49.5 MB.*
+*Última actualización: 2026-11-21 - **Paso 7 (feature-ejercicio logic) COMPLETADO**: BuscarEjercicioFragment, NuevaRutinaFragment, WodTimerFragment, RutinaDetalleFragment, EjercicioHomeFragment, NavigationActions, Exercise domain/model + Repository. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 48 MB.*

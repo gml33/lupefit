@@ -25,7 +25,7 @@
 | ![Progreso](docs/screenshots/progreso_light.svg) | ![Progreso Dark](docs/screenshots/progreso_dark.svg) |
 | *Gráficos de Progreso* | *Gráficos de Progreso (Oscuro)* |
 
-> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 6 - Feature Modules (11 módulos UI) Estructura Completa + Compilación Verificada**.
+> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 7 - Feature Modules Logic (feature-diario, feature-ejercicio) COMPLETADO**.
 
 ---
 
@@ -122,10 +122,35 @@
 - Layouts base (`fragment_*_home.xml`)
 - Strings localizadas (`values/strings.xml` con terminología argentino)
 
-### 📋 **Planificados (Paso 7-8)**
+### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio)**
+
+#### **feature-diario Logic** ✅ COMPLETADO
+| Componente | Descripción |
+|------------|-------------|
+| **BuscarAlimentoFragment** | Búsqueda alimentos con filtros categoría, chips, RecyclerView con macros |
+| **QuickAddFragment** | Alimentos frescos, recientes, favoritos con selección rápida |
+| **EditarPorcionSheet** | Selector gramos (+/- chips presets 50/100/150/200/250/300g), selector tipo comida, macros calculados en vivo |
+| **DiarioCrearAlimentoFragment** | Creación manual de alimentos con macros, porción, fresco |
+| **DiarioHomeFragment** | Navegación integrada, currentDateKey, callback DiarioVozSheet, EscaneoCodigoBarrasFragment |
+| **DiarioVozSheet callback** | Registra alimentos parseados por voz directamente al diario |
+| **ViewModels** | BuscarAlimentoViewModel, QuickAddViewModel, DiarioCrearAlimentoViewModel |
+| **Layouts** | fragment_buscar_alimento, fragment_quick_add, fragment_diario_crear_alimento, item_food_search_result, item_quick_add_food, sheet_editar_porcion |
+
+#### **feature-ejercicio Logic** ✅ COMPLETADO
+| Componente | Descripción |
+|------------|-------------|
+| **BuscarEjercicioFragment** | Búsqueda ejercicios con filtros categoría (Fuerza/Olímpico/Gymnastics/Cardio/Strongman/CrossFit), patrón movimiento, equipamiento |
+| **NuevaRutinaFragment** | Crear rutinas agregando ejercicios con series, reps, peso, %1RM, descanso |
+| **WodTimerFragment** | Timer fullscreen para AMRAP, EMOM, For Time, Tabata con alertas sonoras/vibración |
+| **RutinaDetalleFragment** | Ver ejercicios de rutina, iniciar entrenamiento |
+| **EjercicioHomeFragment** | Grid 4 accesos rápidos (Buscar, Nueva, Timer, Mis rutinas) + lista entrenamientos recientes |
+| **BuscarEjercicioViewModel** | Búsqueda con filtros categoría/patrón, LiveData |
+| **NavigationActions** | Inicialización IDs navegación via reflexión `R.id.action_*` |
+
+### 📋 **Planificados (Paso 7 - Resto / Paso 8-9)**
 | Paso | Descripción |
 |------|-------------|
-| **7** | Feature Modules Logic Completa (BuscarAlimento, QuickAdd, WOD Timer, MPAndroidChart, etc.) |
+| **7 (resto)** | feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes |
 | **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood |
 | **9** | Testing, CI/CD, Release |
 
@@ -260,7 +285,7 @@ LuPeFit/
 │   │   ├── data/local/                  # Room DB, Entities, DAOs, Repositories
 │   │   │   ├── entity/                  # 15 Entidades Room (offline-first)
 │   │   │   ├── dao/                     # 15 DAOs con LiveData queries
-│   │   │   ├── repository/              # DiarioRepositoryImpl, FoodCatalogRepositoryImpl
+│   │   │   ├── repository/              # DiarioRepositoryImpl, FoodCatalogRepositoryImpl, ExerciseRepositoryImpl
 │   │   │   ├── mapper/                  # DiarioMapper
 │   │   │   └── preferences/             # UserPreferencesManager
 │   │   ├── domain/                      # Repositories, Engines, UseCases
@@ -276,8 +301,8 @@ LuPeFit/
 ├── core/
 │   ├── core-domain/              # Entidades dominio, interfaces, providers
 │   │   ├── src/main/java/com/lupefit/core/domain/
-│   │   │   ├── model/                  # DiarioEntry, FoodProduct, MacroTotals
-│   │   │   ├── repository/             # DiarioRepository, FoodCatalogRepository
+│   │   │   ├── model/                  # DiarioEntry, FoodProduct, MacroTotals, Exercise
+│   │   │   ├── repository/             # DiarioRepository, FoodCatalogRepository, ExerciseRepository
 │   │   │   ├── engine/voice/           # VoiceTranscriptionEngine, NativeAndroidVoiceEngine, VoiceFoodParser
 │   │   │   └── provider/               # Repository Providers
 │   │   └── build.gradle.kts
@@ -341,8 +366,10 @@ LuPeFit/
 | **4** | **Escáner + Catálogo + Voz + Costos** | ✅ **COMPLETADO** | `a96505d` |
 | **5** | **Backend FastAPI + Docker Compose** | ✅ **COMPLETADO** | - |
 | **6** | **Feature Modules (11 módulos UI)** | ✅ **COMPLETADO** | `a96505d` |
-| 7 | Advanced Features (Health Connect, Voice, CrossFit, Macros Dinámicos, Streaks, Mood) | ⏳ Pendiente | - |
-| 8 | Testing, CI/CD, Release | ⏳ Pendiente | - |
+| **7** | **Feature Modules Logic (feature-diario, feature-ejercicio)** | ✅ **COMPLETADO** | `0f7a83d` |
+| 7 (resto) | Feature Modules Logic (resto de módulos) | 🔄 En progreso | - |
+| 8 | Advanced Features (Health Connect, Voice, CrossFit, Macros Dinámicos, Streaks, Mood) | ⏳ Pendiente | - |
+| 9 | Testing, CI/CD, Release | ⏳ Pendiente | - |
 
 ### ✅ Paso 1 - Entregables Verificados
 - [x] `build.gradle` (app) con dependencias exactas
@@ -397,6 +424,32 @@ LuPeFit/
 - [x] Main Activity - BottomNavigationView (5 tabs) + MasBottomSheet (7 opciones)
 - [x] 13 Vector Drawables para navegación y más opciones
 - [x] **Build verificado**: BUILD SUCCESSFUL (`./gradlew :app:assembleDebug`)
+
+### ✅ Paso 7 - feature-diario Logic COMPLETADO
+- [x] `BuscarAlimentoFragment`: Búsqueda alimentos con filtros categoría, chips, RecyclerView con macros
+- [x] `QuickAddFragment`: Alimentos frescos, recientes, favoritos con selección rápida
+- [x] `EditarPorcionSheet`: Selector gramos (+/- chips 50/100/150/200/250/300g), selector tipo comida, macros calculados en vivo
+- [x] `DiarioCrearAlimentoFragment`: Creación manual de alimentos con macros, porción, fresco
+- [x] `DiarioHomeFragment`: Navegación integrada, `currentDateKey`, callback `DiarioVozSheet`, `EscaneoCodigoBarrasFragment`
+- [x] `DiarioVozSheet callback`: Registra alimentos parseados por voz directamente al diario
+- [x] ViewModels: `BuscarAlimentoViewModel`, `QuickAddViewModel`, `DiarioCrearAlimentoViewModel`
+- [x] Layouts: `fragment_buscar_alimento`, `fragment_quick_add`, `fragment_diario_crear_alimento`, `item_food_search_result`, `item_quick_add_food`, `sheet_editar_porcion`
+- [x] Menús: `menu_buscar_alimento`, `menu_crear_alimento`
+- [x] **Build verificado**: BUILD SUCCESSFUL
+
+### ✅ Paso 7 - feature-ejercicio Logic COMPLETADO
+- [x] `BuscarEjercicioFragment`: Búsqueda ejercicios con filtros categoría (Fuerza/Olímpico/Gymnastics/Cardio/Strongman/CrossFit), patrón movimiento, equipamiento
+- [x] `NuevaRutinaFragment`: Crear rutinas agregando ejercicios con series, reps, peso, %1RM, descanso
+- [x] `WodTimerFragment`: Timer fullscreen para AMRAP, EMOM, For Time, Tabata con alertas sonoras/vibración
+- [x] `RutinaDetalleFragment`: Ver ejercicios de rutina, iniciar entrenamiento
+- [x] `EjercicioHomeFragment`: Grid 4 accesos rápidos (Buscar, Nueva, Timer, Mis rutinas) + lista entrenamientos recientes
+- [x] `BuscarEjercicioViewModel`: Búsqueda con filtros categoría/patrón, LiveData
+- [x] `NavigationActions`: Inicialización IDs navegación via reflexión `R.id.action_*`
+- [x] Core-domain: `Exercise` model, `ExerciseRepository` interface/provider
+- [x] App: `ExerciseRepositoryImpl` (Room entity ↔ domain mapping)
+- [x] Drawables: `ic_add`, `ic_timer`, `ic_list`, `ic_dumbbell`
+- [x] Strings: categorías, patrones, equipamiento, tipos WOD
+- [x] **Build verificado**: BUILD SUCCESSFUL (APK 48MB)
 
 ---
 
@@ -545,4 +598,4 @@ copies of the Software...
 
 > **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17 • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
-**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso7-diario | **Build**: `latest` ✅
+**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso7-ejercicio | **Build**: `0f7a83d` ✅
