@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -50,6 +51,7 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.gridlayout)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
 

@@ -122,7 +122,7 @@
 - Layouts base (`fragment_*_home.xml`)
 - Strings localizadas (`values/strings.xml` con terminología argentino)
 
-### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion)**
+### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion, feature-progreso)**
 
 #### **feature-diario Logic** ✅ COMPLETADO
 | Componente | Descripción |
@@ -161,10 +161,26 @@
 | **Layouts** | fragment_nutricion_home, fragment_metas, fragment_macros_detalle, fragment_graficos_nutricion, view_empty_nutricion, item_macro_detail, item_micro_detail |
 | **Modelos** | MacroDetail, MicroDetail |
 
+#### **feature-progreso Logic** ✅ COMPLETADO
+| Componente | Descripción |
+|------------|-------------|
+| **ProgresoHomeFragment** | Resumen peso actual/inicial/diferencia, grid 4 acciones rápidas, botones exportar/gráficos |
+| **PesoFragment** | Registro peso con fecha/nota, historial RecyclerView, empty state |
+| **MedidasFragment** | Registro medidas corporales (pecho, cintura, cadera, brazos, muslos, pantorrillas, cuello, hombro) |
+| **FotosFragment** | Fotos progreso (frontal, lateral, espalda), galería, cámara |
+| **ExportarFragment** | Exportar datos CSV/JSON, rango fechas, selección datos (peso, medidas, fotos) |
+| **GraficosProgresoFragment** | Gráficos MPAndroidChart: tendencia peso 7/30/90 días/todo, medidas, periodo selector chips |
+| **PesoViewModel** | Registro peso con validación, ProgresoRepository, fecha actual por defecto |
+| **ProgresoRepository/DAO** | Room entities (PesoEntity), sync fields, LiveData history |
+| **Navigation Safe Args** | Directions classes para navegación type-safe entre fragments |
+| **Layouts** | fragment_progreso_home, fragment_peso, fragment_medidas, fragment_fotos, fragment_exportar, fragment_graficos_progreso, view_empty_progreso, view_empty_peso, item_peso_historial |
+| **Modelos** | PesoEntry (pesoStr, diffStr formatted), PesoEntity |
+| **Drawables** | ic_scale, ic_measure, ic_timeline, ic_download, ic_camera, ic_calendar, bg_circular_icon (core-ui) |
+
 ### 📋 **Planificados (Paso 7 - Resto / Paso 8-9)**
 | Paso | Descripción |
 |------|-------------|
-| **7 (resto)** | feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes |
+| **7 (resto)** | feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes |
 | **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood |
 | **9** | Testing, CI/CD, Release |
 
@@ -612,4 +628,4 @@ copies of the Software...
 
 > **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17 • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
-**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso7-nutricion | **Build**: `latest` ✅
+**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso7-progreso | **Build**: `latest` ✅

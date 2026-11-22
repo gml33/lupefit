@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_progresoHomeFragment_to_exportarFragment"
             app:destination="@id/exportarFragment" />
+        <action
+            android:id="@+id/action_progresoHomeFragment_to_graficosProgresoFragment"
+            app:destination="@id/graficosProgresoFragment" />
     </fragment>
 
     <fragment

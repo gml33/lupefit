@@ -5,4 +5,79 @@
     <string name="medidas_corporales">Medidas corporales</string>
     <string name="peso">Peso</string>
     <string name="progreso_title">Progreso</string>
+
+    <!-- Progreso Home -->
+    <string name="progreso_resumen">Resumen</string>
+    <string name="progreso_peso_actual">Peso actual</string>
+    <string name="progreso_peso_inicial">Peso inicial</string>
+    <string name="progreso_diferencia">Diferencia</string>
+    <string name="progreso_registrar_peso">Registrar peso</string>
+    <string name="progreso_registrar_medidas">Registrar medidas</string>
+    <string name="progreso_tomar_foto">Tomar foto</string>
+    <string name="progreso_ver_graficos">Ver gráficos</string>
+    <string name="progreso_exportar">Exportar datos</string>
+    <string name="progreso_sin_datos">Sin datos de progreso</string>
+    <string name="progreso_agregar_primero">Agregá tu primer registro</string>
+
+    <!-- Peso -->
+    <string name="peso_titulo">Registro de peso</string>
+    <string name="peso_hint">Peso (kg)</string>
+    <string name="peso_fecha">Fecha</string>
+    <string name="peso_nota">Nota (opcional)</string>
+    <string name="peso_guardar">Guardar</string>
+    <string name="peso_historial">Historial de peso</string>
+    <string name="peso_meta">Meta de peso</string>
+    <string name="peso_kg">kg</string>
+
+    <!-- Medidas -->
+    <string name="medidas_titulo">Medidas corporales</string>
+    <string name="medidas_pecho">Pecho</string>
+    <string name="medidas_cintura">Cintura</string>
+    <string name="medidas_cadera">Cadera</string>
+    <string name="medidas_brazo_izq">Brazo izq.</string>
+    <string name="medidas_brazo_der">Brazo der.</string>
+    <string name="medidas_muslo_izq">Muslo izq.</string>
+    <string name="medidas_muslo_der">Muslo der.</string>
+    <string name="medidas_pantorrilla_izq">Pantorrilla izq.</string>
+    <string name="medidas_pantorrilla_der">Pantorrilla der.</string>
+    <string name="medidas_cuello">Cuello</string>
+    <string name="medidas_hombro">Hombro</string>
+    <string name="medidas_cm">cm</string>
+    <string name="medidas_guardar">Guardar medidas</string>
+
+    <!-- Fotos -->
+    <string name="fotos_titulo">Fotos de progreso</string>
+    <string name="fotos_tomar">Tomar foto</string>
+    <string name="fotos_galeria">Galería</string>
+    <string name="fotos_frontal">Frontal</string>
+    <string name="fotos_lateral">Lateral</string>
+    <string name="fotos_espalda">Espalda</string>
+    <string name="fotos_fecha">Fecha</string>
+    <string name="fotos_sin_fotos">Sin fotos aún</string>
+    <string name="fotos_agregar_primera">Agregá tu primera foto</string>
+
+    <!-- Exportar -->
+    <string name="exportar_titulo">Exportar datos</string>
+    <string name="exportar_formato">Formato</string>
+    <string name="exportar_csv">CSV</string>
+    <string name="exportar_json">JSON</string>
+    <string name="exportar_rango">Rango de fechas</string>
+    <string name="exportar_desde">Desde</string>
+    <string name="exportar_hasta">Hasta</string>
+    <string name="exportar_datos_seleccionar">Datos a exportar</string>
+    <string name="exportar_peso">Peso</string>
+    <string name="exportar_medidas">Medidas</string>
+    <string name="exportar_fotos">Fotos (referencias)</string>
+    <string name="exportar_generar">Generar archivo</string>
+    <string name="exportar_compartir">Compartir</string>
+
+    <!-- Gráficos -->
+    <string name="graficos_titulo">Gráficos de progreso</string>
+    <string name="graficos_peso">Peso</string>
+    <string name="graficos_medidas">Medidas</string>
+    <string name="graficos_periodo">Período</string>
+    <string name="graficos_7_dias">7 días</string>
+    <string name="graficos_30_dias">30 días</string>
+    <string name="graficos_90_dias">90 días</string>
+    <string name="graficos_todo">Todo</string>
 </resources>

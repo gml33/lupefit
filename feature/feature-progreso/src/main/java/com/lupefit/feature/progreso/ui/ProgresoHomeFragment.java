@@ -43,15 +43,41 @@ public class ProgresoHomeFragment extends Fragment {
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> navController.navigateUp());
-        binding.toolbar.setTitle("@string/progreso_title");
     }
 
     private void setupClickListeners() {
-        // TODO: Add click listeners for cards/buttons
+        // Card: Registrar Peso
+        binding.cardRegistrarPeso.setOnClickListener(v ->
+                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToPesoFragment()));
+
+        // Card: Registrar Medidas
+        binding.cardRegistrarMedidas.setOnClickListener(v ->
+                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToMedidasFragment()));
+
+        // Card: Tomar Foto
+        binding.cardTomarFoto.setOnClickListener(v ->
+                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToFotosFragment()));
+
+        // Card: Ver Gráficos
+        binding.cardVerGraficos.setOnClickListener(v ->
+                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToGraficosProgresoFragment()));
+
+        // Button: Exportar
+        binding.btnExportar.setOnClickListener(v ->
+                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToExportarFragment()));
+
+        // Button: Ver Gráficos (bottom)
+        binding.btnVerGraficos.setOnClickListener(v ->
+                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToGraficosProgresoFragment()));
+
+        // Empty state button
+        binding.emptyState.btnFirstWeight.setOnClickListener(v ->
+                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToPesoFragment()));
     }
 
     private void setupObservers() {
-        // TODO: Observe ViewModel LiveData
+        // TODO: Observe ViewModel LiveData for current weight, initial weight, diff
+        // viewModel.currentWeight.observe(getViewLifecycleOwner(), weight -> ...)
     }
 
     @Override

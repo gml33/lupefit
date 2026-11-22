@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lupefit.feature.progreso.viewmodel.PesoViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.PesoFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:title="@string/peso"
+                app:navigationIcon="@drawable/ic_chevron_left" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_m">
+
+                <!-- Registrar Peso Form -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_l"
+                    app:cardCornerRadius="@dimen/corner_card"
+                    app:cardElevation="@dimen/elevation_card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_s"
+                                android:text="@string/peso_titulo"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilPeso"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:hint="@string/peso_hint"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                                app:endIconDrawable="@drawable/ic_scale"
+                                app:endIconContentDescription="@string/peso_kg">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etPeso"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="numberDecimal"
+                                    android:text="@={viewModel.pesoStr}" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilFecha"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:hint="@string/peso_fecha"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                                app:endIconDrawable="@drawable/ic_calendar"
+                                app:endIconContentDescription="@string/peso_fecha">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etFecha"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="date"
+                                    android:text="@={viewModel.fecha}" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilNota"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:hint="@string/peso_nota"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etNota"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textMultiLine"
+                                    android:text="@={viewModel.nota}"
+                                    android:minLines="2"
+                                    android:maxLines="4" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnGuardarPeso"
+                                style="@style/Widget.Material3.Button"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_s"
+                                android:text="@string/peso_guardar"
+                                android:onClick="@{() -> viewModel.savePeso()}" />
+                        </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Historial de Peso -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:text="@string/peso_historial"
+                    android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHistorialPeso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="300dp"
+                    tools:listitem="@layout/item_peso_historial" />
+
+                <!-- Empty State -->
+                <include
+                    android:id="@+id/emptyState"
+                    layout="@layout/view_empty_peso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

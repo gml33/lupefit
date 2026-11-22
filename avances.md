@@ -389,8 +389,8 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 8. `feature/*/` - 11 Feature Modules con Navigation Graphs, Fragments, ViewModels (Paso 6 completado)
 9. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion) COMPLETADO**. Próximo: **Paso 7 - Resto de Feature Modules Logic** (feature-progreso, feature-recetas, etc.).
+**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso) COMPLETADO**. Próximo: **Paso 7 - Resto de Feature Modules Logic** (feature-recetas, feature-escaneo, etc.).
 
 ---
 
-*Última actualización: 2026-11-21 - **Paso 7 (feature-nutricion logic) COMPLETADO**: NutricionHomeFragment, MetasFragment, MacrosDetalleFragment, GraficosNutricionFragment, macro summary card, metas nutricionales, net carbs mode, gráficos MPAndroidChart, ViewModels completos. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 49.8 MB.*
+*Última actualización: 2026-11-21 - **Paso 7 (feature-progreso logic) COMPLETADO**: ProgresoHomeFragment, PesoFragment, MedidasFragment, FotosFragment, ExportarFragment, GraficosProgresoFragment, PesoEntry/ProgresoDao/ProgresoRepository, Navigation Safe Args con Directions. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 48.5 MB.*
