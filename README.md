@@ -122,7 +122,7 @@
 - Layouts base (`fragment_*_home.xml`)
 - Strings localizadas (`values/strings.xml` con terminología argentino)
 
-### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas)**
+### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo)**
 
 #### **feature-diario Logic** ✅ COMPLETADO
 | Componente | Descripción |
@@ -193,10 +193,26 @@
 | **Modelos** | Receta (nombre, categoria, tiempos, porciones, dificultad, ingredientes[], nutrición), IngredienteReceta |
 | **Drawables** | ic_book, ic_clock, ic_people, ic_fire, ic_favorite_filled/outline, ic_search, ic_chevron_down, ic_add, ic_camera, ic_image, ic_delete (core-ui) |
 
+#### **feature-escaneo Logic** ✅ COMPLETADO
+| Componente | Descripción |
+|------------|-------------|
+| **EscanearHomeFragment** | Grid 4 acciones: código barras, comida IA, historial, buscar manual; historial reciente con RecyclerView |
+| **EscaneoCodigoBarrasFragment** | ML Kit Barcode Scanning, vista cámara, overlay guiado, resultado sheet con macros y agregar al diario |
+| **EscanearComidaFragment** | Placeholder para Passio Food Scan IA, detección alimentos, selección múltiple, ajuste porciones |
+| **HistorialEscaneosFragment** | Lista escaneos con tipo (código/IA), fecha, estado agregado, chip tipo, binding adapters |
+| **ResultadoEscaneoSheet** | Bottom sheet con info producto, macros, selector porción/tipo comida, confirmar agregar al diario |
+| **EscanearHomeViewModel** | Historial escaneos por tipo, load/delete, marcar como agregado al diario |
+| **EscaneoRepository/DAO** | Room entity (EscaneoEntity), sync fields, LiveData queries por tipo |
+| **Navigation Safe Args** | Directions classes para navegación type-safe entre fragments |
+| **Binding Adapters** | EscaneoBindingAdapters: tipoIcon, tipoText, agregadoText, agregadoColor (core-ui) |
+| **Layouts** | fragment_escanear_home, fragment_escaneo_codigo_barras, fragment_escanear_comida, fragment_historial_escaneos, sheet_resultado_escaneo, view_empty_escaneo, view_empty_historial_escaneos, item_historial_escaneo |
+| **Modelos** | EscaneoEntry (tipo, productoNombre, marca, codigoBarras, nutrición, agregadoAlDiario) |
+| **Drawables** | ic_barcode, ic_ai_food, ic_history (core-ui) |
+
 ### 📋 **Planificados (Paso 7 - Resto / Paso 8-9)**
 | Paso | Descripción |
 |------|-------------|
-| **7 (resto)** | feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes |
+| **7 (resto)** | feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes |
 | **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood |
 | **9** | Testing, CI/CD, Release |
 
@@ -644,4 +660,4 @@ copies of the Software...
 
 > **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17 • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
-**Última actualización**: 2026-11-22 | **Versión**: 1.0.0-Paso7-recetas | **Build**: `latest` ✅
+**Última actualización**: 2026-11-22 | **Versión**: 1.0.0-Paso7-escaneo | **Build**: `latest` ✅

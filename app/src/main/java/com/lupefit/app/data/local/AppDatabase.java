@@ -32,6 +32,7 @@ import com.lupefit.app.data.local.dao.ProgressPhotoDao;
 import com.lupefit.app.data.local.dao.FoodProductDao;
 import com.lupefit.app.data.local.dao.ProgresoDao;
 import com.lupefit.app.data.local.dao.RecetaDao;
+import com.lupefit.app.data.local.dao.EscaneoDao;
 import com.lupefit.app.data.local.entity.FoodLog;
 import com.lupefit.app.data.local.entity.WorkoutLog;
 import com.lupefit.app.data.local.entity.PersonalRecordEntity;
@@ -51,6 +52,7 @@ import com.lupefit.app.data.local.entity.FoodProduct;
 import com.lupefit.app.data.local.entity.PesoEntity;
 import com.lupefit.app.data.local.entity.RecetaEntity;
 import com.lupefit.app.data.local.entity.IngredienteRecetaEntity;
+import com.lupefit.app.data.local.entity.EscaneoEntity;
 import com.lupefit.core.sync.queue.SyncQueueDao;
 import com.lupefit.core.sync.model.SyncQueueItem;
 
@@ -88,6 +90,7 @@ import java.util.concurrent.Executors;
         PesoEntity.class,
         RecetaEntity.class,
         IngredienteRecetaEntity.class,
+        EscaneoEntity.class,
         SyncQueueItem.class
     },
     version = 1,
@@ -123,6 +126,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract FoodProductDao foodProductDao();
     public abstract ProgresoDao progresoDao();
     public abstract RecetaDao recetaDao();
+    public abstract EscaneoDao escaneoDao();
     public abstract SyncQueueDao syncQueueDao();
 
     public static AppDatabase getInstance(Context context) {

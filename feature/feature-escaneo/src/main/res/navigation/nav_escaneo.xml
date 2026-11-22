@@ -1,9 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_escaneo"
-    app:startDestination="@id/escanearCodigoBarrasFragment">
+    app:startDestination="@id/escanearHomeFragment">
+
+    <fragment
+        android:id="@+id/escanearHomeFragment"
+        android:name="com.lupefit.feature.escaneo.ui.EscanearHomeFragment"
+        android:label="@string/escanear_home_title"
+        tools:layout="@layout/fragment_escanear_home">
+        <action
+            android:id="@+id/action_escanearHomeFragment_to_escanearCodigoBarrasFragment"
+            app:destination="@id/escanearCodigoBarrasFragment" />
+        <action
+            android:id="@+id/action_escanearHomeFragment_to_escanearComidaFragment"
+            app:destination="@id/escanearComidaFragment" />
+        <action
+            android:id="@+id/action_escanearHomeFragment_to_historialEscaneosFragment"
+            app:destination="@id/historialEscaneosFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/escanearCodigoBarrasFragment"

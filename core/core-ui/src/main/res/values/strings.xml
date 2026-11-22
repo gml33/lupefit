@@ -13,4 +13,10 @@
     <string name="protein_short">g P</string>
     <string name="carbs_short">g C</string>
     <string name="fat_short">g G</string>
+
+    <!-- Escaneo -->
+    <string name="historial_escaneos_tipo_codigo">Código de barras</string>
+    <string name="historial_escaneos_tipo_comida">Comida (IA)</string>
+    <string name="historial_escaneos_agregado">Agregado al diario</string>
+    <string name="historial_escaneos_no_agregado">No agregado</string>
 </resources>

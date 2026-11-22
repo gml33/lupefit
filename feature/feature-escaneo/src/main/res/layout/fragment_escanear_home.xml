@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="androidx.gridlayout.widget.GridLayout"/>
+        <variable
+            name="viewModel"
+            type="com.lupefit.feature.escaneo.viewmodel.EscanearHomeViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +30,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorSurface"
                 app:navigationIcon="@drawable/ic_chevron_left"
-                app:title="@string/escanear_codigo_barras" />
+                app:title="@string/escanear_home_title" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -39,22 +46,208 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_m">
 
-                <!-- TODO: Add feature-specific content -->
-                <TextView
+                <!-- Empty State -->
+                <include
+                    android:id="@+id/emptyState"
+                    layout="@layout/view_empty_escaneo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/escanear_codigo_barras"
-                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:layout_marginBottom="@dimen/spacing_l" />
+                    android:visibility="gone" />
 
-                <TextView
+                <!-- Content Container -->
+                <LinearLayout
+                    android:id="@+id/contentContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Feature en desarrollo"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:gravity="center"
-                    android:padding="@dimen/spacing_xl" />
+                    android:orientation="vertical">
+
+                    <!-- Quick Actions Grid -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:text="@string/escanear_codigo_barras_title"
+                        android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                    <androidx.gridlayout.widget.GridLayout
+                        android:id="@+id/gridQuickActions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_l"
+                        android:alignmentMode="alignMargins"
+                        android:columnCount="2"
+                        android:rowCount="2"
+                        android:useDefaultMargins="true"
+                        tools:listitem="@layout/item_quick_action_escaneo">
+
+                        <!-- Card: Escanear Código de Barras -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardEscanearCodigoBarras"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="fill"
+                            android:layout_margin="@dimen/spacing_s"
+                            android:layout_rowWeight="1"
+                            app:cardCornerRadius="@dimen/corner_card"
+                            app:cardElevation="@dimen/elevation_card">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_l">
+
+                                <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_marginBottom="@dimen/spacing_s"
+                                    android:src="@drawable/ic_barcode"
+                                    android:tint="?attr/colorPrimary" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/escanear_codigo_barras_title"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textColor="?attr/colorOnSurface"
+                                    android:gravity="center" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Card: Escanear Comida IA -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardEscanearComida"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="fill"
+                            android:layout_margin="@dimen/spacing_s"
+                            android:layout_rowWeight="1"
+                            app:cardCornerRadius="@dimen/corner_card"
+                            app:cardElevation="@dimen/elevation_card">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_l">
+
+                                <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_marginBottom="@dimen/spacing_s"
+                                    android:src="@drawable/ic_ai_food"
+                                    android:tint="?attr/colorPrimary" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/escanear_comida_title"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textColor="?attr/colorOnSurface"
+                                    android:gravity="center" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Card: Historial -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardHistorialEscaneos"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="fill"
+                            android:layout_margin="@dimen/spacing_s"
+                            android:layout_rowWeight="1"
+                            app:cardCornerRadius="@dimen/corner_card"
+                            app:cardElevation="@dimen/elevation_card">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_l">
+
+                                <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_marginBottom="@dimen/spacing_s"
+                                    android:src="@drawable/ic_history"
+                                    android:tint="?attr/colorPrimary" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/escanear_historial_title"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textColor="?attr/colorOnSurface"
+                                    android:gravity="center" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Card: Buscar Manual -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardBuscarManual"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="fill"
+                            android:layout_margin="@dimen/spacing_s"
+                            android:layout_rowWeight="1"
+                            app:cardCornerRadius="@dimen/corner_card"
+                            app:cardElevation="@dimen/elevation_card">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_l">
+
+                                <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_marginBottom="@dimen/spacing_s"
+                                    android:src="@drawable/ic_search"
+                                    android:tint="?attr/colorPrimary" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Buscar manual"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textColor="?attr/colorOnSurface"
+                                    android:gravity="center" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </androidx.gridlayout.widget.GridLayout>
+
+                    <!-- Recent Scans Section -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:text="@string/historial_escaneos"
+                        android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvHistorialEscaneos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="200dp"
+                        tools:listitem="@layout/item_historial_escaneo" />
+
+                    <!-- Empty State for History -->
+                    <include
+                        android:id="@+id/emptyHistory"
+                        layout="@layout/view_empty_historial_escaneos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

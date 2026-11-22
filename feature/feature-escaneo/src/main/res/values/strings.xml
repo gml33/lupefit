@@ -3,4 +3,51 @@
     <string name="escanear_comida_ia">Escanear comida (IA)</string>
     <string name="historial_escaneos">Historial de escaneos</string>
     <string name="resultado_escaneo">Resultado del escaneo</string>
+
+    <!-- Escanear Home -->
+    <string name="escanear_home_title">Escaneo</string>
+    <string name="escanear_codigo_barras_title">Código de barras</string>
+    <string name="escanear_comida_title">Escanear comida (IA)</string>
+    <string name="escanear_historial_title">Historial</string>
+    <string name="escanear_sin_historial">Sin escaneos aún</string>
+    <string name="escanear_primer_escaneo">Realizá tu primer escaneo</string>
+
+    <!-- Escaneo Código de Barras -->
+    <string name="escanear_codigo_barras_instruccion">Apuntá al código de barras</string>
+    <string name="escanear_codigo_barras_procesando">Procesando…</string>
+    <string name="escanear_codigo_barras_encontrado">Producto encontrado</string>
+    <string name="escanear_codigo_barras_no_encontrado">Producto no encontrado</string>
+    <string name="escanear_codigo_barras_agregar_diario">Agregar al diario</string>
+    <string name="escanear_codigo_barras_buscar_manual">Buscar manualmente</string>
+
+    <!-- Escaneo Comida IA -->
+    <string name="escanear_comia_instruccion">Apuntá a la comida</string>
+    <string name="escanear_comida_analizando">Analizando imagen…</string>
+    <string name="escanear_comida_resultado">Alimentos detectados</string>
+    <string name="escanear_comida_seleccionar">Seleccioná los alimentos a agregar</string>
+    <string name="escanear_comida_agregar_todos">Agregar todos</string>
+    <string name="escanear_comida_ajustar_porcion">Ajustar porción</string>
+
+    <!-- Resultado Escaneo Sheet -->
+    <string name="resultado_escaneo_producto">Producto</string>
+    <string name="resultado_escaneo_marca">Marca</string>
+    <string name="resultado_escaneo_macros">Macros (por 100g)</string>
+    <string name="resultado_escaneo_porcion">Porción</string>
+    <string name="resultado_escaneo_gramos">Gramos</string>
+    <string name="resultado_escaneo_tipo_comida">Tipo de comida</string>
+    <string name="resultado_escaneo_confirmar">Confirmar</string>
+    <string name="resultado_escaneo_cancelar">Cancelar</string>
+
+    <!-- Historial Escaneos -->
+    <string name="historial_escaneos_vacio">No hay escaneos registrados</string>
+    <string name="historial_escaneos_tipo_codigo">Código de barras</string>
+    <string name="historial_escaneos_tipo_comida">Comida (IA)</string>
+    <string name="historial_escaneos_fecha">Fecha</string>
+    <string name="historial_escaneos_agregado">Agregado al diario</string>
+    <string name="historial_escaneos_no_agregado">No agregado</string>
+
+    <!-- Permisos -->
+    <string name="permiso_camara_titulo">Permiso de cámara requerido</string>
+    <string name="permiso_camara_mensaje">Para escanear necesitamos acceso a la cámara</string>
+    <string name="permiso_camara_otorgar">Otorgar permiso</string>
 </resources>

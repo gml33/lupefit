@@ -389,8 +389,8 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 8. `feature/*/` - 11 Feature Modules con Navigation Graphs, Fragments, ViewModels (Paso 6 completado)
 9. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas) COMPLETADO**. Próximo: **Paso 7 - Resto de Feature Modules Logic** (feature-escaneo, feature-agua, etc.).
+**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo) COMPLETADO**. Próximo: **Paso 7 - Resto de Feature Modules Logic** (feature-agua, feature-configuracion, etc.).
 
 ---
 
-*Última actualización: 2026-11-22 - **Paso 7 (feature-recetas logic) COMPLETADO**: RecetasHomeFragment, CrearRecetaFragment, ImportarRecetaFragment, ColeccionesFragment, RecetaDetalleFragment, Receta/IngredienteReceta models, RecetaRepository/DAO, Navigation Safe Args con Directions. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 50.1 MB.*
+*Última actualización: 2026-11-22 - **Paso 7 (feature-escaneo logic) COMPLETADO**: EscanearHomeFragment, EscaneoCodigoBarrasFragment, EscanearComidaFragment, HistorialEscaneosFragment, ResultadoEscaneoSheet, EscaneoEntry/EscaneoDao/EscaneoRepository, Navigation Safe Args con Directions, Binding Adapters para UI. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 50.1 MB.*
