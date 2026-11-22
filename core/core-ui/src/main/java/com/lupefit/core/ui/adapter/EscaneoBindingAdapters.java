@@ -8,6 +8,8 @@ import androidx.annotation.ColorInt;
 import androidx.databinding.BindingAdapter;
 
 import com.google.android.material.chip.Chip;
+import com.google.android.material.progressindicator.BaseProgressIndicator;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class EscaneoBindingAdapters {
 
@@ -46,5 +48,31 @@ public class EscaneoBindingAdapters {
         Context context = textView.getContext();
         @ColorInt int color = context.getColor(colorRes);
         textView.setTextColor(color);
+    }
+
+    @BindingAdapter("android:text")
+    public static void setTextFloat(TextInputEditText view, Float value) {
+        if (value != null) {
+            view.setText(String.valueOf(value));
+        }
+    }
+
+    @BindingAdapter("android:text")
+    public static void setTextInt(TextInputEditText view, Integer value) {
+        if (value != null) {
+            view.setText(String.valueOf(value));
+        }
+    }
+
+    @BindingAdapter("android:text")
+    public static void setTextLong(TextInputEditText view, Long value) {
+        if (value != null) {
+            view.setText(String.valueOf(value));
+        }
+    }
+
+    @BindingAdapter("app:indicatorColor")
+    public static void setIndicatorColor(BaseProgressIndicator view, int color) {
+        view.setIndicatorColor(color);
     }
 }

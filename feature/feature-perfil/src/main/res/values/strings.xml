@@ -5,4 +5,56 @@
     <string name="perfil_title">Perfil</string>
     <string name="registrate">Registrate</string>
     <string name="sync_account">Sincronizar cuenta</string>
+
+    <!-- Login -->
+    <string name="bienvenido_de_nuevo">¡Bienvenido de nuevo!</string>
+    <string name="inicia_sesion_para_continuar">Iniciá sesión para continuar</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="recordarme">Recordarme</string>
+    <string name="olvidaste_contraseña">¿Olvidaste tu contraseña?</string>
+    <string name="no_tienes_cuenta">¿No tenés cuenta?</string>
+
+    <!-- Registro -->
+    <string name="crea_tu_cuenta">Creá tu cuenta</string>
+    <string name="registrate_para_empezar">Registrate para empezar</string>
+    <string name="confirmar_contraseña">Confirmar contraseña</string>
+    <string name="acepto_terminos">Acepto los términos y condiciones</string>
+    <string name="ya_tienes_cuenta">¿Ya tenés cuenta?</string>
+
+    <!-- Editar Perfil -->
+    <string name="datos_personales">Datos personales</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="email">Email</string>
+    <string name="fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="seleccionar_fecha">Seleccionar fecha</string>
+    <string name="sexo">Sexo</string>
+    <string name="seleccionar_sexo">Seleccionar sexo</string>
+    <string name="altura_cm">Altura (cm)</string>
+    <string name="peso_kg">Peso (kg)</string>
+    <string name="antropometria">Antropometría</string>
+    <string name="nivel_actividad">Nivel de actividad</string>
+    <string name="seleccionar_nivel">Seleccionar nivel</string>
+    <string name="objetivo">Objetivo</string>
+    <string name="seleccionar_objetivo">Seleccionar objetivo</string>
+    <string name="actividad_y_objetivo">Actividad y objetivo</string>
+    <string name="guardar_cambios">Guardar cambios</string>
+
+    <!-- Sync Account -->
+    <string name="vincular_cuenta">Vincular cuenta</string>
+    <string name="vincular">Vincular</string>
+    <string name="cuenta_vinculada">Cuenta vinculada</string>
+    <string name="desvincular">Desvincular</string>
+    <string name="ultima_sincronizacion">Última sincronización</string>
+    <string name="sincronizar_ahora">Sincronizar ahora</string>
+    <string name="sincronizacion_automatica">Sincronización automática</string>
+    <string name="activar_sync_auto">Activar sync automático</string>
+    <string name="que_es_sync">¿Qué es la sincronización?</string>
+    <string name="sync_account_desc">La sincronización mantiene tus datos respaldados en la nube y disponibles en todos tus dispositivos. Tus datos se encriptan antes de enviarse al servidor.</string>
+
+    <!-- Cambiar Password -->
+    <string name="contraseña_actual">Contraseña actual</string>
+    <string name="contraseña_nueva">Contraseña nueva</string>
+    <string name="confirmar_contraseña_nueva">Confirmar contraseña nueva</string>
+    <string name="ingresa_contraseña_actual_y_nueva">Ingresá tu contraseña actual y la nueva</string>
 </resources>

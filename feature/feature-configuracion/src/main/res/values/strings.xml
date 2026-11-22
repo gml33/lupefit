@@ -10,4 +10,120 @@
     <string name="seguimiento_costos">Seguimiento de costos</string>
     <string name="sincronizacion">Sincronización</string>
     <string name="unidades">Unidades</string>
+
+    <!-- Cuenta -->
+    <string name="datos_personales">Datos personales</string>
+    <string name="nombre">Nombre</string>
+    <string name="email">Email</string>
+    <string name="seguridad">Seguridad</string>
+    <string name="cambiar_password">Cambiar contraseña</string>
+    <string name="autenticacion_2fa">Autenticación 2FA</string>
+    <string name="guardar_cambios">Guardar cambios</string>
+
+    <!-- Perfil Config -->
+    <string name="apellido">Apellido</string>
+    <string name="fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="seleccionar_fecha">Seleccionar fecha</string>
+    <string name="sexo">Sexo</string>
+    <string name="seleccionar_sexo">Seleccionar sexo</string>
+    <string name="altura_cm">Altura (cm)</string>
+    <string name="peso_kg">Peso (kg)</string>
+    <string name="grasa_corporal">Grasa corporal (%)</string>
+    <string name="antropometria">Antropometría</string>
+    <string name="nivel_actividad">Nivel de actividad</string>
+    <string name="seleccionar_nivel">Seleccionar nivel</string>
+    <string name="objetivo">Objetivo</string>
+    <string name="seleccionar_objetivo">Seleccionar objetivo</string>
+    <string name="actividad_y_objetivo">Actividad y objetivo</string>
+
+    <!-- Metas -->
+    <string name="metas_diarias">Metas diarias</string>
+    <string name="calorias">Calorías</string>
+    <string name="proteinas_g">Proteínas (g)</string>
+    <string name="carbohidratos_g">Carbohidratos (g)</string>
+    <string name="grasas_g">Grasas (g)</string>
+    <string name="fibra_g">Fibra (g)</string>
+    <string name="agua_ml">Agua (ml)</string>
+    <string name="opciones_avanzadas">Opciones avanzadas</string>
+    <string name="metas_por_comida">Metas por comida</string>
+    <string name="metas_por_comida_desc">Distribuye tus macros en cada comida</string>
+    <string name="net_carbs">Net Carbs</string>
+    <string name="net_carbs_desc">Resta la fibra de los carbohidratos totales</string>
+    <string name="presets">Presets</string>
+    <string name="preset_perder_peso">Perder peso</string>
+    <string name="preset_mantener">Mantener</string>
+    <string name="preset_ganar_masa">Ganar masa</string>
+
+    <!-- Notificaciones -->
+    <string name="notificaciones_generales">Notificaciones generales</string>
+    <string name="notificaciones_push">Notificaciones push</string>
+    <string name="resumen_semanal">Resumen semanal</string>
+    <string name="logros">Logros</string>
+    <string name="recordatorios">Recordatorios</string>
+    <string name="recordatorio_agua">Recordatorio de agua</string>
+    <string name="recordatorio_comida">Recordatorio de comida</string>
+    <string name="recordatorio_ejercicio">Recordatorio de ejercicio</string>
+    <string name="recordatorio_peso">Recordatorio de peso</string>
+    <string name="hora_recordatorio">Hora del recordatorio</string>
+
+    <!-- Apariencia -->
+    <string name="tema">Tema</string>
+    <string name="tema_sistema">Sistema</string>
+    <string name="tema_claro">Claro</string>
+    <string name="tema_oscuro">Oscuro</string>
+    <string name="animaciones">Animaciones</string>
+    <string name="animaciones_habilitadas">Animaciones habilitadas</string>
+    <string name="reducir_movimiento">Reducir movimiento</string>
+
+    <!-- Unidades -->
+    <string name="sistema_unidades">Sistema de unidades</string>
+    <string name="sistema_metrico">Métrico (kg, cm)</string>
+    <string name="sistema_imperial">Imperial (lb, ft)</string>
+    <string name="energia">Energía</string>
+    <string name="mostrar_kcal">Mostrar kcal</string>
+    <string name="mostrar_kj">Mostrar kJ</string>
+
+    <!-- Sync -->
+    <string name="estado_sincronizacion">Estado de sincronización</string>
+    <string name="ultima_sincronizacion">Última sincronización</string>
+    <string name="pendientes">Pendientes</string>
+    <string name="sincronizar_ahora">Sincronizar ahora</string>
+    <string name="configuracion_sync">Configuración de sync</string>
+    <string name="sincronizacion_automatica">Sincronización automática</string>
+    <string name="solo_wifi">Solo WiFi</string>
+    <string name="resolucion_conflictos">Resolución de conflictos</string>
+    <string name="resolucion_conflictos_desc">Los conflictos se resuelven automáticamente: servidor gana en configuraciones, merge en entradas de diario/ejercicio, más reciente en peso/fotos.</string>
+
+    <!-- Exportar -->
+    <string name="formato_exportacion">Formato de exportación</string>
+    <string name="csv">CSV</string>
+    <string name="json">JSON</string>
+    <string name="datos_a_exportar">Datos a exportar</string>
+    <string name="todos_los_datos">Todos los datos</string>
+    <string name="diario_alimentos">Diario de alimentos</string>
+    <string name="ejercicios">Ejercicios</string>
+    <string name="progreso">Progreso</string>
+    <string name="recetas">Recetas</string>
+    <string name="rango_fechas">Rango de fechas</string>
+    <string name="fecha_inicio">Fecha inicio</string>
+    <string name="fecha_fin">Fecha fin</string>
+    <string name="incluir_imagenes">Incluir imágenes</string>
+    <string name="exportar">Exportar</string>
+
+    <!-- Costos -->
+    <string name="activar_seguimiento_costos">Activar seguimiento de costos</string>
+    <string name="seguimiento_costos_desc">Registra precios de referencia para calcular el costo estimado de cada comida y tu presupuesto semanal.</string>
+    <string name="moneda">Moneda</string>
+    <string name="alerta_precio_dias">Alerta precio desactualizado (días)</string>
+    <string name="como_funciona">Cómo funciona</string>
+    <string name="costos_como_funciona">Cuando agregas un alimento con precio de referencia, LuPeFit calcula automáticamente el costo por porción. Puedes ver el costo estimado en el resumen del escaneo y en el presupuesto semanal.</string>
+
+    <!-- Presupuesto -->
+    <string name="meta_semanal">Meta semanal</string>
+    <string name="meta">Meta</string>
+    <string name="gasto_actual">Gasto actual: %s</string>
+    <string name="items_sin_precio">Items sin precio</string>
+    <string name="items_sin_precio_desc">Estos items no tienen precio de referencia y no se incluyen en el cálculo.</string>
+    <string name="ver_items_sin_precio">Ver items sin precio</string>
+    <string name="historial_presupuesto">Historial de presupuesto</string>
 </resources>

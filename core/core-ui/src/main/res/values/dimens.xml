@@ -44,6 +44,7 @@
     <dimen name="radius_lg">16dp</dimen>
     <dimen name="radius_card">24dp</dimen>
     <dimen name="corner_card">24dp</dimen>
+    <dimen name="corner_large">28dp</dimen>
     <dimen name="radius_button">14dp</dimen>
     <dimen name="radius_pill">9999dp</dimen>
     <dimen name="radius_bottom_sheet">28dp</dimen>

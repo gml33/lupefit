@@ -7,6 +7,7 @@
     <string name="search">Buscar</string>
     <string name="scan">Escanear</string>
     <string name="clear">Limpiar</string>
+    <string name="cambiar_contraseña">Cambiar contraseña</string>
 
     <!-- Macro shortcuts -->
     <string name="kcal_100g">kcal/100g</string>

@@ -34,13 +34,21 @@
         android:id="@+id/loginFragment"
         android:name="com.lupefit.feature.perfil.ui.LoginFragment"
         android:label="@string/entrar"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registroFragment"
+            app:destination="@id/registroFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/registroFragment"
         android:name="com.lupefit.feature.perfil.ui.RegistroFragment"
         android:label="@string/registrate"
-        tools:layout="@layout/fragment_registro" />
+        tools:layout="@layout/fragment_registro">
+        <action
+            android:id="@+id/action_registroFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/syncAccountFragment"

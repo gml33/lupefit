@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="com.lupefit.feature.configuracion.R" />
+                <variable
+            name="viewModel"
+            type="com.lupefit.feature.configuracion.viewmodel.MetasConfigViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/colorBackground"
+        tools:context=".ui.MetasFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorSurface"
+            android:elevation="0dp"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorSurface"
+                app:navigationIcon="@drawable/ic_chevron_left"
+                app:title="@string/metas_personalizadas" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="@dimen/spacing_m"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_m">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:cardCornerRadius="@dimen/corner_large"
+                    app:cardElevation="0dp"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/metas_diarias"
+                            android:textAppearance="?attr/textAppearanceTitleMedium"
+                            android:layout_marginBottom="@dimen/spacing_m" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/spacing_m">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilCalorias"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="@dimen/spacing_s"
+                                android:hint="@string/calorias"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                                app:endIconDrawable="@drawable/ic_fire"
+                                app:endIconContentDescription="@string/calorias">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etCalorias"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="number"
+                                    android:text="@{viewModel.calorias}" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilAgua"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/spacing_s"
+                                android:hint="@string/agua_ml"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                                app:endIconDrawable="@drawable/ic_water_drop"
+                                app:endIconContentDescription="@string/agua_ml">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etAgua"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="number"
+                                    android:text="@{viewModel.agua}" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/spacing_m">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilProteinas"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="@dimen/spacing_s"
+                                android:hint="@string/proteinas_g"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                                app:startIconDrawable="@drawable/ic_protein">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etProteinas"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="number"
+                                    android:text="@{viewModel.proteinas}" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilCarbohidratos"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/spacing_s"
+                                android:layout_marginEnd="@dimen/spacing_s"
+                                android:hint="@string/carbohidratos_g"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                                app:startIconDrawable="@drawable/ic_carbs">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etCarbohidratos"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="number"
+                                    android:text="@{viewModel.carbohidratos}" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilGrasas"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="@dimen/spacing_s"
+                                android:hint="@string/grasas_g"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                                app:startIconDrawable="@drawable/ic_fat">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etGrasas"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="number"
+                                    android:text="@{viewModel.grasas}" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilFibra"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/spacing_m"
+                            android:hint="@string/fibra_g"
+                            app:boxBackgroundMode="outline"
+                            app:boxCornerRadiusTopStart="@dimen/corner_small"
+                            app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                            app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                            app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                            app:startIconDrawable="@drawable/ic_fiber">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etFibra"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:text="@{viewModel.fibra}" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:cardCornerRadius="@dimen/corner_large"
+                    app:cardElevation="0dp"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/opciones_avanzadas"
+                            android:textAppearance="?attr/textAppearanceTitleMedium"
+                            android:layout_marginBottom="@dimen/spacing_m" />
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchMetasPorComida"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/spacing_s"
+                            android:text="@string/metas_por_comida"
+                            android:checked="@{viewModel.metasPorComida}" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/metas_por_comida_desc"
+                            android:textAppearance="?attr/textAppearanceBodySmall"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginBottom="@dimen/spacing_m"
+                            android:layout_marginStart="@dimen/spacing_l" />
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchNetCarbs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/net_carbs"
+                            android:checked="@{viewModel.netCarbs}" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/net_carbs_desc"
+                            android:textAppearance="?attr/textAppearanceBodySmall"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginStart="@dimen/spacing_l" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:cardCornerRadius="@dimen/corner_large"
+                    app:cardElevation="0dp"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/presets"
+                            android:textAppearance="?attr/textAppearanceTitleMedium"
+                            android:layout_marginBottom="@dimen/spacing_m" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnPresetPerderPeso"
+                                style="@style/Widget.Material3.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/spacing_s"
+                                android:text="@string/preset_perder_peso" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnPresetMantener"
+                                style="@style/Widget.Material3.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/spacing_s"
+                                android:text="@string/preset_mantener" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnPresetGanarMasa"
+                                style="@style/Widget.Material3.Button.OutlinedButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/preset_ganar_masa" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGuardarMetas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_l"
+                    android:text="@string/guardar_cambios"
+                    app:icon="@drawable/ic_save" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
