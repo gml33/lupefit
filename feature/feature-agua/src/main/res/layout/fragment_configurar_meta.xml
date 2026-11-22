@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lupefit.feature.agua.viewmodel.ConfigurarMetaViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.ConfigurarMetaFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:title="@string/configurar_meta_agua"
+                app:navigationIcon="@drawable/ic_chevron_left" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_m">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_l"
+                    app:cardCornerRadius="@dimen/corner_card"
+                    app:cardElevation="@dimen/elevation_card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_s"
+                                android:text="@string/configurar_meta_titulo"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:text="@string/configurar_meta_actual"
+                                android:textAppearance="?attr/textAppearanceLabelMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant" />
+
+                            <TextView
+                                android:id="@+id/tvCurrentGoal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:text="@{viewModel.currentGoalStr}"
+                                android:textAppearance="?attr/textAppearanceHeadlineMedium"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                tools:text="2500 ml" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilMeta"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:hint="@string/configurar_meta_hint"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                                app:endIconDrawable="@drawable/ic_water_drop"
+                                app:endIconContentDescription="@string/configurar_meta_ml">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etMeta"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="number"
+                                    android:text="@{viewModel.metaMlStr}" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnGuardarMeta"
+                                style="@style/Widget.Material3.Button"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_s"
+                                android:text="@string/configurar_meta_guardar"
+                                android:onClick="@{() -> viewModel.saveMeta()}" />
+                        </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Preset Goals -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:text="Metas rápidas"
+                    android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:weightSum="3">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPreset2000"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/spacing_xs"
+                        android:text="2000 ml"
+                        android:onClick="@{() -> viewModel.setPreset(2000)}" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPreset2500"
+                        style="@style/Widget.Material3.Button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/spacing_xs"
+                        android:text="2500 ml"
+                        android:onClick="@{() -> viewModel.setPreset(2500)}" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPreset3000"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/spacing_xs"
+                        android:text="3000 ml"
+                        android:onClick="@{() -> viewModel.setPreset(3000)}" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

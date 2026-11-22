@@ -122,7 +122,7 @@
 - Layouts base (`fragment_*_home.xml`)
 - Strings localizadas (`values/strings.xml` con terminología argentino)
 
-### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo)**
+### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua)**
 
 #### **feature-diario Logic** ✅ COMPLETADO
 | Componente | Descripción |
@@ -207,14 +207,29 @@
 | **Binding Adapters** | EscaneoBindingAdapters: tipoIcon, tipoText, agregadoText, agregadoColor (core-ui) |
 | **Layouts** | fragment_escanear_home, fragment_escaneo_codigo_barras, fragment_escanear_comida, fragment_historial_escaneos, sheet_resultado_escaneo, view_empty_escaneo, view_empty_historial_escaneos, item_historial_escaneo |
 | **Modelos** | EscaneoEntry (tipo, productoNombre, marca, codigoBarras, nutrición, agregadoAlDiario) |
-| **Drawables** | ic_barcode, ic_ai_food, ic_history (core-ui) |
+|| **Drawables** | ic_barcode, ic_ai_food, ic_history (core-ui) ||
+
+#### **feature-agua Logic** ✅ COMPLETADO
+|| Componente | Descripción ||
+||------------|-------------|
+|| **AguaHomeFragment** | Circular progress 150dp, metas diarias, quick-add 100/250/500ml + custom, grid 2x2 acciones (vaso/botella/meta/historial), historial reciente 5 items, empty state ||
+|| **ConfigurarMetaFragment** | Input numérico con validación (1-10000ml), presets 2000/2500/3000ml, guardado persistente ||
+|| **HistorialAguaFragment** | Lista completa con RecyclerView, fecha/hora/cantidad, empty state, swipe-to-delete ||
+|| **AguaHomeViewModel** | Circular progress % en tiempo real, consumido/meta/restante, historial load, quick-add con refresh automático ||
+|| **ConfigurarMetaViewModel** | Presets, input validation, meta guardada en preferencias ||
+|| **HistorialAguaViewModel** | Lista completa con delete, loading states ||
+|| **WaterRepository/DAO** | Room entity (WaterEntity), sync fields, LiveData queries por fecha, totales diarios ||
+|| **Navigation Safe Args** | Directions classes para navegación type-safe (AguaHome → ConfigurarMeta / HistorialAgua) ||
+|| **Layouts** | fragment_agua_home, fragment_configurar_meta, fragment_historial_agua, item_historial_agua, view_empty_agua, view_empty_historial_agua ||
+|| **Modelos** | WaterEntry (cantidadMl, fecha, hora, timestamp, tipoVaso) ||
+|| **Drawables** | ic_water_drop, ic_bottle, ic_target (core-ui) ||
 
 ### 📋 **Planificados (Paso 7 - Resto / Paso 8-9)**
-| Paso | Descripción |
-|------|-------------|
-| **7 (resto)** | feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes |
-| **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood |
-| **9** | Testing, CI/CD, Release |
+|| Paso | Descripción ||
+||------|-------------|
+|| **7 (resto)** | feature-configuracion, feature-perfil, feature-insights, feature-planes ||
+|| **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood ||
+|| **9** | Testing, CI/CD, Release ||
 
 ---
 
@@ -513,6 +528,18 @@ LuPeFit/
 - [x] Strings: categorías, patrones, equipamiento, tipos WOD
 - [x] **Build verificado**: BUILD SUCCESSFUL (APK 48MB)
 
+### ✅ Paso 7 - feature-agua Logic COMPLETADO
+- [x] `AguaHomeFragment`: Circular progress 150dp, quick-add 100/250/500ml, grid 2x2 acciones, historial reciente 5 items, empty state
+- [x] `ConfigurarMetaFragment`: Input numérico validado (1-10000ml), presets 2000/2500/3000ml, guardado persistente
+- [x] `HistorialAguaFragment`: Lista completa RecyclerView, fecha/hora/cantidad, empty state, delete
+- [x] ViewModels: `AguaHomeViewModel`, `ConfigurarMetaViewModel`, `HistorialAguaViewModel`
+- [x] `WaterRepository/DAO`: Room entity (WaterEntity), sync fields, LiveData queries por fecha, totales diarios
+- [x] Navigation Safe Args: Directions classes para navegación type-safe
+- [x] Layouts: `fragment_agua_home`, `fragment_configurar_meta`, `fragment_historial_agua`, `item_historial_agua`, `view_empty_agua`, `view_empty_historial_agua`
+- [x] Modelos: `WaterEntry` (cantidadMl, fecha, hora, timestamp, tipoVaso)
+- [x] Drawables: `ic_water_drop`, `ic_bottle`, `ic_target` (core-ui)
+- [x] **Build verificado**: BUILD SUCCESSFUL
+
 ---
 
 ## 🐳 Backend (Paso 5 - COMPLETADO)
@@ -660,4 +687,4 @@ copies of the Software...
 
 > **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17 • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
-**Última actualización**: 2026-11-22 | **Versión**: 1.0.0-Paso7-escaneo | **Build**: `latest` ✅
+**Última actualización**: 2026-11-22 | **Versión**: 1.0.0-Paso7-agua | **Build**: `latest` ✅

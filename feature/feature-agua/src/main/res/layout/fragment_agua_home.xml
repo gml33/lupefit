@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lupefit.feature.agua.viewmodel.AguaHomeViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,23 +45,408 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_m">
 
-                <!-- TODO: Add feature-specific content -->
-                <TextView
+                <!-- Empty State -->
+                <include
+                    android:id="@+id/emptyState"
+                    layout="@layout/view_empty_agua"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/agua_title"
-                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:layout_marginBottom="@dimen/spacing_l" />
+                    android:visibility="gone" />
 
-                <TextView
+                <!-- Content Container -->
+                <LinearLayout
+                    android:id="@+id/contentContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Feature en desarrollo"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:gravity="center"
-                    android:padding="@dimen/spacing_xl" />
+                    android:orientation="vertical">
+
+                    <!-- Water Progress Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardWaterProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_l"
+                        app:cardCornerRadius="@dimen/corner_card"
+                        app:cardElevation="@dimen/elevation_card">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_l">
+
+                            <!-- Progress Circle with Stats -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_l"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <!-- Circular Progress -->
+                                <FrameLayout
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:layout_gravity="center_horizontal">
+
+                                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                                        android:id="@+id/circularProgress"
+                                        android:layout_width="120dp"
+                                        android:layout_height="120dp"
+                                        android:indeterminate="false"
+                                        android:progress="@{viewModel.progressPercent}"
+                                        app:indicatorColor="@color/water_primary"
+                                        app:trackColor="@color/water_track"
+                                        app:trackThickness="8dp" />
+
+                                    <TextView
+                                        android:id="@+id/tvConsumedAmount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:text="@{viewModel.consumedStr}"
+                                        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+                                        android:textColor="?attr/colorOnSurface"
+                                        android:textStyle="bold"
+                                        tools:text="1750 ml" />
+                                </FrameLayout>
+
+                                <!-- Stats -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginStart="@dimen/spacing_l"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/agua_meta_diaria"
+                                        android:textAppearance="?attr/textAppearanceLabelMedium"
+                                        android:textColor="?attr/colorOnSurfaceVariant" />
+
+                                    <TextView
+                                        android:id="@+id/tvDailyGoal"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/spacing_xs"
+                                        android:text="@{viewModel.dailyGoalStr}"
+                                        android:textAppearance="?attr/textAppearanceTitleLarge"
+                                        android:textColor="?attr/colorOnSurface"
+                                        android:textStyle="bold"
+                                        tools:text="2500 ml" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/spacing_m"
+                                        android:text="@string/agua_consumido_hoy"
+                                        android:textAppearance="?attr/textAppearanceLabelMedium"
+                                        android:textColor="?attr/colorOnSurfaceVariant" />
+
+                                    <TextView
+                                        android:id="@+id/tvConsumedToday"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/spacing_xs"
+                                        android:text="@{viewModel.consumedStr}"
+                                        android:textAppearance="?attr/textAppearanceTitleLarge"
+                                        android:textColor="@color/water_primary"
+                                        android:textStyle="bold"
+                                        tools:text="1750 ml" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/spacing_m"
+                                        android:text="@string/agua_restante"
+                                        android:textAppearance="?attr/textAppearanceLabelMedium"
+                                        android:textColor="?attr/colorOnSurfaceVariant" />
+
+                                    <TextView
+                                        android:id="@+id/tvRemaining"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/spacing_xs"
+                                        android:text="@{viewModel.remainingStr}"
+                                        android:textAppearance="?attr/textAppearanceTitleLarge"
+                                        android:textColor="@color/status_warning"
+                                        android:textStyle="bold"
+                                        tools:text="750 ml" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <!-- Quick Add Buttons -->
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_s"
+                                android:text="@string/agregar_vaso"
+                                android:textAppearance="?attr/textAppearanceLabelMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center"
+                                android:weightSum="4">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnAdd100"
+                                    style="@style/Widget.Material3.Button.OutlinedButton"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_margin="@dimen/spacing_xs"
+                                    android:text="@string/vaso_100ml" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnAdd250"
+                                    style="@style/Widget.Material3.Button"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_margin="@dimen/spacing_xs"
+                                    android:text="@string/vaso_250ml" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnAdd500"
+                                    style="@style/Widget.Material3.Button.OutlinedButton"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_margin="@dimen/spacing_xs"
+                                    android:text="@string/vaso_500ml" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnAddCustom"
+                                    style="@style/Widget.Material3.Button.OutlinedButton"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_margin="@dimen/spacing_xs"
+                                    android:text="@string/vaso_personalizado"
+                                    app:icon="@drawable/ic_add"
+                                    app:iconGravity="start" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Quick Actions Grid -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:text="@string/agua_agregar_vaso"
+                        android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                    <androidx.gridlayout.widget.GridLayout
+                        android:id="@+id/gridQuickActions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_l"
+                        android:alignmentMode="alignMargins"
+                        android:columnCount="2"
+                        android:rowCount="2"
+                        android:useDefaultMargins="true"
+                        tools:listitem="@layout/item_quick_action_agua">
+
+                        <!-- Card: Agregar Vaso -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardAgregarVaso"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="fill"
+                            android:layout_margin="@dimen/spacing_s"
+                            android:layout_rowWeight="1"
+                            app:cardCornerRadius="@dimen/corner_card"
+                            app:cardElevation="@dimen/elevation_card">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_l">
+
+                                <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_marginBottom="@dimen/spacing_s"
+                                    android:src="@drawable/ic_water_drop"
+                                    android:tint="?attr/colorPrimary" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/agua_agregar_vaso"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textColor="?attr/colorOnSurface"
+                                    android:gravity="center" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Card: Agregar Botella -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardAgregarBotella"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="fill"
+                            android:layout_margin="@dimen/spacing_s"
+                            android:layout_rowWeight="1"
+                            app:cardCornerRadius="@dimen/corner_card"
+                            app:cardElevation="@dimen/elevation_card">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_l">
+
+                                <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_marginBottom="@dimen/spacing_s"
+                                    android:src="@drawable/ic_bottle"
+                                    android:tint="?attr/colorPrimary" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/agua_agregar_botella"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textColor="?attr/colorOnSurface"
+                                    android:gravity="center" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Card: Configurar Meta -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardConfigurarMeta"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="fill"
+                            android:layout_margin="@dimen/spacing_s"
+                            android:layout_rowWeight="1"
+                            app:cardCornerRadius="@dimen/corner_card"
+                            app:cardElevation="@dimen/elevation_card">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_l">
+
+                                <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_marginBottom="@dimen/spacing_s"
+                                    android:src="@drawable/ic_target"
+                                    android:tint="?attr/colorPrimary" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/agua_configurar_meta"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textColor="?attr/colorOnSurface"
+                                    android:gravity="center" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Card: Ver Historial -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardVerHistorial"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_columnWeight="1"
+                            android:layout_gravity="fill"
+                            android:layout_margin="@dimen/spacing_s"
+                            android:layout_rowWeight="1"
+                            app:cardCornerRadius="@dimen/corner_card"
+                            app:cardElevation="@dimen/elevation_card">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_l">
+
+                                <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_marginBottom="@dimen/spacing_s"
+                                    android:src="@drawable/ic_history"
+                                    android:tint="?attr/colorPrimary" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/agua_ver_historial"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textColor="?attr/colorOnSurface"
+                                    android:gravity="center" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </androidx.gridlayout.widget.GridLayout>
+
+                    <!-- Recent History Section -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/historial_agua"
+                            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnVerTodoHistorial"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ver todo" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRecentHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="200dp"
+                        tools:listitem="@layout/item_historial_agua" />
+
+                    <!-- Empty History State -->
+                    <include
+                        android:id="@+id/emptyHistory"
+                        layout="@layout/view_empty_historial_agua"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <!-- FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddWater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/spacing_m"
+            android:contentDescription="@string/agregar_vaso"
+            android:src="@drawable/ic_water_drop" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

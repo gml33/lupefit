@@ -22,12 +22,14 @@ import com.lupefit.app.data.local.dao.FoodProductDao;
 import com.lupefit.app.data.local.dao.ProgresoDao;
 import com.lupefit.app.data.local.dao.RecetaDao;
 import com.lupefit.app.data.local.dao.EscaneoDao;
+import com.lupefit.app.data.local.dao.WaterDao;
 import com.lupefit.app.data.local.repository.DiarioRepositoryImpl;
 import com.lupefit.app.data.local.repository.ExerciseRepositoryImpl;
 import com.lupefit.app.data.local.repository.FoodCatalogRepositoryImpl;
 import com.lupefit.app.data.local.repository.ProgresoRepositoryImpl;
 import com.lupefit.app.data.local.repository.RecetaRepositoryImpl;
 import com.lupefit.app.data.local.repository.EscaneoRepositoryImpl;
+import com.lupefit.app.data.local.repository.WaterRepositoryImpl;
 import com.lupefit.app.data.local.preferences.UserPreferencesManager;
 import com.lupefit.app.domain.engine.MacroCalculatorEngine;
 import com.lupefit.app.domain.engine.StreakManager;
@@ -84,6 +86,7 @@ public final class AppContainer {
     private volatile ProgresoDao progresoDao;
     private volatile RecetaDao recetaDao;
     private volatile EscaneoDao escaneoDao;
+    private volatile WaterDao waterDao;
 
     // Repositories (solo los implementados para feature-diario)
     private volatile DiarioRepository diarioRepository;
@@ -94,6 +97,7 @@ public final class AppContainer {
     private volatile com.lupefit.core.domain.repository.ProgresoRepository progresoRepository;
     private volatile com.lupefit.core.domain.repository.RecetaRepository recetaRepository;
     private volatile com.lupefit.core.domain.repository.EscaneoRepository escaneoRepository;
+    private volatile com.lupefit.core.domain.repository.WaterRepository waterRepository;
 
     // Preferences
     private volatile UserPreferencesManager userPreferencesManager;
@@ -144,6 +148,7 @@ public final class AppContainer {
         progresoDao = database.progresoDao();
         recetaDao = database.recetaDao();
         escaneoDao = database.escaneoDao();
+        waterDao = database.waterDao();
 
         // Repositories (solo los implementados para feature-diario)
         diarioRepository = new DiarioRepositoryImpl(context, getCurrentUserId());
@@ -154,6 +159,7 @@ public final class AppContainer {
         progresoRepository = new ProgresoRepositoryImpl(context);
         recetaRepository = new RecetaRepositoryImpl(context);
         escaneoRepository = new EscaneoRepositoryImpl(context);
+        waterRepository = new WaterRepositoryImpl(context);
 
         // Preferences
         userPreferencesManager = UserPreferencesManager.getInstance(context);
@@ -226,6 +232,7 @@ public final class AppContainer {
     public ProgresoDao getProgresoDao() { return progresoDao; }
     public RecetaDao getRecetaDao() { return recetaDao; }
     public EscaneoDao getEscaneoDao() { return escaneoDao; }
+    public WaterDao getWaterDao() { return waterDao; }
 
     public DiarioRepository getDiarioRepository() { return diarioRepository; }
     public FoodLogRepository getFoodLogRepository() { return foodLogRepository; }
@@ -235,6 +242,7 @@ public final class AppContainer {
     public com.lupefit.core.domain.repository.ProgresoRepository getProgresoRepository() { return progresoRepository; }
     public com.lupefit.core.domain.repository.RecetaRepository getRecetaRepository() { return recetaRepository; }
     public com.lupefit.core.domain.repository.EscaneoRepository getEscaneoRepository() { return escaneoRepository; }
+    public com.lupefit.core.domain.repository.WaterRepository getWaterRepository() { return waterRepository; }
 
     public UserPreferencesManager getUserPreferencesManager() { return userPreferencesManager; }
 

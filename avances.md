@@ -150,6 +150,18 @@
 - ✅ **Main Activity** - BottomNavigationView (Diario, Ejercicio, Nutrición, Progreso, Más), MasBottomSheet con 7 opciones
 - ✅ **Icons** - 13 vector drawables para bottom navigation y más opciones
 
+#### Hito 18: **PASO 7 - feature-agua Logic** ✅ **COMPLETADO**
+- ✅ **AguaHomeFragment** - Circular progress 150dp, metas diarias, quick-add 100/250/500ml + custom, grid 2x2 acciones (vaso/botella/meta/historial), historial reciente 5 items, empty state
+- ✅ **ConfigurarMetaFragment** - Input numérico con validación (1-10000ml), presets 2000/2500/3000ml, guardado persistente
+- ✅ **HistorialAguaFragment** - Lista completa con RecyclerView, fecha/hora/cantidad, empty state, swipe-to-delete
+- ✅ **ViewModels** - AguaHomeViewModel (progress % tiempo real, quick-add con refresh), ConfigurarMetaViewModel (presets, validación), HistorialAguaViewModel (lista completa con delete)
+- ✅ **WaterRepository/DAO** - Room entity (WaterEntity), sync fields, LiveData queries por fecha, totales diarios
+- ✅ **Navigation Safe Args** - Directions classes para navegación type-safe (AguaHome → ConfigurarMeta / HistorialAgua)
+- ✅ **Layouts** - fragment_agua_home, fragment_configurar_meta, fragment_historial_agua, item_historial_agua, view_empty_agua, view_empty_historial_agua
+- ✅ **Modelos** - WaterEntry (cantidadMl, fecha, hora, timestamp, tipoVaso)
+- ✅ **Drawables** - ic_water_drop, ic_bottle, ic_target (core-ui)
+- ✅ **Build verificado**: BUILD SUCCESSFUL
+
 ---
 
 ## Entregables Generados
@@ -389,8 +401,8 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 8. `feature/*/` - 11 Feature Modules con Navigation Graphs, Fragments, ViewModels (Paso 6 completado)
 9. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo) COMPLETADO**. Próximo: **Paso 7 - Resto de Feature Modules Logic** (feature-agua, feature-configuracion, etc.).
+**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua) COMPLETADO**. Próximo: **Paso 7 - Resto de Feature Modules Logic** (feature-configuracion, feature-perfil, feature-insights, feature-planes).
 
 ---
 
-*Última actualización: 2026-11-22 - **Paso 7 (feature-escaneo logic) COMPLETADO**: EscanearHomeFragment, EscaneoCodigoBarrasFragment, EscanearComidaFragment, HistorialEscaneosFragment, ResultadoEscaneoSheet, EscaneoEntry/EscaneoDao/EscaneoRepository, Navigation Safe Args con Directions, Binding Adapters para UI. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 50.1 MB.*
+*Última actualización: 2026-11-22 - **Paso 7 (feature-agua logic) COMPLETADO**: AguaHomeFragment, ConfigurarMetaFragment, HistorialAguaFragment, ViewModels, WaterRepository/DAO, Navigation Safe Args. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 50.1 MB.*

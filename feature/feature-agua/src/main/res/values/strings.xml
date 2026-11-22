@@ -3,5 +3,50 @@
     <string name="agua_title">Hidratación</string>
     <string name="configurar_meta_agua">Configurar meta de agua</string>
     <string name="historial_agua">Historial de agua</string>
-    <string name="vaso_250ml">Vaso 250ml</string>
+
+    <!-- Agua Home -->
+    <string name="agua_meta_diaria">Meta diaria</string>
+    <string name="agua_consumido_hoy">Consumido hoy</string>
+    <string name="agua_restante">Restante</string>
+    <string name="agua_progreso">Progreso</string>
+    <string name="agua_sin_datos">Sin datos de hidratación</string>
+    <string name="agua_agregar_primer_vaso">Agregá tu primer vaso</string>
+    <string name="agua_vasos">vasos</string>
+    <string name="agua_ml">ml</string>
+
+    <!-- Acciones rápidas -->
+    <string name="agua_agregar_vaso">Agregar vaso</string>
+    <string name="agua_agregar_botella">Agregar botella</string>
+    <string name="agua_configurar_meta">Configurar meta</string>
+    <string name="agua_ver_historial">Ver historial</string>
+
+    <!-- Configurar Meta -->
+    <string name="configurar_meta_titulo">Meta de hidratación</string>
+    <string name="configurar_meta_hint">Meta diaria (ml)</string>
+    <string name="configurar_meta_guardar">Guardar meta</string>
+    <string name="configurar_meta_actual">Meta actual</string>
+    <string name="configurar_meta_ml">ml</string>
+
+    <!-- Historial -->
+    <string name="historial_agua_titulo">Historial de hidratación</string>
+    <string name="historial_agua_vacio">No hay registros aún</string>
+    <string name="historial_agua_primer_registro">Registrá tu primer vaso</string>
+    <string name="historial_agua_fecha">Fecha</string>
+    <string name="historial_agua_total">Total consumido</string>
+    <string name="historial_agua_vasos">vasos</string>
+
+    <!-- Vasos rápidos -->
+    <string name="vaso_100ml">100 ml</string>
+    <string name="vaso_200ml">200 ml</string>
+    <string name="vaso_250ml">250 ml</string>
+    <string name="vaso_350ml">350 ml</string>
+    <string name="vaso_500ml">500 ml</string>
+    <string name="vaso_750ml">750 ml</string>
+    <string name="vaso_1000ml">1000 ml</string>
+    <string name="vaso_personalizado">Personalizado</string>
+
+    <!-- Notificaciones -->
+    <string name="agua_notificacion_titulo">Hora de hidratarse</string>
+    <string name="agua_notificacion_cuerpo">Recordá tomar agua para cumplir tu meta diaria</string>
+    <string name="agua_notificacion_configurar">Configurar recordatorios</string>
 </resources>

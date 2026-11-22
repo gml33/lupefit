@@ -28,6 +28,7 @@ import com.lupefit.app.data.local.dao.FoodDao;
 import com.lupefit.app.data.local.dao.RecipeDao;
 import com.lupefit.app.data.local.dao.RecipeIngredientDao;
 import com.lupefit.app.data.local.dao.WaterLogDao;
+import com.lupefit.app.data.local.dao.WaterDao;
 import com.lupefit.app.data.local.dao.ProgressPhotoDao;
 import com.lupefit.app.data.local.dao.FoodProductDao;
 import com.lupefit.app.data.local.dao.ProgresoDao;
@@ -53,6 +54,7 @@ import com.lupefit.app.data.local.entity.PesoEntity;
 import com.lupefit.app.data.local.entity.RecetaEntity;
 import com.lupefit.app.data.local.entity.IngredienteRecetaEntity;
 import com.lupefit.app.data.local.entity.EscaneoEntity;
+import com.lupefit.app.data.local.entity.WaterEntity;
 import com.lupefit.core.sync.queue.SyncQueueDao;
 import com.lupefit.core.sync.model.SyncQueueItem;
 
@@ -91,6 +93,7 @@ import java.util.concurrent.Executors;
         RecetaEntity.class,
         IngredienteRecetaEntity.class,
         EscaneoEntity.class,
+        WaterEntity.class,
         SyncQueueItem.class
     },
     version = 1,
@@ -122,6 +125,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract RecipeDao recipeDao();
     public abstract RecipeIngredientDao recipeIngredientDao();
     public abstract WaterLogDao waterLogDao();
+    public abstract WaterDao waterDao();
     public abstract ProgressPhotoDao progressPhotoDao();
     public abstract FoodProductDao foodProductDao();
     public abstract ProgresoDao progresoDao();
