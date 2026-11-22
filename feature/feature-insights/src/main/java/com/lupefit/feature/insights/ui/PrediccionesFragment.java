@@ -13,19 +13,19 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.lupefit.core.ui.R;
-import com.lupefit.feature.insights.databinding.FragmentInsightsHomeBinding;
-import com.lupefit.feature.insights.viewmodel.InsightsHomeViewModel;
+import com.lupefit.feature.insights.databinding.FragmentPrediccionesBinding;
+import com.lupefit.feature.insights.viewmodel.PrediccionesViewModel;
 
-public class InsightsHomeFragment extends Fragment {
+public class PrediccionesFragment extends Fragment {
 
-    private FragmentInsightsHomeBinding binding;
-    private InsightsHomeViewModel viewModel;
+    private FragmentPrediccionesBinding binding;
+    private PrediccionesViewModel viewModel;
     private NavController navController;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentInsightsHomeBinding.inflate(inflater, container, false);
+        binding = FragmentPrediccionesBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -34,7 +34,7 @@ public class InsightsHomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = NavHostFragment.findNavController(this);
-        viewModel = new ViewModelProvider(this).get(InsightsHomeViewModel.class);
+        viewModel = new ViewModelProvider(this, new PrediccionesViewModel.Factory(requireContext())).get(PrediccionesViewModel.class);
 
         setupToolbar();
         setupClickListeners();
@@ -43,15 +43,18 @@ public class InsightsHomeFragment extends Fragment {
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> navController.navigateUp());
-        binding.toolbar.setTitle("@string/insights_title");
+        binding.toolbar.setTitle(getString(R.string.predicciones));
     }
 
     private void setupClickListeners() {
-        // TODO: Add click listeners for cards/buttons
+        binding.btnRecargar.setOnClickListener(v -> viewModel.recargar());
     }
 
     private void setupObservers() {
-        // TODO: Observe ViewModel LiveData
+        viewModel.cargando.observe(getViewLifecycleOwner(), cargando -> {
+            binding.progressBar.setVisibility(cargando != null && cargando ? View.VISIBLE : View.GONE);
+            binding.btnRecargar.setEnabled(cargando == null || !cargando);
+        });
     }
 
     @Override

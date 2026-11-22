@@ -1,6 +1,6 @@
 # Avances - LuPeFit: Replicación y Rediseño Completo
 
-## Estado Actual: **PASO 7 - FEATURE MODULES LOGIC (feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil) COMPLETADO** ✅
+## Estado Actual: **PASO 7 - FEATURE MODULES LOGIC (feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights) COMPLETADO** ✅
 
 ### Fecha de Inicio: 2026-11-20
 ### Fase Actual: Implementación - **Paso 7 Completado (Feature Modules Logic: 9/11 módulos)**
@@ -177,6 +177,18 @@
 - ✅ **Layouts**: 6 fragment XMLs con MaterialToolbar, DataBinding, validaciones
 - ✅ **Auth local**: Email/password con validaciones, navegación Login→Registro, Registro→Login
 - ✅ **Build verificado**: BUILD SUCCESSFUL
+
+#### Hito 21: **PASO 7 - feature-insights Logic** ✅ **COMPLETADO**
+- ✅ **5 Fragments**: InsightsHomeFragment, SemanalFragment, TendenciasFragment, PrediccionesFragment, PatronesFragment
+- ✅ **4 ViewModels**: SemanalViewModel, TendenciasViewModel, PrediccionesViewModel, PatronesViewModel con Factory + LiveData
+- ✅ **Navigation**: nav_insights.xml con 5 destinos + actions desde InsightsHomeFragment
+- ✅ **Layouts**: 6 XMLs (4 fragments + item_resumen_macro + item_patron_alimentario) con DataBinding
+- ✅ **TendenciasFragment**: MPAndroidChart LineChart ×3 (Calorías, Peso, Proteínas), selector periodo chips (7/30/90 días), zoom/pan
+- ✅ **PrediccionesFragment**: Proyección peso objetivo + fecha estimada, calorías diarias, tendencia proteínas, racha actual streak
+- ✅ **PatronesFragment**: RecyclerView patrones detectados (positivos/negativos), frecuencia %, score consistencia, patrón principal
+- ✅ **SemanalFragment**: RecyclerView resumen macros con progress bars, selector periodo (Esta semana/Mes/Trimestre), recarga
+- ✅ **Strings**: values/strings.xml completo con terminología argentino
+- ⚠️ **Known Issue**: AGP 7.x/8.x genera R.jar para library modules pero no lo agrega al compile classpath Java → **Workaround pendiente** (migrar a KSP, convertir a Kotlin, o AGP 8.5+)
 
 ---
 
@@ -359,7 +371,7 @@ Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Fac
 - `feature-agua` → Tracking, Meta, Recordatorios
 - `feature-configuracion` → Cuenta, Perfil, Metas, Notificaciones, Apariencia, Sync, Exportar, **Cost Tracking Toggle**, **Presupuesto Semanal** ✅
 - `feature-perfil` → Perfil, Editar, Login, Registro, Password, Sync Account ✅
-- `feature-insights` → IA Nutricional, Tendencias, Predicciones, Weekly Digest, Patrones
+- `feature-insights` → IA Nutricional, Tendencias, Predicciones, Weekly Digest, Patrones ✅
 - `feature-planes` → Planes comida semanales, Planes entrenamiento, Mis Planes, Quick Log Recipe, **Presupuesto**
 
 ### PASO 8: Advanced Features (v2.0-v4.0)
@@ -417,7 +429,7 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 8. `feature/*/` - 11 Feature Modules con Navigation Graphs, Fragments, ViewModels (Paso 6 completado)
 9. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua) COMPLETADO**. Próximo: **Paso 7 - Resto de Feature Modules Logic** (feature-configuracion, feature-perfil, feature-insights, feature-planes).
+**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights) COMPLETADO**. Próximo: **Paso 7 - feature-planes Logic** + **Workaround AGP R class**.
 
 ---
 

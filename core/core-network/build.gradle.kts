@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace = "com.lupefit.core.network"
-    compileSdk = 36
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 28
-        targetSdk = 36
+        targetSdk = 33
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }

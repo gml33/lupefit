@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace = "com.lupefit.core.ui"
-    compileSdk = 36
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 28
-        targetSdk = 36
+        targetSdk = 33
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -55,8 +55,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.cardview:cardview:1.0.0")
 
-    // DataBinding
-    kapt("androidx.databinding:databinding-compiler:8.9.1")
+    // DataBinding - let AGP inject the correct version
 
     // CircleImageView
     implementation("de.hdodenhof:circleimageview:3.1.0")

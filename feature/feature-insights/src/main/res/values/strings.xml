@@ -4,4 +4,27 @@
     <string name="predicciones">Predicciones</string>
     <string name="resumen_semanal">Resumen semanal</string>
     <string name="tendencias">Tendencias</string>
+    <string name="ultimos_7_dias">Últimos 7 días</string>
+    <string name="ultimos_30_dias">Últimos 30 días</string>
+    <string name="ultimos_90_dias">Últimos 90 días</string>
+    <string name="calorias">Calorías</string>
+    <string name="peso">Peso</string>
+    <string name="proteinas">Proteínas</string>
+    <string name="periodo">Periodo</string>
+    <string name="esta_semana">Esta semana</string>
+    <string name="mes_pasado">Mes pasado</string>
+    <string name="trimestre">Trimestre</string>
+    <string name="recargar">Recargar</string>
+    <string name="proyeccion_peso">Proyección de peso</string>
+    <string name="fecha_estimada_objetivo">Fecha estimada objetivo</string>
+    <string name="proyeccion_calorias_diarias">Proyección calorías diarias</string>
+    <string name="tendencia_proteinas">Tendencia proteínas</string>
+    <string name="racha_actual">Racha actual</string>
+    <string name="mantente_constante">¡Mantente constante!</string>
+    <string name="patron_principal">Patrón principal</string>
+    <string name="consistencia_global">Consistencia global</string>
+    <string name="patrones_detectados">Patrones detectados</string>
+    <string name="frecuencia_ejemplo">85%</string>
+    <string name="patron_ejemplo">Patrón de ejemplo</string>
+    <string name="descripcion_patron_ejemplo">Descripción del patrón detectado</string>
 </resources>

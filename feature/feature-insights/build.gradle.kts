@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace = "com.lupefit.feature.insights"
-    compileSdk = 36
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 28
-        targetSdk = 36
+        targetSdk = 33
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -62,9 +62,9 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.circleimageview)
 
-    // Room - usar annotationProcessor (no KSP)
-    implementation(libs.room.runtime)
-    annotationProcessor(libs.room.compiler)
+    // Room - usar kapt
+//    implementation(libs.room.runtime)
+//    kapt(libs.room.compiler)
 
     // Health Connect
     implementation(libs.health.connect)

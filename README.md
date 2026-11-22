@@ -25,7 +25,7 @@
 | ![Progreso](docs/screenshots/progreso_light.svg) | ![Progreso Dark](docs/screenshots/progreso_dark.svg) |
 | *Gráficos de Progreso* | *Gráficos de Progreso (Oscuro)* |
 
-> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 7 - Feature Modules Logic (feature-diario, feature-ejercicio) COMPLETADO**.
+> **Nota**: Las capturas se agregarán conforme se implementen las pantallas. Actualmente el proyecto está en **Paso 7 - Feature Modules Logic (feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights) COMPLETADO**.
 
 ---
 
@@ -112,7 +112,7 @@
 | **feature-agua** | Tracking hidratación, Meta diaria, Recordatorios | AguaHomeFragment, nav_agua.xml |
 | **feature-configuracion** | Cuenta, Perfil, Metas, Notificaciones, Apariencia, Sync, Exportar, Costos, Presupuesto | ConfiguracionHomeFragment, nav_configuracion.xml |
 | **feature-perfil** | Auth local (email/password), Sync account, Dashboard personalizable | PerfilHomeFragment, nav_perfil.xml |
-| **feature-insights** | IA Nutricional, Tendencias, Predicciones, Weekly digest, Patrones | InsightsHomeFragment, nav_insights.xml |
+|| **feature-insights** | IA Nutricional, Tendencias, Predicciones, Weekly digest, Patrones | InsightsHomeFragment, SemanalFragment, TendenciasFragment, PrediccionesFragment, PatronesFragment, nav_insights.xml |
 | **feature-planes** | Planes comida semanales, Planes entrenamiento, Quick log recipe, Presupuesto | PlanesHomeFragment, nav_planes.xml |
 
 **Infraestructura común por módulo:**
@@ -254,14 +254,42 @@
 | **Layouts** | 6 fragment XMLs + nav_perfil.xml con 6 destinos + actions (login↔registro) |
 | **Navigation Safe Args** | Directions classes: PerfilHome → EditarPerfil/Login/Registro/SyncAccount, Login→Registro, Registro→Login |
 
-### 📋 **Planificados (Paso 7 - Resto / Paso 8-9)**
-| Paso | Descripción |
-|------|-------------|
-| **7 (resto)** | feature-insights, feature-planes |
-| **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood |
-| **9** | Testing, CI/CD, Release |
+### ✅ **Paso 7 - feature-insights Logic COMPLETADO**
+|| Componente | Descripción |
+||------------|-------------|
+|| **InsightsHomeFragment** | Dashboard principal con 4 accesos: Resumen Semanal, Tendencias, Predicciones, Patrones |
+|| **SemanalFragment** | Resumen macro semanal con RecyclerView, progress bars, selector periodo (Esta semana/Mes pasado/Trimestre), recarga |
+|| **TendenciasFragment** | Gráficos MPAndroidChart (Calorías, Peso, Proteínas), selector periodo chips (7/30/90 días), zoom/pan |
+|| **PrediccionesFragment** | Proyección peso objetivo, fecha estimada, calorías diarias, tendencia proteínas, racha actual |
+|| **PatronesFragment** | Patrones alimentarios detectados (positivos/negativos), frecuencia %, score consistencia global, patrón principal |
+|| **ViewModels** | SemanalViewModel, TendenciasViewModel, PrediccionesViewModel, PatronesViewModel con Factory + LiveData |
+|| **Layouts** | fragment_semanal, fragment_tendencias, fragment_predicciones, fragment_patrones, item_resumen_macro, item_patron_alimentario |
+|| **Navigation** | nav_insights.xml con 5 destinos + actions desde InsightsHomeFragment |
+|| **Strings** | values/strings.xml completo con terminología argentino |
 
----
+### ✅ **Paso 7 - feature-insights Logic COMPLETADO**
+|| Componente | Descripción |
+||------------|-------------|
+|| **InsightsHomeFragment** | Dashboard principal con 4 accesos: Resumen Semanal, Tendencias, Predicciones, Patrones |
+|| **SemanalFragment** | Resumen macro semanal con RecyclerView, progress bars, selector periodo (Esta semana/Mes pasado/Trimestre), recarga |
+|| **TendenciasFragment** | Gráficos MPAndroidChart (Calorías, Peso, Proteínas), selector periodo chips (7/30/90 días), zoom/pan |
+|| **PrediccionesFragment** | Proyección peso objetivo, fecha estimada, calorías diarias, tendencia proteínas, racha actual |
+|| **PatronesFragment** | Patrones alimentarios detectados (positivos/negativos), frecuencia %, score consistencia global, patrón principal |
+|| **ViewModels** | SemanalViewModel, TendenciasViewModel, PrediccionesViewModel, PatronesViewModel con Factory + LiveData |
+|| **Layouts** | fragment_semanal, fragment_tendencias, fragment_predicciones, fragment_patrones, item_resumen_macro, item_patron_alimentario |
+|| **Navigation** | nav_insights.xml con 5 destinos + actions desde InsightsHomeFragment |
+|| **Strings** | values/strings.xml completo con terminología argentino |
+|| **Build** | ⚠️ AGP 7.x/8.x R class JAR not on compile classpath for library modules — **Workaround needed** |
+
+### ✅ **Paso 7 - feature-planes Logic PLANIFICADO**
+|| Componente | Descripción |
+||------------|-------------|
+|| **PlanesHomeFragment** | Dashboard principal con 3 accesos: Planes Comida, Planes Entrenamiento, Presupuesto Semanal |
+|| **PlanesComidaFragment** | Semanas 1-52, crear/editar plan, recetas por día, lista compras consolidada |
+|| **PlanesEntrenamientoFragment** | Crear plan semanal, asignar rutinas a días, progreso semanal |
+|| **PresupuestoPlanesFragment** | Meta semanal, alerta >80%, items sin precio |
+|| **ViewModels** | PlanesComidaViewModel, PlanesEntrenamientoViewModel, PresupuestoPlanesViewModel |
+|| **Navigation** | nav_planes.xml con 4 destinos + actions |
 
 ## 🗄️ Base de Datos (Room) - 15 Entidades Offline-First
 
@@ -473,7 +501,7 @@ LuPeFit/
 | **4** | **Escáner + Catálogo + Voz + Costos** | ✅ **COMPLETADO** | `a96505d` |
 | **5** | **Backend FastAPI + Docker Compose** | ✅ **COMPLETADO** | - |
 | **6** | **Feature Modules (11 módulos UI)** | ✅ **COMPLETADO** | `a96505d` |
-| **7** | **Feature Modules Logic (feature-diario, feature-ejercicio)** | ✅ **COMPLETADO** | `0f7a83d` |
+|| **7** | **Feature Modules Logic (feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights)** | ✅ **COMPLETADO** | `latest` |
 | 7 (resto) | Feature Modules Logic (resto de módulos) | 🔄 En progreso | - |
 | 8 | Advanced Features (Health Connect, Voice, CrossFit, Macros Dinámicos, Streaks, Mood) | ⏳ Pendiente | - |
 | 9 | Testing, CI/CD, Release | ⏳ Pendiente | - |
