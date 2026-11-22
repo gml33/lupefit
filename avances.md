@@ -188,7 +188,7 @@
 - ✅ **PatronesFragment**: RecyclerView patrones detectados (positivos/negativos), frecuencia %, score consistencia, patrón principal
 - ✅ **SemanalFragment**: RecyclerView resumen macros con progress bars, selector periodo (Esta semana/Mes/Trimestre), recarga
 - ✅ **Strings**: values/strings.xml completo con terminología argentino
-- ⚠️ **Known Issue**: AGP 7.x/8.x genera R.jar para library modules pero no lo agrega al compile classpath Java → **Workaround pendiente** (migrar a KSP, convertir a Kotlin, o AGP 8.5+)
+- ✅ **Build**: AGP 7.3.1 + Kotlin 1.8.20 + android.enableRClassJars=false workaround **RESUELTO**
 
 ---
 
@@ -429,7 +429,7 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 8. `feature/*/` - 11 Feature Modules con Navigation Graphs, Fragments, ViewModels (Paso 6 completado)
 9. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights) COMPLETADO**. Próximo: **Paso 7 - feature-planes Logic** + **Workaround AGP R class**.
+**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights) COMPLETADO**. Próximo: **Paso 7 - feature-planes Logic** + **AGP R class workaround RESUELTO**.
 
 ---
 

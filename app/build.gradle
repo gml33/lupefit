@@ -68,7 +68,7 @@ dependencies {
     implementation project(":feature:feature-agua")
     implementation project(":feature:feature-configuracion")
     implementation project(":feature:feature-perfil")
-    implementation project(":feature:feature-insights")
+    //    implementation project(":feature:feature-insights")
     implementation project(":feature:feature-planes")
 
     // Material Design 3

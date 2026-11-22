@@ -37,16 +37,8 @@ public class MainActivity extends AppCompatActivity {
         if (navHostFragment != null) {
             navController = navHostFragment.getNavController();
 
-            // Configure AppBarConfiguration with top-level destinations
-            appBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.diarioNavHostFragment,
-                    R.id.ejercicioNavHostFragment,
-                    R.id.nutricionNavHostFragment,
-                    R.id.progresoNavHostFragment,
-                    R.id.masNavHostFragment
-            ).build();
-
-            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+            // Load initial feature (Diario)
+            navController.setGraph(R.navigation.nav_diario);
         }
     }
 
@@ -54,34 +46,22 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_diario) {
-                navController.navigate(R.id.action_global_diario);
+                navController.setGraph(R.navigation.nav_diario);
                 return true;
             } else if (itemId == R.id.nav_ejercicio) {
-                navController.navigate(R.id.action_global_ejercicio);
+                navController.setGraph(R.navigation.nav_ejercicio);
                 return true;
             } else if (itemId == R.id.nav_nutricion) {
-                navController.navigate(R.id.action_global_nutricion);
+                navController.setGraph(R.navigation.nav_nutricion);
                 return true;
             } else if (itemId == R.id.nav_progreso) {
-                navController.navigate(R.id.action_global_progreso);
+                navController.setGraph(R.navigation.nav_progreso);
                 return true;
             } else if (itemId == R.id.nav_mas) {
-                // Show bottom sheet with more options
-                showMasBottomSheet();
+                navController.setGraph(R.navigation.nav_planes);
                 return true;
             }
             return false;
         });
-    }
-
-    private void showMasBottomSheet() {
-        MasBottomSheet sheet = new MasBottomSheet();
-        sheet.show(getSupportFragmentManager(), "MasBottomSheet");
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
     }
 }

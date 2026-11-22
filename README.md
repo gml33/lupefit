@@ -268,18 +268,18 @@
 || **Strings** | values/strings.xml completo con terminología argentino |
 
 ### ✅ **Paso 7 - feature-insights Logic COMPLETADO**
-|| Componente | Descripción |
-||------------|-------------|
-|| **InsightsHomeFragment** | Dashboard principal con 4 accesos: Resumen Semanal, Tendencias, Predicciones, Patrones |
-|| **SemanalFragment** | Resumen macro semanal con RecyclerView, progress bars, selector periodo (Esta semana/Mes pasado/Trimestre), recarga |
-|| **TendenciasFragment** | Gráficos MPAndroidChart (Calorías, Peso, Proteínas), selector periodo chips (7/30/90 días), zoom/pan |
-|| **PrediccionesFragment** | Proyección peso objetivo, fecha estimada, calorías diarias, tendencia proteínas, racha actual |
-|| **PatronesFragment** | Patrones alimentarios detectados (positivos/negativos), frecuencia %, score consistencia global, patrón principal |
-|| **ViewModels** | SemanalViewModel, TendenciasViewModel, PrediccionesViewModel, PatronesViewModel con Factory + LiveData |
-|| **Layouts** | fragment_semanal, fragment_tendencias, fragment_predicciones, fragment_patrones, item_resumen_macro, item_patron_alimentario |
-|| **Navigation** | nav_insights.xml con 5 destinos + actions desde InsightsHomeFragment |
-|| **Strings** | values/strings.xml completo con terminología argentino |
-|| **Build** | ⚠️ AGP 7.x/8.x R class JAR not on compile classpath for library modules — **Workaround needed** |
+||| Componente | Descripción ||
+|||------------|-------------||
+||| **InsightsHomeFragment** | Dashboard principal con 4 accesos: Resumen Semanal, Tendencias, Predicciones, Patrones ||
+||| **SemanalFragment** | Resumen macro semanal con RecyclerView, progress bars, selector periodo (Esta semana/Mes pasado/Trimestre), recarga ||
+||| **TendenciasFragment** | Gráficos MPAndroidChart (Calorías, Peso, Proteínas), selector periodo chips (7/30/90 días), zoom/pan ||
+||| **PrediccionesFragment** | Proyección peso objetivo, fecha estimada, calorías diarias, tendencia proteínas, racha actual ||
+||| **PatronesFragment** | Patrones alimentarios detectados (positivos/negativos), frecuencia %, score consistencia global, patrón principal ||
+||| **ViewModels** | SemanalViewModel, TendenciasViewModel, PrediccionesViewModel, PatronesViewModel con Factory + LiveData ||
+||| **Layouts** | fragment_semanal, fragment_tendencias, fragment_predicciones, fragment_patrones, item_resumen_macro, item_patron_alimentario ||
+||| **Navigation** | nav_insights.xml con 5 destinos + actions desde InsightsHomeFragment ||
+||| **Strings** | values/strings.xml completo con terminología argentino ||
+||| **Build** | ✅ **AGP 7.3.1 + Kotlin 1.8.20 + android.enableRClassJars=false workaround resuelto** ||
 
 ### ✅ **Paso 7 - feature-planes Logic PLANIFICADO**
 || Componente | Descripción |

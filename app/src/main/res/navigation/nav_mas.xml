@@ -65,18 +65,6 @@
             app:argType="reference" />
     </fragment>
 
-    <!-- Insights -->
-    <fragment
-        android:id="@+id/insightsNavHostFragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:label="@string/insights_title"
-        tools:layout="@layout/fragment_nav_host">
-        <argument
-            android:name="navGraph"
-            android:value="@navigation/nav_insights"
-            app:argType="reference" />
-    </fragment>
-
     <!-- Planes -->
     <fragment
         android:id="@+id/planesNavHostFragment"
@@ -113,11 +101,6 @@
     <action
         android:id="@+id/action_global_perfil"
         app:destination="@id/perfilNavHostFragment"
-        app:popUpTo="@id/nav_mas"
-        app:popUpToInclusive="true" />
-    <action
-        android:id="@+id/action_global_insights"
-        app:destination="@id/insightsNavHostFragment"
         app:popUpTo="@id/nav_mas"
         app:popUpToInclusive="true" />
     <action

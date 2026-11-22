@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace = "com.lupefit.feature.insights"
-    compileSdk = 33
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 28
-        targetSdk = 33
+        targetSdk = 36
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -36,6 +36,8 @@ android {
     }
 }
 
+// Workaround for AGP 8.x: R class generated as JAR for library modules
+// but not automatically added to compile classpath
 dependencies {
     implementation(project(":core:core-ui"))
     implementation(project(":core:core-domain"))
@@ -62,12 +64,12 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.circleimageview)
 
-    // Room - usar kapt
+    // Room - usar KSP
 //    implementation(libs.room.runtime)
-//    kapt(libs.room.compiler)
+//    ksp(libs.room.compiler)
 
-    // Health Connect
-    implementation(libs.health.connect)
+    // Health Connect - requiere AGP 8.9.1+
+//    implementation(libs.health.connect)
 
     // Gson para JSON parsing
     implementation(libs.gson)
