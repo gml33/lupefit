@@ -190,6 +190,15 @@
 - ✅ **Strings**: values/strings.xml completo con terminología argentino
 - ✅ **Build**: AGP 7.3.1 + Kotlin 1.8.20 + android.enableRClassJars=false workaround **RESUELTO**
 
+#### Hito 22: **PASO 7 - feature-planes Logic** ✅ **COMPLETADO**
+- ✅ **7 Fragments**: PlanesHomeFragment, PlanComidaFragment, PlanEntrenamientoFragment, MisPlanesFragment, PresupuestoPlanFragment, CrearPlanComidaFragment, CrearPlanEntrenamientoFragment
+- ✅ **3 ViewModels**: PlanesComidaViewModel, PlanesEntrenamientoViewModel, PresupuestoPlanesViewModel con Factory + LiveData
+- ✅ **Navigation**: nav_planes.xml con 4 destinos + actions (PlanesHome → PlanComida / PlanEntrenamiento / Presupuesto / MisPlanes)
+- ✅ **Layouts**: 10 XMLs (7 fragments + item_dia_plan + item_presupuesto + dialog_agregar_presupuesto) con ViewBinding/DataBinding
+- ✅ **Strings**: values/strings.xml completo con terminología argentino
+- ✅ **Drawables**: ic_arrow_back, ic_add, ic_delete, ic_warning, ic_restaurant, ic_fitness, ic_attach_money, ic_folder (core-ui + feature-planes)
+- ✅ **Build**: AGP 7.3.1 + Kotlin 1.8.20 + android.enableRClassJars=false workaround **RESUELTO** - BUILD SUCCESSFUL
+
 ---
 
 ## Entregables Generados
@@ -429,8 +438,8 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 8. `feature/*/` - 11 Feature Modules con Navigation Graphs, Fragments, ViewModels (Paso 6 completado)
 9. `apktool_out/` / `jadx_out/` - Referencia app referencia (regenerables)
 
-**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights) COMPLETADO**. Próximo: **Paso 7 - feature-planes Logic** + **AGP R class workaround RESUELTO**.
+**Estado**: **Paso 7 (Feature Modules Logic - feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes) COMPLETADO**. Próximo: **Paso 8 - Advanced Features (Health Connect, Voice, CrossFit, Macros Dinámicos, Streaks, Mood)** + **AGP R class workaround RESUELTO**.
 
 ---
 
-*Última actualización: 2026-11-22 - **Paso 7 (feature-configuracion + feature-perfil logic) COMPLETADO**: 16 fragments, 16 ViewModels, Navigation Safe Args, Layouts, Drawables. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 50.1 MB.*
+*Última actualización: 2026-11-22 - **Paso 7 (feature-planes logic) COMPLETADO**: 7 fragments, 3 ViewModels, Navigation Safe Args, 10 Layouts, Drawables. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 50.1 MB.*

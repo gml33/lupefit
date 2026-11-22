@@ -17,30 +17,32 @@
             android:id="@+id/action_planesHomeFragment_to_planEntrenamientoFragment"
             app:destination="@id/planEntrenamientoFragment" />
         <action
-            android:id="@+id/action_planesHomeFragment_to_misPlanesFragment"
-            app:destination="@id/misPlanesFragment" />
-        <action
             android:id="@+id/action_planesHomeFragment_to_presupuestoPlanFragment"
             app:destination="@id/presupuestoPlanFragment" />
+        <action
+            android:id="@+id/action_planesHomeFragment_to_misPlanesFragment"
+            app:destination="@id/misPlanesFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/planComidaFragment"
         android:name="com.lupefit.feature.planes.ui.PlanComidaFragment"
-        android:label="@string/plan_comida_semanal"
-        tools:layout="@layout/fragment_plan_comida" />
+        android:label="@string/plan_comida"
+        tools:layout="@layout/fragment_plan_comida">
+        <action
+            android:id="@+id/action_planComidaFragment_to_crearPlanComidaFragment"
+            app:destination="@id/crearPlanComidaFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/planEntrenamientoFragment"
         android:name="com.lupefit.feature.planes.ui.PlanEntrenamientoFragment"
         android:label="@string/plan_entrenamiento"
-        tools:layout="@layout/fragment_plan_entrenamiento" />
-
-    <fragment
-        android:id="@+id/misPlanesFragment"
-        android:name="com.lupefit.feature.planes.ui.MisPlanesFragment"
-        android:label="@string/mis_planes"
-        tools:layout="@layout/fragment_mis_planes" />
+        tools:layout="@layout/fragment_plan_entrenamiento">
+        <action
+            android:id="@+id/action_planEntrenamientoFragment_to_crearPlanEntrenamientoFragment"
+            app:destination="@id/crearPlanEntrenamientoFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/presupuestoPlanFragment"
@@ -48,6 +50,13 @@
         android:label="@string/presupuesto_plan"
         tools:layout="@layout/fragment_presupuesto_plan" />
 
+    <fragment
+        android:id="@+id/misPlanesFragment"
+        android:name="com.lupefit.feature.planes.ui.MisPlanesFragment"
+        android:label="@string/mis_planes"
+        tools:layout="@layout/fragment_mis_planes" />
+
+    <!-- Placeholder fragments for future implementation -->
     <fragment
         android:id="@+id/crearPlanComidaFragment"
         android:name="com.lupefit.feature.planes.ui.CrearPlanComidaFragment"
@@ -59,4 +68,5 @@
         android:name="com.lupefit.feature.planes.ui.CrearPlanEntrenamientoFragment"
         android:label="@string/crear_plan_entrenamiento"
         tools:layout="@layout/fragment_crear_plan_entrenamiento" />
+
 </navigation>
