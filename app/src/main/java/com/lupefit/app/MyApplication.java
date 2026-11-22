@@ -53,13 +53,14 @@ import com.lupefit.core.domain.provider.DiarioRepositoryProvider;
 import com.lupefit.core.domain.provider.ExerciseRepositoryProvider;
 import com.lupefit.core.domain.provider.FoodCatalogRepositoryProvider;
 import com.lupefit.core.domain.provider.ProgresoRepositoryProvider;
+import com.lupefit.core.domain.provider.RecetaRepositoryProvider;
 
 /**
  * Application principal - Inicializa el contenedor de dependencias manual (AppContainer).
  * No usa Dagger/Hilt/Kapt - Inyección 100% manual en Java 17+.
  * Implementa SyncWorkerFactoryProvider para proveer dependencias al SyncWorker.
  */
-public class MyApplication extends Application implements SyncWorkerFactoryProvider, DiarioRepositoryProvider, ExerciseRepositoryProvider, FoodCatalogRepositoryProvider, ProgresoRepositoryProvider {
+public class MyApplication extends Application implements SyncWorkerFactoryProvider, DiarioRepositoryProvider, ExerciseRepositoryProvider, FoodCatalogRepositoryProvider, ProgresoRepositoryProvider, RecetaRepositoryProvider {
 
     private static MyApplication instance;
     private AppContainer container;
@@ -120,5 +121,10 @@ public class MyApplication extends Application implements SyncWorkerFactoryProvi
     @Override
     public com.lupefit.core.domain.repository.ProgresoRepository getProgresoRepository() {
         return container.getProgresoRepository();
+    }
+
+    @Override
+    public com.lupefit.core.domain.repository.RecetaRepository getRecetaRepository() {
+        return container.getRecetaRepository();
     }
 }

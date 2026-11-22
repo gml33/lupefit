@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lupefit.feature.recetas.viewmodel.RecetasHomeViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,23 +45,155 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_m">
 
-                <!-- TODO: Add feature-specific content -->
-                <TextView
+                <!-- Empty State -->
+                <include
+                    android:id="@+id/emptyState"
+                    layout="@layout/view_empty_recetas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/recetas_title"
-                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:layout_marginBottom="@dimen/spacing_l" />
+                    android:visibility="gone" />
 
-                <TextView
+                <!-- Content Container -->
+                <LinearLayout
+                    android:id="@+id/contentContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Feature en desarrollo"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:gravity="center"
-                    android:padding="@dimen/spacing_xl" />
+                    android:orientation="vertical">
+
+                    <!-- Search Bar -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_m"
+                        android:hint="@string/buscar_recetas_hint"
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusTopStart="@dimen/corner_small"
+                        app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                        app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                        app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                        app:startIconDrawable="@drawable/ic_search"
+                        app:startIconContentDescription="@string/recetas_buscar">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Filter Chips -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:text="@string/recetas_filtrar"
+                        android:textAppearance="?attr/textAppearanceLabelMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroupFilters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_m"
+                        android:orientation="horizontal"
+                        app:singleSelection="true"
+                        app:chipSpacing="@dimen/spacing_s"
+                        app:chipSpacingHorizontal="@dimen/spacing_s">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipTodas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/filtro_todas"
+                            android:checked="true"
+                            android:checkable="true" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipFavoritas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/filtro_favoritas"
+                            android:checkable="true" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipRecientes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/filtro_recientes"
+                            android:checkable="true" />
+                    </com.google.android.material.chip.ChipGroup>
+
+                    <!-- Sort Dropdown -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilSort"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_m"
+                        android:hint="@string/recetas_ordenar"
+                        app:boxBackgroundMode="outline"
+                        app:boxCornerRadiusTopStart="@dimen/corner_small"
+                        app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                        app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                        app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                        app:endIconDrawable="@drawable/ic_chevron_down"
+                        app:endIconContentDescription="@string/recetas_ordenar"
+                        app:endIconMode="dropdown_menu"
+                        app:endIconTint="?attr/colorOnSurfaceVariant">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etSort"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Recipes List Title -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/recetas_mis_recetas"
+                            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCrearReceta"
+                            style="@style/Widget.Material3.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/crear_receta"
+                            app:icon="@drawable/ic_add"
+                            app:iconGravity="start" />
+                    </LinearLayout>
+
+                    <!-- RecyclerView -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRecetas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="400dp"
+                        tools:listitem="@layout/item_receta" />
+                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <!-- FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCrearReceta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/spacing_m"
+            android:contentDescription="@string/crear_receta"
+            android:src="@drawable/ic_add" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

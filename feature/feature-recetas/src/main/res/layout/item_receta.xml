@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="receta"
+            type="com.lupefit.core.domain.model.Receta" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_s"
+        app:cardCornerRadius="@dimen/corner_card"
+        app:cardElevation="@dimen/elevation_card"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_m">
+
+            <!-- Recipe Image -->
+            <ImageView
+                android:id="@+id/ivRecetaImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="@dimen/spacing_m"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_book"
+                android:contentDescription="@{receta.nombre}"
+                tools:src="@drawable/ic_book" />
+
+            <!-- Recipe Info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{receta.nombre}"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold"
+                    tools:text="Pollo al horno con verduras" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <!-- Category Chip -->
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_s"
+                        android:text="@{receta.categoria}"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        app:chipCornerRadius="@dimen/corner_small"
+                        tools:text="Almuerzo" />
+
+                    <!-- Time -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_m"
+                        android:text="@{@string/tiempo_prep_formato(receta.tiempoPrepMin, receta.tiempoCoccionMin)}"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:drawableStart="@drawable/ic_clock"
+                        android:drawablePadding="@dimen/spacing_xs"
+                        tools:text="25 min" />
+
+                    <!-- Portions -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/porciones_formato(receta.porciones)}"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:drawableStart="@drawable/ic_people"
+                        android:drawablePadding="@dimen/spacing_xs"
+                        tools:text="4 porc." />
+                </LinearLayout>
+
+                <!-- Calories preview -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:text="@{@string/calorias_formato(receta.caloriasPorPorcion)}"
+                    android:textAppearance="?attr/textAppearanceLabelSmall"
+                    android:textColor="@color/macro_carbs"
+                    android:drawableStart="@drawable/ic_fire"
+                    android:drawablePadding="@dimen/spacing_xs"
+                    tools:text="350 kcal" />
+            </LinearLayout>
+
+            <!-- Favorite Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFavorite"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/favorito"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:icon="@{receta.esFavorita ? @drawable/ic_favorite_filled : @drawable/ic_favorite_outline}"
+                app:iconGravity="textStart"
+                app:iconTint="@{receta.esFavorita ? @color/status_error : @color/colorOnSurfaceVariant}"
+                tools:src="@drawable/ic_favorite_outline" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

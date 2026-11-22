@@ -20,10 +20,12 @@ import com.lupefit.app.data.local.dao.WaterLogDao;
 import com.lupefit.app.data.local.dao.ProgressPhotoDao;
 import com.lupefit.app.data.local.dao.FoodProductDao;
 import com.lupefit.app.data.local.dao.ProgresoDao;
+import com.lupefit.app.data.local.dao.RecetaDao;
 import com.lupefit.app.data.local.repository.DiarioRepositoryImpl;
 import com.lupefit.app.data.local.repository.ExerciseRepositoryImpl;
 import com.lupefit.app.data.local.repository.FoodCatalogRepositoryImpl;
 import com.lupefit.app.data.local.repository.ProgresoRepositoryImpl;
+import com.lupefit.app.data.local.repository.RecetaRepositoryImpl;
 import com.lupefit.app.data.local.preferences.UserPreferencesManager;
 import com.lupefit.app.domain.engine.MacroCalculatorEngine;
 import com.lupefit.app.domain.engine.StreakManager;
@@ -78,6 +80,7 @@ public final class AppContainer {
     private volatile ProgressPhotoDao progressPhotoDao;
     private volatile FoodProductDao foodProductDao;
     private volatile ProgresoDao progresoDao;
+    private volatile RecetaDao recetaDao;
 
     // Repositories (solo los implementados para feature-diario)
     private volatile DiarioRepository diarioRepository;
@@ -86,6 +89,7 @@ public final class AppContainer {
     private volatile FoodCatalogRepository foodCatalogRepository;
     private volatile com.lupefit.core.domain.repository.ExerciseRepository exerciseRepository;
     private volatile com.lupefit.core.domain.repository.ProgresoRepository progresoRepository;
+    private volatile com.lupefit.core.domain.repository.RecetaRepository recetaRepository;
 
     // Preferences
     private volatile UserPreferencesManager userPreferencesManager;
@@ -134,6 +138,7 @@ public final class AppContainer {
         progressPhotoDao = database.progressPhotoDao();
         foodProductDao = database.foodProductDao();
         progresoDao = database.progresoDao();
+        recetaDao = database.recetaDao();
 
         // Repositories (solo los implementados para feature-diario)
         diarioRepository = new DiarioRepositoryImpl(context, getCurrentUserId());
@@ -142,6 +147,7 @@ public final class AppContainer {
         foodCatalogRepository = new FoodCatalogRepositoryImpl(context, foodProductDao);
         exerciseRepository = new ExerciseRepositoryImpl(context);
         progresoRepository = new ProgresoRepositoryImpl(context);
+        recetaRepository = new RecetaRepositoryImpl(context);
 
         // Preferences
         userPreferencesManager = UserPreferencesManager.getInstance(context);
@@ -212,6 +218,7 @@ public final class AppContainer {
     public ProgressPhotoDao getProgressPhotoDao() { return progressPhotoDao; }
     public FoodProductDao getFoodProductDao() { return foodProductDao; }
     public ProgresoDao getProgresoDao() { return progresoDao; }
+    public RecetaDao getRecetaDao() { return recetaDao; }
 
     public DiarioRepository getDiarioRepository() { return diarioRepository; }
     public FoodLogRepository getFoodLogRepository() { return foodLogRepository; }
@@ -219,6 +226,7 @@ public final class AppContainer {
     public FoodCatalogRepository getFoodCatalogRepository() { return foodCatalogRepository; }
     public com.lupefit.core.domain.repository.ExerciseRepository getExerciseRepository() { return exerciseRepository; }
     public com.lupefit.core.domain.repository.ProgresoRepository getProgresoRepository() { return progresoRepository; }
+    public com.lupefit.core.domain.repository.RecetaRepository getRecetaRepository() { return recetaRepository; }
 
     public UserPreferencesManager getUserPreferencesManager() { return userPreferencesManager; }
 

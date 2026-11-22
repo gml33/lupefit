@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.lupefit.feature.recetas.viewmodel.CrearRecetaViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.CrearRecetaFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:title="@string/crear_receta_titulo"
+                app:navigationIcon="@drawable/ic_chevron_left" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_m">
+
+                <!-- Foto de la receta -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:cardCornerRadius="@dimen/corner_card"
+                    app:cardElevation="@dimen/elevation_card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_s"
+                                android:text="@string/crear_receta_foto"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/ivRecetaPhoto"
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:layout_marginEnd="@dimen/spacing_m"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ic_book"
+                                    android:contentDescription="@string/crear_receta_foto" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/btnTomarFoto"
+                                        style="@style/Widget.Material3.Button.OutlinedButton"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="@dimen/spacing_s"
+                                        android:text="@string/crear_receta_tomar_foto"
+                                        app:icon="@drawable/ic_camera"
+                                        app:iconGravity="start" />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        android:id="@+id/btnGaleria"
+                                        style="@style/Widget.Material3.Button.TextButton"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/crear_receta_galeria"
+                                        app:icon="@drawable/ic_image"
+                                        app:iconGravity="start" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Información básica -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:cardCornerRadius="@dimen/corner_card"
+                    app:cardElevation="@dimen/elevation_card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:text="@string/crear_receta_nombre"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilNombre"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:hint="@string/crear_receta_nombre"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etNombre"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@={viewModel.nombre}" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilDescripcion"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:hint="@string/crear_receta_descripcion"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etDescripcion"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textMultiLine"
+                                    android:text="@={viewModel.descripcion}"
+                                    android:minLines="2"
+                                    android:maxLines="4" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <!-- Row: Categoria + Dificultad -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilCategoria"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/spacing_s"
+                                    android:layout_weight="1"
+                                    android:hint="@string/crear_receta_categoria"
+                                    app:boxBackgroundMode="outline"
+                                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                    app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                                    app:endIconMode="dropdown_menu"
+                                    app:endIconDrawable="@drawable/ic_chevron_down"
+                                    app:endIconTint="?attr/colorOnSurfaceVariant">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etCategoria"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:focusable="false"
+                                        android:focusableInTouchMode="false"
+                                        android:inputType="none"
+                                        android:text="@={viewModel.categoria}" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilDificultad"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/spacing_s"
+                                    android:layout_weight="1"
+                                    android:hint="@string/crear_receta_dificultad"
+                                    app:boxBackgroundMode="outline"
+                                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                    app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                                    app:endIconMode="dropdown_menu"
+                                    app:endIconDrawable="@drawable/ic_chevron_down"
+                                    app:endIconTint="?attr/colorOnSurfaceVariant">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etDificultad"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:focusable="false"
+                                        android:focusableInTouchMode="false"
+                                        android:inputType="none"
+                                        android:text="@={viewModel.dificultad}" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <!-- Row: Tiempo prep + Tiempo coccion + Porciones -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:orientation="horizontal"
+                                android:weightSum="3">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilTiempoPrep"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/spacing_s"
+                                    android:layout_weight="1"
+                                    android:hint="@string/crear_receta_tiempo_prep"
+                                    app:boxBackgroundMode="outline"
+                                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                    app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etTiempoPrep"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="number"
+                                        android:text="@={viewModel.tiempoPrepMinStr}" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilTiempoCoccion"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/spacing_s"
+                                    android:layout_marginEnd="@dimen/spacing_s"
+                                    android:layout_weight="1"
+                                    android:hint="@string/crear_receta_tiempo_coccion"
+                                    app:boxBackgroundMode="outline"
+                                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                    app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etTiempoCoccion"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="number"
+                                        android:text="@={viewModel.tiempoCoccionMinStr}" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilPorciones"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/spacing_s"
+                                    android:layout_weight="1"
+                                    android:hint="@string/crear_receta_porciones"
+                                    app:boxBackgroundMode="outline"
+                                    app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                    app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                    app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                    app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etPorciones"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:inputType="number"
+                                        android:text="@={viewModel.porcionesStr}" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Ingredientes -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:cardCornerRadius="@dimen/corner_card"
+                    app:cardElevation="@dimen/elevation_card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/crear_receta_ingredientes"
+                                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                                    android:textStyle="bold" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnAgregarIngrediente"
+                                    style="@style/Widget.Material3.Button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/crear_receta_agregar_ingrediente"
+                                    app:icon="@drawable/ic_add"
+                                    app:iconGravity="start" />
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvIngredientes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="200dp"
+                                tools:listitem="@layout/item_ingrediente" />
+                        </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Instrucciones -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:cardCornerRadius="@dimen/corner_card"
+                    app:cardElevation="@dimen/elevation_card">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/spacing_m"
+                                android:text="@string/crear_receta_instrucciones"
+                                android:textAppearance="?attr/textAppearanceTitleMedium"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilInstrucciones"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/crear_receta_instrucciones"
+                                app:boxBackgroundMode="outline"
+                                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                                app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etInstrucciones"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textMultiLine"
+                                    android:text="@={viewModel.instrucciones}"
+                                    android:minLines="6"
+                                    android:maxLines="12" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Guardar Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGuardarReceta"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:text="@string/crear_receta_guardar"
+                    android:onClick="@{() -> viewModel.saveReceta()}" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

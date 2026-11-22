@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="ingrediente"
+            type="com.lupefit.core.domain.model.IngredienteReceta" />
+        <variable
+            name="viewModel"
+            type="com.lupefit.feature.recetas.viewmodel.CrearRecetaViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_s"
+        app:cardCornerRadius="@dimen/corner_small"
+        app:cardElevation="@dimen/elevation_card"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_m">
+
+            <!-- Alimento (with dropdown) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginEnd="@dimen/spacing_s"
+                android:hint="@string/ingrediente_alimento"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                app:endIconMode="dropdown_menu"
+                app:endIconDrawable="@drawable/ic_chevron_down"
+                app:endIconTint="?attr/colorOnSurfaceVariant">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none"
+                    android:text="@={ingrediente.alimentoNombre}"
+                    tools:text="Pechuga de pollo" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Cantidad -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/spacing_s"
+                android:hint="@string/ingrediente_cantidad"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                app:boxCornerRadiusBottomEnd="@dimen/corner_small">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:text="@={ingrediente.cantidadStr}"
+                    tools:text="200" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Unidad -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:layout_marginEnd="@dimen/spacing_s"
+                android:hint="@string/ingrediente_unidad"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusTopStart="@dimen/corner_small"
+                app:boxCornerRadiusTopEnd="@dimen/corner_small"
+                app:boxCornerRadiusBottomStart="@dimen/corner_small"
+                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
+                app:endIconMode="dropdown_menu"
+                app:endIconDrawable="@drawable/ic_chevron_down"
+                app:endIconTint="?attr/colorOnSurfaceVariant">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none"
+                    android:text="@={ingrediente.unidad}"
+                    tools:text="g" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Delete Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeleteIngrediente"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="Eliminar ingrediente"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="@{() -> viewModel.removeIngrediente(ingrediente)}"
+                app:icon="@drawable/ic_delete"
+                app:iconGravity="textStart"
+                app:iconTint="@color/status_error" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

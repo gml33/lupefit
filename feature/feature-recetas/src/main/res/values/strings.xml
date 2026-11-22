@@ -1,7 +1,114 @@
 <resources>
-    <string name="colecciones">Colecciones</string>
+    <string name="recetas_title">Recetas</string>
     <string name="crear_receta">Crear receta</string>
     <string name="importar_receta">Importar receta</string>
+    <string name="colecciones">Colecciones</string>
     <string name="receta_detalle">Detalle de receta</string>
-    <string name="recetas_title">Recetas</string>
+
+    <!-- Recetas Home -->
+    <string name="recetas_mis_recetas">Mis recetas</string>
+    <string name="recetas_sin_recetas">Sin recetas aún</string>
+    <string name="recetas_crear_primera">Creá tu primera receta</string>
+    <string name="recetas_buscar">Buscar recetas</string>
+    <string name="recetas_filtrar">Filtrar</string>
+    <string name="recetas_ordenar">Ordenar</string>
+
+    <!-- Crear Receta -->
+    <string name="crear_receta_titulo">Nueva receta</string>
+    <string name="crear_receta_nombre">Nombre de la receta</string>
+    <string name="crear_receta_descripcion">Descripción</string>
+    <string name="crear_receta_categoria">Categoría</string>
+    <string name="crear_receta_tiempo_prep">Tiempo prep. (min)</string>
+    <string name="crear_receta_tiempo_coccion">Tiempo cocción (min)</string>
+    <string name="crear_receta_porciones">Porciones</string>
+    <string name="crear_receta_dificultad">Dificultad</string>
+    <string name="crear_receta_instrucciones">Instrucciones</string>
+    <string name="crear_receta_ingredientes">Ingredientes</string>
+    <string name="crear_receta_agregar_ingrediente">Agregar ingrediente</string>
+    <string name="crear_receta_guardar">Guardar receta</string>
+    <string name="crear_receta_foto">Foto de la receta</string>
+    <string name="crear_receta_tomar_foto">Tomar foto</string>
+    <string name="crear_receta_galeria">Galería</string>
+
+    <!-- Categorías -->
+    <string name="categoria_desayuno">Desayuno</string>
+    <string name="categoria_almuerzo">Almuerzo</string>
+    <string name="categoria_cena">Cena</string>
+    <string name="categoria_snack">Snack</string>
+    <string name="categoria_postre">Postre</string>
+    <string name="categoria_bebida">Bebida</string>
+    <string name="categoria_otro">Otro</string>
+
+    <!-- Dificultad -->
+    <string name="dificultad_facil">Fácil</string>
+    <string name="dificultad_media">Media</string>
+    <string name="dificultad_dificil">Difícil</string>
+
+    <!-- Ingrediente -->
+    <string name="ingrediente_alimento">Alimento</string>
+    <string name="ingrediente_cantidad">Cantidad</string>
+    <string name="ingrediente_unidad">Unidad</string>
+    <string name="ingrediente_nota">Nota (opcional)</string>
+
+    <!-- Unidades -->
+    <string name="unidad_g">g</string>
+    <string name="unidad_kg">kg</string>
+    <string name="unidad_ml">ml</string>
+    <string name="unidad_l">L</string>
+    <string name="unidad_cda">cda</string>
+    <string name="unidad_cdt">cdt</string>
+    <string name="unidad_taza">taza</string>
+    <string name="unidad_unidad">unidad</string>
+    <string name="unidad_pizca">pizca</string>
+    <string name="unidad_al_gusto">al gusto</string>
+
+    <!-- Importar Receta -->
+    <string name="importar_receta_titulo">Importar receta</string>
+    <string name="importar_receta_url">URL de la receta</string>
+    <string name="importar_receta_texto">O pegá el texto aquí</string>
+    <string name="importar_receta_escanear">Escanear de libro/revista</string>
+    <string name="importar_receta_procesar">Procesar</string>
+
+    <!-- Colecciones -->
+    <string name="colecciones_titulo">Mis colecciones</string>
+    <string name="colecciones_crear">Crear colección</string>
+    <string name="colecciones_nombre">Nombre de la colección</string>
+    <string name="colecciones_descripcion">Descripción</string>
+    <string name="colecciones_guardar">Guardar colección</string>
+    <string name="colecciones_sin_colecciones">Sin colecciones aún</string>
+    <string name="colecciones_crear_primera">Creá tu primera colección</string>
+    <string name="colecciones_recetas">recetas</string>
+
+    <!-- Receta Detalle -->
+    <string name="receta_detalle_ingredientes">Ingredientes</string>
+    <string name="receta_detalle_instrucciones">Instrucciones</string>
+    <string name="receta_detalle_info_nutricional">Info nutricional (por porción)</string>
+    <string name="receta_detalle_calorias">Calorías</string>
+    <string name="receta_detalle_proteinas">Proteínas</string>
+    <string name="receta_detalle_carbohidratos">Carbohidratos</string>
+    <string name="receta_detalle_grasas">Grasas</string>
+    <string name="receta_detalle_fibra">Fibra</string>
+    <string name="receta_detalle_agregar_diario">Agregar al diario</string>
+    <string name="receta_detalle_compartir">Compartir</string>
+    <string name="receta_detalle_editar">Editar</string>
+    <string name="receta_detalle_eliminar">Eliminar</string>
+
+    <!-- Búsqueda y Filtros -->
+    <string name="buscar_recetas_hint">Buscar por nombre, ingrediente…</string>
+    <string name="filtro_todas">Todas</string>
+    <string name="filtro_favoritas">Favoritas</string>
+    <string name="filtro_recientes">Recientes</string>
+    <string name="ordenar_nombre">Nombre (A-Z)</string>
+    <string name="ordenar_fecha">Fecha (nuevas primero)</string>
+    <string name="ordenar_calorias">Calorías (menor a mayor)</string>
+    <string name="ordenar_tiempo">Tiempo prep. (menor a mayor)</string>
+
+    <!-- General -->
+    <string name="favorito">Favorito</string>
+
+    <!-- Formatos para Data Binding -->
+    <string name="tiempo_prep_formato">%d min</string>
+    <string name="tiempo_total_formato">%d min</string>
+    <string name="porciones_formato">%d porc.</string>
+    <string name="calorias_formato">%d kcal</string>
 </resources>

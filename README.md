@@ -122,7 +122,7 @@
 - Layouts base (`fragment_*_home.xml`)
 - Strings localizadas (`values/strings.xml` con terminología argentino)
 
-### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion, feature-progreso)**
+### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas)**
 
 #### **feature-diario Logic** ✅ COMPLETADO
 | Componente | Descripción |
@@ -177,10 +177,26 @@
 | **Modelos** | PesoEntry (pesoStr, diffStr formatted), PesoEntity |
 | **Drawables** | ic_scale, ic_measure, ic_timeline, ic_download, ic_camera, ic_calendar, bg_circular_icon (core-ui) |
 
+#### **feature-recetas Logic** ✅ COMPLETADO
+| Componente | Descripción |
+|------------|-------------|
+| **RecetasHomeFragment** | Lista recetas con búsqueda, filtros (todas/favoritas/recientes), ordenamiento, empty state, FAB crear |
+| **CrearRecetaFragment** | Formulario completo: nombre, descripción, categoría, tiempos, porciones, dificultad, foto, ingredientes dinámicos, instrucciones |
+| **ImportarRecetaFragment** | Importar desde URL, texto pegado o escaneo OCR (placeholder) |
+| **ColeccionesFragment** | Gestión de colecciones de recetas (crear, listar, agregar recetas) |
+| **RecetaDetalleFragment** | Vista completa con imagen, info nutricional, ingredientes, instrucciones, agregar al diario, compartir |
+| **RecetasHomeViewModel** | Lista recetas con búsqueda/filtro/orden, toggle favorito, delete |
+| **CrearRecetaViewModel** | Formulario validado, ingredientes dinámicos (add/remove), cálculo nutrición placeholder |
+| **RecetaRepository/DAO** | Room entities (RecetaEntity, IngredienteRecetaEntity), sync fields, JSON ingredientes, LiveData queries |
+| **Navigation Safe Args** | Directions classes para navegación type-safe entre fragments |
+| **Layouts** | fragment_recetas_home, fragment_crear_receta, fragment_importar_receta, fragment_colecciones, fragment_receta_detalle, view_empty_recetas, item_receta, item_ingrediente |
+| **Modelos** | Receta (nombre, categoria, tiempos, porciones, dificultad, ingredientes[], nutrición), IngredienteReceta |
+| **Drawables** | ic_book, ic_clock, ic_people, ic_fire, ic_favorite_filled/outline, ic_search, ic_chevron_down, ic_add, ic_camera, ic_image, ic_delete (core-ui) |
+
 ### 📋 **Planificados (Paso 7 - Resto / Paso 8-9)**
 | Paso | Descripción |
 |------|-------------|
-| **7 (resto)** | feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes |
+| **7 (resto)** | feature-escaneo, feature-agua, feature-configuracion, feature-perfil, feature-insights, feature-planes |
 | **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood |
 | **9** | Testing, CI/CD, Release |
 
@@ -628,4 +644,4 @@ copies of the Software...
 
 > **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17 • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
-**Última actualización**: 2026-11-21 | **Versión**: 1.0.0-Paso7-progreso | **Build**: `latest` ✅
+**Última actualización**: 2026-11-22 | **Versión**: 1.0.0-Paso7-recetas | **Build**: `latest` ✅
