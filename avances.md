@@ -1,9 +1,9 @@
 # Avances - LuPeFit: Replicación y Rediseño Completo
 
-## Estado Actual: **PASO 6 - FEATURE MODULES (11 MÓDULOS UI) ESTRUCTURA COMPLETA** ✅
+## Estado Actual: **PASO 7 - FEATURE MODULES LOGIC (feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil) COMPLETADO** ✅
 
 ### Fecha de Inicio: 2026-11-20
-### Fase Actual: Implementación - Paso 6 Completado (Estructura Feature Modules)
+### Fase Actual: Implementación - **Paso 7 Completado (Feature Modules Logic: 9/11 módulos)**
 
 ---
 
@@ -160,6 +160,22 @@
 - ✅ **Layouts** - fragment_agua_home, fragment_configurar_meta, fragment_historial_agua, item_historial_agua, view_empty_agua, view_empty_historial_agua
 - ✅ **Modelos** - WaterEntry (cantidadMl, fecha, hora, timestamp, tipoVaso)
 - ✅ **Drawables** - ic_water_drop, ic_bottle, ic_target (core-ui)
+- ✅ **Build verificado**: BUILD SUCCESSFUL
+
+#### Hito 19: **PASO 7 - feature-configuracion Logic** ✅ **COMPLETADO**
+- ✅ **10 Fragments**: CuentaFragment, PerfilFragment, MetasFragment, NotificacionesFragment, AparienciaFragment, UnidadesFragment, SyncFragment, ExportarFragment, CostosFragment, PresupuestoFragment
+- ✅ **10 ViewModels**: CuentaViewModel, PerfilConfigViewModel, MetasConfigViewModel, NotificacionesViewModel, AparienciaViewModel, UnidadesViewModel, SyncViewModel, ExportarViewModel, CostosViewModel, PresupuestoViewModel
+- ✅ **Navigation**: nav_configuracion.xml con 10 destinos + actions
+- ✅ **Layouts**: 10 fragment XMLs con MaterialToolbar, NestedScrollView, DataBinding
+- ✅ **Drawables**: ic_person, ic_email, ic_lock, ic_shield, ic_target, ic_scale, ic_bottle, ic_download, ic_calendar, ic_visibility (core-ui)
+- ✅ **Build verificado**: BUILD SUCCESSFUL
+
+#### Hito 20: **PASO 7 - feature-perfil Logic** ✅ **COMPLETADO**
+- ✅ **6 Fragments**: PerfilHomeFragment, EditarPerfilFragment, LoginFragment, RegistroFragment, SyncAccountFragment, CambiarPasswordFragment
+- ✅ **6 ViewModels**: PerfilHomeViewModel, EditarPerfilViewModel, LoginViewModel, RegistroViewModel, SyncAccountViewModel, CambiarPasswordViewModel
+- ✅ **Navigation**: nav_perfil.xml con 6 destinos + actions (Login↔Registro Safe Args)
+- ✅ **Layouts**: 6 fragment XMLs con MaterialToolbar, DataBinding, validaciones
+- ✅ **Auth local**: Email/password con validaciones, navegación Login→Registro, Registro→Login
 - ✅ **Build verificado**: BUILD SUCCESSFUL
 
 ---
@@ -341,8 +357,8 @@ Blog, Community, Friends, Payments, Fasting, Premium/Upsell, Zendesk, Braze, Fac
 - `feature-recetas` → Lista, Crear, Importar, Detalle, Colecciones
 - `feature-escaneo` → ML Kit Barcode + Passio Food Scan
 - `feature-agua` → Tracking, Meta, Recordatorios
-- `feature-configuracion` → Cuenta, Perfil, Metas, Notificaciones, Apariencia, Sync, Exportar, **Cost Tracking Toggle**, **Presupuesto Semanal**
-- `feature-perfil` → Perfil, Editar, Login, Registro, Password, Sync Account
+- `feature-configuracion` → Cuenta, Perfil, Metas, Notificaciones, Apariencia, Sync, Exportar, **Cost Tracking Toggle**, **Presupuesto Semanal** ✅
+- `feature-perfil` → Perfil, Editar, Login, Registro, Password, Sync Account ✅
 - `feature-insights` → IA Nutricional, Tendencias, Predicciones, Weekly Digest, Patrones
 - `feature-planes` → Planes comida semanales, Planes entrenamiento, Mis Planes, Quick Log Recipe, **Presupuesto**
 
@@ -405,4 +421,4 @@ jq '.[] | select(.name | contains("price"))' /Users/marcelo/Desktop/Desarrollos/
 
 ---
 
-*Última actualización: 2026-11-22 - **Paso 7 (feature-agua logic) COMPLETADO**: AguaHomeFragment, ConfigurarMetaFragment, HistorialAguaFragment, ViewModels, WaterRepository/DAO, Navigation Safe Args. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 50.1 MB.*
+*Última actualización: 2026-11-22 - **Paso 7 (feature-configuracion + feature-perfil logic) COMPLETADO**: 16 fragments, 16 ViewModels, Navigation Safe Args, Layouts, Drawables. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 50.1 MB.*

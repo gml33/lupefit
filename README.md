@@ -122,7 +122,7 @@
 - Layouts base (`fragment_*_home.xml`)
 - Strings localizadas (`values/strings.xml` con terminología argentino)
 
-### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua)**
+### ✅ **Implementados (Paso 7 - Feature Modules Logic: feature-diario, feature-ejercicio, feature-nutricion, feature-progreso, feature-recetas, feature-escaneo, feature-agua, feature-configuracion, feature-perfil)** ✅ **COMPLETADO**
 
 #### **feature-diario Logic** ✅ COMPLETADO
 | Componente | Descripción |
@@ -222,14 +222,44 @@
 || **Navigation Safe Args** | Directions classes para navegación type-safe (AguaHome → ConfigurarMeta / HistorialAgua) ||
 || **Layouts** | fragment_agua_home, fragment_configurar_meta, fragment_historial_agua, item_historial_agua, view_empty_agua, view_empty_historial_agua ||
 || **Modelos** | WaterEntry (cantidadMl, fecha, hora, timestamp, tipoVaso) ||
-|| **Drawables** | ic_water_drop, ic_bottle, ic_target (core-ui) ||
+||| **Drawables** | ic_water_drop, ic_bottle, ic_target (core-ui) ||
+
+#### **feature-configuracion Logic** ✅ COMPLETADO
+||| Componente | Descripción ||
+|||------------|-------------|
+||| **CuentaFragment** | Configuración cuenta: nombre, email, autenticación 2FA, cambiar contraseña ||
+||| **PerfilFragment** | Perfil físico: altura, peso, grasa corporal, nivel actividad, objetivo ||
+||| **MetasFragment** | Metas calóricas/macros, toggle Net Carbs, metas por comida (desayuno/almuerzo/cena/merienda) ||
+||| **NotificacionesFragment** | Push, resumen semanal, logros, recordatorios (agua, comida, ejercicio, peso) ||
+||| **AparienciaFragment** | Tema (claro/oscuro/sistema), animaciones, reducción movimiento ||
+||| **UnidadesFragment** | Sistema métrico/imperial, kcal/kJ, mostrar macros por gramo o % ||
+||| **SyncFragment** | Auto-sync, solo WiFi, sincronizar ahora, pendientes count, última sync ||
+||| **ExportarFragment** | CSV/JSON, rango fechas, selección datos (diario, ejercicio, progreso, recetas, agua, etc.) ||
+||| **CostosFragment** | Toggle seguimiento costos, moneda (ARS), alerta precio >30 días ||
+||| **PresupuestoFragment** | Meta semanal, LinearProgressIndicator, estado vs meta, items sin precio ||
+||| **ViewModels** | 10 ViewModels con LiveData, validaciones, persistencias ||
+||| **Layouts** | 10 fragment XMLs + nav_configuracion.xml con 10 destinos + actions ||
+||| **Drawables** | ic_person, ic_email, ic_lock, ic_shield, ic_target, ic_scale, ic_bottle, ic_download, ic_calendar, ic_visibility (core-ui) ||
+
+#### **feature-perfil Logic** ✅ COMPLETADO
+||| Componente | Descripción ||
+|||------------|-------------|
+||| **PerfilHomeFragment** | Dashboard perfil: avatar, nombre, email, stats rápidos, acciones ||
+||| **EditarPerfilFragment** | Formulario completo: nombre, apellido, email, fecha nacimiento, sexo, altura, peso, grasa corporal, nivel actividad, objetivo ||
+||| **LoginFragment** | Auth local email/password, navegar a registro, validaciones ||
+||| **RegistroFragment** | Registro con validación email, password match, mínimo 8 chars, términos ||
+||| **SyncAccountFragment** | Vincular/desvincular cuenta nube, estado sync, email servidor ||
+||| **CambiarPasswordFragment** | Password actual, nueva, confirmar, validación fortaleza ||
+||| **ViewModels** | 6 ViewModels con LiveData, validaciones, navegación Safe Args ||
+||| **Layouts** | 6 fragment XMLs + nav_perfil.xml con 6 destinos + actions (login↔registro) ||
+||| **Navigation Safe Args** | Directions classes: PerfilHome → EditarPerfil/Login/Registro/SyncAccount, Login→Registro, Registro→Login ||
 
 ### 📋 **Planificados (Paso 7 - Resto / Paso 8-9)**
-|| Paso | Descripción ||
-||------|-------------|
-|| **7 (resto)** | feature-configuracion, feature-perfil, feature-insights, feature-planes ||
-|| **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood ||
-|| **9** | Testing, CI/CD, Release ||
+||| Paso | Descripción ||
+|||------|-------------|
+||| **7 (resto)** | feature-insights, feature-planes ||
+||| **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood ||
+||| **9** | Testing, CI/CD, Release ||
 
 ---
 
@@ -687,4 +717,4 @@ copies of the Software...
 
 > **Desarrollado con ❤️ en Argentina** | **Stack**: Java 17 • XML Views • Room • Material 3 • WorkManager • FastAPI • PostgreSQL • Docker
 
-**Última actualización**: 2026-11-22 | **Versión**: 1.0.0-Paso7-agua | **Build**: `latest` ✅
+**Última actualización**: 2026-11-22 | **Versión**: 1.0.0-Paso7-configuracion-perfil | **Build**: `latest` ✅

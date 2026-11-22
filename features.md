@@ -244,7 +244,7 @@ Completo en `core-ui/src/main/res/values-es-rAR/strings.xml`:
 2. **PASO 7 - Advanced Features** (Health Connect, CrossFit WOD, Dynamic Macros, Streaks, Mood, Notes)
 3. **Testing** (Unit, Integration, UI)
 4. **CI/CD** (GitHub Actions, Docker build, Deploy)
-*Última actualización: 2026-11-22 - **Paso 7 (feature-agua logic) COMPLETADO**: AguaHomeFragment, ConfigurarMetaFragment, HistorialAguaFragment, ViewModels, WaterRepository/DAO, Navigation Safe Args. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 50.1 MB.*
+*Última actualización: 2026-11-22 - **Paso 7 (feature-configuracion + feature-perfil logic) COMPLETADO**: 16 fragments, 16 ViewModels, Navigation Safe Args, Layouts, Drawables. **Compilación verificada** (BUILD SUCCESSFUL). APK generado: 50.1 MB.*
 
 ---
 
