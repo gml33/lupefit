@@ -207,59 +207,59 @@
 | **Binding Adapters** | EscaneoBindingAdapters: tipoIcon, tipoText, agregadoText, agregadoColor (core-ui) |
 | **Layouts** | fragment_escanear_home, fragment_escaneo_codigo_barras, fragment_escanear_comida, fragment_historial_escaneos, sheet_resultado_escaneo, view_empty_escaneo, view_empty_historial_escaneos, item_historial_escaneo |
 | **Modelos** | EscaneoEntry (tipo, productoNombre, marca, codigoBarras, nutrición, agregadoAlDiario) |
-|| **Drawables** | ic_barcode, ic_ai_food, ic_history (core-ui) ||
+| **Drawables** | ic_barcode, ic_ai_food, ic_history (core-ui) |
 
 #### **feature-agua Logic** ✅ COMPLETADO
-|| Componente | Descripción ||
-||------------|-------------|
-|| **AguaHomeFragment** | Circular progress 150dp, metas diarias, quick-add 100/250/500ml + custom, grid 2x2 acciones (vaso/botella/meta/historial), historial reciente 5 items, empty state ||
-|| **ConfigurarMetaFragment** | Input numérico con validación (1-10000ml), presets 2000/2500/3000ml, guardado persistente ||
-|| **HistorialAguaFragment** | Lista completa con RecyclerView, fecha/hora/cantidad, empty state, swipe-to-delete ||
-|| **AguaHomeViewModel** | Circular progress % en tiempo real, consumido/meta/restante, historial load, quick-add con refresh automático ||
-|| **ConfigurarMetaViewModel** | Presets, input validation, meta guardada en preferencias ||
-|| **HistorialAguaViewModel** | Lista completa con delete, loading states ||
-|| **WaterRepository/DAO** | Room entity (WaterEntity), sync fields, LiveData queries por fecha, totales diarios ||
-|| **Navigation Safe Args** | Directions classes para navegación type-safe (AguaHome → ConfigurarMeta / HistorialAgua) ||
-|| **Layouts** | fragment_agua_home, fragment_configurar_meta, fragment_historial_agua, item_historial_agua, view_empty_agua, view_empty_historial_agua ||
-|| **Modelos** | WaterEntry (cantidadMl, fecha, hora, timestamp, tipoVaso) ||
-||| **Drawables** | ic_water_drop, ic_bottle, ic_target (core-ui) ||
+| Componente | Descripción |
+|------------|-------------|
+| **AguaHomeFragment** | Circular progress 150dp, metas diarias, quick-add 100/250/500ml + custom, grid 2x2 acciones (vaso/botella/meta/historial), historial reciente 5 items, empty state |
+| **ConfigurarMetaFragment** | Input numérico con validación (1-10000ml), presets 2000/2500/3000ml, guardado persistente |
+| **HistorialAguaFragment** | Lista completa con RecyclerView, fecha/hora/cantidad, empty state, swipe-to-delete |
+| **AguaHomeViewModel** | Circular progress % en tiempo real, consumido/meta/restante, historial load, quick-add con refresh automático |
+| **ConfigurarMetaViewModel** | Presets, input validation, meta guardada en preferencias |
+| **HistorialAguaViewModel** | Lista completa con delete, loading states |
+| **WaterRepository/DAO** | Room entity (WaterEntity), sync fields, LiveData queries por fecha, totales diarios |
+| **Navigation Safe Args** | Directions classes para navegación type-safe (AguaHome → ConfigurarMeta / HistorialAgua) |
+| **Layouts** | fragment_agua_home, fragment_configurar_meta, fragment_historial_agua, item_historial_agua, view_empty_agua, view_empty_historial_agua |
+| **Modelos** | WaterEntry (cantidadMl, fecha, hora, timestamp, tipoVaso) |
+| **Drawables** | ic_water_drop, ic_bottle, ic_target (core-ui) |
 
 #### **feature-configuracion Logic** ✅ COMPLETADO
-||| Componente | Descripción ||
-|||------------|-------------|
-||| **CuentaFragment** | Configuración cuenta: nombre, email, autenticación 2FA, cambiar contraseña ||
-||| **PerfilFragment** | Perfil físico: altura, peso, grasa corporal, nivel actividad, objetivo ||
-||| **MetasFragment** | Metas calóricas/macros, toggle Net Carbs, metas por comida (desayuno/almuerzo/cena/merienda) ||
-||| **NotificacionesFragment** | Push, resumen semanal, logros, recordatorios (agua, comida, ejercicio, peso) ||
-||| **AparienciaFragment** | Tema (claro/oscuro/sistema), animaciones, reducción movimiento ||
-||| **UnidadesFragment** | Sistema métrico/imperial, kcal/kJ, mostrar macros por gramo o % ||
-||| **SyncFragment** | Auto-sync, solo WiFi, sincronizar ahora, pendientes count, última sync ||
-||| **ExportarFragment** | CSV/JSON, rango fechas, selección datos (diario, ejercicio, progreso, recetas, agua, etc.) ||
-||| **CostosFragment** | Toggle seguimiento costos, moneda (ARS), alerta precio >30 días ||
-||| **PresupuestoFragment** | Meta semanal, LinearProgressIndicator, estado vs meta, items sin precio ||
-||| **ViewModels** | 10 ViewModels con LiveData, validaciones, persistencias ||
-||| **Layouts** | 10 fragment XMLs + nav_configuracion.xml con 10 destinos + actions ||
-||| **Drawables** | ic_person, ic_email, ic_lock, ic_shield, ic_target, ic_scale, ic_bottle, ic_download, ic_calendar, ic_visibility (core-ui) ||
+| Componente | Descripción |
+|------------|-------------|
+| **CuentaFragment** | Configuración cuenta: nombre, email, autenticación 2FA, cambiar contraseña |
+| **PerfilFragment** | Perfil físico: altura, peso, grasa corporal, nivel actividad, objetivo |
+| **MetasFragment** | Metas calóricas/macros, toggle Net Carbs, metas por comida (desayuno/almuerzo/cena/merienda) |
+| **NotificacionesFragment** | Push, resumen semanal, logros, recordatorios (agua, comida, ejercicio, peso) |
+| **AparienciaFragment** | Tema (claro/oscuro/sistema), animaciones, reducción movimiento |
+| **UnidadesFragment** | Sistema métrico/imperial, kcal/kJ, mostrar macros por gramo o % |
+| **SyncFragment** | Auto-sync, solo WiFi, sincronizar ahora, pendientes count, última sync |
+| **ExportarFragment** | CSV/JSON, rango fechas, selección datos (diario, ejercicio, progreso, recetas, agua, etc.) |
+| **CostosFragment** | Toggle seguimiento costos, moneda (ARS), alerta precio >30 días |
+| **PresupuestoFragment** | Meta semanal, LinearProgressIndicator, estado vs meta, items sin precio |
+| **ViewModels** | 10 ViewModels con LiveData, validaciones, persistencias |
+| **Layouts** | 10 fragment XMLs + nav_configuracion.xml con 10 destinos + actions |
+| **Drawables** | ic_person, ic_email, ic_lock, ic_shield, ic_target, ic_scale, ic_bottle, ic_download, ic_calendar, ic_visibility (core-ui) |
 
 #### **feature-perfil Logic** ✅ COMPLETADO
-||| Componente | Descripción ||
-|||------------|-------------|
-||| **PerfilHomeFragment** | Dashboard perfil: avatar, nombre, email, stats rápidos, acciones ||
-||| **EditarPerfilFragment** | Formulario completo: nombre, apellido, email, fecha nacimiento, sexo, altura, peso, grasa corporal, nivel actividad, objetivo ||
-||| **LoginFragment** | Auth local email/password, navegar a registro, validaciones ||
-||| **RegistroFragment** | Registro con validación email, password match, mínimo 8 chars, términos ||
-||| **SyncAccountFragment** | Vincular/desvincular cuenta nube, estado sync, email servidor ||
-||| **CambiarPasswordFragment** | Password actual, nueva, confirmar, validación fortaleza ||
-||| **ViewModels** | 6 ViewModels con LiveData, validaciones, navegación Safe Args ||
-||| **Layouts** | 6 fragment XMLs + nav_perfil.xml con 6 destinos + actions (login↔registro) ||
-||| **Navigation Safe Args** | Directions classes: PerfilHome → EditarPerfil/Login/Registro/SyncAccount, Login→Registro, Registro→Login ||
+| Componente | Descripción |
+|------------|-------------|
+| **PerfilHomeFragment** | Dashboard perfil: avatar, nombre, email, stats rápidos, acciones |
+| **EditarPerfilFragment** | Formulario completo: nombre, apellido, email, fecha nacimiento, sexo, altura, peso, grasa corporal, nivel actividad, objetivo |
+| **LoginFragment** | Auth local email/password, navegar a registro, validaciones |
+| **RegistroFragment** | Registro con validación email, password match, mínimo 8 chars, términos |
+| **SyncAccountFragment** | Vincular/desvincular cuenta nube, estado sync, email servidor |
+| **CambiarPasswordFragment** | Password actual, nueva, confirmar, validación fortaleza |
+| **ViewModels** | 6 ViewModels con LiveData, validaciones, navegación Safe Args |
+| **Layouts** | 6 fragment XMLs + nav_perfil.xml con 6 destinos + actions (login↔registro) |
+| **Navigation Safe Args** | Directions classes: PerfilHome → EditarPerfil/Login/Registro/SyncAccount, Login→Registro, Registro→Login |
 
 ### 📋 **Planificados (Paso 7 - Resto / Paso 8-9)**
-||| Paso | Descripción ||
-|||------|-------------|
-||| **7 (resto)** | feature-insights, feature-planes ||
-||| **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood ||
-||| **9** | Testing, CI/CD, Release ||
+| Paso | Descripción |
+|------|-------------|
+| **7 (resto)** | feature-insights, feature-planes |
+| **8** | Advanced Features: Health Connect, Voice Logging completo, CrossFit WOD, Dynamic Macros, Streaks, Mood |
+| **9** | Testing, CI/CD, Release |
 
 ---
 
