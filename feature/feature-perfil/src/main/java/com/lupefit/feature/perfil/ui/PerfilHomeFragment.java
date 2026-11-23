@@ -43,7 +43,6 @@ public class PerfilHomeFragment extends Fragment {
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> navController.navigateUp());
-        binding.toolbar.setTitle("@string/perfil_title");
     }
 
     private void setupClickListeners() {

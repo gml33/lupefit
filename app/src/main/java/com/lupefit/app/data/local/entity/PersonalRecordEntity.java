@@ -21,6 +21,7 @@ import java.util.Objects;
     indices = {
         @Index(value = {"userId", "exerciseId"}),
         @Index(value = {"userId", "recordType"}),
+        @Index("exerciseId"),
         @Index(value = {"achievedAt"}),
         @Index(value = {"isSynced"}),
         @Index(value = {"serverId"})

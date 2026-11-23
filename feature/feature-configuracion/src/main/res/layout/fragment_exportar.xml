@@ -11,19 +11,19 @@
             type="com.lupefit.feature.configuracion.viewmodel.ExportarViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="?android:attr/colorBackground"
         tools:context=".ui.ExportarFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <LinearLayout
             android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorSurface"
-            android:elevation="0dp"
-            app:elevation="0dp">
+            android:elevation="0dp">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
@@ -32,14 +32,14 @@
                 android:background="?attr/colorSurface"
                 app:navigationIcon="@drawable/ic_chevron_left"
                 app:title="@string/exportar_datos" />
-        </com.google.android.material.appbar.AppBarLayout>
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:clipToPadding="false"
-            android:padding="@dimen/spacing_m"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:padding="@dimen/spacing_m">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -289,5 +289,5 @@
                     android:visibility="@{viewModel.archivoGeneradoVisible ? View.VISIBLE : View.GONE}" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
 </layout>

@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
 import com.lupefit.feature.diario.R;
-import com.lupefit.feature.diario.databinding.SheetDiarioVozBinding;
+import com.lupefit.feature.diario.databinding.SheetDiarioRegistroVozBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class DiarioVozSheet extends BottomSheetDialogFragment {
 
     private static final String TAG = "DiarioVozSheet";
 
-    private SheetDiarioVozBinding binding;
+    private SheetDiarioRegistroVozBinding binding;
     private NativeAndroidVoiceEngine voiceEngine;
     private VoiceFoodParser foodParser;
     private ExecutorService parserExecutor;
@@ -81,7 +81,7 @@ public class DiarioVozSheet extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = SheetDiarioVozBinding.inflate(inflater, container, false);
+        binding = SheetDiarioRegistroVozBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

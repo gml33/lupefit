@@ -9,19 +9,19 @@
             type="com.lupefit.feature.agua.viewmodel.AguaHomeViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="?android:attr/colorBackground"
         tools:context=".ui.AguaHomeFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <LinearLayout
             android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorSurface"
-            android:elevation="0dp"
-            app:elevation="0dp">
+            android:elevation="0dp">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
@@ -30,14 +30,14 @@
                 android:background="?attr/colorSurface"
                 app:navigationIcon="@drawable/ic_chevron_left"
                 app:title="@string/agua_title" />
-        </com.google.android.material.appbar.AppBarLayout>
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:clipToPadding="false"
-            android:padding="@dimen/spacing_m"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:padding="@dimen/spacing_m">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -247,10 +247,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_l"
-                        android:alignmentMode="alignMargins"
-                        android:columnCount="2"
-                        android:rowCount="2"
-                        android:useDefaultMargins="true"
+                        app:alignmentMode="alignMargins"
+                        app:columnCount="2"
+                        app:rowCount="2"
+                        app:useDefaultMargins="true"
                         tools:listitem="@layout/item_quick_action_agua">
 
                         <!-- Card: Agregar Vaso -->
@@ -258,10 +258,10 @@
                             android:id="@+id/cardAgregarVaso"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:layout_gravity="fill"
+                            app:layout_columnWeight="1"
+                            app:layout_gravity="fill"
                             android:layout_margin="@dimen/spacing_s"
-                            android:layout_rowWeight="1"
+                            app:layout_rowWeight="1"
                             app:cardCornerRadius="@dimen/corner_card"
                             app:cardElevation="@dimen/elevation_card">
 
@@ -294,10 +294,10 @@
                             android:id="@+id/cardAgregarBotella"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:layout_gravity="fill"
+                            app:layout_columnWeight="1"
+                            app:layout_gravity="fill"
                             android:layout_margin="@dimen/spacing_s"
-                            android:layout_rowWeight="1"
+                            app:layout_rowWeight="1"
                             app:cardCornerRadius="@dimen/corner_card"
                             app:cardElevation="@dimen/elevation_card">
 
@@ -330,10 +330,10 @@
                             android:id="@+id/cardConfigurarMeta"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:layout_gravity="fill"
+                            app:layout_columnWeight="1"
+                            app:layout_gravity="fill"
                             android:layout_margin="@dimen/spacing_s"
-                            android:layout_rowWeight="1"
+                            app:layout_rowWeight="1"
                             app:cardCornerRadius="@dimen/corner_card"
                             app:cardElevation="@dimen/elevation_card">
 
@@ -366,10 +366,10 @@
                             android:id="@+id/cardVerHistorial"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:layout_gravity="fill"
+                            app:layout_columnWeight="1"
+                            app:layout_gravity="fill"
                             android:layout_margin="@dimen/spacing_s"
-                            android:layout_rowWeight="1"
+                            app:layout_rowWeight="1"
                             app:cardCornerRadius="@dimen/corner_card"
                             app:cardElevation="@dimen/elevation_card">
 
@@ -448,5 +448,5 @@
             android:layout_margin="@dimen/spacing_m"
             android:contentDescription="@string/agregar_vaso"
             android:src="@drawable/ic_water_drop" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
 </layout>

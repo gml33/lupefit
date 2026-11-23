@@ -9,28 +9,29 @@
             type="com.lupefit.feature.recetas.viewmodel.CrearRecetaViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.CrearRecetaFragment">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+            android:background="?attr/colorSurface">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:title="@string/crear_receta_titulo"
+                app:title="@string/crear_receta_titulo"
                 app:navigationIcon="@drawable/ic_chevron_left" />
-        </com.google.android.material.appbar.AppBarLayout>
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -191,7 +192,7 @@
                                     app:endIconDrawable="@drawable/ic_chevron_down"
                                     app:endIconTint="?attr/colorOnSurfaceVariant">
 
-                                    <com.google.android.material.textfield.TextInputEditText
+                                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                                         android:id="@+id/etCategoria"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -217,7 +218,7 @@
                                     app:endIconDrawable="@drawable/ic_chevron_down"
                                     app:endIconTint="?attr/colorOnSurfaceVariant">
 
-                                    <com.google.android.material.textfield.TextInputEditText
+                                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                                         android:id="@+id/etDificultad"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -407,5 +408,5 @@
                     android:onClick="@{() -> viewModel.saveReceta()}" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
 </layout>

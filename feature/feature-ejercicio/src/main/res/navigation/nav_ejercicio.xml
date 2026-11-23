@@ -14,11 +14,8 @@
             android:id="@+id/action_ejercicioHomeFragment_to_buscarEjercicioFragment"
             app:destination="@id/buscarEjercicioFragment" />
         <action
-            android:id="@+id/action_ejercicioHomeFragment_to_nuevaRutinaFragment"
-            app:destination="@id/nuevaRutinaFragment" />
-        <action
-            android:id="@+id/action_ejercicioHomeFragment_to_wodTimerFragment"
-            app:destination="@id/wodTimerFragment" />
+            android:id="@+id/action_ejercicioHomeFragment_to_rutinaDetalleFragment"
+            app:destination="@id/rutinaDetalleFragment" />
     </fragment>
 
     <fragment
@@ -26,18 +23,6 @@
         android:name="com.lupefit.feature.ejercicio.ui.BuscarEjercicioFragment"
         android:label="@string/buscar_ejercicio"
         tools:layout="@layout/fragment_buscar_ejercicio" />
-
-    <fragment
-        android:id="@+id/nuevaRutinaFragment"
-        android:name="com.lupefit.feature.ejercicio.ui.NuevaRutinaFragment"
-        android:label="@string/nueva_rutina"
-        tools:layout="@layout/fragment_nueva_rutina" />
-
-    <fragment
-        android:id="@+id/wodTimerFragment"
-        android:name="com.lupefit.feature.ejercicio.ui.WodTimerFragment"
-        android:label="@string/wod_timer"
-        tools:layout="@layout/fragment_wod_timer" />
 
     <fragment
         android:id="@+id/rutinaDetalleFragment"

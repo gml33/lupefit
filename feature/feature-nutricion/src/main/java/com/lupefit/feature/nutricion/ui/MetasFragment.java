@@ -17,18 +17,18 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.lupefit.feature.nutricion.R;
-import com.lupefit.feature.nutricion.databinding.FragmentMetasBinding;
+import com.lupefit.feature.nutricion.databinding.FragmentMetasNutricionBinding;
 import com.lupefit.feature.nutricion.viewmodel.MetasViewModel;
 
 public class MetasFragment extends Fragment {
 
-    private FragmentMetasBinding binding;
+    private FragmentMetasNutricionBinding binding;
     private MetasViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentMetasBinding.inflate(inflater, container, false);
+        binding = FragmentMetasNutricionBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

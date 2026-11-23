@@ -14,7 +14,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.lupefit.core.ui.R;
+import com.lupefit.feature.ejercicio.R;
 import com.lupefit.feature.ejercicio.databinding.FragmentEjercicioHomeBinding;
 import com.lupefit.feature.ejercicio.viewmodel.EjercicioHomeViewModel;
 
@@ -38,9 +38,6 @@ public class EjercicioHomeFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
         viewModel = new ViewModelProvider(this).get(EjercicioHomeViewModel.class);
 
-        // Inicializar IDs de navegación
-        NavigationActions.init(navController);
-
         setupToolbar();
         setupClickListeners();
         setupObservers();
@@ -53,20 +50,21 @@ public class EjercicioHomeFragment extends Fragment {
     private void setupClickListeners() {
         // Quick action cards
         binding.cardBuscarEjercicio.setOnClickListener(v -> {
-            navController.navigate(NavigationActions.ACTION_TO_BUSCAR_EJERCICIO);
+            navController.navigate(R.id.action_ejercicioHomeFragment_to_buscarEjercicioFragment);
         });
 
-        binding.cardNuevaRutina.setOnClickListener(v -> {
-            navController.navigate(NavigationActions.ACTION_TO_NUEVA_RUTINA);
-        });
+        binding.cardNuevaRutina.setOnClickListener(v -> showUnavailable());
 
-        binding.cardWodTimer.setOnClickListener(v -> {
-            navController.navigate(NavigationActions.ACTION_TO_WOD_TIMER);
-        });
+        binding.cardWodTimer.setOnClickListener(v -> showUnavailable());
 
         binding.cardMisRutinas.setOnClickListener(v -> {
-            navController.navigate(NavigationActions.ACTION_TO_RUTINA_DETALLE);
+            navController.navigate(R.id.action_ejercicioHomeFragment_to_rutinaDetalleFragment);
         });
+    }
+
+    private void showUnavailable() {
+        Toast.makeText(requireContext(), com.lupefit.core.ui.R.string.funcion_no_disponible,
+                Toast.LENGTH_SHORT).show();
     }
 
     private void setupObservers() {

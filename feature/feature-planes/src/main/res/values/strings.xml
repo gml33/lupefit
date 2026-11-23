@@ -39,5 +39,6 @@
     <string name="dia">Día</string>
     <string name="recetas">Recetas</string>
     <string name="completado">Completado</string>
+    <string name="ver_detalle">Ver detalle</string>
 
 </resources>

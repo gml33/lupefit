@@ -12,42 +12,21 @@
         <action
             android:id="@+id/action_escanearHomeFragment_to_escanearCodigoBarrasFragment"
             app:destination="@id/escanearCodigoBarrasFragment" />
-        <action
-            android:id="@+id/action_escanearHomeFragment_to_escanearComidaFragment"
-            app:destination="@id/escanearComidaFragment" />
-        <action
-            android:id="@+id/action_escanearHomeFragment_to_historialEscaneosFragment"
-            app:destination="@id/historialEscaneosFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/escanearCodigoBarrasFragment"
-        android:name="com.lupefit.feature.escaneo.ui.EscaneoCodigoBarrasFragment"
+        android:name="com.lupefit.app.ui.escaneo.EscaneoCodigoBarrasFragment"
         android:label="@string/escanear_codigo_barras"
         tools:layout="@layout/fragment_escaneo_codigo_barras">
         <action
             android:id="@+id/action_escanearCodigoBarrasFragment_to_resultadoEscaneoSheet"
             app:destination="@id/resultadoEscaneoSheet" />
-        <action
-            android:id="@+id/action_escanearCodigoBarrasFragment_to_escanearComidaFragment"
-            app:destination="@id/escanearComidaFragment" />
     </fragment>
 
     <dialog
         android:id="@+id/resultadoEscaneoSheet"
-        android:name="com.lupefit.feature.escaneo.ui.ResultadoEscaneoSheet"
+        android:name="com.lupefit.app.ui.escaneo.ResultadoEscaneoSheet"
         android:label="@string/resultado_escaneo"
         tools:layout="@layout/sheet_resultado_escaneo" />
-
-    <fragment
-        android:id="@+id/escanearComidaFragment"
-        android:name="com.lupefit.feature.escaneo.ui.EscanearComidaFragment"
-        android:label="@string/escanear_comida_ia"
-        tools:layout="@layout/fragment_escanear_comida" />
-
-    <fragment
-        android:id="@+id/historialEscaneosFragment"
-        android:name="com.lupefit.feature.escaneo.ui.HistorialEscaneosFragment"
-        android:label="@string/historial_escaneos"
-        tools:layout="@layout/fragment_historial_escaneos" />
 </navigation>

@@ -17,7 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.lupefit.feature.diario.R;
-import com.lupefit.feature.diario.databinding.CardMacroSummaryBinding;
+import com.lupefit.core.ui.databinding.CardMacroSummaryBinding;
 import com.lupefit.feature.diario.databinding.FragmentDiarioHomeBinding;
 import com.lupefit.feature.diario.databinding.ViewEmptyDiarioBinding;
 import com.lupefit.feature.diario.viewmodel.DiarioHomeViewModel;

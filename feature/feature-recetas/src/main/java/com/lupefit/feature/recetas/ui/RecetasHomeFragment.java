@@ -34,7 +34,8 @@ public class RecetasHomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = NavHostFragment.findNavController(this);
-        viewModel = new ViewModelProvider(this).get(RecetasHomeViewModel.class);
+        viewModel = new ViewModelProvider(this, new RecetasHomeViewModel.Factory(requireContext()))
+                .get(RecetasHomeViewModel.class);
 
         setupToolbar();
         setupClickListeners();
@@ -43,7 +44,6 @@ public class RecetasHomeFragment extends Fragment {
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> navController.navigateUp());
-        binding.toolbar.setTitle("@string/recetas_title");
     }
 
     private void setupClickListeners() {

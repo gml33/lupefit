@@ -9,39 +9,5 @@
         android:id="@+id/recetasHomeFragment"
         android:name="com.lupefit.feature.recetas.ui.RecetasHomeFragment"
         android:label="@string/recetas_title"
-        tools:layout="@layout/fragment_recetas_home">
-        <action
-            android:id="@+id/action_recetasHomeFragment_to_crearRecetaFragment"
-            app:destination="@id/crearRecetaFragment" />
-        <action
-            android:id="@+id/action_recetasHomeFragment_to_importarRecetaFragment"
-            app:destination="@id/importarRecetaFragment" />
-        <action
-            android:id="@+id/action_recetasHomeFragment_to_coleccionesFragment"
-            app:destination="@id/coleccionesFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/crearRecetaFragment"
-        android:name="com.lupefit.feature.recetas.ui.CrearRecetaFragment"
-        android:label="@string/crear_receta"
-        tools:layout="@layout/fragment_crear_receta" />
-
-    <fragment
-        android:id="@+id/importarRecetaFragment"
-        android:name="com.lupefit.feature.recetas.ui.ImportarRecetaFragment"
-        android:label="@string/importar_receta"
-        tools:layout="@layout/fragment_importar_receta" />
-
-    <fragment
-        android:id="@+id/coleccionesFragment"
-        android:name="com.lupefit.feature.recetas.ui.ColeccionesFragment"
-        android:label="@string/colecciones"
-        tools:layout="@layout/fragment_colecciones" />
-
-    <fragment
-        android:id="@+id/recetaDetalleFragment"
-        android:name="com.lupefit.feature.recetas.ui.RecetaDetalleFragment"
-        android:label="@string/receta_detalle"
-        tools:layout="@layout/fragment_receta_detalle" />
+        tools:layout="@layout/fragment_recetas_home" />
 </navigation>

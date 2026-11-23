@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,28 +52,28 @@ public class ProgresoHomeFragment extends Fragment {
                 navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToPesoFragment()));
 
         // Card: Registrar Medidas
-        binding.cardRegistrarMedidas.setOnClickListener(v ->
-                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToMedidasFragment()));
+        binding.cardRegistrarMedidas.setOnClickListener(v -> showUnavailable());
 
         // Card: Tomar Foto
-        binding.cardTomarFoto.setOnClickListener(v ->
-                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToFotosFragment()));
+        binding.cardTomarFoto.setOnClickListener(v -> showUnavailable());
 
         // Card: Ver Gráficos
-        binding.cardVerGraficos.setOnClickListener(v ->
-                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToGraficosProgresoFragment()));
+        binding.cardVerGraficos.setOnClickListener(v -> showUnavailable());
 
         // Button: Exportar
-        binding.btnExportar.setOnClickListener(v ->
-                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToExportarFragment()));
+        binding.btnExportar.setOnClickListener(v -> showUnavailable());
 
         // Button: Ver Gráficos (bottom)
-        binding.btnVerGraficos.setOnClickListener(v ->
-                navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToGraficosProgresoFragment()));
+        binding.btnVerGraficos.setOnClickListener(v -> showUnavailable());
 
         // Empty state button
         binding.emptyState.btnFirstWeight.setOnClickListener(v ->
                 navController.navigate(ProgresoHomeFragmentDirections.Companion.actionProgresoHomeFragmentToPesoFragment()));
+    }
+
+    private void showUnavailable() {
+        Toast.makeText(requireContext(), com.lupefit.core.ui.R.string.funcion_no_disponible,
+                Toast.LENGTH_SHORT).show();
     }
 
     private void setupObservers() {

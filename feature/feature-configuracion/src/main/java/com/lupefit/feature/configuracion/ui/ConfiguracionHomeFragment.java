@@ -43,7 +43,6 @@ public class ConfiguracionHomeFragment extends Fragment {
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> navController.navigateUp());
-        binding.toolbar.setTitle("@string/configuracion_title");
     }
 
     private void setupClickListeners() {

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/diarioHomeFragment">
+    app:startDestination="@id/nav_diario">
 
     <!-- Include feature navigation graphs -->
     <include app:graph="@navigation/nav_diario" />
@@ -12,30 +11,14 @@
     <include app:graph="@navigation/nav_progreso" />
     <include app:graph="@navigation/nav_planes" />
 
-    <!-- Global actions to switch between features (use each feature's home fragment) -->
-    <action
-        android:id="@+id/action_global_diario"
-        app:destination="@id/diarioHomeFragment"
-        app:popUpTo="@id/nav_main"
-        app:popUpToInclusive="true" />
-    <action
-        android:id="@+id/action_global_ejercicio"
-        app:destination="@id/ejercicioHomeFragment"
-        app:popUpTo="@id/nav_main"
-        app:popUpToInclusive="true" />
-    <action
-        android:id="@+id/action_global_nutricion"
-        app:destination="@id/nutricionHomeFragment"
-        app:popUpTo="@id/nav_main"
-        app:popUpToInclusive="true" />
-    <action
-        android:id="@+id/action_global_progreso"
-        app:destination="@id/progresoHomeFragment"
-        app:popUpTo="@id/nav_main"
-        app:popUpToInclusive="true" />
-    <action
-        android:id="@+id/action_global_mas"
-        app:destination="@id/planesHomeFragment"
-        app:popUpTo="@id/nav_main"
-        app:popUpToInclusive="true" />
+    <include app:graph="@navigation/nav_recetas" />
+    <include app:graph="@navigation/nav_escaneo" />
+    <include app:graph="@navigation/nav_agua" />
+    <include app:graph="@navigation/nav_configuracion" />
+    <include app:graph="@navigation/nav_perfil" />
+
+    <dialog
+        android:id="@+id/masDialog"
+        android:name="com.lupefit.app.ui.main.MasBottomSheet"
+        android:label="@string/mas" />
 </navigation>

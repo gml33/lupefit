@@ -8,8 +8,10 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/radius_card"
         app:cardElevation="@dimen/elevation_card"
-        app:cardBackgroundColor="?attr/colorSurfaceContainer"
-        android:padding="@dimen/padding_card">
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardPreventCornerOverlap="false"
+        android:stateListAnimator="@null"
+        app:contentPadding="@dimen/padding_card">
 
     <LinearLayout
         android:layout_width="match_parent"

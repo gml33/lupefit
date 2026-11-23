@@ -1,5 +1,6 @@
 package com.lupefit.feature.escaneo.ui;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,19 +63,14 @@ public class EscanearHomeFragment extends Fragment {
                 navController.navigate(EscanearHomeFragmentDirections.Companion.actionEscanearHomeFragmentToEscanearCodigoBarrasFragment()));
 
         // Card: Escanear Comida IA
-        binding.cardEscanearComida.setOnClickListener(v ->
-                navController.navigate(EscanearHomeFragmentDirections.Companion.actionEscanearHomeFragmentToEscanearComidaFragment()));
+        binding.cardEscanearComida.setOnClickListener(v -> showUnavailable());
 
         // Card: Historial
-        binding.cardHistorialEscaneos.setOnClickListener(v ->
-                navController.navigate(EscanearHomeFragmentDirections.Companion.actionEscanearHomeFragmentToHistorialEscaneosFragment()));
+        binding.cardHistorialEscaneos.setOnClickListener(v -> showUnavailable());
 
         // Card: Buscar Manual
-        binding.cardBuscarManual.setOnClickListener(v -> {
-            // Navigate to buscar alimento in feature-diario
-            // TODO: Implement cross-feature navigation
-            Toast.makeText(requireContext(), "Próximamente", Toast.LENGTH_SHORT).show();
-        });
+        binding.cardBuscarManual.setOnClickListener(v ->
+                navController.navigate(Uri.parse("lupefit://diario/buscar-alimento")));
 
         // Empty state buttons
         binding.emptyState.btnFirstScan.setOnClickListener(v ->
@@ -88,6 +84,11 @@ public class EscanearHomeFragment extends Fragment {
         adapter = new HistorialEscaneosAdapter(historialList);
         binding.rvHistorialEscaneos.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvHistorialEscaneos.setAdapter(adapter);
+    }
+
+    private void showUnavailable() {
+        Toast.makeText(requireContext(), com.lupefit.core.ui.R.string.funcion_no_disponible,
+                Toast.LENGTH_SHORT).show();
     }
 
     private void setupObservers() {

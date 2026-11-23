@@ -9,6 +9,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.gson.Gson;
@@ -96,7 +97,7 @@ import java.util.concurrent.Executors;
         WaterEntity.class,
         SyncQueueItem.class
     },
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters({Converters.class})
@@ -104,6 +105,14 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
     private static volatile AppDatabase INSTANCE;
+
+    private static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_personal_records_exerciseId "
+                    + "ON personal_records (exerciseId)");
+        }
+    };
 
     // Executor para tareas de escritura en background
     public static final ExecutorService databaseWriteExecutor = Executors.newSingleThreadExecutor();
@@ -157,6 +166,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             db.execSQL("PRAGMA foreign_keys = ON");
                         }
                     })
+                    .addMigrations(MIGRATION_1_2)
                     .fallbackToDestructiveMigration()
                     .build();
                 }

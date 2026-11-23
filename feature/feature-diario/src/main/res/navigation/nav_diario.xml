@@ -10,6 +10,7 @@
         android:name="com.lupefit.feature.diario.ui.DiarioHomeFragment"
         android:label="@string/diario_title"
         tools:layout="@layout/fragment_diario_home">
+        <deepLink app:uri="lupefit://diario" />
         <action
             android:id="@+id/action_diarioHomeFragment_to_buscarAlimentoFragment"
             app:destination="@id/buscarAlimentoFragment" />
@@ -28,7 +29,9 @@
         android:id="@+id/buscarAlimentoFragment"
         android:name="com.lupefit.feature.diario.ui.BuscarAlimentoFragment"
         android:label="@string/buscar_alimento"
-        tools:layout="@layout/fragment_buscar_alimento" />
+        tools:layout="@layout/fragment_buscar_alimento">
+        <deepLink app:uri="lupefit://diario/buscar-alimento" />
+    </fragment>
 
     <fragment
         android:id="@+id/quickAddFragment"
@@ -38,7 +41,7 @@
 
     <fragment
         android:id="@+id/escanearCodigoBarrasFragment"
-        android:name="com.lupefit.feature.diario.ui.EscaneoCodigoBarrasFragment"
+        android:name="com.lupefit.app.ui.escaneo.EscaneoCodigoBarrasFragment"
         android:label="@string/escanear_codigo_barras"
         tools:layout="@layout/fragment_escaneo_codigo_barras" />
 
@@ -46,11 +49,11 @@
         android:id="@+id/diarioVozSheet"
         android:name="com.lupefit.feature.diario.ui.DiarioVozSheet"
         android:label="@string/registro_por_voz"
-        tools:layout="@layout/sheet_diario_voz" />
+        tools:layout="@layout/sheet_diario_registro_voz" />
 
     <dialog
         android:id="@+id/resultadoEscaneoSheet"
-        android:name="com.lupefit.feature.diario.ui.ResultadoEscaneoSheet"
+        android:name="com.lupefit.app.ui.escaneo.ResultadoEscaneoSheet"
         android:label="@string/resultado_escaneo"
         tools:layout="@layout/sheet_resultado_escaneo" />
 

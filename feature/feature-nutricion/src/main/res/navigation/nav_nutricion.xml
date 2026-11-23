@@ -25,7 +25,7 @@
         android:id="@+id/metasFragment"
         android:name="com.lupefit.feature.nutricion.ui.MetasFragment"
         android:label="@string/metas_nutricionales"
-        tools:layout="@layout/fragment_metas" />
+        tools:layout="@layout/fragment_metas_nutricion" />
 
     <fragment
         android:id="@+id/macrosDetalleFragment"

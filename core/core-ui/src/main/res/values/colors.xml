@@ -31,6 +31,21 @@
     <color name="md_theme_outline">#707973</color>
     <color name="md_theme_outlineVariant">#C4C7C3</color>
 
+
+    <!-- Paleta nocturna -->
+    <color name="md_theme_dark_surface">#1E1E1E</color>
+    <color name="md_theme_dark_on_surface">#FFFFFF</color>
+    <color name="md_theme_dark_surface_variant">#2C2C2C</color>
+    <color name="md_theme_dark_on_surface_variant">#CCCCCC</color>
+    <color name="md_theme_dark_background">#121212</color>
+    <color name="md_theme_dark_on_background">#FFFFFF</color>
+    <color name="md_theme_dark_primary">#89F8C7</color>
+    <color name="md_theme_dark_primary_container">#005236</color>
+    <color name="md_theme_dark_outline">#888888</color>
+    <color name="md_theme_dark_outline_variant">#666666</color>
+    <color name="md_theme_dark_error">#EF5350</color>
+    <color name="md_theme_dark_on_error">#1E0000</color>
+
     <!-- Inversos (Material 3) -->
     <color name="md_theme_inverse_surface">#171D1A</color>
     <color name="md_theme_inverse_on_surface">#F5FBF6</color>
@@ -76,5 +91,6 @@
     <color name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</color>
     <color name="colorOutline">@color/md_theme_outline</color>
     <color name="colorError">@color/status_error</color>
-    <color name="colorOnError">@color/md_theme_onPrimary</color>
+    <color name="colorOnError">@color/md_theme_onError</color>
+    <color name="md_theme_onError">@color/md_theme_onPrimary</color>
 </resources>

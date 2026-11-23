@@ -6,9 +6,9 @@
          ============================================================ -->
 
     <!-- Identidad Principal -->
-    <color name="md_theme_primary">#6CDBAC</color>
+    <color name="md_theme_primary">@color/md_theme_dark_primary</color>
     <color name="md_theme_onPrimary">#003826</color>
-    <color name="md_theme_primaryContainer">#005138</color>
+    <color name="md_theme_primaryContainer">@color/md_theme_dark_primary_container</color>
     <color name="md_theme_onPrimaryContainer">#89F8C7</color>
 
     <!-- Secundarios y Superficies -->
@@ -17,17 +17,17 @@
     <color name="md_theme_secondaryContainer">#354B40</color>
     <color name="md_theme_onSecondaryContainer">#CFE9D9</color>
 
-    <color name="md_theme_background">#0F1512</color>
-    <color name="md_theme_onBackground">#DFE4DF</color>
-    <color name="md_theme_surface">#171D1A</color>
-    <color name="md_theme_onSurface">#DFE4DF</color>
-    <color name="md_theme_surfaceVariant">#404943</color>
-    <color name="md_theme_onSurfaceVariant">#BFC9C2</color>
+    <color name="md_theme_background">@color/md_theme_dark_background</color>
+    <color name="md_theme_onBackground">@color/md_theme_dark_on_background</color>
+    <color name="md_theme_surface">@color/md_theme_dark_surface</color>
+    <color name="md_theme_onSurface">@color/md_theme_dark_on_surface</color>
+    <color name="md_theme_surfaceVariant">@color/md_theme_dark_surface_variant</color>
+    <color name="md_theme_onSurfaceVariant">@color/md_theme_dark_on_surface_variant</color>
     <color name="md_theme_surfaceContainer">#1C241F</color>
     <color name="md_theme_surfaceContainerHigh">#242D27</color>
     <color name="md_theme_surfaceContainerHighest">#2D372F</color>
-    <color name="md_theme_outline">#8A938C</color>
-    <color name="md_theme_outlineVariant">#4A4D48</color>
+    <color name="md_theme_outline">@color/md_theme_dark_outline</color>
+    <color name="md_theme_outlineVariant">@color/md_theme_dark_outline_variant</color>
 
     <!-- Inversos (Material 3) -->
     <color name="md_theme_inverse_surface">#F5FBF6</color>
@@ -73,5 +73,6 @@
     <color name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</color>
     <color name="colorOutline">@color/md_theme_outline</color>
     <color name="colorError">@color/status_error</color>
-    <color name="colorOnError">@color/md_theme_onPrimary</color>
+    <color name="colorOnError">@color/md_theme_onError</color>
+    <color name="md_theme_onError">@color/md_theme_dark_on_error</color>
 </resources>

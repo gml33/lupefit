@@ -1,6 +1,7 @@
 package com.lupefit.feature.nutricion.ui;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.lupefit.core.domain.model.MacroTotals;
+import com.lupefit.core.ui.databinding.CardMacroSummaryBinding;
 import com.lupefit.feature.nutricion.R;
 import com.lupefit.feature.nutricion.databinding.FragmentNutricionHomeBinding;
 import com.lupefit.feature.nutricion.databinding.ViewEmptyNutricionBinding;
@@ -22,7 +24,7 @@ import com.lupefit.feature.nutricion.viewmodel.NutricionHomeViewModel;
 public class NutricionHomeFragment extends Fragment {
 
     private FragmentNutricionHomeBinding binding;
-    private com.lupefit.feature.nutricion.databinding.CardMacroSummaryBinding macroBinding;
+    private CardMacroSummaryBinding macroBinding;
     private ViewEmptyNutricionBinding emptyBinding;
     private NutricionHomeViewModel viewModel;
     private NavController navController;
@@ -62,13 +64,10 @@ public class NutricionHomeFragment extends Fragment {
         binding.btnVerMetas.setOnClickListener(v -> navController.navigate(R.id.action_nutricionHomeFragment_to_metasFragment));
         binding.btnVerDetalle.setOnClickListener(v -> navController.navigate(R.id.action_nutricionHomeFragment_to_macrosDetalleFragment));
         binding.btnVerGraficos.setOnClickListener(v -> navController.navigate(R.id.graficosNutricionFragment));
-        binding.btnAgregarAlimento.setOnClickListener(v -> {
-            // Navigate to Diario feature
-            // This would need a deep link or cross-feature navigation
-        });
-        emptyBinding.btnIrDiario.setOnClickListener(v -> {
-            // Navigate to Diario
-        });
+        binding.btnAgregarAlimento.setOnClickListener(v ->
+                navController.navigate(Uri.parse("lupefit://diario/buscar-alimento")));
+        emptyBinding.btnIrDiario.setOnClickListener(v ->
+                navController.navigate(Uri.parse("lupefit://diario")));
     }
 
     private void setupObservers() {

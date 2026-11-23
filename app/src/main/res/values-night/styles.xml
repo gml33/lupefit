@@ -1,6 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Dark theme overrides - inherit from main Theme.LuPeFit which uses DayNight -->
-    <style name="Theme.LuPeFit" parent="Theme.LuPeFit">
-        <!-- Dark mode customizations can go here -->
+    <style name="Theme.LuPeFit" parent="Theme.LuPeFit.Base">
+        <item name="colorSurface">@color/md_theme_dark_surface</item>
+        <item name="colorOnSurface">@color/md_theme_dark_on_surface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_dark_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_dark_on_surface_variant</item>
+        <item name="android:colorBackground">@color/md_theme_dark_background</item>
+        <item name="colorOnBackground">@color/md_theme_dark_on_background</item>
+        <item name="colorPrimary">@color/md_theme_dark_primary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_dark_primary_container</item>
+        <item name="colorOutline">@color/md_theme_dark_outline</item>
+        <item name="colorOutlineVariant">@color/md_theme_dark_outline_variant</item>
+        <item name="colorError">@color/md_theme_dark_error</item>
+        <item name="colorOnError">@color/md_theme_dark_on_error</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:forceDarkAllowed">false</item>
     </style>
 </resources>
