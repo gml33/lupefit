@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.widget.Toast;
+import com.lupefit.core.domain.provider.CurrentUserProvider;
 
 public class QuickAddFragment extends Fragment {
 
@@ -71,7 +72,7 @@ public class QuickAddFragment extends Fragment {
     }
 
     private long getCurrentUserId() {
-        return 1L;
+        return ((CurrentUserProvider) requireContext().getApplicationContext()).getCurrentUserId();
     }
 
     private int getTodayDateKey() {

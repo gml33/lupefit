@@ -60,6 +60,7 @@
     <string name="escaneo_preset_200g">200g</string>
     <string name="escaneo_calculado_para">Calculado para</string>
     <string name="escaneo_agregar_diario">Agregar al diario</string>
+    <string name="escaneo_agregado_diario">Alimento agregado al diario</string>
     <string name="escaneo_no_encontrado">No encontrado</string>
     <string name="escaneo_no_encontrado_msg">El código %1$s no está en nuestra base de datos ni en Open Food Facts.</string>
 

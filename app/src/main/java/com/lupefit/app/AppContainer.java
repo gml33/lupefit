@@ -37,6 +37,11 @@ import com.lupefit.app.domain.engine.HealthConnectManager;
 import com.lupefit.app.domain.engine.SyncEngine;
 import com.lupefit.app.domain.engine.MacroCyclerEngine;
 import com.lupefit.app.domain.repository.FoodLogRepository;
+import com.lupefit.app.domain.repository.MoodEntryRepository;
+import com.lupefit.app.domain.repository.UserNoteRepository;
+import com.lupefit.app.domain.repository.StreakRepository;
+import com.lupefit.app.domain.repository.WorkoutLogRepository;
+import com.lupefit.app.domain.repository.WaterLogRepository;
 import com.lupefit.app.domain.usecase.FoodLogUseCase;
 import com.lupefit.app.domain.usecase.WorkoutLogUseCase;
 import com.lupefit.app.domain.usecase.PersonalRecordUseCase;
@@ -59,7 +64,7 @@ import com.lupefit.core.network.interceptor.AuthInterceptor;
  * Crea y gestiona el ciclo de vida de todas las dependencias de la app.
  * No usa Dagger/Hilt/Kapt - 100% manual, cero reflection en runtime.
  */
-public final class AppContainer {
+public final class AppContainer implements com.lupefit.core.domain.provider.WorkoutSummaryProvider {
 
     private final Context context;
 
@@ -91,6 +96,11 @@ public final class AppContainer {
     // Repositories (solo los implementados para feature-diario)
     private volatile DiarioRepository diarioRepository;
     private volatile FoodLogRepository foodLogRepository;
+    private volatile MoodEntryRepository moodEntryRepository;
+    private volatile UserNoteRepository userNoteRepository;
+    private volatile StreakRepository streakRepository;
+    private volatile WorkoutLogRepository workoutLogRepository;
+    private volatile WaterLogRepository waterLogRepository;
     private volatile SyncQueueRepository syncQueueRepository;
     private volatile FoodCatalogRepository foodCatalogRepository;
     private volatile com.lupefit.core.domain.repository.ExerciseRepository exerciseRepository;
@@ -115,8 +125,8 @@ public final class AppContainer {
     // private volatile WorkoutLogUseCase workoutLogUseCase;
     // private volatile PersonalRecordUseCase personalRecordUseCase;
     // private volatile GlucoseLogUseCase glucoseLogUseCase;
-    // private volatile MoodEntryUseCase moodEntryUseCase;
-    // private volatile UserNoteUseCase userNoteUseCase;
+    private volatile MoodEntryUseCase moodEntryUseCase;
+    private volatile UserNoteUseCase userNoteUseCase;
     // private volatile UserProfileUseCase userProfileUseCase;
 
     public AppContainer(Context context) {
@@ -150,9 +160,17 @@ public final class AppContainer {
         escaneoDao = database.escaneoDao();
         waterDao = database.waterDao();
 
+        // Preferences must be ready before repositories that need the active user.
+        userPreferencesManager = UserPreferencesManager.getInstance(context);
+
         // Repositories (solo los implementados para feature-diario)
         diarioRepository = new DiarioRepositoryImpl(context, getCurrentUserId());
         foodLogRepository = new FoodLogRepository(foodLogDao);
+        moodEntryRepository = new MoodEntryRepository(moodEntryDao);
+        userNoteRepository = new UserNoteRepository(userNoteDao);
+        streakRepository = new StreakRepository(streakDao);
+        workoutLogRepository = new WorkoutLogRepository(workoutLogDao);
+        waterLogRepository = new WaterLogRepository(waterLogDao);
         syncQueueRepository = new SyncQueueRepository(database.syncQueueDao());
         foodCatalogRepository = new FoodCatalogRepositoryImpl(context, foodProductDao);
         exerciseRepository = new ExerciseRepositoryImpl(context);
@@ -161,13 +179,9 @@ public final class AppContainer {
         escaneoRepository = new EscaneoRepositoryImpl(context);
         waterRepository = new WaterRepositoryImpl(context);
 
-        // Preferences
-        userPreferencesManager = UserPreferencesManager.getInstance(context);
-
         // Engines
         macroCalculatorEngine = new MacroCalculatorEngine();
-        // TODO: streakManager necesita streakRepository, workoutLogRepository, waterLogRepository
-        // streakManager = new StreakManager(streakRepository, foodLogRepository, workoutLogRepository, waterLogRepository);
+        streakManager = new StreakManager(streakRepository, foodLogRepository, workoutLogRepository, waterLogRepository);
         healthConnectManager = new HealthConnectManager(context);
 
         // App domain engine (for local sync logic)
@@ -198,15 +212,13 @@ public final class AppContainer {
         // workoutLogUseCase = new WorkoutLogUseCase(workoutLogRepository, macroCalculatorEngine, syncEngine, healthConnectManager);
         // personalRecordUseCase = new PersonalRecordUseCase(personalRecordRepository, exerciseRepository);
         // glucoseLogUseCase = new GlucoseLogUseCase(glucoseLogRepository, syncEngine);
-        // moodEntryUseCase = new MoodEntryUseCase(moodEntryRepository, syncEngine);
-        // userNoteUseCase = new UserNoteUseCase(userNoteRepository, syncEngine);
+        moodEntryUseCase = new MoodEntryUseCase(moodEntryRepository, syncEngine);
+        userNoteUseCase = new UserNoteUseCase(userNoteRepository, syncEngine);
         // userProfileUseCase = new UserProfileUseCase(userRepository, macroCalculatorEngine);
     }
 
     private long getCurrentUserId() {
-        // TODO: Get actual logged-in user ID from UserRepository or preferences
-        // For now, return a default user ID (1)
-        return 1L;
+        return userPreferencesManager.getCurrentUserId();
     }
 
     // ==================== GETTERS ====================
@@ -252,11 +264,26 @@ public final class AppContainer {
     public com.lupefit.core.network.SyncEngine getNetworkSyncEngine() { return networkSyncEngine; }
     public MacroCyclerEngine getMacroCyclerEngine() { return macroCyclerEngine; }
 
+    @Override
+    public androidx.lifecycle.LiveData<java.util.List<com.lupefit.core.domain.model.WorkoutSummary>> getRecentWorkoutSummaries(long userId, int limit) {
+        androidx.lifecycle.MediatorLiveData<java.util.List<com.lupefit.core.domain.model.WorkoutSummary>> result = new androidx.lifecycle.MediatorLiveData<>();
+        result.addSource(workoutLogDao.getRecentByUser(userId, limit), logs -> {
+            java.util.List<com.lupefit.core.domain.model.WorkoutSummary> summaries = new java.util.ArrayList<>();
+            if (logs != null) for (com.lupefit.app.data.local.entity.WorkoutLog log : logs) summaries.add(new com.lupefit.core.domain.model.WorkoutSummary(log.name, log.workoutType, Math.max(0, log.durationSeconds / 60), log.caloriesBurned));
+            result.setValue(summaries);
+        });
+        return result;
+    }
+
     public FoodLogUseCase getFoodLogUseCase() { return foodLogUseCase; }
     // public WorkoutLogUseCase getWorkoutLogUseCase() { return workoutLogUseCase; }
     // public PersonalRecordUseCase getPersonalRecordUseCase() { return personalRecordUseCase; }
     // public GlucoseLogUseCase getGlucoseLogUseCase() { return glucoseLogUseCase; }
-    // public MoodEntryUseCase getMoodEntryUseCase() { return moodEntryUseCase; }
-    // public UserNoteUseCase getUserNoteUseCase() { return userNoteUseCase; }
+    public MoodEntryUseCase getMoodEntryUseCase() { return moodEntryUseCase; }
+    public UserNoteUseCase getUserNoteUseCase() { return userNoteUseCase; }
+    public MoodEntryRepository getMoodEntryRepository() { return moodEntryRepository; }
+    public UserNoteRepository getUserNoteRepository() { return userNoteRepository; }
+    public StreakRepository getStreakRepository() { return streakRepository; }
+    public StreakManager getStreakManager() { return streakManager; }
     // public UserProfileUseCase getUserProfileUseCase() { return userProfileUseCase; }
 }

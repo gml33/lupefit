@@ -155,6 +155,7 @@
                     <!-- Card: WOD Timer -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cardWodTimer"
+                        android:onClick="openWodTimer"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:layout_columnWeight="1"

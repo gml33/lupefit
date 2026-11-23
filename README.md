@@ -38,11 +38,11 @@ Los iconos de interfaz son Vector Drawable nativos de 24dp ubicados en `core/cor
 
 La cobertura funcional se registra en [la matriz de pruebas](docs/pruebas-funcionales.md).
 
-En el Motorola e13 con Android 13 se comprobó la compilación, el arranque en claro y oscuro, el acceso a Planes, Mis Planes y el regreso a Diario. También se revisó visualmente el dashboard de Diario, sus tarjetas de comidas, hidratación y el estado vacío. La validación completa de todas las operaciones de escritura y en Android 14 queda pendiente.
+En el Motorola e13 con Android 13 se comprobó la compilación, instalación, arranque, Diario, Ejercicio y el WOD Timer. También se revisó visualmente el dashboard de Diario, sus tarjetas de comidas, hidratación, estado vacío y el diálogo WOD en modo claro. `logcat -b crash` quedó sin excepciones durante estas pruebas.
 
-Hasta el hito 7 están implementados los flujos locales de hidratación, peso, medidas, fotos de progreso, recetas, planes, presupuesto, perfil, configuración y exportación. Insights conserva datos de ejemplo y el ejercicio reciente no tiene todavía una fuente de entrenamiento real.
+Hasta el hito 7 están implementados los flujos locales de hidratación, peso, medidas, fotos de progreso, recetas, planes, presupuesto, perfil, configuración, exportación, Quick Log, tendencias semanales, historial de entrenamientos, rachas, Health Connect opcional y WOD Timer configurable.
 
-El hito 8 queda fuera de este corte. Incluye WOD/cronómetro, Health Connect, macros dinámicos, rachas, estado de ánimo y ampliaciones de voz. El escáner mantiene la lectura de código y la integración de alta automática como pendientes conocidos.
+`features.md` es la fuente de verdad del alcance. Health Connect funciona de forma opcional con fallback offline; el escáner de código agrega productos encontrados al Diario. La integración remota y la validación completa en Android 14 continúan pendientes.
 
 Para repetir la prueba, cambiá el modo de pantalla del teléfono desde los ajustes de Android, abrí la app y recorré las pestañas en cada modo. Revisá los cierres del proceso con:
 

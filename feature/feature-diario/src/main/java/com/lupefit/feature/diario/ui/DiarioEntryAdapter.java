@@ -14,6 +14,7 @@ import com.lupefit.feature.diario.databinding.ItemLogEntryBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DiarioEntryAdapter extends RecyclerView.Adapter<DiarioEntryAdapter.ViewHolder> {
 
@@ -63,8 +64,8 @@ public class DiarioEntryAdapter extends RecyclerView.Adapter<DiarioEntryAdapter.
             binding.tvFoodName.setText(entry.getFoodName());
             binding.tvCalories.setText(String.valueOf(entry.getCalorias()));
             binding.tvMealType.setText(entry.getTipoComida());
-            binding.tvFoodDetails.setText(String.format(
-                    "%dg • %d kcal • P: %dg C: %dg G: %dg",
+            binding.tvFoodDetails.setText(String.format(Locale.getDefault(),
+                    "%.0fg • %d kcal • P: %.0fg C: %.0fg G: %.0fg",
                     entry.getCantidad(),
                     entry.getCalorias(),
                     entry.getProteinas(),

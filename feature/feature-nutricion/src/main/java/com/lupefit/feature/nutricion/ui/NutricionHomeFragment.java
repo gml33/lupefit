@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -98,9 +99,9 @@ public class NutricionHomeFragment extends Fragment {
         if (totales == null) return;
 
         macroBinding.tvTotalCaloriesValue.setText(String.valueOf(totales.getCalorias()));
-        macroBinding.tvProteinValue.setText(totales.getProteinas() + "g");
-        macroBinding.tvCarbsValue.setText(totales.getCarbohidratos() + "g");
-        macroBinding.tvFatValue.setText(totales.getGrasas() + "g");
+        macroBinding.tvProteinValue.setText(String.format(Locale.getDefault(), "%.1f g", totales.getProteinas()));
+        macroBinding.tvCarbsValue.setText(String.format(Locale.getDefault(), "%.1f g", totales.getCarbohidratos()));
+        macroBinding.tvFatValue.setText(String.format(Locale.getDefault(), "%.1f g", totales.getGrasas()));
 
         double totalMacroGrams = totales.getProteinas() + totales.getCarbohidratos() + totales.getGrasas();
         macroBinding.pbProtein.setProgress(totalMacroGrams > 0 ? (int) (totales.getProteinas() * 100 / totalMacroGrams) : 0);

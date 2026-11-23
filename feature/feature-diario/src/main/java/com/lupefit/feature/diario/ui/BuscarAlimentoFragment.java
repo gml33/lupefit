@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import com.lupefit.core.domain.provider.CurrentUserProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.chip.Chip;
@@ -80,7 +81,7 @@ public class BuscarAlimentoFragment extends Fragment {
     }
 
     private long getCurrentUserId() {
-        return 1L; // TODO: Get from UserRepository
+        return ((CurrentUserProvider) requireContext().getApplicationContext()).getCurrentUserId();
     }
 
     private int getTodayDateKey() {

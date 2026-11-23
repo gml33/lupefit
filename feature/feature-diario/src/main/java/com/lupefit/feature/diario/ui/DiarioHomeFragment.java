@@ -33,6 +33,7 @@ import com.lupefit.feature.diario.viewmodel.DiarioHomeViewModel;
 import com.lupefit.core.domain.model.DiarioEntry;
 import com.lupefit.core.domain.model.MacroTotals;
 import com.lupefit.core.domain.engine.voice.VoiceTranscriptionEngine;
+import com.lupefit.core.domain.provider.CurrentUserProvider;
 
 public class DiarioHomeFragment extends Fragment {
 
@@ -89,9 +90,7 @@ public class DiarioHomeFragment extends Fragment {
     }
 
     private long getCurrentUserId() {
-        // TODO: Get actual logged-in user ID from UserRepository or preferences
-        // For now, return a default user ID (1)
-        return 1L;
+        return ((CurrentUserProvider) requireContext().getApplicationContext()).getCurrentUserId();
     }
 
     private int getTodayDateKey() {
@@ -121,6 +120,7 @@ public class DiarioHomeFragment extends Fragment {
             return false;
         });
     }
+
 
     private void setupRecyclerView() {
         binding.recyclerDiario.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -195,9 +195,9 @@ public class DiarioHomeFragment extends Fragment {
 
         macroBinding.tvTotalCaloriesValue.setText(String.valueOf(totales.getCalorias()));
 
-        macroBinding.tvProteinValue.setText(totales.getProteinas() + "g");
-        macroBinding.tvCarbsValue.setText(totales.getCarbohidratos() + "g");
-        macroBinding.tvFatValue.setText(totales.getGrasas() + "g");
+        macroBinding.tvProteinValue.setText(String.format(Locale.getDefault(), "%.1f g", totales.getProteinas()));
+        macroBinding.tvCarbsValue.setText(String.format(Locale.getDefault(), "%.1f g", totales.getCarbohidratos()));
+        macroBinding.tvFatValue.setText(String.format(Locale.getDefault(), "%.1f g", totales.getGrasas()));
 
         // Calculate percentages for progress bars (based on typical macro distribution)
         int totalMacroGrams = (int) (totales.getProteinas() + totales.getCarbohidratos() + totales.getGrasas());

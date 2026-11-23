@@ -13,6 +13,7 @@ public final class UserPreferencesManager {
     private static final String KEY_ENABLE_COST_TRACKING = "enable_cost_tracking";
     private static final String KEY_WEEKLY_BUDGET_GOAL = "weekly_budget_goal";
     private static final String KEY_CURRENCY_CODE = "currency_code";
+    private static final String KEY_CURRENT_USER_ID = "current_user_id";
 
     private final SharedPreferences prefs;
 
@@ -23,6 +24,14 @@ public final class UserPreferencesManager {
 
     public static UserPreferencesManager getInstance(Context context) {
         return new UserPreferencesManager(context);
+    }
+
+    public long getCurrentUserId() {
+        return prefs.getLong(KEY_CURRENT_USER_ID, 1L);
+    }
+
+    public void setCurrentUserId(long userId) {
+        if (userId > 0) prefs.edit().putLong(KEY_CURRENT_USER_ID, userId).apply();
     }
 
     // ==================== FEATURE TOGGLE: COST TRACKING ====================

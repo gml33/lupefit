@@ -6,8 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.util.ArrayList
+import java.util.Calendar
+import com.lupefit.core.domain.model.DiarioEntry
+import com.lupefit.core.domain.provider.DiarioRepositoryProvider
+import com.lupefit.core.domain.repository.DiarioRepository
 
-class SemanalViewModel : ViewModel() {
+class SemanalViewModel(private val repository: DiarioRepository) : ViewModel() {
 
     data class MacroResumen(
         val nombre: String,
@@ -43,14 +47,14 @@ class SemanalViewModel : ViewModel() {
     private val _macroResumenes = MutableLiveData<List<MacroResumen>>(listOf())
     val macroResumenes: LiveData<List<MacroResumen>> = _macroResumenes
 
-    init {
-        cargarDatosSimulados()
+    private val entriesSource = repository.getEntriesForDateRange(dateKey(-6), dateKey(0)).also {
+        it.observeForever { entries -> cargarDatosReales(entries.orEmpty()) }
     }
 
     fun recargar() {
         _cargando.value = true
         android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-            cargarDatosSimulados()
+            cargarDatosReales(entriesSource.value.orEmpty())
             _cargando.postValue(false)
         }, 500)
     }
@@ -59,21 +63,23 @@ class SemanalViewModel : ViewModel() {
         _periodo.value = periodo
     }
 
-    private fun cargarDatosSimulados() {
-        _resumenCalorias.value = "14.200 kcal"
-        _resumenProteinas.value = "120 g"
-        _resumenCarbohidratos.value = "180 g"
-        _resumenGrasas.value = "55 g"
-        _resumenAgua.value = "14.000 ml"
-        _resumenEjercicio.value = "5 sesiones"
+    private fun cargarDatosReales(entries: List<DiarioEntry>) {
+        val kcal = entries.sumOf { it.calorias }
+        val protein = entries.sumOf { it.proteinas }
+        val carbs = entries.sumOf { it.carbohidratos }
+        val fat = entries.sumOf { it.grasas }
+        _resumenCalorias.value = if (entries.isEmpty()) "—" else String.format("%.0f kcal", kcal.toDouble())
+        _resumenProteinas.value = if (entries.isEmpty()) "—" else String.format("%.1f g", protein)
+        _resumenCarbohidratos.value = if (entries.isEmpty()) "—" else String.format("%.1f g", carbs)
+        _resumenGrasas.value = if (entries.isEmpty()) "—" else String.format("%.1f g", fat)
+        _resumenAgua.value = "—"
+        _resumenEjercicio.value = "—"
 
         val lista = ArrayList<MacroResumen>()
-        lista.add(MacroResumen("Calorías", "14.200 kcal", 85, "85% de la meta semanal"))
-        lista.add(MacroResumen("Proteínas", "120 g", 92, "92% de la meta semanal"))
-        lista.add(MacroResumen("Carbohidratos", "180 g", 78, "78% de la meta semanal"))
-        lista.add(MacroResumen("Grasas", "55 g", 88, "88% de la meta semanal"))
-        lista.add(MacroResumen("Agua", "14.000 ml", 100, "Meta cumplida"))
-        lista.add(MacroResumen("Ejercicio", "5 sesiones", 71, "5 de 7 días"))
+        lista.add(MacroResumen("Calorías", _resumenCalorias.value ?: "—", 0, "Registros del diario"))
+        lista.add(MacroResumen("Proteínas", _resumenProteinas.value ?: "—", 0, "Registros del diario"))
+        lista.add(MacroResumen("Carbohidratos", _resumenCarbohidratos.value ?: "—", 0, "Registros del diario"))
+        lista.add(MacroResumen("Grasas", _resumenGrasas.value ?: "—", 0, "Registros del diario"))
         _macroResumenes.value = lista
     }
 
@@ -81,9 +87,16 @@ class SemanalViewModel : ViewModel() {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(SemanalViewModel::class.java)) {
-                return SemanalViewModel() as T
+                val provider = context.applicationContext as DiarioRepositoryProvider
+                return SemanalViewModel(provider.getDiarioRepository()) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
+    }
+
+    private fun dateKey(offset: Int): Int {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, offset)
+        return calendar.get(Calendar.YEAR) * 10000 + (calendar.get(Calendar.MONTH) + 1) * 100 + calendar.get(Calendar.DAY_OF_MONTH)
     }
 }

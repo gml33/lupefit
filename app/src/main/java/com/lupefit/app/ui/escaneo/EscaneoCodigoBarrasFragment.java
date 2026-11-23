@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.Camera;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
@@ -21,6 +22,7 @@ import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.material.button.MaterialButton;
@@ -29,6 +31,9 @@ import com.lupefit.app.R;
 import com.lupefit.app.data.local.entity.FoodProduct;
 import com.lupefit.app.data.local.repository.FoodCatalogRepositoryImpl;
 import com.lupefit.app.databinding.FragmentEscaneoCodigoBarrasBinding;
+import com.lupefit.core.domain.model.DiarioEntry;
+import com.lupefit.core.domain.provider.CurrentUserProvider;
+import com.lupefit.core.domain.provider.DiarioRepositoryProvider;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -47,6 +52,8 @@ public class EscaneoCodigoBarrasFragment extends Fragment {
     private BarcodeAnalyzer barcodeAnalyzer;
     private ExecutorService cameraExecutor;
     private boolean hasCameraPermission = false;
+    private Camera camera;
+    private boolean torchEnabled;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -167,13 +174,16 @@ public class EscaneoCodigoBarrasFragment extends Fragment {
 
         // Unbind y bind
         cameraProvider.unbindAll();
-        cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview, imageAnalysis);
+        camera = cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview, imageAnalysis);
     }
 
     private void toggleFlash() {
-        // TODO: Implementar toggle de linterna usando CameraControl
-        // Requiere acceso a CameraControl desde ProcessCameraProvider
-        Toast.makeText(requireContext(), R.string.escaneo_linterna_proximamente, Toast.LENGTH_SHORT).show();
+        if (camera == null || !camera.getCameraInfo().hasFlashUnit()) {
+            Toast.makeText(requireContext(), R.string.escaneo_linterna_proximamente, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        torchEnabled = !torchEnabled;
+        camera.getCameraControl().enableTorch(torchEnabled);
     }
 
     private void onBarcodeFound(String barcode) {
@@ -203,7 +213,33 @@ public class EscaneoCodigoBarrasFragment extends Fragment {
 
     private void showResultSheet(FoodProduct product) {
         ResultadoEscaneoSheet sheet = ResultadoEscaneoSheet.newInstance(product);
+        sheet.setOnProductAddedListener((selected, grams, estimatedCost) -> {
+            FoodProduct.MacroBreakdown macros = selected.calculateMacrosForGrams(grams);
+            DiarioEntry entry = new DiarioEntry();
+            entry.setFoodName(selected.name);
+            entry.setFoodProductId(String.valueOf(selected.id));
+            entry.setCantidad(grams);
+            entry.setCalorias((int) Math.round(macros.kcal));
+            entry.setProteinas(macros.proteinG);
+            entry.setCarbohidratos(macros.carbsG);
+            entry.setGrasas(macros.fatG);
+            entry.setTipoComida(requireArguments().getString("mealType", "otro"));
+            entry.setDateKey(todayKey());
+            entry.setTimestamp(System.currentTimeMillis());
+            entry.setBarcode(selected.barcode);
+            entry.setEstimatedCostSnapshot(estimatedCost);
+            DiarioRepositoryProvider provider = (DiarioRepositoryProvider) requireContext().getApplicationContext();
+            provider.getDiarioRepository().insert(entry);
+            Toast.makeText(requireContext(), R.string.escaneo_agregado_diario, Toast.LENGTH_SHORT).show();
+        });
         sheet.show(getParentFragmentManager(), "ResultadoEscaneoSheet");
+    }
+
+    private int todayKey() {
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        return calendar.get(java.util.Calendar.YEAR) * 10000
+                + (calendar.get(java.util.Calendar.MONTH) + 1) * 100
+                + calendar.get(java.util.Calendar.DAY_OF_MONTH);
     }
 
     private void showNotFoundDialog(String barcode) {
@@ -218,8 +254,10 @@ public class EscaneoCodigoBarrasFragment extends Fragment {
     }
 
     private void openCreateFoodFragment(String barcode) {
-        // TODO: Navegar a DiarioCrearAlimentoFragment con código prellenado
-        Toast.makeText(requireContext(), "Abrir crear alimento con código: " + barcode, Toast.LENGTH_SHORT).show();
+        Bundle args = new Bundle();
+        args.putString("barcode", barcode);
+        NavHostFragment.findNavController(this)
+                .navigate(com.lupefit.feature.diario.R.id.diarioCrearAlimentoFragment, args);
     }
 
     private void showManualEntryDialog() {

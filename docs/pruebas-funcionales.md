@@ -5,7 +5,7 @@ Ejecutar la app con Material 3 en un dispositivo Android y comprobar las pantall
 | Módulo | Flujos que se deben comprobar | Alcance conocido |
 | --- | --- | --- |
 | Diario | Buscar alimento, alta manual, agregado rápido, edición de porción y acciones por comida | El dashboard muestra fecha, macros, hidratación y tarjetas de desayuno, almuerzo, merienda y cena. Las acciones de agua y el registro de recetas usan persistencia local. La voz depende del permiso y del servicio del dispositivo. |
-| Ejercicio | Búsqueda y detalle de rutina | Nueva rutina y WOD muestran un aviso de desarrollo. |
+| Ejercicio | Búsqueda, detalle de rutina, historial y WOD Timer | El historial lee Room; WOD permite AMRAP, EMOM, For Time y Tabata con duración/rondas configurables. |
 | Nutrición | Resumen con datos y vacío, metas, detalle y gráficos | El acceso a Diario se puede probar desde el estado vacío. |
 | Progreso | Consultar y registrar peso, medidas, fotos, gráficos y exportación | Los flujos están conectados a Room y al selector de archivos/cámara. Requieren una prueba de escritura aislada. |
 | Recetas | Crear, editar, importar, buscar, filtrar, ordenar y registrar en Diario | La importación requiere conexión HTTPS y JSON-LD compatible. |
@@ -13,12 +13,12 @@ Ejecutar la app con Material 3 en un dispositivo Android y comprobar las pantall
 | Hidratación | Agregar agua, meta e historial | Verificar cantidades y persistencia. |
 | Configuración | Acceso y persistencia de los ajustes implementados | Cuenta, apariencia, metas, costos, presupuesto, unidades, notificaciones y exportación guardan estado local. |
 | Perfil | Apertura desde Más, edición y cambio de contraseña local | Las credenciales son locales. La cuenta remota requiere backend disponible. |
-| Planes | Comida, entrenamiento, presupuesto, lista de compras y Mis Planes | Las semanas guardadas, avance y presupuesto persisten localmente. Quick Log desde Planes queda para una iteración posterior. |
-| Insights | Apertura desde Más y navegación a vistas | Las vistas están accesibles, pero sus datos siguen siendo de ejemplo. |
+| Planes | Comida, entrenamiento, presupuesto, lista de compras, Mis Planes y Quick Log | Las semanas guardadas, avance, presupuesto y acceso a Agregado rápido persisten localmente. |
+| Insights | Apertura desde Más, resumen semanal y tendencias | Calorías, proteínas, carbohidratos y grasas se agregan desde Diario; sin registros se muestra estado vacío. |
 
 ## Registro
 
-La verificación reciente compiló el APK con JDK 17, lo instaló en un Motorola e13 con Android 13 y comprobó Diario, Planes, Mis Planes y el regreso a Diario en claro y oscuro. También se inspeccionó el dashboard de Diario y se confirmó que las acciones de comida navegan con su `mealType`. La validación completa de escritura y Android 14 queda pendiente.
+La verificación reciente compiló el APK con JDK 17, lo instaló en un Motorola e13 con Android 13 y comprobó el arranque, Diario, Ejercicio, WOD Timer, Planes y navegación inferior. Se abrió el diálogo WOD, se verificó el contador y se revisó el layout de duración/rondas. `logcat -b crash` no registró excepciones. Android 14 y la validación completa de escritura siguen pendientes.
 
 ### Primera ronda con Material 3
 

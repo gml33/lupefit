@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import android.widget.ArrayAdapter
+import android.net.Uri
+import androidx.navigation.NavDeepLinkRequest
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.lupefit.feature.planes.R
 import com.lupefit.feature.planes.viewmodel.PlanesComidaViewModel
@@ -70,9 +72,11 @@ class PlanComidaFragment : Fragment() {
     private fun setupRecyclerView(view: View) {
         val rvDias = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvDias)
         rvDias.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
-        rvDias.adapter = DiasComidaAdapter { dia ->
+        rvDias.adapter = DiasComidaAdapter({ dia ->
             viewModel.toggleDiaCompletado(viewModel.semanaActual.value ?: 1, dia)
-        }
+        }, {
+            navController.navigate(NavDeepLinkRequest.Builder.fromUri(Uri.parse("lupefit://diario/quick-add")).build())
+        })
     }
 
     private fun setupObservers() {
@@ -87,7 +91,7 @@ class PlanComidaFragment : Fragment() {
         requireView().findViewById<View>(R.id.tvSemanaSinPlan).visibility = if (dias.isEmpty()) View.VISIBLE else View.GONE
     }
 
-    private class DiasComidaAdapter(private val onToggle: (Int) -> Unit) : androidx.recyclerview.widget.ListAdapter<PlanesComidaViewModel.DiaPlan, DiasComidaAdapter.DiaViewHolder>(
+    private class DiasComidaAdapter(private val onToggle: (Int) -> Unit, private val onRegistrar: () -> Unit) : androidx.recyclerview.widget.ListAdapter<PlanesComidaViewModel.DiaPlan, DiasComidaAdapter.DiaViewHolder>(
         object : androidx.recyclerview.widget.DiffUtil.ItemCallback<PlanesComidaViewModel.DiaPlan>() {
             override fun areItemsTheSame(oldItem: PlanesComidaViewModel.DiaPlan, newItem: PlanesComidaViewModel.DiaPlan): Boolean = oldItem.dia == newItem.dia
             override fun areContentsTheSame(oldItem: PlanesComidaViewModel.DiaPlan, newItem: PlanesComidaViewModel.DiaPlan): Boolean = oldItem == newItem
@@ -99,7 +103,7 @@ class PlanComidaFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: DiaViewHolder, position: Int) {
-            holder.bind(getItem(position), onToggle)
+            holder.bind(getItem(position), onToggle, onRegistrar)
         }
 
         class DiaViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
@@ -107,13 +111,14 @@ class PlanComidaFragment : Fragment() {
             private val tvRecetas: android.widget.TextView = view.findViewById(R.id.tvRecetas)
             private val cbCompletado: android.widget.CheckBox = view.findViewById(R.id.cbCompletado)
 
-            fun bind(dia: PlanesComidaViewModel.DiaPlan, onToggle: (Int) -> Unit) {
+            fun bind(dia: PlanesComidaViewModel.DiaPlan, onToggle: (Int) -> Unit, onRegistrar: () -> Unit) {
                 tvDia.text = dia.nombre
                 tvRecetas.text = dia.recetas.joinToString(", ")
                 cbCompletado.isEnabled = dia.recetas.isNotEmpty()
                 cbCompletado.setOnCheckedChangeListener(null)
                 cbCompletado.isChecked = dia.completado
                 cbCompletado.setOnCheckedChangeListener { _, _ -> onToggle(dia.dia) }
+                itemView.findViewById<View>(R.id.btnRegistrar).setOnClickListener { onRegistrar() }
             }
         }
     }

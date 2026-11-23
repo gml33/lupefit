@@ -59,17 +59,24 @@ import com.lupefit.core.domain.provider.ProgresoRepositoryProvider;
 import com.lupefit.core.domain.provider.RecetaRepositoryProvider;
 import com.lupefit.core.domain.provider.EscaneoRepositoryProvider;
 import com.lupefit.core.domain.provider.WaterRepositoryProvider;
+import com.lupefit.core.domain.provider.CurrentUserProvider;
+import com.lupefit.app.data.local.preferences.UserPreferencesManager;
 
 /**
  * Application principal - Inicializa el contenedor de dependencias manual (AppContainer).
  * No usa Dagger/Hilt/Kapt - Inyección 100% manual en Java 17+.
  * Implementa SyncWorkerFactoryProvider para proveer dependencias al SyncWorker.
  */
-public class MyApplication extends Application implements RoutineRepositoryProvider, SyncWorkerFactoryProvider, DiarioRepositoryProvider, ExerciseRepositoryProvider, FoodCatalogRepositoryProvider, ProgresoRepositoryProvider, RecetaRepositoryProvider, EscaneoRepositoryProvider, WaterRepositoryProvider {
+public class MyApplication extends Application implements RoutineRepositoryProvider, SyncWorkerFactoryProvider, DiarioRepositoryProvider, ExerciseRepositoryProvider, FoodCatalogRepositoryProvider, ProgresoRepositoryProvider, RecetaRepositoryProvider, EscaneoRepositoryProvider, WaterRepositoryProvider, CurrentUserProvider, com.lupefit.core.domain.provider.WorkoutSummaryProvider {
 
     private static MyApplication instance;
     private AppContainer container;
     private SyncWorkerFactory syncWorkerFactory;
+
+    @Override
+    public long getCurrentUserId() {
+        return UserPreferencesManager.getInstance(this).getCurrentUserId();
+    }
 
     @Override
     public void onCreate() {
@@ -107,6 +114,11 @@ public class MyApplication extends Application implements RoutineRepositoryProvi
 
     public AppContainer getContainer() {
         return container;
+    }
+
+    @Override
+    public androidx.lifecycle.LiveData<java.util.List<com.lupefit.core.domain.model.WorkoutSummary>> getRecentWorkoutSummaries(long userId, int limit) {
+        return container.getRecentWorkoutSummaries(userId, limit);
     }
 
     @Override

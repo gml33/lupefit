@@ -37,7 +37,9 @@
         android:id="@+id/quickAddFragment"
         android:name="com.lupefit.feature.diario.ui.QuickAddFragment"
         android:label="@string/quick_add"
-        tools:layout="@layout/fragment_quick_add" />
+        tools:layout="@layout/fragment_quick_add">
+        <deepLink app:uri="lupefit://diario/quick-add" />
+    </fragment>
 
     <fragment
         android:id="@+id/escanearCodigoBarrasFragment"

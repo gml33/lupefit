@@ -326,7 +326,7 @@ public class DiarioVozSheet extends BottomSheetDialogFragment {
 
             void bind(VoiceTranscriptionEngine.ParsedFoodItem item) {
                 tvFoodName.setText(item.getFoodName());
-                tvFoodDetail.setText(String.format("%.0f g • %.0f kcal • P: %.0fg C: %.0fg G: %.0fg",
+                tvFoodDetail.setText(String.format(java.util.Locale.getDefault(), "%.0f g • %.0f kcal • P: %.0f g C: %.0f g G: %.0f g",
                         item.getGrams(), item.getMacros().kcal, item.getMacros().proteinG, item.getMacros().carbsG, item.getMacros().fatG));
 
                 // Calcular porcentajes para barras
