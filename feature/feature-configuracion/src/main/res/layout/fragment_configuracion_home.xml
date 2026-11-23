@@ -31,7 +31,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clipToPadding="false"
-            android:padding="@dimen/spacing_m">
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,22 +39,125 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_m">
 
-                <!-- TODO: Add feature-specific content -->
-                <TextView
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionCuenta"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/configuracion_title"
-                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:layout_marginBottom="@dimen/spacing_l" />
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/cuenta"
+                    app:icon="@drawable/ic_person"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionPerfil"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Feature en desarrollo"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:gravity="center"
-                    android:padding="@dimen/spacing_xl" />
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/perfil"
+                    app:icon="@drawable/ic_person"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionMetas"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/metas_personalizadas"
+                    app:icon="@drawable/ic_target"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionNotificaciones"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/notificaciones"
+                    app:icon="@drawable/ic_chevron_right"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionApariencia"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/apariencia"
+                    app:icon="@drawable/ic_visibility"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionUnidades"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/unidades"
+                    app:icon="@drawable/ic_scale"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionSync"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/sincronizacion"
+                    app:icon="@drawable/ic_sync"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionExportar"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/exportar_datos"
+                    app:icon="@drawable/ic_download"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionCostos"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/seguimiento_costos"
+                    app:icon="@drawable/ic_chevron_right"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionPresupuesto"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/presupuesto_semanal"
+                    app:icon="@drawable/ic_chevron_right"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

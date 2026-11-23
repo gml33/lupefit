@@ -1,9 +1,12 @@
 package com.lupefit.app;
 
 import android.app.Application;
+import com.lupefit.app.data.local.AppDatabase;
+import com.lupefit.app.data.local.repository.RoutineRepositoryImpl;
+import com.lupefit.core.domain.provider.RoutineRepositoryProvider;
+import com.lupefit.core.domain.repository.RoutineRepository;
 import android.content.Context;
 
-import com.lupefit.app.data.local.AppDatabase;
 import com.lupefit.app.data.local.dao.FoodLogDao;
 import com.lupefit.app.data.local.dao.WorkoutLogDao;
 import com.lupefit.app.data.local.dao.PersonalRecordDao;
@@ -62,7 +65,7 @@ import com.lupefit.core.domain.provider.WaterRepositoryProvider;
  * No usa Dagger/Hilt/Kapt - Inyección 100% manual en Java 17+.
  * Implementa SyncWorkerFactoryProvider para proveer dependencias al SyncWorker.
  */
-public class MyApplication extends Application implements SyncWorkerFactoryProvider, DiarioRepositoryProvider, ExerciseRepositoryProvider, FoodCatalogRepositoryProvider, ProgresoRepositoryProvider, RecetaRepositoryProvider, EscaneoRepositoryProvider, WaterRepositoryProvider {
+public class MyApplication extends Application implements RoutineRepositoryProvider, SyncWorkerFactoryProvider, DiarioRepositoryProvider, ExerciseRepositoryProvider, FoodCatalogRepositoryProvider, ProgresoRepositoryProvider, RecetaRepositoryProvider, EscaneoRepositoryProvider, WaterRepositoryProvider {
 
     private static MyApplication instance;
     private AppContainer container;
@@ -71,6 +74,7 @@ public class MyApplication extends Application implements SyncWorkerFactoryProvi
     @Override
     public void onCreate() {
         super.onCreate();
+        com.lupefit.feature.configuracion.viewmodel.AparienciaViewModel.applySavedTheme(this);
         instance = this;
         container = new AppContainer(this);
 
@@ -86,6 +90,11 @@ public class MyApplication extends Application implements SyncWorkerFactoryProvi
                 return container.getNetworkSyncEngine();
             }
         };
+    }
+
+    @Override
+    public RoutineRepository getRoutineRepository() {
+        return new RoutineRepositoryImpl(AppDatabase.getInstance(this).routineDao());
     }
 
     public static MyApplication getInstance() {

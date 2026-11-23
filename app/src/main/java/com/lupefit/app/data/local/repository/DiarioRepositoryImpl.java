@@ -8,6 +8,9 @@ import androidx.lifecycle.Transformations;
 import com.lupefit.app.data.local.AppDatabase;
 import com.lupefit.app.data.local.dao.FoodLogDao;
 import com.lupefit.app.data.local.entity.FoodLog;
+import com.lupefit.app.data.local.entity.User;
+import com.lupefit.app.data.local.dao.UserDao;
+import android.util.Log;
 import com.lupefit.app.data.local.mapper.DiarioMapper;
 import com.lupefit.core.domain.model.DiarioEntry;
 import com.lupefit.core.domain.model.MacroTotals;
@@ -19,10 +22,13 @@ import java.util.List;
 public class DiarioRepositoryImpl implements DiarioRepository {
 
     private final FoodLogDao foodLogDao;
+    private final UserDao userDao;
     private final long currentUserId;
 
     public DiarioRepositoryImpl(Context context, long userId) {
-        this.foodLogDao = AppDatabase.getInstance(context).foodLogDao();
+        AppDatabase database = AppDatabase.getInstance(context);
+        this.foodLogDao = database.foodLogDao();
+        this.userDao = database.userDao();
         this.currentUserId = userId;
     }
 
@@ -66,9 +72,21 @@ public class DiarioRepositoryImpl implements DiarioRepository {
     @Override
     public void insert(DiarioEntry entry) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            FoodLog entity = DiarioMapper.toEntity(entry);
-            entity.userId = currentUserId;
-            foodLogDao.insert(entity);
+            try {
+                User local = new User();
+                local.id = currentUserId;
+                local.email = "offline-" + currentUserId + "@lupefit.invalid";
+                local.passwordHash = "";
+                local.fullName = "";
+                local.gender = "OTRO";
+                local.activityLevel = "SEDENTARIO";
+                userDao.insertIfMissing(local);
+                FoodLog entity = DiarioMapper.toEntity(entry);
+                entity.userId = currentUserId;
+                foodLogDao.insert(entity);
+            } catch (RuntimeException e) {
+                Log.e("DiarioRepository", "No se pudo guardar el registro", e);
+            }
         });
     }
 

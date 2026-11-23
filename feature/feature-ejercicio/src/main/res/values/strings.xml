@@ -88,4 +88,10 @@
     <string name="equip_cuerda">Cuerda</string>
     <string name="equip_cajon">Cajón</string>
     <string name="equip_medicina">Medicina</string>
+    <string name="routine_empty">Todavía no hay rutinas guardadas</string>
+    <string name="routine_exercises_hint">Ejercicios, uno por línea</string>
+    <string name="routine_required">Ingresá un nombre y al menos un ejercicio</string>
+    <string name="routine_completed">Última sesión: %1$s</string>
+    <string name="routine_finish">Registrar sesión realizada</string>
+    <string name="routine_error">No se pudo actualizar la rutina</string>
 </resources>

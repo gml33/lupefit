@@ -6,8 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.util.ArrayList
+import com.google.gson.reflect.TypeToken
 
-class PlanesEntrenamientoViewModel : ViewModel() {
+class PlanesEntrenamientoViewModel private constructor(private val storage: PlanesStorage) : ViewModel() {
 
     data class DiaEntrenamiento(
         val dia: Int,
@@ -24,7 +25,8 @@ class PlanesEntrenamientoViewModel : ViewModel() {
     private val _semanas = MutableLiveData<List<SemanaEntrenamiento>>(listOf())
     val semanas: LiveData<List<SemanaEntrenamiento>> = _semanas
 
-    private val _semanaActual = MutableLiveData<Int>(1)
+    private val _semanaActual = MutableLiveData(
+        storage.read("entrenamientos_semana", Int::class.javaObjectType, 1).coerceIn(1, 52))
     val semanaActual: LiveData<Int> = _semanaActual
 
     private val _cargando = MutableLiveData<Boolean>(false)
@@ -34,11 +36,13 @@ class PlanesEntrenamientoViewModel : ViewModel() {
     val progresoSemanal: LiveData<Int> = _progresoSemanal
 
     init {
-        cargarPlanesSimulados()
+        _semanas.value = storage.read("entrenamientos", object : TypeToken<List<SemanaEntrenamiento>>() {}.type, emptyList<SemanaEntrenamiento>())
+        calcularProgreso()
     }
 
     fun setSemanaActual(semana: Int) {
         if (semana in 1..52) {
+            storage.write("entrenamientos_semana", semana)
             _semanaActual.value = semana
             calcularProgreso()
         }
@@ -57,7 +61,7 @@ class PlanesEntrenamientoViewModel : ViewModel() {
                 semana
             }
         }
-        _semanas.value = nuevaLista
+        save(nuevaLista)
         calcularProgreso()
         _cargando.value = false
     }
@@ -76,48 +80,44 @@ class PlanesEntrenamientoViewModel : ViewModel() {
                 semana.copy(dias = nuevosDias)
             } else semana
         }
-        _semanas.value = nuevaLista
+        save(nuevaLista)
     }
 
     private fun calcularProgreso() {
         val semana = _semanas.value?.firstOrNull { it.numeroSemana == _semanaActual.value }
         if (semana != null) {
-            val total = semana.dias.size
-            val completados = semana.dias.count { it.completado }
+            val diasPlanificados = semana.dias.filter { it.rutinasAsignadas.isNotEmpty() }
+            val total = diasPlanificados.size
+            val completados = diasPlanificados.count { it.completado }
             _progresoSemanal.value = if (total > 0) (completados * 100 / total) else 0
         } else {
             _progresoSemanal.value = 0
         }
     }
 
-    private fun cargarPlanesSimulados() {
-        val todasLasSemanas = ArrayList<SemanaEntrenamiento>()
-        for (s in 1..52) {
-            val dias = ArrayList<DiaEntrenamiento>()
-            val nombresDias = listOf("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo")
-            val rutinasPorDia = mapOf(
-                1 to listOf("Push/Pull/Legs - Push", "Core 15min"),
-                2 to listOf("Upper Body", "Cardio 20min"),
-                3 to listOf("Lower Body", "Movilidad"),
-                4 to listOf("Push/Pull/Legs - Pull", "Core 15min"),
-                5 to listOf("Full Body", "HIIT 20min"),
-                6 to listOf("Push/Pull/Legs - Legs", "Estiramiento"),
-                7 to listOf("Descanso activo", "Yoga/Caminata")
-            )
-            for (d in 1..7) {
-                dias.add(DiaEntrenamiento(d, nombresDias[d-1], rutinasPorDia[d] ?: listOf()))
-            }
-            todasLasSemanas.add(SemanaEntrenamiento(s, dias))
+    fun guardarSemana(semana: Int, nombres: List<String>, entradas: List<List<String>>) {
+        require(semana in 1..52 && nombres.size == 7 && entradas.size == 7)
+        val anterior = _semanas.value.orEmpty().find { it.numeroSemana == semana }
+        val dias = nombres.mapIndexed { index, nombre ->
+            val elementos = entradas[index]
+            val previo = anterior?.dias?.getOrNull(index)
+            DiaEntrenamiento(index + 1, nombre, elementos, previo?.let { it.rutinasAsignadas == elementos && it.completado } == true)
         }
-        _semanas.value = todasLasSemanas
-        calcularProgreso()
+        save((_semanas.value.orEmpty().filterNot { it.numeroSemana == semana } + SemanaEntrenamiento(semana, dias))
+            .sortedBy { it.numeroSemana })
+        setSemanaActual(semana)
+    }
+
+    private fun save(semanas: List<SemanaEntrenamiento>) {
+        storage.write("entrenamientos", semanas)
+        _semanas.value = semanas
     }
 
     class Factory(private val context: Context) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(PlanesEntrenamientoViewModel::class.java)) {
-                return PlanesEntrenamientoViewModel() as T
+                return PlanesEntrenamientoViewModel(PlanesStorage(context)) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lupefit_config_sexos">
+        <item>Femenino</item>
+        <item>Masculino</item>
+        <item>Prefiero omitirlo</item>
+    </string-array>
+    <string-array name="lupefit_config_niveles_actividad">
+        <item>Sedentario</item>
+        <item>Actividad ligera</item>
+        <item>Actividad moderada</item>
+        <item>Actividad alta</item>
+    </string-array>
+    <string-array name="lupefit_config_objetivos">
+        <item>Perder peso</item>
+        <item>Mantener peso</item>
+        <item>Ganar masa muscular</item>
+    </string-array>
+</resources>

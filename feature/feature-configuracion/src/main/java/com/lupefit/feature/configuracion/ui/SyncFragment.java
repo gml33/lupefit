@@ -32,6 +32,8 @@ public class SyncFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this, new SyncViewModel.Factory(requireContext())).get(SyncViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
         setupClickListeners();

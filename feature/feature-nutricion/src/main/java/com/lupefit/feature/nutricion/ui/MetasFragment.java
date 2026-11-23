@@ -2,8 +2,6 @@ package com.lupefit.feature.nutricion.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.lupefit.feature.nutricion.R;
 import com.lupefit.feature.nutricion.databinding.FragmentMetasNutricionBinding;
 import com.lupefit.feature.nutricion.viewmodel.MetasViewModel;
@@ -40,7 +37,8 @@ public class MetasFragment extends Fragment {
         viewModel = new ViewModelProvider(this, new MetasViewModel.Factory(context)).get(MetasViewModel.class);
 
         setupToolbar();
-        setupTextWatchers();
+        initializeFields();
+        binding.btnGuardar.setOnClickListener(v -> save());
         setupObservers();
     }
 
@@ -48,55 +46,44 @@ public class MetasFragment extends Fragment {
         binding.toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
     }
 
-    private void setupTextWatchers() {
-        // Calorías
-        setupIntegerTextWatcher(binding.etMetaCalorias, viewModel.metaCalorias);
-        // Proteínas
-        setupFloatTextWatcher(binding.etMetaProteinas, viewModel.metaProteinas);
-        // Carbohidratos
-        setupFloatTextWatcher(binding.etMetaCarbohidratos, viewModel.metaCarbohidratos);
-        // Grasas
-        setupFloatTextWatcher(binding.etMetaGrasas, viewModel.metaGrasas);
-        // Fibra
-        setupFloatTextWatcher(binding.etMetaFibra, viewModel.metaFibra);
-        // Agua
-        setupIntegerTextWatcher(binding.etMetaAgua, viewModel.metaAgua);
+    private void initializeFields() {
+        binding.etMetaCalorias.setText(String.valueOf(viewModel.metaCalorias.getValue()));
+        binding.etMetaProteinas.setText(String.valueOf(viewModel.metaProteinas.getValue()));
+        binding.etMetaCarbohidratos.setText(String.valueOf(viewModel.metaCarbohidratos.getValue()));
+        binding.etMetaGrasas.setText(String.valueOf(viewModel.metaGrasas.getValue()));
+        binding.etMetaFibra.setText(String.valueOf(viewModel.metaFibra.getValue()));
+        binding.etMetaAgua.setText(String.valueOf(viewModel.metaAgua.getValue()));
+        binding.switchNetCarbs.setChecked(Boolean.TRUE.equals(viewModel.netCarbsMode.getValue()));
     }
 
-    private void setupIntegerTextWatcher(TextInputEditText editText, androidx.lifecycle.MutableLiveData<Integer> liveData) {
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
-            @Override
-            public void afterTextChanged(Editable s) {
-                String text = s.toString().trim();
-                if (!text.isEmpty()) {
-                    try {
-                        liveData.setValue(Integer.parseInt(text));
-                    } catch (NumberFormatException ignored) {}
-                } else {
-                    liveData.setValue(0);
-                }
-            }
-        });
+    private void save() {
+        try {
+            int calorias = Math.round(readAmount(binding.etMetaCalorias));
+            float proteinas = readAmount(binding.etMetaProteinas);
+            float carbohidratos = readAmount(binding.etMetaCarbohidratos);
+            float grasas = readAmount(binding.etMetaGrasas);
+            float fibra = readAmount(binding.etMetaFibra);
+            int agua = Math.round(readAmount(binding.etMetaAgua));
+            viewModel.metaCalorias.setValue(calorias);
+            viewModel.metaProteinas.setValue(proteinas);
+            viewModel.metaCarbohidratos.setValue(carbohidratos);
+            viewModel.metaGrasas.setValue(grasas);
+            viewModel.metaFibra.setValue(fibra);
+            viewModel.metaAgua.setValue(agua);
+            viewModel.netCarbsMode.setValue(binding.switchNetCarbs.isChecked());
+            viewModel.saveMetas();
+        } catch (NumberFormatException ignored) {
+            Toast.makeText(requireContext(), R.string.metas_valores_invalidos, Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void setupFloatTextWatcher(TextInputEditText editText, androidx.lifecycle.MutableLiveData<Float> liveData) {
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
-            @Override
-            public void afterTextChanged(Editable s) {
-                String text = s.toString().trim();
-                if (!text.isEmpty()) {
-                    try {
-                        liveData.setValue(Float.parseFloat(text));
-                    } catch (NumberFormatException ignored) {}
-                } else {
-                    liveData.setValue(0f);
-                }
-            }
-        });
+    private float readAmount(TextInputEditText field) {
+        String text = field.getText() == null ? "" : field.getText().toString().trim();
+        float value = Float.parseFloat(text.replace(',', '.'));
+        if (!Float.isFinite(value) || value < 0) {
+            throw new NumberFormatException();
+        }
+        return value;
     }
 
     private void setupObservers() {

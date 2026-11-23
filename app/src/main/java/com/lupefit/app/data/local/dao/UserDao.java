@@ -17,6 +17,9 @@ public interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(User user);
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    long insertIfMissing(User user);
+
     @Update
     int update(User user);
 

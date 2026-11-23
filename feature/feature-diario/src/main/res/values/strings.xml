@@ -90,4 +90,9 @@
     <string name="weekly_budget_goal">Meta semanal</string>
     <string name="costo_precio_desactualizado">Precio desactualizado (%d días)</string>
     <string name="costo_calculado_para">Costo calculado para %s: %s</string>
+    <string name="diario_water_progress">%1$s / %2$s</string>
+    <string name="diario_portion_grams">Porción (g)</string>
+    <string name="diario_portion_invalid">Ingresá entre 1 y 10.000 g</string>
+    <string name="diario_delete_entry">Eliminar</string>
+    <string name="diario_delete_confirm">¿Eliminar este registro del diario?</string>
 </resources>

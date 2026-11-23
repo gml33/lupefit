@@ -32,6 +32,8 @@ public class MetasFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this, new MetasConfigViewModel.Factory(requireContext())).get(MetasConfigViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
         setupClickListeners();
@@ -43,7 +45,13 @@ public class MetasFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        binding.btnGuardarMetas.setOnClickListener(v -> viewModel.saveMetas());
+        binding.btnGuardarMetas.setOnClickListener(v -> viewModel.saveMetas(
+                leerEntero(binding.etCalorias),
+                leerEntero(binding.etProteinas),
+                leerEntero(binding.etCarbohidratos),
+                leerEntero(binding.etGrasas),
+                leerEntero(binding.etFibra),
+                leerEntero(binding.etAgua)));
 
         binding.btnPresetPerderPeso.setOnClickListener(v -> viewModel.setPreset(1800, 140, 180, 55));
         binding.btnPresetMantener.setOnClickListener(v -> viewModel.setPreset(2200, 160, 220, 65));
@@ -51,6 +59,14 @@ public class MetasFragment extends Fragment {
 
         binding.switchMetasPorComida.setOnClickListener(v -> viewModel.toggleMetasPorComida());
         binding.switchNetCarbs.setOnClickListener(v -> viewModel.toggleNetCarbs());
+    }
+
+    private static int leerEntero(android.widget.EditText field) {
+        try {
+            return Integer.parseInt(field.getText().toString().trim());
+        } catch (NumberFormatException invalid) {
+            return -1;
+        }
     }
 
     private void setupObservers() {

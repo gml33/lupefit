@@ -80,4 +80,16 @@
     <string name="graficos_30_dias">30 días</string>
     <string name="graficos_90_dias">90 días</string>
     <string name="graficos_todo">Todo</string>
+    <string name="progress_weight_value">%1$.1f kg</string>
+    <string name="progress_weight_delta">%1$+.1f kg</string>
+    <string name="progress_no_weights">Registrá un peso para usar esta opción</string>
+    <string name="progress_read_error">No se pudo cargar el historial de peso</string>
+    <string name="progress_export_done">Archivo guardado</string>
+    <string name="progress_export_error">No se pudo guardar el archivo</string>
+    <string name="progress_measure_row">%1$s · %2$.1f cm · %3$s</string>
+    <string name="progress_no_measurements">Todavía no hay medidas registradas</string>
+    <string name="progress_invalid_measure">Ingresá una medida válida en centímetros</string>
+    <string name="progress_no_photos">Todavía no hay fotos de progreso</string>
+    <string name="progress_photo_saved">Foto guardada</string>
+    <string name="progress_photo_error">No se pudo abrir la cámara</string>
 </resources>

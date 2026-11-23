@@ -39,22 +39,44 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_m">
 
-                <!-- TODO: Add feature-specific content -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/insights_title"
-                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:layout_marginBottom="@dimen/spacing_l" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Feature en desarrollo"
+                    android:text="@string/insights_demo"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:gravity="center"
-                    android:padding="@dimen/spacing_xl" />
+                    android:layout_marginBottom="@dimen/spacing_m" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/weekly"
+                    style="@style/Widget.LuPeFit.Button.Outlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:text="@string/resumen_semanal" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/trends"
+                    style="@style/Widget.LuPeFit.Button.Outlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:text="@string/tendencias" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/predictions"
+                    style="@style/Widget.LuPeFit.Button.Outlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:text="@string/predicciones" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/patterns"
+                    style="@style/Widget.LuPeFit.Button.Outlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:text="@string/patrones" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

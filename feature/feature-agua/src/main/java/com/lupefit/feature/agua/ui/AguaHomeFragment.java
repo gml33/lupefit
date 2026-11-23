@@ -1,6 +1,8 @@
 package com.lupefit.feature.agua.ui;
 
 import android.os.Bundle;
+import android.text.InputType;
+import android.widget.FrameLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.lupefit.core.ui.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.lupefit.feature.agua.R;
 import com.lupefit.core.domain.model.WaterEntry;
 import com.lupefit.feature.agua.databinding.FragmentAguaHomeBinding;
 import com.lupefit.feature.agua.databinding.ViewEmptyAguaBinding;
@@ -64,9 +69,7 @@ public class AguaHomeFragment extends Fragment {
         binding.btnAdd100.setOnClickListener(v -> viewModel.addQuickWater(100));
         binding.btnAdd250.setOnClickListener(v -> viewModel.addQuickWater(250));
         binding.btnAdd500.setOnClickListener(v -> viewModel.addQuickWater(500));
-        binding.btnAddCustom.setOnClickListener(v -> {
-            // TODO: Show custom amount dialog
-        });
+        binding.btnAddCustom.setOnClickListener(v -> showAmountDialog());
 
         // FAB
         binding.fabAddWater.setOnClickListener(v -> viewModel.addQuickWater(250));
@@ -85,6 +88,46 @@ public class AguaHomeFragment extends Fragment {
 
         // Empty state
         binding.emptyState.btnFirstWater.setOnClickListener(v -> viewModel.addQuickWater(250));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.loadTodayData();
+    }
+
+    private void showAmountDialog() {
+        TextInputLayout field = new TextInputLayout(requireContext());
+        field.setHint(getString(R.string.water_amount_ml));
+        TextInputEditText input = new TextInputEditText(field.getContext());
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        field.addView(input);
+        int padding = (int) (24 * getResources().getDisplayMetrics().density + 0.5f);
+        FrameLayout content = new FrameLayout(requireContext());
+        content.setPadding(padding, 0, padding, 0);
+        content.addView(field, new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.water_add_custom)
+                .setView(content)
+                .setPositiveButton(android.R.string.ok, null)
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+        dialog.setOnShowListener(ignored -> dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
+                .setOnClickListener(v -> {
+                    try {
+                        int ml = Integer.parseInt(String.valueOf(input.getText()));
+                        if (ml < 1 || ml > 10000) {
+                            field.setError(getString(R.string.water_invalid_amount));
+                            return;
+                        }
+                        viewModel.addWater(ml);
+                        dialog.dismiss();
+                    } catch (NumberFormatException e) {
+                        field.setError(getString(R.string.water_invalid_amount));
+                    }
+                }));
+        dialog.show();
     }
 
     private void setupRecyclerView() {
@@ -107,6 +150,7 @@ public class AguaHomeFragment extends Fragment {
         viewModel.consumedStr.observe(getViewLifecycleOwner(), consumed -> {
             if (consumed != null) {
                 binding.tvConsumedAmount.setText(consumed);
+                binding.tvConsumedToday.setText(consumed);
             }
         });
 
@@ -140,7 +184,6 @@ public class AguaHomeFragment extends Fragment {
                 adapter.notifyDataSetChanged();
 
                 boolean isEmpty = entries.isEmpty();
-                binding.contentContainer.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
                 binding.emptyState.getRoot().setVisibility(isEmpty ? View.VISIBLE : View.GONE);
                 binding.emptyHistory.getRoot().setVisibility(isEmpty ? View.VISIBLE : View.GONE);
             }

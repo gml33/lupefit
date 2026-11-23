@@ -52,11 +52,25 @@ public class NutricionHomeFragment extends Fragment {
         setupClickListeners();
         setupObservers();
 
-        viewModel.refresh();
     }
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> navController.navigateUp());
+        binding.toolbar.getMenu().add(R.string.metas_nutricionales)
+                .setOnMenuItemClickListener(item -> {
+                    navController.navigate(R.id.action_nutricionHomeFragment_to_metasFragment);
+                    return true;
+                });
+        binding.toolbar.getMenu().add(R.string.macros_detalle)
+                .setOnMenuItemClickListener(item -> {
+                    navController.navigate(R.id.action_nutricionHomeFragment_to_macrosDetalleFragment);
+                    return true;
+                });
+        binding.toolbar.getMenu().add(R.string.graficos_nutricion)
+                .setOnMenuItemClickListener(item -> {
+                    navController.navigate(R.id.action_nutricionHomeFragment_to_graficosNutricionFragment);
+                    return true;
+                });
     }
 
     private void setupClickListeners() {
@@ -78,9 +92,6 @@ public class NutricionHomeFragment extends Fragment {
             emptyBinding.getRoot().setVisibility(hasData ? View.GONE : View.VISIBLE);
         });
 
-        viewModel.isLoading.observe(getViewLifecycleOwner(), loading -> {
-            // Show/hide loading
-        });
     }
 
     private void updateMacroSummary(MacroTotals totales) {
@@ -91,12 +102,10 @@ public class NutricionHomeFragment extends Fragment {
         macroBinding.tvCarbsValue.setText(totales.getCarbohidratos() + "g");
         macroBinding.tvFatValue.setText(totales.getGrasas() + "g");
 
-        int totalMacroGrams = (int) (totales.getProteinas() + totales.getCarbohidratos() + totales.getGrasas());
-        if (totalMacroGrams > 0) {
-            macroBinding.pbProtein.setProgress((int) (totales.getProteinas() * 100 / totalMacroGrams));
-            macroBinding.pbCarbs.setProgress((int) (totales.getCarbohidratos() * 100 / totalMacroGrams));
-            macroBinding.pbFat.setProgress((int) (totales.getGrasas() * 100 / totalMacroGrams));
-        }
+        double totalMacroGrams = totales.getProteinas() + totales.getCarbohidratos() + totales.getGrasas();
+        macroBinding.pbProtein.setProgress(totalMacroGrams > 0 ? (int) (totales.getProteinas() * 100 / totalMacroGrams) : 0);
+        macroBinding.pbCarbs.setProgress(totalMacroGrams > 0 ? (int) (totales.getCarbohidratos() * 100 / totalMacroGrams) : 0);
+        macroBinding.pbFat.setProgress(totalMacroGrams > 0 ? (int) (totales.getGrasas() * 100 / totalMacroGrams) : 0);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.lupefit.feature.configuracion.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -19,8 +20,13 @@ public class CostosViewModel extends ViewModel {
     private final MutableLiveData<Integer> _diasAlertaPrecio = new MutableLiveData<>(30);
     public final LiveData<Integer> diasAlertaPrecio = _diasAlertaPrecio;
 
-    public CostosViewModel() {
-        // TODO: Load from UserPreferencesManager
+    private final SharedPreferences preferences;
+
+    public CostosViewModel(Context context) {
+        preferences = context.getApplicationContext().getSharedPreferences("lupefit_user_preferences", Context.MODE_PRIVATE);
+        _enabled.setValue(preferences.getBoolean("enable_cost_tracking", true));
+        _moneda.setValue(preferences.getString("currency_code", "ARS"));
+        _diasAlertaPrecio.setValue(preferences.getInt("days_price_alert", 30));
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -34,7 +40,7 @@ public class CostosViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(CostosViewModel.class)) {
-                return (T) new CostosViewModel();
+                return (T) new CostosViewModel(context);
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
@@ -42,16 +48,26 @@ public class CostosViewModel extends ViewModel {
 
     public void setEnabled(boolean enabled) {
         _enabled.setValue(enabled);
-        // TODO: Save to UserPreferencesManager
+        savePreferences();
     }
 
     public void setMoneda(String moneda) {
         _moneda.setValue(moneda);
+        savePreferences();
     }
 
     public void setDiasAlerta(int dias) {
         if (dias > 0 && dias <= 365) {
             _diasAlertaPrecio.setValue(dias);
+        savePreferences();
         }
+    }
+
+    private void savePreferences() {
+        preferences.edit()
+                .putBoolean("enable_cost_tracking", _enabled.getValue())
+                .putString("currency_code", _moneda.getValue())
+                .putInt("days_price_alert", _diasAlertaPrecio.getValue())
+                .apply();
     }
 }

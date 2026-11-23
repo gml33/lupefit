@@ -2,8 +2,6 @@ package com.lupefit.app.data.local.repository;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
-
 import com.lupefit.app.data.local.AppDatabase;
 import com.lupefit.app.data.local.dao.WaterDao;
 import com.lupefit.app.data.local.entity.WaterEntity;
@@ -23,51 +21,38 @@ public class WaterRepositoryImpl implements WaterRepository {
 
     @Override
     public void insertWater(WaterEntry entry) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            WaterEntity entity = convertToEntity(entry);
-            long id = waterDao.insertWater(entity);
-            entry.setId(id);
-        });
+        entry.setId(waterDao.insertWater(convertToEntity(entry)));
     }
 
     @Override
     public void updateWater(WaterEntry entry) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            WaterEntity entity = convertToEntity(entry);
-            waterDao.updateWater(entity);
-        });
+        waterDao.updateWater(convertToEntity(entry));
     }
 
     @Override
     public void deleteWater(long id) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            waterDao.deleteWaterById(id);
-        });
+        waterDao.deleteWaterById(id);
     }
 
     @Override
     public List<WaterEntry> getAllWaterEntries() {
-        LiveData<List<WaterEntity>> liveData = waterDao.getAllWaterEntries();
-        return convertToDomainList(liveData.getValue());
+        return convertToDomainList(waterDao.getAllWaterEntriesSync());
     }
 
     @Override
     public List<WaterEntry> getWaterEntriesByDate(String fecha) {
-        LiveData<List<WaterEntity>> liveData = waterDao.getWaterEntriesByDate(fecha);
-        return convertToDomainList(liveData.getValue());
+        return convertToDomainList(waterDao.getWaterEntriesByDateSync(fecha));
     }
 
     @Override
     public WaterEntry getWaterEntryById(long id) {
-        LiveData<WaterEntity> liveData = waterDao.getWaterById(id);
-        WaterEntity entity = liveData.getValue();
+        WaterEntity entity = waterDao.getWaterByIdSync(id);
         return entity != null ? convertToDomain(entity) : null;
     }
 
     @Override
     public int getTotalWaterToday(String fecha) {
-        LiveData<Integer> liveData = waterDao.getTotalWaterToday(fecha);
-        Integer total = liveData.getValue();
+        Integer total = waterDao.getTotalWaterTodaySync(fecha);
         return total != null ? total : 0;
     }
 

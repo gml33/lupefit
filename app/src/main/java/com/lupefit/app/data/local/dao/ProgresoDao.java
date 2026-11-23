@@ -8,11 +8,18 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.lupefit.app.data.local.entity.PesoEntity;
+import com.lupefit.app.data.local.entity.MeasurementEntity;
 
 import java.util.List;
 
 @Dao
 public interface ProgresoDao {
+
+    @Insert
+    void insertMeasurement(MeasurementEntity measurement);
+
+    @Query("SELECT * FROM progress_measurements ORDER BY timestamp DESC")
+    List<MeasurementEntity> listMeasurements();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insertPeso(PesoEntity peso);

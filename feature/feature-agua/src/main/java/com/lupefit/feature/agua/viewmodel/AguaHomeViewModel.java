@@ -1,6 +1,7 @@
 package com.lupefit.feature.agua.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -51,10 +52,11 @@ public class AguaHomeViewModel extends ViewModel {
     private final MutableLiveData<List<WaterEntry>> _historial = new MutableLiveData<>(new ArrayList<>());
     public final LiveData<List<WaterEntry>> historial = _historial;
 
-    private int dailyGoalMl = 2500;
+    private final SharedPreferences preferences;
 
-    public AguaHomeViewModel(WaterRepository repository) {
+    public AguaHomeViewModel(WaterRepository repository, SharedPreferences preferences) {
         this.repository = repository;
+        this.preferences = preferences;
         loadTodayData();
     }
 
@@ -72,14 +74,14 @@ public class AguaHomeViewModel extends ViewModel {
                 WaterRepositoryProvider provider =
                         (WaterRepositoryProvider) context.getApplicationContext();
                 WaterRepository repository = provider.getWaterRepository();
-                return (T) new AguaHomeViewModel(repository);
+                return (T) new AguaHomeViewModel(repository, context.getSharedPreferences("hydration", Context.MODE_PRIVATE));
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
     }
 
     public void loadTodayData() {
-        _loading.setValue(true);
+        _loading.postValue(true);
         String today = dateFormat.format(Calendar.getInstance().getTime());
 
         executor.execute(() -> {
@@ -149,12 +151,7 @@ public class AguaHomeViewModel extends ViewModel {
     }
 
     public int getDailyGoalMl() {
-        // TODO: Load from preferences
-        return dailyGoalMl;
-    }
-
-    public void setDailyGoalMl(int dailyGoalMl) {
-        this.dailyGoalMl = dailyGoalMl;
+        return preferences.getInt("goal_ml", 2500);
     }
 
     @Override

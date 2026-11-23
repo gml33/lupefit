@@ -37,7 +37,7 @@ class PresupuestoPlanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = NavHostFragment.findNavController(this)
-        viewModel = ViewModelProvider(this).get(PresupuestoPlanesViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), PresupuestoPlanesViewModel.Factory(requireContext()))[PresupuestoPlanesViewModel::class.java]
 
         setupToolbar()
         setupRecyclerView()
@@ -51,7 +51,7 @@ class PresupuestoPlanFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = PresupuestoAdapter()
+        adapter = PresupuestoAdapter(viewModel::eliminarItem)
         binding.rvItems.layoutManager = LinearLayoutManager(requireContext())
         binding.rvItems.adapter = adapter
     }
@@ -61,8 +61,12 @@ class PresupuestoPlanFragment : Fragment() {
         binding.etMetaSemanal.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 val texto = binding.etMetaSemanal.text.toString()
-                if (texto.isNotEmpty()) {
-                    viewModel.setMetaSemanal(texto.toDouble())
+                val meta = texto.replace(',', '.').toDoubleOrNull()?.takeIf { it.isFinite() && it > 0 }
+                if (meta != null) {
+                    binding.tilMetaSemanal.error = null
+                    viewModel.setMetaSemanal(meta)
+                } else {
+                    binding.tilMetaSemanal.error = getString(R.string.planes_presupuesto_meta_error)
                 }
             }
         }
@@ -107,12 +111,12 @@ class PresupuestoPlanFragment : Fragment() {
             .setTitle("Agregar item al presupuesto")
             .setView(dialogView)
             .setPositiveButton("Agregar") { dialog: android.content.DialogInterface, _: Int ->
-                val nombre = etNombre.text.toString()
-                val costo = etCosto.text.toString().toDoubleOrNull() ?: 0.0
-                val cantidad = etCantidad.text.toString().toIntOrNull() ?: 1
+                val nombre = etNombre.text.toString().trim()
+                val costo = etCosto.text.toString().replace(',', '.').toDoubleOrNull()?.takeIf { it.isFinite() && it >= 0 }
+                val cantidad = (etCantidad.text.toString().toIntOrNull() ?: 1).coerceAtLeast(1)
                 val unidad = etUnidad.text.toString()
                 if (nombre.isNotEmpty()) {
-                    viewModel.agregarItem(PresupuestoPlanesViewModel.ItemPresupuesto(nombre, costo, cantidad, unidad))
+                    viewModel.agregarItem(PresupuestoPlanesViewModel.ItemPresupuesto(nombre, costo ?: 0.0, cantidad, unidad, costo != null))
                 }
                 dialog.dismiss()
             }
@@ -120,13 +124,13 @@ class PresupuestoPlanFragment : Fragment() {
             .show()
     }
 
-    private class PresupuestoAdapter : androidx.recyclerview.widget.ListAdapter<PresupuestoPlanesViewModel.ItemPresupuesto, PresupuestoAdapter.ItemViewHolder>(
+    private class PresupuestoAdapter(private val eliminar: (Int) -> Unit) : androidx.recyclerview.widget.ListAdapter<PresupuestoPlanesViewModel.ItemPresupuesto, PresupuestoAdapter.ItemViewHolder>(
         object : androidx.recyclerview.widget.DiffUtil.ItemCallback<PresupuestoPlanesViewModel.ItemPresupuesto>() {
             override fun areItemsTheSame(oldItem: PresupuestoPlanesViewModel.ItemPresupuesto, newItem: PresupuestoPlanesViewModel.ItemPresupuesto): Boolean =
                 oldItem.nombre == newItem.nombre
 
             override fun areContentsTheSame(oldItem: PresupuestoPlanesViewModel.ItemPresupuesto, newItem: PresupuestoPlanesViewModel.ItemPresupuesto): Boolean =
-                oldItem.costoEstimado == newItem.costoEstimado && oldItem.cantidad == newItem.cantidad
+                oldItem == newItem
         }
     ) {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -136,18 +140,19 @@ class PresupuestoPlanFragment : Fragment() {
 
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
             val item = getItem(position)
-            holder.bind(item, position)
+            holder.bind(item, eliminar)
         }
 
         class ItemViewHolder(private val binding: ItemPresupuestoBinding) :
             androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
-            fun bind(item: PresupuestoPlanesViewModel.ItemPresupuesto, position: Int) {
+            fun bind(item: PresupuestoPlanesViewModel.ItemPresupuesto, eliminar: (Int) -> Unit) {
                 binding.tvNombre.text = item.nombre
                 binding.tvCosto.text = "\$${String.format("%,.0f", item.costoEstimado)} x${item.cantidad} ${item.unidad}"
                 binding.tvTotal.text = "Total: \$${String.format("%,.0f", item.costoEstimado * item.cantidad)}"
                 binding.icSinPrecio.visibility = if (item.tienePrecio) View.GONE else View.VISIBLE
                 binding.btnEliminar.setOnClickListener {
-                    // TODO: Call viewModel.eliminarItem(position)
+                    val posicion = bindingAdapterPosition
+                    if (posicion != androidx.recyclerview.widget.RecyclerView.NO_POSITION) eliminar(posicion)
                 }
             }
         }

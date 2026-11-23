@@ -13,6 +13,9 @@ import com.lupefit.core.domain.repository.ProgresoRepository;
 import com.lupefit.core.domain.model.PesoEntry;
 
 import java.text.SimpleDateFormat;
+import java.text.ParsePosition;
+import java.util.Date;
+import java.util.List;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
@@ -33,13 +36,18 @@ public class PesoViewModel extends ViewModel {
     private final MutableLiveData<String> _error = new MutableLiveData<>();
     public final LiveData<String> error = _error;
 
+    private final MutableLiveData<List<PesoEntry>> history = new MutableLiveData<>();
+    public final LiveData<List<PesoEntry>> entries = history;
+
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
     public PesoViewModel(ProgresoRepository repository) {
         this.repository = repository;
+        dateFormat.setLenient(false);
         // Set today's date by default
         Calendar cal = Calendar.getInstance();
         fecha.setValue(dateFormat.format(cal.getTime()));
+        refreshHistory();
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -71,13 +79,13 @@ public class PesoViewModel extends ViewModel {
 
         float pesoValue;
         try {
-            pesoValue = Float.parseFloat(pesoInput.trim());
+            pesoValue = Float.parseFloat(pesoInput.trim().replace(',', '.'));
         } catch (NumberFormatException e) {
             _error.setValue("Peso inválido");
             return;
         }
 
-        if (pesoValue <= 0) {
+        if (!Float.isFinite(pesoValue) || pesoValue <= 0) {
             _error.setValue("Ingresá un peso válido");
             return;
         }
@@ -88,6 +96,18 @@ public class PesoViewModel extends ViewModel {
             return;
         }
 
+        ParsePosition position = new ParsePosition(0);
+        Date selectedDate = dateFormat.parse(fechaStr, position);
+        if (selectedDate == null || position.getIndex() != fechaStr.length()) {
+            _error.setValue("Ingresá una fecha válida (dd/mm/aaaa)");
+            return;
+        }
+        Calendar selected = Calendar.getInstance();
+        selected.setTime(selectedDate);
+        int dateKey = selected.get(Calendar.YEAR) * 10000
+                + (selected.get(Calendar.MONTH) + 1) * 100 + selected.get(Calendar.DAY_OF_MONTH);
+        String note = nota.getValue();
+
         _saved.setValue(false);
         _error.setValue(null);
 
@@ -96,23 +116,29 @@ public class PesoViewModel extends ViewModel {
                 PesoEntry entry = new PesoEntry();
                 entry.setPeso(pesoValue);
                 entry.setFecha(fechaStr);
-                entry.setNota(nota.getValue() != null ? nota.getValue() : "");
-                entry.setDateKey(getTodayDateKey());
+                entry.setNota(note != null ? note : "");
+                entry.setDateKey(dateKey);
                 entry.setTimestamp(System.currentTimeMillis());
 
                 repository.insertPeso(entry);
                 _saved.postValue(true);
+                loadHistory();
             } catch (Exception e) {
                 _error.postValue("Error guardando: " + e.getMessage());
             }
         });
     }
 
-    private int getTodayDateKey() {
-        Calendar cal = Calendar.getInstance();
-        return cal.get(Calendar.YEAR) * 10000
-                + (cal.get(Calendar.MONTH) + 1) * 100
-                + cal.get(Calendar.DAY_OF_MONTH);
+    private void refreshHistory() {
+        executor.execute(this::loadHistory);
+    }
+
+    private void loadHistory() {
+        try {
+            repository.getPesoHistory(history::postValue);
+        } catch (Exception e) {
+            _error.postValue("Error cargando el historial de peso");
+        }
     }
 
     @Override

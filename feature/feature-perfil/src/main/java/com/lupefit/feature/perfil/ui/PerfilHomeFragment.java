@@ -8,18 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.lupefit.core.ui.R;
+import com.lupefit.feature.perfil.R;
 import com.lupefit.feature.perfil.databinding.FragmentPerfilHomeBinding;
-import com.lupefit.feature.perfil.viewmodel.PerfilHomeViewModel;
 
 public class PerfilHomeFragment extends Fragment {
 
     private FragmentPerfilHomeBinding binding;
-    private PerfilHomeViewModel viewModel;
     private NavController navController;
 
     @Override
@@ -34,11 +31,9 @@ public class PerfilHomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = NavHostFragment.findNavController(this);
-        viewModel = new ViewModelProvider(this).get(PerfilHomeViewModel.class);
 
         setupToolbar();
         setupClickListeners();
-        setupObservers();
     }
 
     private void setupToolbar() {
@@ -46,11 +41,16 @@ public class PerfilHomeFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        // TODO: Add click listeners for cards/buttons
-    }
-
-    private void setupObservers() {
-        // TODO: Observe ViewModel LiveData
+        binding.optionEditarPerfil.setOnClickListener(v ->
+                navController.navigate(R.id.action_perfilHomeFragment_to_editarPerfilFragment));
+        binding.optionLogin.setOnClickListener(v ->
+                navController.navigate(R.id.action_perfilHomeFragment_to_loginFragment));
+        binding.optionRegistro.setOnClickListener(v ->
+                navController.navigate(R.id.action_perfilHomeFragment_to_registroFragment));
+        binding.optionSyncAccount.setOnClickListener(v ->
+                navController.navigate(R.id.action_perfilHomeFragment_to_syncAccountFragment));
+        binding.optionCambiarPassword.setOnClickListener(v ->
+                navController.navigate(R.id.action_perfilHomeFragment_to_cambiarPasswordFragment));
     }
 
     @Override

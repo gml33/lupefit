@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_perfilHomeFragment_to_syncAccountFragment"
             app:destination="@id/syncAccountFragment" />
+        <action
+            android:id="@+id/action_perfilHomeFragment_to_cambiarPasswordFragment"
+            app:destination="@id/cambiarPasswordFragment" />
     </fragment>
 
     <fragment

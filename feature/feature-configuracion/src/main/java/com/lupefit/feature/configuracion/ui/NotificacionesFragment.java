@@ -32,6 +32,8 @@ public class NotificacionesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this, new NotificacionesViewModel.Factory(requireContext())).get(NotificacionesViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
         setupClickListeners();
@@ -42,7 +44,24 @@ public class NotificacionesFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        // Switches automatically update ViewModel via data binding
+        binding.switchPush.setOnClickListener(v -> viewModel.setPushEnabled(binding.switchPush.isChecked()));
+        binding.switchResumenSemanal.setOnClickListener(v -> viewModel.setResumenSemanal(binding.switchResumenSemanal.isChecked()));
+        binding.switchLogros.setOnClickListener(v -> viewModel.setLogros(binding.switchLogros.isChecked()));
+        binding.switchRecordatorioAgua.setOnClickListener(v -> viewModel.setRecordatorioAgua(binding.switchRecordatorioAgua.isChecked()));
+        binding.switchRecordatorioComida.setOnClickListener(v -> viewModel.setRecordatorioComida(binding.switchRecordatorioComida.isChecked()));
+        binding.switchRecordatorioEjercicio.setOnClickListener(v -> viewModel.setRecordatorioEjercicio(binding.switchRecordatorioEjercicio.isChecked()));
+        binding.switchRecordatorioPeso.setOnClickListener(v -> viewModel.setRecordatorioPeso(binding.switchRecordatorioPeso.isChecked()));
+        binding.etHoraAgua.setOnClickListener(v -> elegirHora(viewModel.horaRecordatorioAgua.getValue(),
+                viewModel::setHoraRecordatorioAgua));
+        binding.etHoraComida.setOnClickListener(v -> elegirHora(viewModel.horaRecordatorioComida.getValue(),
+                viewModel::setHoraRecordatorioComida));
+    }
+
+    private void elegirHora(String hora, java.util.function.Consumer<String> save) {
+        String[] parts = hora.split(":");
+        new android.app.TimePickerDialog(requireContext(), (dialog, hour, minute) ->
+                save.accept(String.format(java.util.Locale.ROOT, "%02d:%02d", hour, minute)),
+                Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), true).show();
     }
 
     @Override

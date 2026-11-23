@@ -51,7 +51,7 @@ public class DiarioMapper {
             }
         }
         entity.foodName = domain.getFoodName();
-        entity.foodId = domain.getFoodId();
+        entity.foodId = domain.getFoodId() != null ? domain.getFoodId() : "";
         entity.quantityGrams = domain.getCantidad();
         entity.calories = domain.getCalorias();
         entity.proteinGrams = domain.getProteinas();
@@ -60,7 +60,7 @@ public class DiarioMapper {
         entity.fiberGrams = domain.getFibra();
         entity.sugarGrams = domain.getAzucar();
         entity.sodiumMg = domain.getSodio();
-        entity.mealType = domain.getTipoComida();
+        entity.mealType = domain.getTipoComida() != null ? domain.getTipoComida() : "otro";
         entity.timestamp = domain.getTimestamp();
         entity.dateKey = domain.getDateKey();
         entity.estimatedCostSnapshot = domain.getEstimatedCostSnapshot();
@@ -70,7 +70,7 @@ public class DiarioMapper {
         entity.fromAIFoodScan = domain.isFromAiFoodScan();
         entity.sourceType = domain.getSourceType();
         entity.isSynced = domain.isSynced();
-        entity.syncAction = domain.getSyncAction();
+        entity.syncAction = domain.getSyncAction() != null ? domain.getSyncAction() : "CREATE";
         entity.serverId = domain.getServerId();
         entity.lastModified = domain.getLastModified();
         return entity;

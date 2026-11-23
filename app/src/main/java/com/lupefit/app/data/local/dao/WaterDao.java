@@ -32,6 +32,9 @@ public interface WaterDao {
     @Query("SELECT * FROM water_entries WHERE id = :id")
     LiveData<WaterEntity> getWaterById(long id);
 
+    @Query("SELECT * FROM water_entries WHERE id = :id")
+    WaterEntity getWaterByIdSync(long id);
+
     @Query("SELECT * FROM water_entries WHERE serverId = :serverId")
     LiveData<WaterEntity> getWaterByServerId(String serverId);
 

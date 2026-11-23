@@ -26,30 +26,18 @@
             android:orientation="horizontal"
             android:padding="@dimen/spacing_m">
 
-            <!-- Alimento (with dropdown) -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:layout_marginEnd="@dimen/spacing_s"
-                android:hint="@string/ingrediente_alimento"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusTopStart="@dimen/corner_small"
-                app:boxCornerRadiusTopEnd="@dimen/corner_small"
-                app:boxCornerRadiusBottomStart="@dimen/corner_small"
-                app:boxCornerRadiusBottomEnd="@dimen/corner_small"
-                app:endIconMode="dropdown_menu"
-                app:endIconDrawable="@drawable/ic_chevron_down"
-                app:endIconTint="?attr/colorOnSurfaceVariant">
+                android:hint="@string/ingrediente_alimento">
 
-                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:inputType="none"
-                    android:text="@={ingrediente.alimentoNombre}"
-                    tools:text="Pechuga de pollo" />
+                    android:inputType="textCapSentences"
+                    android:text="@={ingrediente.alimentoNombre}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Cantidad -->
@@ -90,6 +78,7 @@
                 app:endIconTint="?attr/colorOnSurfaceVariant">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/etIngredienteUnidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
@@ -103,10 +92,10 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDeleteIngrediente"
                 style="@style/Widget.Material3.Button.IconButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center_vertical"
-                android:contentDescription="Eliminar ingrediente"
+                android:contentDescription="@string/ingrediente_eliminar"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:onClick="@{() -> viewModel.removeIngrediente(ingrediente)}"

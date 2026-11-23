@@ -6,8 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.util.ArrayList
+import com.google.gson.reflect.TypeToken
 
-class PlanesComidaViewModel : ViewModel() {
+class PlanesComidaViewModel private constructor(private val storage: PlanesStorage) : ViewModel() {
 
     data class DiaPlan(
         val dia: Int,
@@ -24,7 +25,8 @@ class PlanesComidaViewModel : ViewModel() {
     private val _semanas = MutableLiveData<List<SemanaPlan>>(listOf())
     val semanas: LiveData<List<SemanaPlan>> = _semanas
 
-    private val _semanaActual = MutableLiveData<Int>(1)
+    private val _semanaActual = MutableLiveData(
+        storage.read("comidas_semana", Int::class.javaObjectType, 1).coerceIn(1, 52))
     val semanaActual: LiveData<Int> = _semanaActual
 
     private val _cargando = MutableLiveData<Boolean>(false)
@@ -34,12 +36,15 @@ class PlanesComidaViewModel : ViewModel() {
     val listaCompras: LiveData<List<String>> = _listaCompras
 
     init {
-        cargarPlanesSimulados()
+        _semanas.value = storage.read("comidas", object : TypeToken<List<SemanaPlan>>() {}.type, emptyList<SemanaPlan>())
+        generarListaCompras()
     }
 
     fun setSemanaActual(semana: Int) {
         if (semana in 1..52) {
+            storage.write("comidas_semana", semana)
             _semanaActual.value = semana
+            generarListaCompras()
         }
     }
 
@@ -56,7 +61,7 @@ class PlanesComidaViewModel : ViewModel() {
                 semana
             }
         }
-        _semanas.value = nuevaLista
+        save(nuevaLista)
         generarListaCompras()
         _cargando.value = false
     }
@@ -75,50 +80,42 @@ class PlanesComidaViewModel : ViewModel() {
                 semana.copy(dias = nuevosDias)
             } else semana
         }
-        _semanas.value = nuevaLista
+        save(nuevaLista)
         generarListaCompras()
     }
 
     private fun generarListaCompras() {
         val semana = _semanas.value?.firstOrNull { it.numeroSemana == _semanaActual.value }
-        val compras = mutableSetOf<String>()
+        val compras = mutableListOf<String>()
         semana?.dias?.forEach { dia ->
-            if (dia.completado) {
-                compras.addAll(dia.recetas)
-            }
+            compras.addAll(dia.recetas)
         }
         _listaCompras.value = ArrayList(compras)
     }
 
-    private fun cargarPlanesSimulados() {
-        val todasLasSemanas = ArrayList<SemanaPlan>()
-        for (s in 1..52) {
-            val dias = ArrayList<DiaPlan>()
-            val nombresDias = listOf("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo")
-            for (d in 1..7) {
-                val recetas = when (d) {
-                    1 -> listOf("Pollo con arroz", "Ensalada mixta")
-                    2 -> listOf("Pasta con atún", "Verduras al vapor")
-                    3 -> listOf("Tacos de carne", "Guacamole")
-                    4 -> listOf("Salmón a la plancha", "Puré de papa")
-                    5 -> listOf("Hamburguesas caseras", "Papas fritas")
-                    6 -> listOf("Asado", "Ensalada rusa")
-                    7 -> listOf("Pizza casera", "Helado")
-                    else -> listOf()
-                }
-                dias.add(DiaPlan(d, nombresDias[d-1], recetas))
-            }
-            todasLasSemanas.add(SemanaPlan(s, dias))
+    fun guardarSemana(semana: Int, nombres: List<String>, entradas: List<List<String>>) {
+        require(semana in 1..52 && nombres.size == 7 && entradas.size == 7)
+        val anterior = _semanas.value.orEmpty().find { it.numeroSemana == semana }
+        val dias = nombres.mapIndexed { index, nombre ->
+            val elementos = entradas[index]
+            val previo = anterior?.dias?.getOrNull(index)
+            DiaPlan(index + 1, nombre, elementos, previo?.let { it.recetas == elementos && it.completado } == true)
         }
-        _semanas.value = todasLasSemanas
-        generarListaCompras()
+        save((_semanas.value.orEmpty().filterNot { it.numeroSemana == semana } + SemanaPlan(semana, dias))
+            .sortedBy { it.numeroSemana })
+        setSemanaActual(semana)
+    }
+
+    private fun save(semanas: List<SemanaPlan>) {
+        storage.write("comidas", semanas)
+        _semanas.value = semanas
     }
 
     class Factory(private val context: Context) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(PlanesComidaViewModel::class.java)) {
-                return PlanesComidaViewModel() as T
+                return PlanesComidaViewModel(PlanesStorage(context)) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

@@ -28,7 +28,12 @@ public class LoginViewModel extends ViewModel {
     private final MutableLiveData<String> _error = new MutableLiveData<>();
     public final LiveData<String> error = _error;
 
-    public LoginViewModel() {}
+    private final LocalAccount account;
+
+    public LoginViewModel(Context context) {
+        account = new LocalAccount(context);
+        _email.setValue(account.rememberedEmail());
+    }
 
     public static class Factory implements ViewModelProvider.Factory {
         private final Context context;
@@ -41,7 +46,7 @@ public class LoginViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(LoginViewModel.class)) {
-                return (T) new LoginViewModel();
+                return (T) new LoginViewModel(context);
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
@@ -69,11 +74,21 @@ public class LoginViewModel extends ViewModel {
         _cargando.setValue(true);
         _error.setValue(null);
 
-        // TODO: Call AuthRepository.login()
-        new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
-            _cargando.postValue(false);
-            _autenticado.postValue(true);
-        }, 1500);
+        boolean recordarEmail = Boolean.TRUE.equals(_recordar.getValue());
+        LocalAccount.EXECUTOR.execute(() -> {
+            try {
+                if (account.login(emailVal, passVal, recordarEmail)) {
+                    _password.postValue("");
+                    _autenticado.postValue(true);
+                } else {
+                    _error.postValue("Email o contraseña incorrectos");
+                }
+            } catch (java.security.GeneralSecurityException | IllegalArgumentException | IllegalStateException failure) {
+                _error.postValue("No se pudo completar la operación de cuenta local");
+            } finally {
+                _cargando.postValue(false);
+            }
+        });
     }
 
     public void setEmail(String email) {
@@ -82,5 +97,8 @@ public class LoginViewModel extends ViewModel {
 
     public void setPassword(String password) {
         _password.setValue(password);
+    }
+    public void setRecordar(boolean value) {
+        _recordar.setValue(value);
     }
 }

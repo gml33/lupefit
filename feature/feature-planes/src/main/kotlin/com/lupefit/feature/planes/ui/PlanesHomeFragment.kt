@@ -37,9 +37,9 @@ class PlanesHomeFragment : Fragment() {
 
         navController = NavHostFragment.findNavController(this)
         viewModel = ViewModelProvider(this).get(PlanesHomeViewModel::class.java)
-        comidaViewModel = ViewModelProvider(this).get(PlanesComidaViewModel::class.java)
-        entrenamientoViewModel = ViewModelProvider(this).get(PlanesEntrenamientoViewModel::class.java)
-        presupuestoViewModel = ViewModelProvider(this).get(PresupuestoPlanesViewModel::class.java)
+        comidaViewModel = ViewModelProvider(requireActivity(), PlanesComidaViewModel.Factory(requireContext()))[PlanesComidaViewModel::class.java]
+        entrenamientoViewModel = ViewModelProvider(requireActivity(), PlanesEntrenamientoViewModel.Factory(requireContext()))[PlanesEntrenamientoViewModel::class.java]
+        presupuestoViewModel = ViewModelProvider(requireActivity(), PresupuestoPlanesViewModel.Factory(requireContext()))[PresupuestoPlanesViewModel::class.java]
 
         setupToolbar(view)
         setupClickListeners(view)
@@ -70,7 +70,7 @@ class PlanesHomeFragment : Fragment() {
     private fun setupObservers(view: View) {
         comidaViewModel.semanaActual.observe(viewLifecycleOwner) { semana ->
             val tv = view.findViewById<TextView>(R.id.tvSemanaComida)
-            tv?.text = "Semana $semana"
+            tv?.text = getString(R.string.planes_resumen_comida, semana)
         }
 
         entrenamientoViewModel.progresoSemanal.observe(viewLifecycleOwner) { progreso ->

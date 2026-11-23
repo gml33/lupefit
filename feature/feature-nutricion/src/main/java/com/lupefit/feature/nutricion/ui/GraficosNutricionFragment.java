@@ -1,7 +1,6 @@
 package com.lupefit.feature.nutricion.ui;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -33,6 +31,12 @@ import com.lupefit.feature.nutricion.viewmodel.GraficosNutricionViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.function.ToDoubleFunction;
+
+import com.google.android.material.color.MaterialColors;
+import com.lupefit.core.domain.model.MacroTotals;
 
 public class GraficosNutricionFragment extends Fragment {
 
@@ -58,7 +62,7 @@ public class GraficosNutricionFragment extends Fragment {
         setupToolbar();
         setupChipGroup();
         setupCharts();
-        setupMockData(); // TODO: Replace with real data from ViewModel
+        viewModel.history.observe(getViewLifecycleOwner(), this::renderCharts);
     }
 
     private void setupToolbar() {
@@ -78,32 +82,33 @@ public class GraficosNutricionFragment extends Fragment {
     }
 
     private void setupCharts() {
-        setupLineChart(binding.chartCalorias, 0xFF10B981);
-        setupLineChart(binding.chartProteinas, 0xFF2563EB);
-        setupLineChart(binding.chartCarbohidratos, 0xFFD97706);
-        setupLineChart(binding.chartGrasas, 0xFF7C3AED);
+        setupLineChart(binding.chartCalorias);
+        setupLineChart(binding.chartProteinas);
+        setupLineChart(binding.chartCarbohidratos);
+        setupLineChart(binding.chartGrasas);
         setupPieChart(binding.chartMacroDistribution);
     }
 
-    private void setupLineChart(LineChart chart, int color) {
+    private void setupLineChart(LineChart chart) {
+        chart.setNoDataText(getString(R.string.chart_sin_datos));
+        chart.setNoDataTextColor(onSurface(chart));
         chart.getDescription().setEnabled(false);
         chart.setTouchEnabled(true);
         chart.setDragEnabled(true);
         chart.setScaleEnabled(true);
         chart.setPinchZoom(false);
         chart.setDrawGridBackground(false);
-        chart.setBackgroundColor(Color.TRANSPARENT);
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
-        xAxis.setTextColor(Color.GRAY);
+        xAxis.setTextColor(onSurface(chart));
         xAxis.setGranularity(1f);
 
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setDrawGridLines(true);
-        leftAxis.setGridColor(Color.LTGRAY);
-        leftAxis.setTextColor(Color.GRAY);
+        leftAxis.setGridColor(MaterialColors.getColor(chart, com.google.android.material.R.attr.colorOutlineVariant));
+        leftAxis.setTextColor(onSurface(chart));
         leftAxis.setAxisMinimum(0f);
 
         chart.getAxisRight().setEnabled(false);
@@ -113,13 +118,17 @@ public class GraficosNutricionFragment extends Fragment {
     }
 
     private void setupPieChart(PieChart chart) {
+        chart.setNoDataText(getString(R.string.chart_sin_datos));
+        chart.setNoDataTextColor(onSurface(chart));
         chart.getDescription().setEnabled(false);
         chart.setDrawHoleEnabled(true);
         chart.setHoleRadius(40f);
         chart.setTransparentCircleRadius(45f);
         chart.setUsePercentValues(true);
         chart.setDrawEntryLabels(true);
-        chart.setEntryLabelColor(Color.BLACK);
+        chart.setDrawEntryLabels(false);
+        chart.setHoleColor(MaterialColors.getColor(chart, com.google.android.material.R.attr.colorSurface));
+        chart.getLegend().setTextColor(onSurface(chart));
         chart.setEntryLabelTextSize(12f);
 
         Legend legend = chart.getLegend();
@@ -128,120 +137,75 @@ public class GraficosNutricionFragment extends Fragment {
         legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
     }
 
-    private void setupMockData() {
-        // Calorías trend
-        List<Entry> caloriasEntries = new ArrayList<>();
-        caloriasEntries.add(new Entry(1, 1850));
-        caloriasEntries.add(new Entry(2, 1920));
-        caloriasEntries.add(new Entry(3, 1780));
-        caloriasEntries.add(new Entry(4, 2010));
-        caloriasEntries.add(new Entry(5, 1890));
-        caloriasEntries.add(new Entry(6, 1950));
-        caloriasEntries.add(new Entry(7, 2100));
+    private int onSurface(View view) {
+        return MaterialColors.getColor(view, com.google.android.material.R.attr.colorOnSurface);
+    }
 
-        LineDataSet caloriasSet = new LineDataSet(caloriasEntries, "Calorías");
-        caloriasSet.setColor(0xFF10B981);
-        caloriasSet.setCircleColor(0xFF10B981);
-        caloriasSet.setLineWidth(2f);
-        caloriasSet.setCircleRadius(4f);
-        caloriasSet.setDrawValues(true);
-        caloriasSet.setValueTextSize(10f);
-        caloriasSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+    private void renderCharts(Map<Integer, MacroTotals> history) {
+        int protein = requireContext().getColor(com.lupefit.core.ui.R.color.macro_protein);
+        int carbs = requireContext().getColor(com.lupefit.core.ui.R.color.macro_carbs);
+        int fat = requireContext().getColor(com.lupefit.core.ui.R.color.macro_fat);
+        renderLine(binding.chartCalorias, history, MacroTotals::getCalorias,
+                MaterialColors.getColor(binding.chartCalorias, androidx.appcompat.R.attr.colorPrimary));
+        renderLine(binding.chartProteinas, history, MacroTotals::getProteinas, protein);
+        renderLine(binding.chartCarbohidratos, history, MacroTotals::getCarbohidratos, carbs);
+        renderLine(binding.chartGrasas, history, MacroTotals::getGrasas, fat);
 
-        LineData caloriasData = new LineData(caloriasSet);
-        binding.chartCalorias.setData(caloriasData);
-        binding.chartCalorias.invalidate();
+        List<PieEntry> entries = new ArrayList<>();
+        List<Integer> colors = new ArrayList<>();
+        addSlice(entries, colors, history, MacroTotals::getProteinas, R.string.chart_proteinas, protein);
+        addSlice(entries, colors, history, MacroTotals::getCarbohidratos, R.string.chart_carbohidratos, carbs);
+        addSlice(entries, colors, history, MacroTotals::getGrasas, R.string.chart_grasas, fat);
+        if (entries.isEmpty()) {
+            binding.chartMacroDistribution.clear();
+            return;
+        }
+        PieDataSet set = new PieDataSet(entries, "");
+        set.setColors(colors);
+        set.setDrawValues(false);
+        binding.chartMacroDistribution.setData(new PieData(set));
+        binding.chartMacroDistribution.invalidate();
+    }
 
-        // Proteínas
-        List<Entry> proteinasEntries = new ArrayList<>();
-        proteinasEntries.add(new Entry(1, 120));
-        proteinasEntries.add(new Entry(2, 135));
-        proteinasEntries.add(new Entry(3, 110));
-        proteinasEntries.add(new Entry(4, 140));
-        proteinasEntries.add(new Entry(5, 125));
-        proteinasEntries.add(new Entry(6, 130));
-        proteinasEntries.add(new Entry(7, 145));
+    private void addSlice(List<PieEntry> entries, List<Integer> colors,
+                          Map<Integer, MacroTotals> history, ToDoubleFunction<MacroTotals> metric,
+                          int label, int color) {
+        float total = 0;
+        for (MacroTotals day : history.values()) total += metric.applyAsDouble(day);
+        if (total > 0) {
+            entries.add(new PieEntry(total, getString(label)));
+            colors.add(color);
+        }
+    }
 
-        LineDataSet proteinasSet = new LineDataSet(proteinasEntries, "Proteínas");
-        proteinasSet.setColor(0xFF2563EB);
-        proteinasSet.setCircleColor(0xFF2563EB);
-        proteinasSet.setLineWidth(2f);
-        proteinasSet.setCircleRadius(4f);
-        proteinasSet.setDrawValues(true);
-        proteinasSet.setValueTextSize(10f);
-        proteinasSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
-        LineData proteinasData = new LineData(proteinasSet);
-        binding.chartProteinas.setData(proteinasData);
-        binding.chartProteinas.invalidate();
-
-        // Carbohidratos
-        List<Entry> carbsEntries = new ArrayList<>();
-        carbsEntries.add(new Entry(1, 220));
-        carbsEntries.add(new Entry(2, 240));
-        carbsEntries.add(new Entry(3, 200));
-        carbsEntries.add(new Entry(4, 260));
-        carbsEntries.add(new Entry(5, 230));
-        carbsEntries.add(new Entry(6, 245));
-        carbsEntries.add(new Entry(7, 270));
-
-        LineDataSet carbsSet = new LineDataSet(carbsEntries, "Carbohidratos");
-        carbsSet.setColor(0xFFD97706);
-        carbsSet.setCircleColor(0xFFD97706);
-        carbsSet.setLineWidth(2f);
-        carbsSet.setCircleRadius(4f);
-        carbsSet.setDrawValues(true);
-        carbsSet.setValueTextSize(10f);
-        carbsSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
-        LineData carbsData = new LineData(carbsSet);
-        binding.chartCarbohidratos.setData(carbsData);
-        binding.chartCarbohidratos.invalidate();
-
-        // Grasas
-        List<Entry> grasasEntries = new ArrayList<>();
-        grasasEntries.add(new Entry(1, 65));
-        grasasEntries.add(new Entry(2, 70));
-        grasasEntries.add(new Entry(3, 60));
-        grasasEntries.add(new Entry(4, 75));
-        grasasEntries.add(new Entry(5, 68));
-        grasasEntries.add(new Entry(6, 72));
-        grasasEntries.add(new Entry(7, 80));
-
-        LineDataSet grasasSet = new LineDataSet(grasasEntries, "Grasas");
-        grasasSet.setColor(0xFF7C3AED);
-        grasasSet.setCircleColor(0xFF7C3AED);
-        grasasSet.setLineWidth(2f);
-        grasasSet.setCircleRadius(4f);
-        grasasSet.setDrawValues(true);
-        grasasSet.setValueTextSize(10f);
-        grasasSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
-        LineData grasasData = new LineData(grasasSet);
-        binding.chartGrasas.setData(grasasData);
-        binding.chartGrasas.invalidate();
-
-        // Macro Distribution Pie Chart
-        List<PieEntry> macroEntries = new ArrayList<>();
-        macroEntries.add(new PieEntry(120f, "Proteínas"));
-        macroEntries.add(new PieEntry(240f, "Carbohidratos"));
-        macroEntries.add(new PieEntry(65f, "Grasas"));
-
-        PieDataSet macroSet = new PieDataSet(macroEntries, "");
-        macroSet.setColors(new int[]{0xFF2563EB, 0xFFD97706, 0xFF7C3AED});
-        macroSet.setValueTextSize(12f);
-        macroSet.setValueTextColor(Color.WHITE);
-        macroSet.setSliceSpace(2f);
-
-        PieData macroData = new PieData(macroSet);
-        macroData.setValueFormatter(new ValueFormatter() {
+    private void renderLine(LineChart chart, Map<Integer, MacroTotals> history,
+                            ToDoubleFunction<MacroTotals> metric, int color) {
+        if (history.isEmpty()) {
+            chart.clear();
+            return;
+        }
+        List<Entry> values = new ArrayList<>();
+        List<Integer> dates = new ArrayList<>();
+        for (Map.Entry<Integer, MacroTotals> day : history.entrySet()) {
+            values.add(new Entry(dates.size(), (float) metric.applyAsDouble(day.getValue())));
+            dates.add(day.getKey());
+        }
+        chart.getXAxis().setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                return String.format("%.0f%%", value);
+                int index = Math.round(value);
+                if (value != index || index < 0 || index >= dates.size()) return "";
+                int date = dates.get(index);
+                return String.format(Locale.getDefault(), "%02d/%02d", date % 100, date / 100 % 100);
             }
         });
-        binding.chartMacroDistribution.setData(macroData);
-        binding.chartMacroDistribution.invalidate();
+        LineDataSet set = new LineDataSet(values, "");
+        set.setColor(color);
+        set.setCircleColor(color);
+        set.setLineWidth(2f);
+        set.setDrawValues(false);
+        chart.setData(new LineData(set));
+        chart.invalidate();
     }
 
     @Override

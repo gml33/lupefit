@@ -1,6 +1,7 @@
 package com.lupefit.feature.configuracion.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -37,8 +38,19 @@ public class NotificacionesViewModel extends ViewModel {
     private final MutableLiveData<String> _horaRecordatorioComida = new MutableLiveData<>("12:00");
     public final LiveData<String> horaRecordatorioComida = _horaRecordatorioComida;
 
-    public NotificacionesViewModel() {
-        // TODO: Load from preferences
+    private final SharedPreferences preferences;
+
+    public NotificacionesViewModel(Context context) {
+        preferences = context.getApplicationContext().getSharedPreferences("lupefit_settings", Context.MODE_PRIVATE);
+        _pushEnabled.setValue(preferences.getBoolean("pushEnabled", true));
+        _recordatorioAgua.setValue(preferences.getBoolean("recordatorioAgua", true));
+        _recordatorioComida.setValue(preferences.getBoolean("recordatorioComida", true));
+        _recordatorioEjercicio.setValue(preferences.getBoolean("recordatorioEjercicio", false));
+        _recordatorioPeso.setValue(preferences.getBoolean("recordatorioPeso", false));
+        _resumenSemanal.setValue(preferences.getBoolean("resumenSemanal", true));
+        _logros.setValue(preferences.getBoolean("logros", true));
+        _horaRecordatorioAgua.setValue(preferences.getString("horaRecordatorioAgua", "09:00"));
+        _horaRecordatorioComida.setValue(preferences.getString("horaRecordatorioComida", "12:00"));
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -52,13 +64,68 @@ public class NotificacionesViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(NotificacionesViewModel.class)) {
-                return (T) new NotificacionesViewModel();
+                return (T) new NotificacionesViewModel(context);
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
     }
 
+    public void setPushEnabled(boolean value) {
+        _pushEnabled.setValue(value);
+        savePreferencias();
+    }
+
+    public void setRecordatorioAgua(boolean value) {
+        _recordatorioAgua.setValue(value);
+        savePreferencias();
+    }
+
+    public void setRecordatorioComida(boolean value) {
+        _recordatorioComida.setValue(value);
+        savePreferencias();
+    }
+
+    public void setRecordatorioEjercicio(boolean value) {
+        _recordatorioEjercicio.setValue(value);
+        savePreferencias();
+    }
+
+    public void setRecordatorioPeso(boolean value) {
+        _recordatorioPeso.setValue(value);
+        savePreferencias();
+    }
+
+    public void setResumenSemanal(boolean value) {
+        _resumenSemanal.setValue(value);
+        savePreferencias();
+    }
+
+    public void setLogros(boolean value) {
+        _logros.setValue(value);
+        savePreferencias();
+    }
+
+    public void setHoraRecordatorioAgua(String value) {
+        _horaRecordatorioAgua.setValue(value);
+        savePreferencias();
+    }
+
+    public void setHoraRecordatorioComida(String value) {
+        _horaRecordatorioComida.setValue(value);
+        savePreferencias();
+    }
+
     public void savePreferencias() {
-        // TODO: Save all preferences
+        preferences.edit()
+                .putBoolean("pushEnabled", _pushEnabled.getValue())
+                .putBoolean("recordatorioAgua", _recordatorioAgua.getValue())
+                .putBoolean("recordatorioComida", _recordatorioComida.getValue())
+                .putBoolean("recordatorioEjercicio", _recordatorioEjercicio.getValue())
+                .putBoolean("recordatorioPeso", _recordatorioPeso.getValue())
+                .putBoolean("resumenSemanal", _resumenSemanal.getValue())
+                .putBoolean("logros", _logros.getValue())
+                .putString("horaRecordatorioAgua", _horaRecordatorioAgua.getValue())
+                .putString("horaRecordatorioComida", _horaRecordatorioComida.getValue())
+                .apply();
     }
 }

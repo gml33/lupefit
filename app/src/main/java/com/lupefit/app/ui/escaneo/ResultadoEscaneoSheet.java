@@ -130,10 +130,10 @@ public class ResultadoEscaneoSheet extends BottomSheetDialogFragment {
 
         // Macros por 100g
         FoodProduct.MacroBreakdown macros100 = product.calculateMacrosForGrams(100);
-        setMacroView(binding.macroKcal.getRoot(), macros100.kcal, "kcal");
-        setMacroView(binding.macroProtein.getRoot(), macros100.proteinG, "g");
-        setMacroView(binding.macroCarbs.getRoot(), macros100.carbsG, "g");
-        setMacroView(binding.macroFat.getRoot(), macros100.fatG, "g");
+        setMacroView(binding.macroKcal.getRoot(), macros100.kcal, "Calorías", "kcal");
+        setMacroView(binding.macroProtein.getRoot(), macros100.proteinG, "Proteínas", "g");
+        setMacroView(binding.macroCarbs.getRoot(), macros100.carbsG, "Carbohidratos", "g");
+        setMacroView(binding.macroFat.getRoot(), macros100.fatG, "Grasas", "g");
 
         // Valor por defecto: porción por defecto del producto
         double defaultGrams = product.defaultServingGrams > 0 ? product.defaultServingGrams : 100;
@@ -255,12 +255,13 @@ public class ResultadoEscaneoSheet extends BottomSheetDialogFragment {
         }
     }
 
-    private void setMacroView(View view, double value, String unit) {
+    private void setMacroView(View view, double value, String label, String unit) {
         TextView tvValue = view.findViewById(R.id.tvMacroValue);
         TextView tvLabel = view.findViewById(R.id.tvMacroLabel);
         TextView tvUnit = view.findViewById(R.id.tvMacroUnit);
 
         tvValue.setText(String.format("%.0f", value));
+        tvLabel.setText(label);
         tvUnit.setText(unit);
     }
 
@@ -286,10 +287,10 @@ public class ResultadoEscaneoSheet extends BottomSheetDialogFragment {
         double grams = getCurrentGrams();
         FoodProduct.MacroBreakdown macros = product.calculateMacrosForGrams(grams);
 
-        setMacroView(binding.calcKcal.getRoot(), macros.kcal, "kcal");
-        setMacroView(binding.calcProtein.getRoot(), macros.proteinG, "g");
-        setMacroView(binding.calcCarbs.getRoot(), macros.carbsG, "g");
-        setMacroView(binding.calcFat.getRoot(), macros.fatG, "g");
+        setMacroView(binding.calcKcal.getRoot(), macros.kcal, "Calorías", "kcal");
+        setMacroView(binding.calcProtein.getRoot(), macros.proteinG, "Proteínas", "g");
+        setMacroView(binding.calcCarbs.getRoot(), macros.carbsG, "Carbohidratos", "g");
+        setMacroView(binding.calcFat.getRoot(), macros.fatG, "Grasas", "g");
 
         // Actualizar costo estimado si tracking activado
         double estimatedCost = calculateEstimatedCost(grams);

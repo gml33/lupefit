@@ -95,7 +95,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="number"
-                                    android:text="@{viewModel.calorias}" />
+                                    android:text="@{String.valueOf(viewModel.calorias)}" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -118,7 +118,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="number"
-                                    android:text="@{viewModel.agua}" />
+                                    android:text="@{String.valueOf(viewModel.agua)}" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
@@ -146,7 +146,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="number"
-                                    android:text="@{viewModel.proteinas}" />
+                                    android:text="@{String.valueOf(viewModel.proteinas)}" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -168,7 +168,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="number"
-                                    android:text="@{viewModel.carbohidratos}" />
+                                    android:text="@{String.valueOf(viewModel.carbohidratos)}" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -189,7 +189,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="number"
-                                    android:text="@{viewModel.grasas}" />
+                                    android:text="@{String.valueOf(viewModel.grasas)}" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
@@ -210,7 +210,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
-                                android:text="@{viewModel.fibra}" />
+                                android:text="@{String.valueOf(viewModel.fibra)}" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>

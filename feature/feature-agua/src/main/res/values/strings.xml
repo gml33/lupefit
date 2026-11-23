@@ -49,4 +49,7 @@
     <string name="agua_notificacion_titulo">Hora de hidratarse</string>
     <string name="agua_notificacion_cuerpo">Recordá tomar agua para cumplir tu meta diaria</string>
     <string name="agua_notificacion_configurar">Configurar recordatorios</string>
+    <string name="water_amount_ml">Cantidad (ml)</string>
+    <string name="water_add_custom">Agregar agua</string>
+    <string name="water_invalid_amount">Ingresá entre 1 y 10.000 ml</string>
 </resources>

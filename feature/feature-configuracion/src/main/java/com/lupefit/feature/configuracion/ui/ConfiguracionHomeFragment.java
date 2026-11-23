@@ -8,18 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.lupefit.core.ui.R;
+import com.lupefit.feature.configuracion.R;
 import com.lupefit.feature.configuracion.databinding.FragmentConfiguracionHomeBinding;
-import com.lupefit.feature.configuracion.viewmodel.ConfiguracionHomeViewModel;
 
 public class ConfiguracionHomeFragment extends Fragment {
 
     private FragmentConfiguracionHomeBinding binding;
-    private ConfiguracionHomeViewModel viewModel;
     private NavController navController;
 
     @Override
@@ -34,11 +31,9 @@ public class ConfiguracionHomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = NavHostFragment.findNavController(this);
-        viewModel = new ViewModelProvider(this).get(ConfiguracionHomeViewModel.class);
 
         setupToolbar();
         setupClickListeners();
-        setupObservers();
     }
 
     private void setupToolbar() {
@@ -46,11 +41,26 @@ public class ConfiguracionHomeFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        // TODO: Add click listeners for cards/buttons
-    }
-
-    private void setupObservers() {
-        // TODO: Observe ViewModel LiveData
+        binding.optionCuenta.setOnClickListener(v ->
+                navController.navigate(R.id.action_configuracionHomeFragment_to_cuentaFragment));
+        binding.optionPerfil.setOnClickListener(v ->
+                navController.navigate(R.id.action_configuracionHomeFragment_to_perfilFragment));
+        binding.optionMetas.setOnClickListener(v ->
+                navController.navigate(R.id.action_configuracionHomeFragment_to_metasFragment));
+        binding.optionNotificaciones.setOnClickListener(v ->
+                navController.navigate(R.id.action_configuracionHomeFragment_to_notificacionesFragment));
+        binding.optionApariencia.setOnClickListener(v ->
+                navController.navigate(R.id.action_configuracionHomeFragment_to_aparienciaFragment));
+        binding.optionUnidades.setOnClickListener(v ->
+                navController.navigate(R.id.action_configuracionHomeFragment_to_unidadesFragment));
+        binding.optionSync.setOnClickListener(v ->
+                navController.navigate(R.id.action_configuracionHomeFragment_to_syncFragment));
+        binding.optionExportar.setOnClickListener(v ->
+                navController.navigate(R.id.action_configuracionHomeFragment_to_exportarFragment));
+        binding.optionCostos.setOnClickListener(v ->
+                navController.navigate(R.id.action_configuracionHomeFragment_to_costosFragment));
+        binding.optionPresupuesto.setOnClickListener(v ->
+                navController.navigate(R.id.action_configuracionHomeFragment_to_presupuestoFragment));
     }
 
     @Override

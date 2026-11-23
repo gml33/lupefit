@@ -1,6 +1,7 @@
 package com.lupefit.feature.configuracion.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -40,8 +41,20 @@ public class MetasConfigViewModel extends ViewModel {
     private final MutableLiveData<String> _error = new MutableLiveData<>();
     public final LiveData<String> error = _error;
 
-    public MetasConfigViewModel() {
-        // TODO: Load current goals from preferences
+    private final SharedPreferences goals;
+    private final SharedPreferences hydration;
+
+    public MetasConfigViewModel(Context context) {
+        goals = context.getSharedPreferences("nutricion_metas", Context.MODE_PRIVATE);
+        hydration = context.getSharedPreferences("hydration", Context.MODE_PRIVATE);
+        _calorias.setValue(goals.getInt("meta_calorias", 2000));
+        _proteinas.setValue(Math.round(goals.getFloat("meta_proteinas", 150f)));
+        _carbohidratos.setValue(Math.round(goals.getFloat("meta_carbohidratos", 250f)));
+        _grasas.setValue(Math.round(goals.getFloat("meta_grasas", 65f)));
+        _fibra.setValue(Math.round(goals.getFloat("meta_fibra", 25f)));
+        _agua.setValue(hydration.getInt("goal_ml", 2500));
+        _metasPorComida.setValue(goals.getBoolean("meta_por_comida", false));
+        _netCarbs.setValue(goals.getBoolean("meta_net_carbs", false));
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -55,13 +68,19 @@ public class MetasConfigViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(MetasConfigViewModel.class)) {
-                return (T) new MetasConfigViewModel();
+                return (T) new MetasConfigViewModel(context);
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
     }
 
-    public void saveMetas() {
+    public void saveMetas(int calories, int protein, int carbs, int fat, int fiber, int water) {
+        _calorias.setValue(calories);
+        _proteinas.setValue(protein);
+        _carbohidratos.setValue(carbs);
+        _grasas.setValue(fat);
+        _fibra.setValue(fiber);
+        _agua.setValue(water);
         Integer cal = _calorias.getValue();
         Integer prot = _proteinas.getValue();
         Integer carb = _carbohidratos.getValue();
@@ -96,8 +115,21 @@ public class MetasConfigViewModel extends ViewModel {
         _saved.setValue(false);
         _error.setValue(null);
 
-        // TODO: Save to preferences
-        _saved.postValue(true);
+        if (fiber < 0 || fiber > 150 || water < 250 || water > 6000) {
+            _error.setValue("Revisá las metas de fibra y agua");
+            return;
+        }
+        goals.edit()
+                .putInt("meta_calorias", cal)
+                .putFloat("meta_proteinas", prot)
+                .putFloat("meta_carbohidratos", carb)
+                .putFloat("meta_grasas", grasa)
+                .putFloat("meta_fibra", fiber)
+                .putBoolean("meta_por_comida", Boolean.TRUE.equals(_metasPorComida.getValue()))
+                .putBoolean("meta_net_carbs", Boolean.TRUE.equals(_netCarbs.getValue()))
+                .apply();
+        hydration.edit().putInt("goal_ml", water).apply();
+        _saved.setValue(true);
     }
 
     public void setPreset(int calorias, int proteinas, int carbohidratos, int grasas) {

@@ -6,28 +6,48 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.lupefit.core.domain.provider.DiarioRepositoryProvider;
 import com.lupefit.core.domain.repository.DiarioRepository;
 
+import com.lupefit.core.domain.model.DiarioEntry;
+import com.lupefit.core.domain.model.MacroTotals;
+
 import java.util.Calendar;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class GraficosNutricionViewModel extends ViewModel {
 
-    private final DiarioRepository diarioRepository;
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
-
-    private final MutableLiveData<Integer> _selectedPeriod = new MutableLiveData<>(7);
-    public final LiveData<Integer> selectedPeriod = _selectedPeriod;
-
-    private final MutableLiveData<Boolean> _isLoading = new MutableLiveData<>(false);
-    public final LiveData<Boolean> isLoading = _isLoading;
+    private final MutableLiveData<Integer> selectedPeriod = new MutableLiveData<>(7);
+    public final LiveData<Map<Integer, MacroTotals>> history;
 
     public GraficosNutricionViewModel(DiarioRepository diarioRepository) {
-        this.diarioRepository = diarioRepository;
+        history = Transformations.switchMap(selectedPeriod, days -> {
+            Calendar date = Calendar.getInstance();
+            int end = dateKey(date);
+            date.add(Calendar.DAY_OF_YEAR, 1 - days);
+            return Transformations.map(diarioRepository.getEntriesForDateRange(dateKey(date), end), entries -> {
+                Map<Integer, MacroTotals> daily = new TreeMap<>();
+                if (entries == null) return daily;
+                for (DiarioEntry entry : entries) {
+                    MacroTotals previous = daily.getOrDefault(entry.getDateKey(), new MacroTotals());
+                    daily.put(entry.getDateKey(), new MacroTotals(
+                            previous.getCalorias() + entry.getCalorias(),
+                            previous.getProteinas() + entry.getProteinas(),
+                            previous.getCarbohidratos() + entry.getCarbohidratos(),
+                            previous.getGrasas() + entry.getGrasas()));
+                }
+                return daily;
+            });
+        });
+    }
+
+    private static int dateKey(Calendar date) {
+        return date.get(Calendar.YEAR) * 10000
+                + (date.get(Calendar.MONTH) + 1) * 100 + date.get(Calendar.DAY_OF_MONTH);
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -51,16 +71,6 @@ public class GraficosNutricionViewModel extends ViewModel {
     }
 
     public void setPeriod(int days) {
-        _selectedPeriod.setValue(days);
-    }
-
-    public void refresh() {
-        // TODO: Load chart data
-    }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        executor.shutdown();
+        selectedPeriod.setValue(days);
     }
 }

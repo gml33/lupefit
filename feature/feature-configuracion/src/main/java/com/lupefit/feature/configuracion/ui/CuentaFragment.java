@@ -32,6 +32,8 @@ public class CuentaFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this, new CuentaViewModel.Factory(requireContext())).get(CuentaViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
         setupClickListeners();
@@ -43,7 +45,11 @@ public class CuentaFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        binding.btnGuardarCuenta.setOnClickListener(v -> viewModel.saveCambios());
+        binding.btnGuardarCuenta.setOnClickListener(v -> {
+            viewModel.setNombre(binding.etNombre.getText().toString().trim());
+            viewModel.setEmail(binding.etEmail.getText().toString().trim());
+            viewModel.saveCambios();
+        });
         binding.btnCambiarPassword.setOnClickListener(v ->
                 Toast.makeText(requireContext(), "Próximamente", Toast.LENGTH_SHORT).show());
         binding.btnAutenticacionDosFactores.setOnClickListener(v ->

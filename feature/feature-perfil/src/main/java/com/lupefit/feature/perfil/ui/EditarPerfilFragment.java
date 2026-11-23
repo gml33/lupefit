@@ -11,7 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.lupefit.core.ui.R;
+import com.lupefit.feature.perfil.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.lupefit.feature.perfil.databinding.FragmentEditarPerfilBinding;
 import com.lupefit.feature.perfil.viewmodel.EditarPerfilViewModel;
 
@@ -32,6 +33,8 @@ public class EditarPerfilFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this, new EditarPerfilViewModel.Factory(requireContext())).get(EditarPerfilViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
         setupClickListeners();
@@ -43,23 +46,61 @@ public class EditarPerfilFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        binding.btnGuardarPerfil.setOnClickListener(v -> viewModel.guardarPerfil());
-
-        binding.etFechaNacimiento.setOnClickListener(v -> {
-            // TODO: Show date picker
+        binding.btnGuardarPerfil.setOnClickListener(v -> {
+            viewModel.setNombre(binding.etNombre.getText().toString().trim());
+            viewModel.setApellido(binding.etApellido.getText().toString().trim());
+            viewModel.setEmail(binding.etEmail.getText().toString().trim());
+            viewModel.setAltura(leerDecimal(binding.etAltura.getText().toString().trim()));
+            viewModel.setPeso(leerDecimal(binding.etPeso.getText().toString().trim()));
+            viewModel.guardarPerfil();
         });
 
-        binding.etSexo.setOnClickListener(v -> {
-            // TODO: Show sex selector
-        });
-
+        binding.etFechaNacimiento.setOnClickListener(v -> elegirFecha());
+        binding.etSexo.setOnClickListener(v -> elegirOpcion(binding.etSexo.getHint(),
+                R.array.lupefit_perfil_sexos, viewModel::setSexo));
         binding.etNivelActividad.setOnClickListener(v -> {
-            // TODO: Show activity level selector
+            String[] niveles = getResources().getStringArray(R.array.lupefit_perfil_niveles_actividad);
+            new MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(binding.etNivelActividad.getHint())
+                    .setItems(niveles, (dialog, position) -> viewModel.setNivelActividad(position + 1))
+                    .show();
         });
+        binding.etObjetivo.setOnClickListener(v -> elegirOpcion(binding.etObjetivo.getHint(),
+                R.array.lupefit_perfil_objetivos, viewModel::setObjetivo));
+    }
 
-        binding.etObjetivo.setOnClickListener(v -> {
-            // TODO: Show objective selector
-        });
+    private void elegirFecha() {
+        java.time.LocalDate inicial = java.time.LocalDate.now();
+        String fecha = viewModel.fechaNacimiento.getValue();
+        if (fecha != null && !fecha.isEmpty()) {
+            try {
+                inicial = java.time.LocalDate.parse(fecha);
+            } catch (java.time.format.DateTimeParseException ignored) {
+                // Se puede reemplazar un valor legado desde el selector.
+            }
+        }
+        android.app.DatePickerDialog picker = new android.app.DatePickerDialog(requireContext(),
+                (view, year, month, day) -> viewModel.setFechaNacimiento(
+                        java.time.LocalDate.of(year, month + 1, day).toString()),
+                inicial.getYear(), inicial.getMonthValue() - 1, inicial.getDayOfMonth());
+        picker.getDatePicker().setMaxDate(System.currentTimeMillis());
+        picker.show();
+    }
+
+    private void elegirOpcion(CharSequence title, int opciones, java.util.function.Consumer<String> guardar) {
+        String[] opcionesTexto = getResources().getStringArray(opciones);
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(title)
+                .setItems(opcionesTexto, (dialog, position) -> guardar.accept(opcionesTexto[position]))
+                .show();
+    }
+
+    private static float leerDecimal(String value) {
+        try {
+            return Float.parseFloat(value.replace(',', '.'));
+        } catch (NumberFormatException invalid) {
+            return 0f;
+        }
     }
 
     private void setupObservers() {

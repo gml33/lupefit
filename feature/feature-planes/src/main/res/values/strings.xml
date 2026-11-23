@@ -21,7 +21,7 @@
     <string name="meta_semanal">Meta semanal ($)</string>
     <string name="agregar_item">Agregar item</string>
     <string name="total_estimado">Total estimado: $0</string>
-    <string name="alerta_presupuesto">⚠️ Te acercas al 80% de tu presupuesto semanal</string>
+    <string name="alerta_presupuesto">Te acercás al 80% de tu presupuesto semanal</string>
     <string name="items_sin_precio">Hay items sin precio asignado</string>
     <string name="nombre_item">Nombre del item</string>
     <string name="costo_estimado">Costo estimado</string>
@@ -41,4 +41,29 @@
     <string name="completado">Completado</string>
     <string name="ver_detalle">Ver detalle</string>
 
+    <string name="planes_semana">Semana</string>
+    <string name="planes_semana_numero">Semana %1$d</string>
+    <string name="planes_resumen_comida">Plan de comida · Semana %1$d</string>
+    <string name="planes_semana_vacia">Todavía no hay un plan para esta semana.</string>
+    <string name="planes_guardar">Guardar plan</string>
+    <string name="planes_entradas_comida">Escribí una receta por línea.</string>
+    <string name="planes_entradas_entrenamiento">Escribí una rutina por línea.</string>
+    <string name="planes_entradas_error">Agregá al menos una actividad para guardar.</string>
+    <string name="planes_lista_compras">Lista de compras</string>
+    <string name="planes_lista_vacia">Agregá recetas al plan para ver los ingredientes.</string>
+    <string name="planes_receta_sin_ingredientes">%1$s · sin ingredientes disponibles</string>
+    <string name="planes_ingrediente_formato">%1$s · %2$s %3$s</string>
+    <string name="planes_cerrar">Cerrar</string>
+    <string name="planes_guardados_vacio">Todavía no guardaste ningún plan.</string>
+    <string name="planes_guardado_formato">%1$s · Semana %2$d</string>
+    <string-array name="planes_dias">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
+    </string-array>
+    <string name="planes_presupuesto_meta_error">Ingresá una meta mayor que cero.</string>
 </resources>

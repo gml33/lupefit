@@ -3,12 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+<androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="?attr/colorSurface"
-        android:padding="24dp">
+    android:fillViewport="true"
+    android:background="?attr/colorSurface">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
 
         <!-- Header con handle -->
         <LinearLayout
@@ -123,7 +128,7 @@
                 android:fontFamily="sans-serif"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
-                android:background="?attr/colorSurfaceContainerHighest"
+                android:background="?attr/colorSurface"
                 android:padding="16dp"
                 android:minHeight="80dp" />
         </LinearLayout>
@@ -185,4 +190,5 @@
         </LinearLayout>
 
     </LinearLayout>
+</androidx.core.widget.NestedScrollView>
 </layout>

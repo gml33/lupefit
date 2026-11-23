@@ -66,7 +66,7 @@ public class EscanearHomeFragment extends Fragment {
         binding.cardEscanearComida.setOnClickListener(v -> showUnavailable());
 
         // Card: Historial
-        binding.cardHistorialEscaneos.setOnClickListener(v -> showUnavailable());
+        binding.cardHistorialEscaneos.setOnClickListener(v -> mostrarHistorial());
 
         // Card: Buscar Manual
         binding.cardBuscarManual.setOnClickListener(v ->
@@ -89,6 +89,17 @@ public class EscanearHomeFragment extends Fragment {
     private void showUnavailable() {
         Toast.makeText(requireContext(), com.lupefit.core.ui.R.string.funcion_no_disponible,
                 Toast.LENGTH_SHORT).show();
+    }
+
+    private void mostrarHistorial() {
+        if (historialList.isEmpty()) {
+            Toast.makeText(requireContext(), "Todavía no hay escaneos guardados", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        binding.contentContainer.setVisibility(View.VISIBLE);
+        binding.emptyState.getRoot().setVisibility(View.GONE);
+        binding.emptyHistory.getRoot().setVisibility(View.GONE);
+        binding.rvHistorialEscaneos.smoothScrollToPosition(0);
     }
 
     private void setupObservers() {

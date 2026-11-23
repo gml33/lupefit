@@ -2,9 +2,6 @@ package com.lupefit.app.data.local.repository;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Transformations;
-
 import com.lupefit.app.data.local.AppDatabase;
 import com.lupefit.app.data.local.dao.RecetaDao;
 import com.lupefit.app.data.local.entity.RecetaEntity;
@@ -25,57 +22,43 @@ public class RecetaRepositoryImpl implements RecetaRepository {
 
     @Override
     public void insertReceta(Receta receta) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            RecetaEntity entity = convertToEntity(receta);
-            long id = recetaDao.insertReceta(entity);
-            receta.setId(id);
-        });
+        receta.setId(recetaDao.insertReceta(convertToEntity(receta)));
     }
 
     @Override
     public void updateReceta(Receta receta) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            RecetaEntity entity = convertToEntity(receta);
-            recetaDao.updateReceta(entity);
-        });
+        recetaDao.updateReceta(convertToEntity(receta));
     }
 
     @Override
     public void deleteReceta(long id) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            recetaDao.deleteRecetaById(id);
-        });
+        recetaDao.deleteRecetaById(id);
     }
 
     @Override
     public List<Receta> getAllRecetas() {
-        LiveData<List<RecetaEntity>> liveData = recetaDao.getAllRecetas();
-        return convertToDomainList(liveData.getValue());
+        return convertToDomainList(recetaDao.getAllRecetasSync());
     }
 
     @Override
     public Receta getRecetaById(long id) {
-        LiveData<RecetaEntity> liveData = recetaDao.getRecetaById(id);
-        RecetaEntity entity = liveData.getValue();
+        RecetaEntity entity = recetaDao.getRecetaByIdSync(id);
         return entity != null ? convertToDomain(entity) : null;
     }
 
     @Override
     public List<Receta> searchRecetas(String query) {
-        LiveData<List<RecetaEntity>> liveData = recetaDao.searchRecetas("%" + query + "%");
-        return convertToDomainList(liveData.getValue());
+        return convertToDomainList(recetaDao.searchRecetasSync("%" + query + "%"));
     }
 
     @Override
     public List<Receta> getRecetasByCategory(String categoria) {
-        LiveData<List<RecetaEntity>> liveData = recetaDao.getRecetasByCategory(categoria);
-        return convertToDomainList(liveData.getValue());
+        return convertToDomainList(recetaDao.getRecetasByCategorySync(categoria));
     }
 
     @Override
     public List<Receta> getFavoriteRecetas() {
-        LiveData<List<RecetaEntity>> liveData = recetaDao.getFavoriteRecetas();
-        return convertToDomainList(liveData.getValue());
+        return convertToDomainList(recetaDao.getFavoriteRecetasSync());
     }
 
     private List<Receta> convertToDomainList(List<RecetaEntity> entities) {
@@ -116,7 +99,10 @@ public class RecetaRepositoryImpl implements RecetaRepository {
 
         // Convert ingredientes
         List<IngredienteReceta> ingredientes = new ArrayList<>();
-        for (com.lupefit.app.data.local.entity.IngredienteRecetaEntity ingEntity : entity.getIngredientes()) {
+        List<com.lupefit.app.data.local.entity.IngredienteRecetaEntity> storedIngredients = entity.getIngredientes();
+        if (storedIngredients == null) return domain;
+        for (com.lupefit.app.data.local.entity.IngredienteRecetaEntity ingEntity : storedIngredients) {
+            if (ingEntity == null) continue;
             IngredienteReceta ing = new IngredienteReceta();
             ing.setId(ingEntity.id);
             ing.setRecetaId(ingEntity.recetaId);

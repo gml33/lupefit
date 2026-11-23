@@ -111,4 +111,15 @@
     <string name="tiempo_total_formato">%d min</string>
     <string name="porciones_formato">%d porc.</string>
     <string name="calorias_formato">%d kcal</string>
+    <string name="ingrediente_eliminar">Eliminar ingrediente</string>
+    <string name="receta_compartir">Compartir receta</string>
+    <string name="receta_borrar_confirmar">¿Eliminar esta receta?</string>
+    <string name="recetas_sin_resultados">No hay recetas que coincidan con esos filtros.</string>
+    <string name="receta_nutricion_no_disponible">Información nutricional no disponible para todos los ingredientes.</string>
+    <string name="receta_error_foto">No se pudo cargar la foto.</string>
+    <string name="receta_detalle_macros">Proteínas %1$.1f g · Carbohidratos %2$.1f g · Grasas %3$.1f g · Fibra %4$.1f g</string>
+    <string name="receta_importar_error">Ingresá un enlace HTTPS con una receta compatible o pegá el texto.</string>
+    <string name="receta_importar_texto_ayuda">Poné el nombre en la primera línea y las instrucciones debajo.</string>
+    <string name="receta_acciones">Acciones</string>
+    <string name="receta_registrar_porcion">Registrar una porción en</string>
 </resources>

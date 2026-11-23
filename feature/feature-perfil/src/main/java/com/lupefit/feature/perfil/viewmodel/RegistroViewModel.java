@@ -37,7 +37,11 @@ public class RegistroViewModel extends ViewModel {
     private final MutableLiveData<String> _error = new MutableLiveData<>();
     public final LiveData<String> error = _error;
 
-    public RegistroViewModel() {}
+    private final LocalAccount account;
+
+    public RegistroViewModel(Context context) {
+        account = new LocalAccount(context);
+    }
 
     public static class Factory implements ViewModelProvider.Factory {
         private final Context context;
@@ -50,7 +54,7 @@ public class RegistroViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(RegistroViewModel.class)) {
-                return (T) new RegistroViewModel();
+                return (T) new RegistroViewModel(context);
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
@@ -102,10 +106,37 @@ public class RegistroViewModel extends ViewModel {
         _cargando.setValue(true);
         _error.setValue(null);
 
-        // TODO: Call AuthRepository.register()
-        new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
-            _cargando.postValue(false);
-            _registrado.postValue(true);
-        }, 1500);
+        LocalAccount.EXECUTOR.execute(() -> {
+            try {
+                if (account.register(nombreVal, apellidoVal, emailVal, passVal)) {
+                    _password.postValue("");
+                    _registrado.postValue(true);
+                } else {
+                    _error.postValue("Ya hay una cuenta local en este dispositivo");
+                }
+            } catch (java.security.GeneralSecurityException | IllegalArgumentException | IllegalStateException failure) {
+                _error.postValue("No se pudo completar la operación de cuenta local");
+            } finally {
+                _cargando.postValue(false);
+            }
+        });
+    }
+    public void setNombre(String value) {
+        _nombre.setValue(value);
+    }
+    public void setApellido(String value) {
+        _apellido.setValue(value);
+    }
+    public void setEmail(String value) {
+        _email.setValue(value);
+    }
+    public void setPassword(String value) {
+        _password.setValue(value);
+    }
+    public void setConfirmPassword(String value) {
+        _confirmPassword.setValue(value);
+    }
+    public void setTerminos(boolean value) {
+        _terminos.setValue(value);
     }
 }

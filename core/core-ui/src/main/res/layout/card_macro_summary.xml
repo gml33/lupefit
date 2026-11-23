@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/radius_card"
-        app:cardElevation="@dimen/elevation_card"
+        app:cardElevation="0dp"
         app:cardBackgroundColor="?attr/colorSurface"
+        app:strokeWidth="1dp"
+        app:strokeColor="?attr/colorSurfaceVariant"
         app:cardPreventCornerOverlap="false"
         android:stateListAnimator="@null"
         app:contentPadding="@dimen/padding_card">
@@ -195,5 +197,5 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

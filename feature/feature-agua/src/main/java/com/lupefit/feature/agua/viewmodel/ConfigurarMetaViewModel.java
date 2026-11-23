@@ -1,6 +1,7 @@
 package com.lupefit.feature.agua.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -8,16 +9,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.lupefit.core.domain.provider.WaterRepositoryProvider;
-import com.lupefit.core.domain.repository.WaterRepository;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class ConfigurarMetaViewModel extends ViewModel {
 
-    private final WaterRepository repository;
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final SharedPreferences preferences;
 
     private final MutableLiveData<String> _metaMlStr = new MutableLiveData<>("");
     public final LiveData<String> metaMlStr = _metaMlStr;
@@ -31,12 +25,11 @@ public class ConfigurarMetaViewModel extends ViewModel {
     private final MutableLiveData<String> _error = new MutableLiveData<>();
     public final LiveData<String> error = _error;
 
-    private int currentGoalMl = 2500;
-
-    public ConfigurarMetaViewModel(WaterRepository repository) {
-        this.repository = repository;
-        // TODO: Load current goal from preferences
-        _currentGoalStr.setValue(currentGoalMl + " ml");
+    public ConfigurarMetaViewModel(SharedPreferences preferences) {
+        this.preferences = preferences;
+        int goal = preferences.getInt("goal_ml", 2500);
+        _metaMlStr.setValue(String.valueOf(goal));
+        _currentGoalStr.setValue(goal + " ml");
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -50,10 +43,8 @@ public class ConfigurarMetaViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(ConfigurarMetaViewModel.class)) {
-                WaterRepositoryProvider provider =
-                        (WaterRepositoryProvider) context.getApplicationContext();
-                WaterRepository repository = provider.getWaterRepository();
-                return (T) new ConfigurarMetaViewModel(repository);
+                return (T) new ConfigurarMetaViewModel(
+                        context.getSharedPreferences("hydration", Context.MODE_PRIVATE));
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
@@ -82,17 +73,15 @@ public class ConfigurarMetaViewModel extends ViewModel {
         _saved.setValue(false);
         _error.setValue(null);
 
-        // TODO: Save to preferences
-        _saved.postValue(true);
+        preferences.edit().putInt("goal_ml", meta).apply();
+        _saved.setValue(true);
     }
 
     public void setPreset(int ml) {
-        currentGoalMl = ml;
         _metaMlStr.setValue(String.valueOf(ml));
-        _currentGoalStr.setValue(ml + " ml");
     }
 
     public void updateMetaInput(String value) {
-        _metaMlStr.postValue(value);
+        _metaMlStr.setValue(value);
     }
 }

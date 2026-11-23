@@ -33,6 +33,8 @@ public class PresupuestoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this, new PresupuestoViewModel.Factory(requireContext())).get(PresupuestoViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
         setupRecyclerView();
@@ -49,8 +51,18 @@ public class PresupuestoFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        binding.btnVerItemsSinPrecio.setOnClickListener(v ->
-                Toast.makeText(requireContext(), "Próximamente", Toast.LENGTH_SHORT).show());
+        binding.btnVerItemsSinPrecio.setOnClickListener(v -> {
+            Integer count = viewModel.itemsSinPrecio.getValue();
+            int items = count == null ? 0 : count;
+            String message = items == 0
+                    ? "Todos los ítems tienen precio."
+                    : "Hay " + items + " ítems sin precio. Podés completarlos desde tus recetas y compras.";
+            new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Ítems sin precio")
+                    .setMessage(message)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
+        });
     }
 
     @Override

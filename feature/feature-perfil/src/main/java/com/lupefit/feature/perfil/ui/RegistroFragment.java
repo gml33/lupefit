@@ -36,6 +36,8 @@ public class RegistroFragment extends Fragment {
 
         navController = NavHostFragment.findNavController(this);
         viewModel = new ViewModelProvider(this, new RegistroViewModel.Factory(requireContext())).get(RegistroViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
         setupClickListeners();
@@ -47,7 +49,15 @@ public class RegistroFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        binding.btnRegistro.setOnClickListener(v -> viewModel.registrar());
+        binding.btnRegistro.setOnClickListener(v -> {
+            viewModel.setNombre(binding.etNombre.getText().toString());
+            viewModel.setApellido(binding.etApellido.getText().toString());
+            viewModel.setEmail(binding.etEmail.getText().toString());
+            viewModel.setPassword(binding.etPassword.getText().toString());
+            viewModel.setConfirmPassword(binding.etConfirmPassword.getText().toString());
+            viewModel.setTerminos(binding.cbTerminos.isChecked());
+            viewModel.registrar();
+        });
 
         binding.btnIrLogin.setOnClickListener(v ->
                 navController.navigate(RegistroFragmentDirections.Companion.actionRegistroFragmentToLoginFragment()));

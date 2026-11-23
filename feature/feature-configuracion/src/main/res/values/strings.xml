@@ -126,4 +126,5 @@
     <string name="items_sin_precio_desc">Estos items no tienen precio de referencia y no se incluyen en el cálculo.</string>
     <string name="ver_items_sin_precio">Ver items sin precio</string>
     <string name="historial_presupuesto">Historial de presupuesto</string>
+    <string name="lupefit_export_agua">Hidratación</string>
 </resources>

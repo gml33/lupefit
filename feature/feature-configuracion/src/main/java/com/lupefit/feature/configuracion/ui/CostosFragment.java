@@ -31,12 +31,35 @@ public class CostosFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this, new CostosViewModel.Factory(requireContext())).get(CostosViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
+        setupClickListeners();
     }
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
+    }
+
+    private void setupClickListeners() {
+        binding.switchCostos.setOnCheckedChangeListener((button, checked) -> viewModel.setEnabled(checked));
+        binding.etMoneda.setOnFocusChangeListener((input, focused) -> {
+            if (!focused) {
+                String currency = binding.etMoneda.getText().toString().trim().toUpperCase(java.util.Locale.ROOT);
+                if (currency.matches("[A-Z]{3}")) {
+                    viewModel.setMoneda(currency);
+                }
+            }
+        });
+        binding.etDiasAlerta.setOnFocusChangeListener((input, focused) -> {
+            if (!focused) {
+                String days = binding.etDiasAlerta.getText().toString().trim();
+                if (days.matches("[0-9]{1,3}")) {
+                    viewModel.setDiasAlerta(Integer.parseInt(days));
+                }
+            }
+        });
     }
 
     @Override

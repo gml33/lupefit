@@ -1,6 +1,7 @@
 package com.lupefit.feature.configuracion.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -22,8 +23,13 @@ public class CuentaViewModel extends ViewModel {
     private final MutableLiveData<String> _error = new MutableLiveData<>();
     public final LiveData<String> error = _error;
 
-    public CuentaViewModel() {
-        // TODO: Load current user data
+    private final SharedPreferences preferences;
+
+    public CuentaViewModel(Context context) {
+        preferences = context.getApplicationContext()
+                .getSharedPreferences("lupefit_local_profile", Context.MODE_PRIVATE);
+        _nombre.setValue(preferences.getString("nombre", ""));
+        _email.setValue(preferences.getString("email", ""));
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -37,7 +43,7 @@ public class CuentaViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(CuentaViewModel.class)) {
-                return (T) new CuentaViewModel();
+                return (T) new CuentaViewModel(context);
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
@@ -65,8 +71,11 @@ public class CuentaViewModel extends ViewModel {
         _saved.setValue(false);
         _error.setValue(null);
 
-        // TODO: Save to repository/preferences
-        _saved.postValue(true);
+        preferences.edit()
+                .putString("nombre", _nombre.getValue())
+                .putString("email", _email.getValue())
+                .apply();
+        _saved.setValue(true);
     }
 
     public void setEmail(String email) {

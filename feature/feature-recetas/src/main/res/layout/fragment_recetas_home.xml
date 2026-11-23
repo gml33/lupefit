@@ -176,6 +176,15 @@
                     </LinearLayout>
 
                     <!-- RecyclerView -->
+                    <TextView
+                        android:id="@+id/tvRecetaSinResultados"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_m"
+                        android:text="@string/recetas_sin_resultados"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:visibility="gone" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvRecetas"
                         android:layout_width="match_parent"

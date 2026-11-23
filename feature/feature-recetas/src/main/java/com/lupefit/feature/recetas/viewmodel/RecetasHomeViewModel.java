@@ -76,42 +76,27 @@ public class RecetasHomeViewModel extends ViewModel {
         });
     }
 
-    public void searchRecetas(String query) {
-        searchQuery.setValue(query);
-        // TODO: Implement search with repository
-    }
-
-    public void setFilter(String filter) {
-        currentFilter.setValue(filter);
-        // TODO: Implement filter with repository
-    }
-
-    public void setSort(String sort) {
-        currentSort.setValue(sort);
-        // TODO: Implement sort with repository
-    }
-
     public void toggleFavorite(Receta receta) {
-        receta.setEsFavorita(!receta.isEsFavorita());
+        long id = receta.getId();
         executor.execute(() -> {
             try {
-                repository.updateReceta(receta);
+                Receta stored = repository.getRecetaById(id);
+                if (stored == null) return;
+                stored.setEsFavorita(!stored.isEsFavorita());
+                stored.setLastModified(System.currentTimeMillis());
+                repository.updateReceta(stored);
+                _recetas.postValue(repository.getAllRecetas());
             } catch (Exception e) {
                 _error.postValue("Error actualizando favorito: " + e.getMessage());
             }
         });
     }
 
-    public void deleteReceta(Receta receta) {
+    public void deleteReceta(long id) {
         executor.execute(() -> {
             try {
-                repository.deleteReceta(receta.getId());
-                // Remove from local list
-                List<Receta> current = _recetas.getValue();
-                if (current != null) {
-                    current.remove(receta);
-                    _recetas.postValue(new ArrayList<>(current));
-                }
+                repository.deleteReceta(id);
+                _recetas.postValue(repository.getAllRecetas());
             } catch (Exception e) {
                 _error.postValue("Error eliminando receta: " + e.getMessage());
             }

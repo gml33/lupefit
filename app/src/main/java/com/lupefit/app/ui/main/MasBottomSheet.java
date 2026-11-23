@@ -14,7 +14,7 @@ public class MasBottomSheet extends AppCompatDialogFragment {
 
     static final int[] DESTINATIONS = {
             R.id.nav_recetas, R.id.nav_escaneo, R.id.nav_agua, R.id.nav_configuracion,
-            R.id.nav_perfil, R.id.nav_planes
+            R.id.nav_perfil, R.id.nav_planes, R.id.nav_insights
     };
 
     @NonNull
@@ -24,7 +24,8 @@ public class MasBottomSheet extends AppCompatDialogFragment {
                 getText(R.string.recetas_title), getText(R.string.escanear_codigo_barras),
                 getText(R.string.agua_title), getText(R.string.configuracion_title),
                 getText(R.string.perfil_title),
-                getText(R.string.planes_title)
+                getText(R.string.planes_title),
+                getText(R.string.insights_title)
         };
         return new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.mas)

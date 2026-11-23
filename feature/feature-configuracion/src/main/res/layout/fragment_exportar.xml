@@ -122,7 +122,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:checkedButton="@{viewModel.tipoDato == com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.TODO ? R.id.rbTodo : (viewModel.tipoDato == com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.DIARIO ? R.id.rbDiario : (viewModel.tipoDato == com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.EJERCICIO ? R.id.rbEjercicio : (viewModel.tipoDato == com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.PROGRESO ? R.id.rbProgreso : R.id.rbRecetas)))}">
+                            android:checkedButton="@{viewModel.tipoDato == com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.TODO ? R.id.rbTodo : (viewModel.tipoDato == com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.DIARIO ? R.id.rbDiario : (viewModel.tipoDato == com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.EJERCICIO ? R.id.rbEjercicio : (viewModel.tipoDato == com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.PROGRESO ? R.id.rbProgreso : (viewModel.tipoDato == com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.AGUA ? R.id.rbAgua : R.id.rbRecetas))))}">
 
                             <RadioButton
                                 android:id="@+id/rbTodo"
@@ -158,6 +158,14 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/recetas"
                                 android:onClick="@{() -> viewModel.setTipoDato(com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.RECETAS)}" />
+
+
+                            <RadioButton
+                                android:id="@+id/rbAgua"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/lupefit_export_agua"
+                                android:onClick="@{() -> viewModel.setTipoDato(com.lupefit.feature.configuracion.viewmodel.ExportarViewModel.TipoDato.AGUA)}" />
                         </RadioGroup>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -237,12 +245,6 @@
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
-                        <com.google.android.material.switchmaterial.SwitchMaterial
-                            android:id="@+id/switchIncluirImagenes"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/incluir_imagenes"
-                            android:checked="@{viewModel.incluirImagenes}" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 

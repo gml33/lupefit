@@ -83,5 +83,14 @@
             android:name="androidx.health.connect.client.application.package"
             android:value="com.lupefit.app" />
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.progress.photos"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/progress_photo_paths" />
+        </provider>
     </application>
 </manifest>

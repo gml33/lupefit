@@ -31,7 +31,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clipToPadding="false"
-            android:padding="@dimen/spacing_m">
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,22 +39,65 @@
                 android:orientation="vertical"
                 android:padding="@dimen/spacing_m">
 
-                <!-- TODO: Add feature-specific content -->
-                <TextView
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionEditarPerfil"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/perfil_title"
-                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:layout_marginBottom="@dimen/spacing_l" />
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/editar_perfil"
+                    app:icon="@drawable/ic_person"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionLogin"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Feature en desarrollo"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?attr/colorOnSurfaceVariant"
-                    android:gravity="center"
-                    android:padding="@dimen/spacing_xl" />
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/entrar"
+                    app:icon="@drawable/ic_email"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionRegistro"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/registrate"
+                    app:icon="@drawable/ic_person"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionSyncAccount"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/sync_account"
+                    app:icon="@drawable/ic_sync"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/optionCambiarPassword"
+                    style="@style/Widget.LuPeFit.Button.Tonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_s"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/cambiar_password"
+                    app:icon="@drawable/ic_lock"
+                    app:iconGravity="start"
+                    app:iconTint="?attr/colorOnSecondaryContainer" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

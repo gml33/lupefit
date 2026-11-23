@@ -28,7 +28,11 @@ public class CambiarPasswordViewModel extends ViewModel {
     private final MutableLiveData<String> _error = new MutableLiveData<>();
     public final LiveData<String> error = _error;
 
-    public CambiarPasswordViewModel() {}
+    private final LocalAccount account;
+
+    public CambiarPasswordViewModel(Context context) {
+        account = new LocalAccount(context);
+    }
 
     public static class Factory implements ViewModelProvider.Factory {
         private final Context context;
@@ -41,7 +45,7 @@ public class CambiarPasswordViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(CambiarPasswordViewModel.class)) {
-                return (T) new CambiarPasswordViewModel();
+                return (T) new CambiarPasswordViewModel(context);
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
@@ -75,10 +79,28 @@ public class CambiarPasswordViewModel extends ViewModel {
         _cargando.setValue(true);
         _error.setValue(null);
 
-        // TODO: Call AuthRepository.changePassword()
-        new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
-            _cargando.postValue(false);
-            _cambiado.postValue(true);
-        }, 1500);
+        LocalAccount.EXECUTOR.execute(() -> {
+            try {
+                if (account.changePassword(actual, nueva)) {
+                    _passwordActual.postValue("");
+                    _cambiado.postValue(true);
+                } else {
+                    _error.postValue("La contraseña actual es incorrecta o todavía no hay una cuenta local");
+                }
+            } catch (java.security.GeneralSecurityException | IllegalArgumentException | IllegalStateException failure) {
+                _error.postValue("No se pudo completar la operación de cuenta local");
+            } finally {
+                _cargando.postValue(false);
+            }
+        });
+    }
+    public void setPasswordActual(String value) {
+        _passwordActual.setValue(value);
+    }
+    public void setPasswordNueva(String value) {
+        _passwordNueva.setValue(value);
+    }
+    public void setConfirmPasswordNueva(String value) {
+        _confirmPasswordNueva.setValue(value);
     }
 }

@@ -32,6 +32,8 @@ public class CambiarPasswordFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this, new CambiarPasswordViewModel.Factory(requireContext())).get(CambiarPasswordViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
         setupClickListeners();
@@ -43,7 +45,12 @@ public class CambiarPasswordFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        binding.btnCambiarPassword.setOnClickListener(v -> viewModel.cambiarPassword());
+        binding.btnCambiarPassword.setOnClickListener(v -> {
+            viewModel.setPasswordActual(binding.etPasswordActual.getText().toString());
+            viewModel.setPasswordNueva(binding.etPasswordNueva.getText().toString());
+            viewModel.setConfirmPasswordNueva(binding.etConfirmPasswordNueva.getText().toString());
+            viewModel.cambiarPassword();
+        });
     }
 
     private void setupObservers() {

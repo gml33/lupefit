@@ -16,6 +16,7 @@
     <include app:graph="@navigation/nav_agua" />
     <include app:graph="@navigation/nav_configuracion" />
     <include app:graph="@navigation/nav_perfil" />
+    <include app:graph="@navigation/nav_insights" />
 
     <dialog
         android:id="@+id/masDialog"

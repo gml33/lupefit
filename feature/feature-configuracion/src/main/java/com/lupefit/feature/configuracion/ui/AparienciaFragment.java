@@ -31,12 +31,20 @@ public class AparienciaFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this, new AparienciaViewModel.Factory(requireContext())).get(AparienciaViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
+        setupClickListeners();
     }
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
+    }
+
+    private void setupClickListeners() {
+        binding.switchAnimaciones.setOnClickListener(v -> viewModel.toggleAnimaciones());
+        binding.switchReduccionMovimiento.setOnClickListener(v -> viewModel.toggleReduccionMovimiento());
     }
 
     @Override

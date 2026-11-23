@@ -209,7 +209,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="numberDecimal"
-                                    android:text="@{viewModel.altura}" />
+                                    android:text="@{String.valueOf(viewModel.altura)}" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -230,7 +230,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="numberDecimal"
-                                    android:text="@{viewModel.peso}" />
+                                    android:text="@{String.valueOf(viewModel.peso)}" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
@@ -251,7 +251,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="numberDecimal"
-                                android:text="@{viewModel.grasaCorporal}" />
+                                android:text="@{String.valueOf(viewModel.grasaCorporal)}" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -298,7 +298,7 @@
                                 android:layout_height="wrap_content"
                                 android:focusable="false"
                                 android:clickable="true"
-                                android:text="@{viewModel.nivelActividad}" />
+                                android:text="@{String.valueOf(viewModel.nivelActividad)}" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout

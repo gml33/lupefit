@@ -7,46 +7,34 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.lupefit.core.domain.provider.DiarioRepositoryProvider;
 import com.lupefit.core.domain.repository.DiarioRepository;
+import com.lupefit.core.domain.model.DiarioEntry;
 import com.lupefit.core.domain.model.MacroTotals;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class MacrosDetalleViewModel extends ViewModel {
 
-    private final DiarioRepository diarioRepository;
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final SharedPreferences prefs;
+    private final Context context;
 
-    public final MutableLiveData<Boolean> netCarbsMode = new MutableLiveData<>(false);
-
-    private final MutableLiveData<MacroTotals> _totales = new MutableLiveData<>();
-    public final LiveData<MacroTotals> totales = _totales;
-
-    private final MutableLiveData<List<com.lupefit.feature.nutricion.model.MacroDetail>> _macroDetails = new MutableLiveData<>(new ArrayList<>());
-    public final LiveData<List<com.lupefit.feature.nutricion.model.MacroDetail>> macroDetails = _macroDetails;
-
-    private final MutableLiveData<List<com.lupefit.feature.nutricion.model.MicroDetail>> _microDetails = new MutableLiveData<>(new ArrayList<>());
-    public final LiveData<List<com.lupefit.feature.nutricion.model.MicroDetail>> microDetails = _microDetails;
-
-    private final MutableLiveData<Boolean> _isLoading = new MutableLiveData<>(false);
-    public final LiveData<Boolean> isLoading = _isLoading;
-
-    private int currentDateKey;
+    public final MutableLiveData<Boolean> netCarbsMode;
+    public final LiveData<List<com.lupefit.feature.nutricion.model.MacroDetail>> macroDetails;
+    public final LiveData<List<com.lupefit.feature.nutricion.model.MicroDetail>> microDetails;
 
     public MacrosDetalleViewModel(DiarioRepository diarioRepository, Context context) {
-        this.diarioRepository = diarioRepository;
-        this.prefs = context.getSharedPreferences("nutricion_metas", Context.MODE_PRIVATE);
-        currentDateKey = getTodayDateKey();
-        netCarbsMode.setValue(prefs.getBoolean("net_carbs_mode", false));
-        loadTotales();
+        this.context = context.getApplicationContext();
+        prefs = context.getSharedPreferences("nutricion_metas", Context.MODE_PRIVATE);
+        netCarbsMode = new MutableLiveData<>(prefs.getBoolean("net_carbs_mode", false));
+        LiveData<List<DiarioEntry>> entries = diarioRepository.getEntriesForDate(getTodayDateKey());
+        macroDetails = Transformations.map(entries, this::buildMacroDetails);
+        microDetails = Transformations.map(entries, this::buildMicroDetails);
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -69,22 +57,18 @@ public class MacrosDetalleViewModel extends ViewModel {
         }
     }
 
-    private void loadTotales() {
-        _isLoading.setValue(true);
-
-        executor.execute(() -> {
-            LiveData<com.lupefit.core.domain.model.MacroTotals> liveData = diarioRepository.getDailyTotals(currentDateKey);
-            com.lupefit.core.domain.model.MacroTotals totales = liveData.getValue();
-            if (totales != null) {
-                _totales.postValue(totales);
-                buildMacroDetails(totales);
-                buildMicroDetails();
+    private List<com.lupefit.feature.nutricion.model.MacroDetail> buildMacroDetails(List<DiarioEntry> entries) {
+        MacroTotals totales = new MacroTotals();
+        double fibra = 0;
+        if (entries != null) {
+            for (DiarioEntry entry : entries) {
+                totales.setCalorias(totales.getCalorias() + entry.getCalorias());
+                totales.setProteinas(totales.getProteinas() + entry.getProteinas());
+                totales.setCarbohidratos(totales.getCarbohidratos() + entry.getCarbohidratos());
+                totales.setGrasas(totales.getGrasas() + entry.getGrasas());
+                fibra += entry.getFibra();
             }
-            _isLoading.postValue(false);
-        });
-    }
-
-    private void buildMacroDetails(com.lupefit.core.domain.model.MacroTotals totales) {
+        }
         List<com.lupefit.feature.nutricion.model.MacroDetail> details = new ArrayList<>();
 
         // Get goals from SharedPreferences (use the prefs already stored in this class)
@@ -103,7 +87,7 @@ public class MacrosDetalleViewModel extends ViewModel {
                 String.valueOf(totales.getCalorias()),
                 "kcal",
                 caloriasPct + "%",
-                0xFF10B981
+                context.getColor(com.lupefit.core.ui.R.color.md_theme_primary)
         ));
 
         // Proteínas
@@ -114,11 +98,11 @@ public class MacrosDetalleViewModel extends ViewModel {
                 String.format("%.1f", totales.getProteinas()),
                 "g",
                 proteinasPct + "%",
-                0xFF2563EB
+                context.getColor(com.lupefit.core.ui.R.color.macro_protein)
         ));
 
         // Carbohidratos
-        float carbs = netCarbs ? (float) (totales.getCarbohidratos() - 0) : (float) totales.getCarbohidratos(); // TODO: subtract fiber
+        float carbs = netCarbs ? (float) Math.max(0, totales.getCarbohidratos() - fibra) : (float) totales.getCarbohidratos();
         int carbsPct = goalCarbohidratos > 0 ? (int) (carbs * 100f / goalCarbohidratos) : 0;
         details.add(new com.lupefit.feature.nutricion.model.MacroDetail(
                 netCarbs ? "Net Carbs" : "Carbohidratos",
@@ -126,7 +110,7 @@ public class MacrosDetalleViewModel extends ViewModel {
                 String.format("%.1f", carbs),
                 "g",
                 carbsPct + "%",
-                0xFFD97706
+                context.getColor(com.lupefit.core.ui.R.color.macro_carbs)
         ));
 
         // Grasas
@@ -137,56 +121,32 @@ public class MacrosDetalleViewModel extends ViewModel {
                 String.format("%.1f", totales.getGrasas()),
                 "g",
                 grasasPct + "%",
-                0xFF7C3AED
+                context.getColor(com.lupefit.core.ui.R.color.macro_fat)
         ));
 
-        _macroDetails.postValue(details);
+        return details;
     }
 
-    private void buildMicroDetails() {
-        List<com.lupefit.feature.nutricion.model.MicroDetail> details = new ArrayList<>();
-
-        details.add(new com.lupefit.feature.nutricion.model.MicroDetail(
-                "Fibra",
-                "Salud digestiva",
-                "0",
-                "g",
-                "0%"
-        ));
-
-        details.add(new com.lupefit.feature.nutricion.model.MicroDetail(
-                "Azúcar",
-                "Azúcares totales",
-                "0",
-                "g",
-                "0%"
-        ));
-
-        details.add(new com.lupefit.feature.nutricion.model.MicroDetail(
-                "Sodio",
-                "Equilibrio de fluidos",
-                "0",
-                "mg",
-                "0%"
-        ));
-
-        details.add(new com.lupefit.feature.nutricion.model.MicroDetail(
-                "Potasio",
-                "Función muscular",
-                "0",
-                "mg",
-                "0%"
-        ));
-
-        _microDetails.postValue(details);
-    }
-
-    public void setNetCarbsMode(boolean enabled) {
-        netCarbsMode.setValue(enabled);
-    }
-
-    public void refresh() {
-        loadTotales();
+    private List<com.lupefit.feature.nutricion.model.MicroDetail> buildMicroDetails(List<DiarioEntry> entries) {
+        double fibra = 0;
+        double azucar = 0;
+        double sodio = 0;
+        if (entries != null) {
+            for (DiarioEntry entry : entries) {
+                fibra += entry.getFibra();
+                azucar += entry.getAzucar();
+                sodio += entry.getSodio();
+            }
+        }
+        float goalFibra = prefs.getFloat("meta_fibra", 25f);
+        String fibraPct = goalFibra > 0 ? Math.round(fibra * 100 / goalFibra) + "%" : "";
+        return java.util.Arrays.asList(
+                new com.lupefit.feature.nutricion.model.MicroDetail(
+                        "Fibra", "Fibra registrada", String.format("%.1f", fibra), "g", fibraPct),
+                new com.lupefit.feature.nutricion.model.MicroDetail(
+                        "Azúcar", "Azúcares totales", String.format("%.1f", azucar), "g", ""),
+                new com.lupefit.feature.nutricion.model.MicroDetail(
+                        "Sodio", "Sodio registrado", String.format("%.0f", sodio), "mg", ""));
     }
 
     private int getTodayDateKey() {
@@ -196,9 +156,4 @@ public class MacrosDetalleViewModel extends ViewModel {
                 + cal.get(Calendar.DAY_OF_MONTH);
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        executor.shutdown();
-    }
 }

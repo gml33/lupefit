@@ -28,40 +28,24 @@
             android:layout_weight="1">
 
             <LinearLayout
+                android:id="@+id/routineList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/spacing_m">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_l"
-                    android:text="Rutina: Nombre de la rutina"
-                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_m"
-                    android:text="@string/rutina_ejercicios"
-                    android:textAppearance="?attr/textAppearanceTitleMedium" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvEjercicios"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="200dp"
-                    tools:listitem="@layout/item_rutina_ejercicio" />
+                android:padding="@dimen/padding_screen">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnIniciarRutina"
-                    style="@style/Widget.Material3.Button"
+                    android:id="@+id/newRoutine"
+                    style="@style/Widget.LuPeFit.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_xl"
-                    android:text="@string/rutina_iniciar" />
+                    android:text="@string/nueva_rutina" />
+
+                <LinearLayout
+                    android:id="@+id/routineItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

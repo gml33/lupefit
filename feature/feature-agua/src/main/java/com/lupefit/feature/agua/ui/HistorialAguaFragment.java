@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lupefit.core.ui.R;
 import com.lupefit.core.domain.model.WaterEntry;
@@ -56,6 +58,24 @@ public class HistorialAguaFragment extends Fragment {
         adapter = new HistorialAguaAdapter(historialList);
         binding.rvHistorialAgua.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvHistorialAgua.setAdapter(adapter);
+        ItemTouchHelper swipe = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+                0, ItemTouchHelper.START | ItemTouchHelper.END) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder source,
+                                  @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder holder, int direction) {
+                int index = holder.getBindingAdapterPosition();
+                if (index != RecyclerView.NO_POSITION) {
+                    viewModel.deleteEntry(historialList.get(index));
+                }
+            }
+        });
+        swipe.attachToRecyclerView(binding.rvHistorialAgua);
     }
 
     private void setupObservers() {

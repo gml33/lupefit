@@ -31,14 +31,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/macro_ejemplo"
+                    tools:text="Proteínas"
                     android:textAppearance="?attr/textAppearanceTitleMedium" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvMacroValor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/valor_ejemplo"
+                    tools:text="120 g"
                     android:textAppearance="?attr/textAppearanceTitleMedium"
                     android:textColor="?attr/colorPrimary"
                     android:layout_marginStart="@dimen/spacing_m" />
@@ -60,7 +60,7 @@
                 android:id="@+id/tvMacroPorcentaje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/porcentaje_ejemplo"
+                tools:text="85%"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:layout_marginTop="@dimen/spacing_xs"

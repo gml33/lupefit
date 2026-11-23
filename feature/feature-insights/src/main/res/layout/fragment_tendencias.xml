@@ -57,7 +57,7 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipSemana"
-                        style="@style/Widget.Material3.Chip.Choice"
+                        style="@style/Widget.LuPeFit.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ultimos_7_dias"
@@ -65,14 +65,14 @@
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipMes"
-                        style="@style/Widget.Material3.Chip.Choice"
+                        style="@style/Widget.LuPeFit.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ultimos_30_dias" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipTrimestre"
-                        style="@style/Widget.Material3.Chip.Choice"
+                        style="@style/Widget.LuPeFit.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ultimos_90_dias" />

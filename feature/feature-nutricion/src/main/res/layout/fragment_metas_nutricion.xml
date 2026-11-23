@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.lupefit.feature.nutricion.viewmodel.MetasViewModel" />
-    </data>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -55,8 +49,7 @@
                         android:id="@+id/etMetaCalorias"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:text="@{String.valueOf(viewModel.metaCalorias)}" />
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Proteínas -->
@@ -76,8 +69,7 @@
                         android:id="@+id/etMetaProteinas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:text="@{String.valueOf(viewModel.metaProteinas)}" />
+                        android:inputType="numberDecimal" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Carbohidratos -->
@@ -97,8 +89,7 @@
                         android:id="@+id/etMetaCarbohidratos"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:text="@{String.valueOf(viewModel.metaCarbohidratos)}" />
+                        android:inputType="numberDecimal" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Grasas -->
@@ -118,8 +109,7 @@
                         android:id="@+id/etMetaGrasas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:text="@{String.valueOf(viewModel.metaGrasas)}" />
+                        android:inputType="numberDecimal" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Fibra -->
@@ -139,8 +129,7 @@
                         android:id="@+id/etMetaFibra"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:text="@{String.valueOf(viewModel.metaFibra)}" />
+                        android:inputType="numberDecimal" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Agua -->
@@ -160,8 +149,7 @@
                         android:id="@+id/etMetaAgua"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:text="@{String.valueOf(viewModel.metaAgua)}" />
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Net Carbs Toggle -->
@@ -169,9 +157,7 @@
                     android:id="@+id/switchNetCarbs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_l"
-                    android:text="@string/modo_net_carbs"
-                    android:checked="@={viewModel.netCarbsMode}" />
+                    android:layout_marginTop="@dimen/spacing_l" />
 
                 <!-- Botón guardar -->
                 <com.google.android.material.button.MaterialButton
@@ -180,9 +166,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_xl"
-                    android:layout_marginBottom="@dimen/spacing_l"
-                    android:text="@string/meta_guardar"
-                    android:onClick="@{() -> viewModel.saveMetas()}" />
+                    android:layout_marginBottom="@dimen/spacing_l" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>

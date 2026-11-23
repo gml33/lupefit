@@ -9,5 +9,24 @@
         android:id="@+id/recetasHomeFragment"
         android:name="com.lupefit.feature.recetas.ui.RecetasHomeFragment"
         android:label="@string/recetas_title"
-        tools:layout="@layout/fragment_recetas_home" />
+        tools:layout="@layout/fragment_recetas_home">
+        <action android:id="@+id/action_recetasHomeFragment_to_importarRecetaFragment"
+            app:destination="@id/importarRecetaFragment" />
+        <action android:id="@+id/action_recetasHomeFragment_to_crearRecetaFragment"
+            app:destination="@id/crearRecetaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crearRecetaFragment"
+        android:name="com.lupefit.feature.recetas.ui.CrearRecetaFragment"
+        android:label="@string/crear_receta_titulo"
+        tools:layout="@layout/fragment_crear_receta" />
+    <fragment
+        android:id="@+id/importarRecetaFragment"
+        android:name="com.lupefit.feature.recetas.ui.ImportarRecetaFragment"
+        android:label="@string/importar_receta_titulo"
+        tools:layout="@layout/fragment_importar_receta">
+        <action android:id="@+id/action_importarRecetaFragment_to_crearRecetaFragment"
+            app:destination="@id/crearRecetaFragment"
+            app:popUpTo="@id/recetasHomeFragment" />
+    </fragment>
 </navigation>

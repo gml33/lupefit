@@ -67,6 +67,12 @@ public class ConfigurarMetaFragment extends Fragment {
     }
 
     private void setupObservers() {
+        viewModel.metaMlStr.observe(getViewLifecycleOwner(), value -> {
+            if (!value.contentEquals(binding.etMeta.getText())) {
+                binding.etMeta.setText(value);
+                binding.etMeta.setSelection(value.length());
+            }
+        });
         viewModel.saved.observe(getViewLifecycleOwner(), saved -> {
             if (saved != null && saved) {
                 Toast.makeText(requireContext(), "Meta guardada", Toast.LENGTH_SHORT).show();

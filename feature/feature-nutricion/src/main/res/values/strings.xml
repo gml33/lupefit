@@ -52,4 +52,9 @@
     <string name="nutricion_vacio_titulo">Sin datos nutricionales</string>
     <string name="nutricion_vacio_subtitulo">Registrá tus alimentos en el Diario para ver tu resumen nutricional</string>
     <string name="nutricion_ir_diario">Ir al Diario</string>
+    <string name="metas_valores_invalidos">Ingresá valores numéricos positivos o cero.</string>
+    <string name="chart_proteinas">Proteínas</string>
+    <string name="chart_carbohidratos">Carbohidratos</string>
+    <string name="chart_grasas">Grasas</string>
+    <string name="chart_sin_datos">Sin registros para este período</string>
 </resources>

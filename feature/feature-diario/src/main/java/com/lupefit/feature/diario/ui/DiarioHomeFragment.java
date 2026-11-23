@@ -2,11 +2,19 @@ package com.lupefit.feature.diario.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.InputType;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.lupefit.feature.diario.R;
 import com.lupefit.core.ui.databinding.CardMacroSummaryBinding;
+import com.lupefit.feature.agua.viewmodel.AguaHomeViewModel;
 import com.lupefit.feature.diario.databinding.FragmentDiarioHomeBinding;
 import com.lupefit.feature.diario.databinding.ViewEmptyDiarioBinding;
 import com.lupefit.feature.diario.viewmodel.DiarioHomeViewModel;
@@ -28,6 +37,7 @@ import com.lupefit.core.domain.engine.voice.VoiceTranscriptionEngine;
 public class DiarioHomeFragment extends Fragment {
 
     private FragmentDiarioHomeBinding binding;
+    private AguaHomeViewModel water;
     private CardMacroSummaryBinding macroBinding;
     private ViewEmptyDiarioBinding emptyBinding;
     private DiarioHomeViewModel viewModel;
@@ -58,9 +68,22 @@ public class DiarioHomeFragment extends Fragment {
         viewModel = new ViewModelProvider(this, new DiarioHomeViewModel.Factory(context, currentUserId)).get(DiarioHomeViewModel.class);
 
         setupToolbar();
+        binding.tvDateHeader.setText(new SimpleDateFormat("EEEE, d 'de' MMMM", new Locale("es", "AR"))
+                .format(new Date()));
         setupRecyclerView();
         setupObservers();
         setupClickListeners();
+        water = new ViewModelProvider(this, new AguaHomeViewModel.Factory(requireContext()))
+                .get(AguaHomeViewModel.class);
+        water.consumedStr.observe(getViewLifecycleOwner(), ignored -> updateWater());
+        water.dailyGoalStr.observe(getViewLifecycleOwner(), ignored -> updateWater());
+        water.progressPercent.observe(getViewLifecycleOwner(), progress -> {
+            binding.waterProgress.progressWater.setMax(100);
+            binding.waterProgress.progressWater.setProgress(progress);
+        });
+        binding.waterProgress.btnQuickWater.setOnClickListener(v -> water.addQuickWater(250));
+        binding.waterProgress.btnAddWater.setOnClickListener(v ->
+                navController.navigate(Uri.parse("lupefit://hidratacion")));
 
         viewModel.loadDiarioDelDia();
     }
@@ -101,9 +124,56 @@ public class DiarioHomeFragment extends Fragment {
 
     private void setupRecyclerView() {
         binding.recyclerDiario.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.recyclerDiario.setAdapter(new DiarioEntryAdapter(entry -> {
-            // TODO: Open edit portion sheet
-        }));
+        binding.recyclerDiario.setAdapter(new DiarioEntryAdapter(this::editPortion));
+    }
+
+    private void editPortion(DiarioEntry entry) {
+        TextInputLayout field = new TextInputLayout(requireContext());
+        field.setHint(getString(R.string.diario_portion_grams));
+        TextInputEditText input = new TextInputEditText(field.getContext());
+        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        input.setText(String.valueOf(entry.getCantidad()));
+        field.addView(input);
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(entry.getFoodName())
+                .setView(field)
+                .setPositiveButton(android.R.string.ok, null)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setNeutralButton(R.string.diario_delete_entry, (d, i) -> new MaterialAlertDialogBuilder(requireContext())
+                        .setMessage(R.string.diario_delete_confirm)
+                        .setPositiveButton(android.R.string.ok, (confirm, option) -> viewModel.deleteEntry(entry))
+                        .setNegativeButton(android.R.string.cancel, null)
+                        .show())
+                .create();
+        dialog.setOnShowListener(d -> dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE)
+                .setOnClickListener(v -> {
+                    double grams;
+                    try {
+                        grams = Double.parseDouble(String.valueOf(input.getText()).replace(',', '.'));
+                    } catch (NumberFormatException e) {
+                        grams = 0;
+                    }
+                    if (!Double.isFinite(grams) || grams <= 0 || grams > 10000 || entry.getCantidad() <= 0) {
+                        field.setError(getString(R.string.diario_portion_invalid));
+                        return;
+                    }
+                    double ratio = grams / entry.getCantidad();
+                    entry.setCantidad(grams);
+                    entry.setCalorias((int) Math.round(entry.getCalorias() * ratio));
+                    entry.setProteinas(entry.getProteinas() * ratio);
+                    entry.setCarbohidratos(entry.getCarbohidratos() * ratio);
+                    entry.setGrasas(entry.getGrasas() * ratio);
+                    entry.setFibra(entry.getFibra() * ratio);
+                    entry.setAzucar(entry.getAzucar() * ratio);
+                    entry.setSodio(entry.getSodio() * ratio);
+                    entry.setEstimatedCostSnapshot(entry.getEstimatedCostSnapshot() * ratio);
+                    entry.setSynced(false);
+                    entry.setSyncAction(entry.getServerId() == null ? "CREATE" : "UPDATE");
+                    entry.setLastModified(System.currentTimeMillis());
+                    viewModel.updateEntry(entry);
+                    dialog.dismiss();
+                }));
+        dialog.show();
     }
 
     private void setupObservers() {
@@ -141,7 +211,19 @@ public class DiarioHomeFragment extends Fragment {
     private void setupClickListeners() {
         binding.fabAddFood.setOnClickListener(v -> navigateToBuscarAlimento());
 
+        binding.btnAddBreakfast.setOnClickListener(v -> navigateToMeal("desayuno"));
+        binding.btnAddLunch.setOnClickListener(v -> navigateToMeal("almuerzo"));
+        binding.btnAddSnack.setOnClickListener(v -> navigateToMeal("merienda"));
+        binding.btnAddDinner.setOnClickListener(v -> navigateToMeal("cena"));
+
         emptyBinding.btnFirstFood.setOnClickListener(v -> navigateToBuscarAlimento());
+    }
+
+    private void navigateToMeal(String mealType) {
+        Bundle args = new Bundle();
+        args.putInt("dateKey", currentDateKey);
+        args.putString("mealType", mealType);
+        navController.navigate(R.id.action_diarioHomeFragment_to_buscarAlimentoFragment, args);
     }
 
     private void navigateToBuscarAlimento() {
@@ -186,6 +268,17 @@ public class DiarioHomeFragment extends Fragment {
             Toast.makeText(requireContext(), items.size() + " alimento(s) registrado(s) por voz", Toast.LENGTH_SHORT).show();
         });
         sheet.show(getChildFragmentManager(), "DiarioVozSheet");
+    }
+
+    private void updateWater() {
+        binding.waterProgress.tvWaterProgress.setText(getString(
+                R.string.diario_water_progress, water.consumedStr.getValue(), water.dailyGoalStr.getValue()));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        water.loadTodayData();
     }
 
     @Override

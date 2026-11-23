@@ -1,6 +1,7 @@
 package com.lupefit.feature.configuracion.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -43,8 +44,20 @@ public class PerfilConfigViewModel extends ViewModel {
     private final MutableLiveData<String> _error = new MutableLiveData<>();
     public final LiveData<String> error = _error;
 
-    public PerfilConfigViewModel() {
-        // TODO: Load current profile data
+    private final SharedPreferences preferences;
+
+    public PerfilConfigViewModel(Context context) {
+        preferences = context.getApplicationContext()
+                .getSharedPreferences("lupefit_local_profile", Context.MODE_PRIVATE);
+        _nombre.setValue(preferences.getString("nombre", ""));
+        _apellido.setValue(preferences.getString("apellido", ""));
+        _fechaNacimiento.setValue(preferences.getString("fechaNacimiento", ""));
+        _sexo.setValue(preferences.getString("sexo", ""));
+        _objetivo.setValue(preferences.getString("objetivo", ""));
+        _altura.setValue(preferences.getFloat("altura", 0f));
+        _peso.setValue(preferences.getFloat("peso", 0f));
+        _grasaCorporal.setValue(preferences.getFloat("grasaCorporal", 0f));
+        _nivelActividad.setValue(preferences.getInt("nivelActividad", 1));
     }
 
     public static class Factory implements ViewModelProvider.Factory {
@@ -58,7 +71,7 @@ public class PerfilConfigViewModel extends ViewModel {
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
             if (modelClass.isAssignableFrom(PerfilConfigViewModel.class)) {
-                return (T) new PerfilConfigViewModel();
+                return (T) new PerfilConfigViewModel(context);
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
@@ -81,12 +94,12 @@ public class PerfilConfigViewModel extends ViewModel {
         Float alturaVal = _altura.getValue();
         Float pesoVal = _peso.getValue();
 
-        if (alturaVal == null || alturaVal <= 0) {
+        if (alturaVal == null || !Float.isFinite(alturaVal) || alturaVal < 50) {
             _error.setValue("Altura inválida");
             return;
         }
 
-        if (pesoVal == null || pesoVal <= 0) {
+        if (pesoVal == null || !Float.isFinite(pesoVal) || pesoVal < 20) {
             _error.setValue("Peso inválido");
             return;
         }
@@ -94,7 +107,53 @@ public class PerfilConfigViewModel extends ViewModel {
         _saved.setValue(false);
         _error.setValue(null);
 
-        // TODO: Save to repository/preferences
-        _saved.postValue(true);
+        preferences.edit()
+                .putString("nombre", _nombre.getValue())
+                .putString("apellido", _apellido.getValue())
+                .putString("fechaNacimiento", _fechaNacimiento.getValue())
+                .putString("sexo", _sexo.getValue())
+                .putString("objetivo", _objetivo.getValue())
+                .putFloat("altura", _altura.getValue())
+                .putFloat("peso", _peso.getValue())
+                .putFloat("grasaCorporal", _grasaCorporal.getValue())
+                .putInt("nivelActividad", _nivelActividad.getValue())
+                .apply();
+        _saved.setValue(true);
     }
+    public void setNombre(String value) {
+        _nombre.setValue(value);
+    }
+
+    public void setApellido(String value) {
+        _apellido.setValue(value);
+    }
+
+    public void setFechaNacimiento(String value) {
+        _fechaNacimiento.setValue(value);
+    }
+
+    public void setSexo(String value) {
+        _sexo.setValue(value);
+    }
+
+    public void setObjetivo(String value) {
+        _objetivo.setValue(value);
+    }
+
+    public void setAltura(float value) {
+        _altura.setValue(value);
+    }
+
+    public void setPeso(float value) {
+        _peso.setValue(value);
+    }
+
+    public void setGrasaCorporal(float value) {
+        _grasaCorporal.setValue(value);
+    }
+
+    public void setNivelActividad(int value) {
+        _nivelActividad.setValue(value);
+    }
+
 }

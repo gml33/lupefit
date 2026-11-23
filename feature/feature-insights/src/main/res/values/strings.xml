@@ -27,4 +27,5 @@
     <string name="frecuencia_ejemplo">85%</string>
     <string name="patron_ejemplo">Patrón de ejemplo</string>
     <string name="descripcion_patron_ejemplo">Descripción del patrón detectado</string>
+    <string name="insights_demo">Vistas preliminares con datos de ejemplo.</string>
 </resources>

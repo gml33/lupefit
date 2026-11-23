@@ -31,6 +31,8 @@ public class UnidadesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this, new UnidadesViewModel.Factory(requireContext())).get(UnidadesViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
     }

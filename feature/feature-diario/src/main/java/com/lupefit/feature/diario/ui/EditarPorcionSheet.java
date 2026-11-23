@@ -144,10 +144,10 @@ public class EditarPorcionSheet extends BottomSheetDialogFragment {
 
         // Macros por 100g
         FoodProduct.MacroBreakdown macros100 = food.calculateMacrosForGrams(100);
-        setMacroView(binding.llMacros100g.getChildAt(0), macros100.kcal, "kcal", com.lupefit.core.ui.R.color.macro_protein);
-        setMacroView(binding.llMacros100g.getChildAt(1), macros100.proteinG, "g", com.lupefit.core.ui.R.color.macro_carbs);
-        setMacroView(binding.llMacros100g.getChildAt(2), macros100.carbsG, "g", com.lupefit.core.ui.R.color.macro_fat);
-        setMacroView(binding.llMacros100g.getChildAt(3), macros100.fatG, "g", com.lupefit.core.ui.R.color.macro_carbs);
+        setMacroView(binding.llMacros100g.getChildAt(0), macros100.kcal, "Calorías", "kcal", com.lupefit.core.ui.R.color.macro_protein);
+        setMacroView(binding.llMacros100g.getChildAt(1), macros100.proteinG, "Proteínas", "g", com.lupefit.core.ui.R.color.macro_carbs);
+        setMacroView(binding.llMacros100g.getChildAt(2), macros100.carbsG, "Carbohidratos", "g", com.lupefit.core.ui.R.color.macro_fat);
+        setMacroView(binding.llMacros100g.getChildAt(3), macros100.fatG, "Grasas", "g", com.lupefit.core.ui.R.color.macro_carbs);
 
         // Macros calculados
         updateCalculatedMacros();
@@ -177,15 +177,16 @@ public class EditarPorcionSheet extends BottomSheetDialogFragment {
 
     private void updateCalculatedMacros() {
         FoodProduct.MacroBreakdown macros = food.calculateMacrosForGrams(currentGrams);
-        setMacroView(binding.llCalculatedMacros.getChildAt(0), macros.kcal, "kcal", com.lupefit.core.ui.R.color.macro_protein);
-        setMacroView(binding.llCalculatedMacros.getChildAt(1), macros.proteinG, "g", com.lupefit.core.ui.R.color.macro_carbs);
-        setMacroView(binding.llCalculatedMacros.getChildAt(2), macros.carbsG, "g", com.lupefit.core.ui.R.color.macro_fat);
-        setMacroView(binding.llCalculatedMacros.getChildAt(3), macros.fatG, "g", com.lupefit.core.ui.R.color.macro_carbs);
+        setMacroView(binding.llCalculatedMacros.getChildAt(0), macros.kcal, "Calorías", "kcal", com.lupefit.core.ui.R.color.macro_protein);
+        setMacroView(binding.llCalculatedMacros.getChildAt(1), macros.proteinG, "Proteínas", "g", com.lupefit.core.ui.R.color.macro_carbs);
+        setMacroView(binding.llCalculatedMacros.getChildAt(2), macros.carbsG, "Carbohidratos", "g", com.lupefit.core.ui.R.color.macro_fat);
+        setMacroView(binding.llCalculatedMacros.getChildAt(3), macros.fatG, "Grasas", "g", com.lupefit.core.ui.R.color.macro_carbs);
     }
 
-    private void setMacroView(View view, double value, String unit, int colorRes) {
+    private void setMacroView(View view, double value, String label, String unit, int colorRes) {
         ItemMacroMiniBinding binding = ItemMacroMiniBinding.bind(view);
         binding.tvMacroValue.setText(String.format("%.0f", value));
+        binding.tvMacroLabel.setText(label);
         binding.tvMacroUnit.setText(unit);
         binding.tvMacroValue.setTextColor(ContextCompat.getColor(requireContext(), colorRes));
     }

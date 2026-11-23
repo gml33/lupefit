@@ -9,6 +9,7 @@
         android:name="com.lupefit.feature.agua.ui.AguaHomeFragment"
         android:label="@string/agua_title"
         tools:layout="@layout/fragment_agua_home">
+        <deepLink app:uri="lupefit://hidratacion" />
         <action
             android:id="@+id/action_aguaHomeFragment_to_configurarMetaFragment"
             app:destination="@id/configurarMetaFragment" />

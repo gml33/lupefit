@@ -38,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:feature-agua"))
     implementation(project(":core:core-ui"))
     implementation(project(":core:core-domain"))
     implementation(project(":core:core-network"))

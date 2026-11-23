@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="@dimen/icon_xxl"
             android:layout_height="@dimen/icon_xxl"
-            android:src="@drawable/ic_food_placeholder"
+            android:src="@drawable/ic_restaurant"
             android:contentDescription="@string/agregar_alimento"
             android:tint="?attr/colorOnSurfaceVariant"
             android:layout_marginBottom="@dimen/spacing_md" />

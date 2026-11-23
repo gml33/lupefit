@@ -51,19 +51,16 @@ public class PesoFragment extends Fragment {
         navController = NavHostFragment.findNavController(this);
         viewModel = new ViewModelProvider(this, new PesoViewModel.Factory(context)).get(PesoViewModel.class);
 
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
+
         setupToolbar();
-        setupInputs();
         setupRecyclerView();
         setupObservers();
     }
 
     private void setupToolbar() {
         binding.toolbar.setNavigationOnClickListener(v -> navController.navigateUp());
-    }
-
-    private void setupInputs() {
-        // Set today's date
-        binding.etFecha.setText(new java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault()).format(new java.util.Date()));
     }
 
     private void setupRecyclerView() {
@@ -73,14 +70,19 @@ public class PesoFragment extends Fragment {
     }
 
     private void setupObservers() {
+        viewModel.entries.observe(getViewLifecycleOwner(), entries -> {
+            historial.clear();
+            historial.addAll(entries);
+            adapter.notifyDataSetChanged();
+            binding.rvHistorialPeso.setVisibility(entries.isEmpty() ? View.GONE : View.VISIBLE);
+            binding.emptyState.getRoot().setVisibility(entries.isEmpty() ? View.VISIBLE : View.GONE);
+        });
         viewModel.saved.observe(getViewLifecycleOwner(), saved -> {
             if (saved != null && saved) {
                 Toast.makeText(requireContext(), "Peso guardado", Toast.LENGTH_SHORT).show();
                 binding.etPeso.setText("");
                 binding.etNota.setText("");
                 binding.etFecha.setText(new java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault()).format(new java.util.Date()));
-                // Refresh historial
-                // TODO: Load historial from repository
             }
         });
 

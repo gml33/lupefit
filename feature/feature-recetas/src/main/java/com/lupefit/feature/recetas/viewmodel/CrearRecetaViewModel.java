@@ -9,9 +9,12 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.lupefit.core.domain.model.IngredienteReceta;
+import com.lupefit.core.domain.model.FoodProduct;
 import com.lupefit.core.domain.model.Receta;
 import com.lupefit.core.domain.provider.RecetaRepositoryProvider;
 import com.lupefit.core.domain.repository.RecetaRepository;
+import com.lupefit.core.domain.repository.FoodCatalogRepository;
+import com.lupefit.core.domain.provider.FoodCatalogRepositoryProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,11 @@ import java.util.concurrent.Executors;
 public class CrearRecetaViewModel extends ViewModel {
 
     private final RecetaRepository repository;
+    private final FoodCatalogRepository catalog;
+    private Receta edited;
+    private boolean draftLoaded;
+    private final MutableLiveData<Boolean> saving = new MutableLiveData<>(false);
+    public final LiveData<Boolean> isSaving = saving;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     // UI State
@@ -44,8 +52,9 @@ public class CrearRecetaViewModel extends ViewModel {
     private final MutableLiveData<String> _error = new MutableLiveData<>();
     public final LiveData<String> error = _error;
 
-    public CrearRecetaViewModel(RecetaRepository repository) {
+    public CrearRecetaViewModel(RecetaRepository repository, FoodCatalogRepository catalog) {
         this.repository = repository;
+        this.catalog = catalog;
         // Set default values
         categoria.setValue("Almuerzo");
         dificultad.setValue("Fácil");
@@ -66,7 +75,9 @@ public class CrearRecetaViewModel extends ViewModel {
                 RecetaRepositoryProvider provider =
                         (RecetaRepositoryProvider) context.getApplicationContext();
                 RecetaRepository repository = provider.getRecetaRepository();
-                return (T) new CrearRecetaViewModel(repository);
+                FoodCatalogRepository catalog = ((FoodCatalogRepositoryProvider)
+                        context.getApplicationContext()).getFoodCatalogRepository();
+                return (T) new CrearRecetaViewModel(repository, catalog);
             }
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
@@ -96,87 +107,154 @@ public class CrearRecetaViewModel extends ViewModel {
         }
     }
 
+    public void loadRecipe(Receta recipe) {
+        if (recipe == null || draftLoaded) return;
+        draftLoaded = true;
+        if (recipe.getId() != 0) edited = recipe;
+        nombre.setValue(recipe.getNombre());
+        descripcion.setValue(recipe.getDescripcion());
+        if (recipe.getCategoria() != null) categoria.setValue(recipe.getCategoria());
+        tiempoPrepMinStr.setValue(String.valueOf(recipe.getTiempoPrepMin()));
+        tiempoCoccionMinStr.setValue(String.valueOf(recipe.getTiempoCoccionMin()));
+        porcionesStr.setValue(String.valueOf(recipe.getPorciones()));
+        if (recipe.getDificultad() != null) dificultad.setValue(recipe.getDificultad());
+        instrucciones.setValue(recipe.getInstrucciones());
+        fotoUri.setValue(recipe.getFotoUri());
+        List<IngredienteReceta> ingredients = new ArrayList<>();
+        for (IngredienteReceta original : recipe.getIngredientes()) {
+            IngredienteReceta copy = new IngredienteReceta();
+            copy.setAlimentoNombre(original.getAlimentoNombre());
+            copy.setUnidad(original.getUnidad());
+            copy.setCantidad(original.getCantidad());
+            copy.setNota(original.getNota());
+            copy.setAlimentoId(original.getAlimentoId());
+            copy.setOrden(original.getOrden());
+            ingredients.add(copy);
+        }
+        _ingredientes.setValue(ingredients);
+    }
+
     public void saveReceta() {
-        // Validaciones
-        String nombreStr = nombre.getValue();
-        if (nombreStr == null || nombreStr.trim().isEmpty()) {
-            _error.setValue("El nombre es obligatorio");
+        if (Boolean.TRUE.equals(saving.getValue())) return;
+        String recipeName = value(nombre);
+        String instructions = value(instrucciones);
+        List<IngredienteReceta> ingredients = _ingredientes.getValue();
+        if (recipeName.isEmpty() || instructions.isEmpty() || ingredients == null || ingredients.isEmpty()) {
+            _error.setValue("Completá el nombre, los ingredientes y las instrucciones.");
             return;
         }
 
-        String porcionesInput = porcionesStr.getValue();
-        int porciones;
+        Receta recipe = new Receta();
         try {
-            porciones = Integer.parseInt(porcionesInput != null ? porcionesInput : "1");
+            recipe.setPorciones(number(value(porcionesStr), false));
+            recipe.setTiempoPrepMin(number(value(tiempoPrepMinStr), true));
+            recipe.setTiempoCoccionMin(number(value(tiempoCoccionMinStr), true));
+            for (IngredienteReceta source : ingredients) {
+                float amount = Float.parseFloat(source.getCantidadStr().trim().replace(',', '.'));
+                if (source.getAlimentoNombre() == null || source.getAlimentoNombre().trim().isEmpty()
+                        || !Float.isFinite(amount) || amount <= 0) throw new NumberFormatException();
+                IngredienteReceta entry = new IngredienteReceta();
+                entry.setAlimentoNombre(source.getAlimentoNombre().trim());
+                entry.setCantidad(amount);
+                entry.setUnidad(source.getUnidad());
+                entry.setOrden(recipe.getIngredientes().size());
+                entry.setAlimentoId(source.getAlimentoId());
+                entry.setNota(source.getNota());
+                recipe.addIngrediente(entry);
+            }
         } catch (NumberFormatException e) {
-            porciones = 1;
-        }
-
-        if (porciones <= 0) {
-            _error.setValue("Las porciones deben ser mayor a 0");
+            _error.setValue("Revisá las porciones, los tiempos y la cantidad de cada ingrediente.");
             return;
         }
 
-        List<IngredienteReceta> ingredientesList = _ingredientes.getValue();
-        if (ingredientesList == null || ingredientesList.isEmpty()) {
-            _error.setValue("Agregá al menos un ingrediente");
-            return;
+        recipe.setNombre(recipeName);
+        recipe.setDescripcion(value(descripcion));
+        recipe.setCategoria(value(categoria));
+        recipe.setDificultad(value(dificultad));
+        recipe.setInstrucciones(instructions);
+        recipe.setFotoUri(value(fotoUri));
+        if (edited != null) {
+            recipe.setId(edited.getId());
+            recipe.setTimestamp(edited.getTimestamp());
+            recipe.setEsFavorita(edited.isEsFavorita());
+            recipe.setEsPublica(edited.isEsPublica());
+            recipe.setUserId(edited.getUserId());
+            recipe.setServerId(edited.getServerId());
+            recipe.setSyncAction(edited.getServerId() == null ? "CREATE" : "UPDATE");
+        } else {
+            recipe.setUserId(1L);
         }
-
-        // Validar ingredientes
-        for (IngredienteReceta ing : ingredientesList) {
-            if (ing.getAlimentoNombre() == null || ing.getAlimentoNombre().trim().isEmpty()) {
-                _error.setValue("Todos los ingredientes deben tener un alimento");
-                return;
-            }
-            if (ing.getCantidad() <= 0) {
-                _error.setValue("La cantidad debe ser mayor a 0");
-                return;
-            }
-        }
-
-        String instruccionesStr = instrucciones.getValue();
-        if (instruccionesStr == null || instruccionesStr.trim().isEmpty()) {
-            _error.setValue("Las instrucciones son obligatorias");
-            return;
-        }
-
-        _saved.setValue(false);
+        saving.setValue(true);
         _error.setValue(null);
-
-        final int porcionesFinal = porciones;
-        final String instruccionesFinal = instruccionesStr;
-        final List<IngredienteReceta> ingredientesFinal = ingredientesList;
-
         executor.execute(() -> {
             try {
-                Receta receta = new Receta();
-                receta.setNombre(nombreStr.trim());
-                receta.setDescripcion(descripcion.getValue() != null ? descripcion.getValue().trim() : "");
-                receta.setCategoria(categoria.getValue() != null ? categoria.getValue() : "Almuerzo");
-                receta.setTiempoPrepMin(Integer.parseInt(tiempoPrepMinStr.getValue() != null ? tiempoPrepMinStr.getValue() : "0"));
-                receta.setTiempoCoccionMin(Integer.parseInt(tiempoCoccionMinStr.getValue() != null ? tiempoCoccionMinStr.getValue() : "0"));
-                receta.setPorciones(porcionesFinal);
-                receta.setDificultad(dificultad.getValue() != null ? dificultad.getValue() : "Fácil");
-                receta.setInstrucciones(instruccionesFinal.trim());
-                receta.setFotoUri(fotoUri.getValue() != null ? fotoUri.getValue() : "");
-                receta.setIngredientes(ingredientesFinal);
-                receta.setUserId(1L); // TODO: Get actual user ID
-                receta.setTimestamp(System.currentTimeMillis());
-
-                // Calcular nutrición básica (placeholder)
-                receta.setCaloriasPorPorcion(350);
-                receta.setProteinasPorPorcion(25f);
-                receta.setCarbohidratosPorPorcion(30f);
-                receta.setGrasasPorPorcion(15f);
-                receta.setFibraPorPorcion(5f);
-
-                repository.insertReceta(receta);
+                addNutrition(recipe);
+                if (recipe.getId() == 0) repository.insertReceta(recipe);
+                else repository.updateReceta(recipe);
                 _saved.postValue(true);
-            } catch (Exception e) {
-                _error.postValue("Error guardando: " + e.getMessage());
+            } catch (RuntimeException e) {
+                _error.postValue("No se pudo guardar la receta.");
+            } finally {
+                saving.postValue(false);
             }
         });
+    }
+
+    private void addNutrition(Receta recipe) {
+        double calories = 0;
+        double protein = 0;
+        double carbs = 0;
+        double fat = 0;
+        double fiber = 0;
+        for (IngredienteReceta ingredient : recipe.getIngredientes()) {
+            String unit = ingredient.getUnidad();
+            if (!"g".equals(unit) && !"kg".equals(unit)) {
+                recipe.setCaloriasPorPorcion(-1);
+                return;
+            }
+            // The local catalog invokes its result callback synchronously on this worker.
+            List<FoodProduct> matches = new ArrayList<>();
+            catalog.searchByName(ingredient.getAlimentoNombre(), 8, (foods, error) -> {
+                if (foods != null) matches.addAll(foods);
+            });
+            FoodProduct exact = null;
+            for (FoodProduct food : matches) {
+                if (ingredient.getAlimentoNombre().equalsIgnoreCase(food.getName())) {
+                    if (exact != null) {
+                        recipe.setCaloriasPorPorcion(-1);
+                        return;
+                    }
+                    exact = food;
+                }
+            }
+            if (exact == null) {
+                recipe.setCaloriasPorPorcion(-1);
+                return;
+            }
+            double factor = ingredient.getCantidad() * ("kg".equals(unit) ? 10d : 0.01d);
+            calories += exact.getKcalPer100g() * factor;
+            protein += exact.getProteinPer100g() * factor;
+            carbs += exact.getCarbsPer100g() * factor;
+            fat += exact.getFatPer100g() * factor;
+            fiber += exact.getFiberPer100g() * factor;
+        }
+        int servings = recipe.getPorciones();
+        recipe.setCaloriasPorPorcion((int) Math.round(calories / servings));
+        recipe.setProteinasPorPorcion((float) (protein / servings));
+        recipe.setCarbohidratosPorPorcion((float) (carbs / servings));
+        recipe.setGrasasPorPorcion((float) (fat / servings));
+        recipe.setFibraPorPorcion((float) (fiber / servings));
+    }
+
+    private String value(LiveData<String> data) {
+        String text = data.getValue();
+        return text == null ? "" : text.trim();
+    }
+
+    private int number(String raw, boolean allowZero) {
+        int value = allowZero && raw.isEmpty() ? 0 : Integer.parseInt(raw);
+        if (value < (allowZero ? 0 : 1)) throw new NumberFormatException();
+        return value;
     }
 
     @Override

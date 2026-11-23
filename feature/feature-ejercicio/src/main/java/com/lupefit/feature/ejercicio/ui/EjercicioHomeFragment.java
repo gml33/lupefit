@@ -53,7 +53,11 @@ public class EjercicioHomeFragment extends Fragment {
             navController.navigate(R.id.action_ejercicioHomeFragment_to_buscarEjercicioFragment);
         });
 
-        binding.cardNuevaRutina.setOnClickListener(v -> showUnavailable());
+        binding.cardNuevaRutina.setOnClickListener(v -> {
+            Bundle arguments = new Bundle();
+            arguments.putBoolean("create", true);
+            navController.navigate(R.id.action_ejercicioHomeFragment_to_rutinaDetalleFragment, arguments);
+        });
 
         binding.cardWodTimer.setOnClickListener(v -> showUnavailable());
 

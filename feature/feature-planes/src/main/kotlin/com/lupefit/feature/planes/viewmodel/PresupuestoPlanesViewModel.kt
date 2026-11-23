@@ -6,8 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.util.ArrayList
+import com.google.gson.reflect.TypeToken
 
-class PresupuestoPlanesViewModel : ViewModel() {
+class PresupuestoPlanesViewModel private constructor(private val storage: PlanesStorage) : ViewModel() {
 
     data class ItemPresupuesto(
         val nombre: String,
@@ -39,10 +40,15 @@ class PresupuestoPlanesViewModel : ViewModel() {
     val porcentajeMeta: LiveData<Int> = _porcentajeMeta
 
     init {
-        cargarPresupuestoSimulado()
+        _items.value = storage.read("presupuesto_items", object : TypeToken<List<ItemPresupuesto>>() {}.type,
+            emptyList<ItemPresupuesto>())
+        _metaSemanal.value = storage.read("presupuesto_meta", Double::class.javaObjectType, 50000.0)
+        evaluarAlerta()
     }
 
     fun setMetaSemanal(meta: Double) {
+        if (!meta.isFinite() || meta <= 0) return
+        storage.write("presupuesto_meta", meta)
         _metaSemanal.value = meta
         evaluarAlerta()
     }
@@ -50,7 +56,7 @@ class PresupuestoPlanesViewModel : ViewModel() {
     fun agregarItem(item: ItemPresupuesto) {
         val lista = ArrayList<ItemPresupuesto>(_items.value ?: listOf())
         lista.add(item)
-        _items.value = lista
+        saveItems(lista)
         evaluarAlerta()
     }
 
@@ -58,7 +64,7 @@ class PresupuestoPlanesViewModel : ViewModel() {
         val lista = ArrayList<ItemPresupuesto>(_items.value ?: listOf())
         if (index in lista.indices) {
             lista.removeAt(index)
-            _items.value = lista
+            saveItems(lista)
             evaluarAlerta()
         }
     }
@@ -68,7 +74,7 @@ class PresupuestoPlanesViewModel : ViewModel() {
         if (index in lista.indices) {
             val item = lista[index]
             lista[index] = item.copy(costoEstimado = nuevoCosto, tienePrecio = true)
-            _items.value = lista
+            saveItems(lista)
             evaluarAlerta()
         }
     }
@@ -83,24 +89,16 @@ class PresupuestoPlanesViewModel : ViewModel() {
         _porcentajeMeta.value = if (meta > 0) (total / meta * 100).toInt() else 0
     }
 
-    private fun cargarPresupuestoSimulado() {
-        val items = ArrayList<ItemPresupuesto>()
-        items.add(ItemPresupuesto("Pollo (2kg)", 3500.0, 2, "kg"))
-        items.add(ItemPresupuesto("Arroz (1kg)", 800.0, 1, "kg"))
-        items.add(ItemPresupuesto("Verduras mixtas", 2200.0, 1, "bolsa"))
-        items.add(ItemPresupuesto("Huevos (maple)", 1800.0, 1, "maple"))
-        items.add(ItemPresupuesto("Aceite de oliva", 4500.0, 1, "botella"))
-        items.add(ItemPresupuesto("Especias varias", 1200.0, 1, "pack"))
-        items.add(ItemPresupuesto("Frutas de estación", 3000.0, 1, "kg", false))
+    private fun saveItems(items: List<ItemPresupuesto>) {
+        storage.write("presupuesto_items", items)
         _items.value = items
-        evaluarAlerta()
     }
 
     class Factory(private val context: Context) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(PresupuestoPlanesViewModel::class.java)) {
-                return PresupuestoPlanesViewModel() as T
+                return PresupuestoPlanesViewModel(PlanesStorage(context)) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

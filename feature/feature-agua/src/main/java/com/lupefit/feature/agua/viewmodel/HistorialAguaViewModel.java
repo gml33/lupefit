@@ -73,16 +73,16 @@ public class HistorialAguaViewModel extends ViewModel {
     public void deleteEntry(WaterEntry entry) {
         executor.execute(() -> {
             try {
-                // TODO: Implement delete in repository
-                // repository.deleteWater(entry.getId());
-                List<WaterEntry> current = _historial.getValue();
-                if (current != null) {
-                    current.remove(entry);
-                    _historial.postValue(new ArrayList<>(current));
-                }
+                repository.deleteWater(entry.getId());
             } catch (Exception e) {
                 _error.postValue("Error eliminando: " + e.getMessage());
             }
+            _historial.postValue(repository.getAllWaterEntries());
         });
+    }
+
+    @Override
+    protected void onCleared() {
+        executor.shutdown();
     }
 }

@@ -6,6 +6,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.room.Database;
+import com.lupefit.app.data.local.dao.RoutineDao;
+import com.lupefit.app.data.local.entity.RoutineEntity;
+import com.lupefit.app.data.local.entity.MeasurementEntity;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
@@ -95,9 +98,11 @@ import java.util.concurrent.Executors;
         IngredienteRecetaEntity.class,
         EscaneoEntity.class,
         WaterEntity.class,
+        RoutineEntity.class,
+        MeasurementEntity.class,
         SyncQueueItem.class
     },
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters({Converters.class})
@@ -113,6 +118,18 @@ public abstract class AppDatabase extends RoomDatabase {
                     + "ON personal_records (exerciseId)");
         }
     };
+
+    private static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS routines (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                    + "title TEXT NOT NULL, exercises TEXT NOT NULL, completedAt INTEGER NOT NULL)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS progress_measurements (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                    + "kind TEXT NOT NULL, centimeters REAL NOT NULL, timestamp INTEGER NOT NULL)");
+        }
+    };
+
+    public abstract RoutineDao routineDao();
 
     // Executor para tareas de escritura en background
     public static final ExecutorService databaseWriteExecutor = Executors.newSingleThreadExecutor();
@@ -166,7 +183,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             db.execSQL("PRAGMA foreign_keys = ON");
                         }
                     })
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .fallbackToDestructiveMigration()
                     .build();
                 }

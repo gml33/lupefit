@@ -30,13 +30,19 @@ Si hay varios dispositivos conectados, usá `adb -s <serial>` para indicar el de
 | `feature/` | Módulos funcionales de la app Android. |
 | `backend/` | Servicio del proyecto y configuración de Docker Compose. |
 
-Diario y Nutrición comparten la tarjeta de macronutrientes. El tema usa Material Components DayNight, aplica la paleta nocturna desde los recursos de la app y desactiva Force Dark. La migración de Room de la versión 1 a la 2 agrega un índice para `personal_records.exerciseId` sin recrear la tabla.
+Diario y Nutrición comparten la tarjeta de macronutrientes. El dashboard de Diario incluye encabezado de fecha, tarjetas de comida para desayuno, almuerzo, merienda y cena, y acciones conectadas al buscador con el tipo de comida correspondiente. El tema usa Material 3 DayNight para vistas XML, aplica la paleta nocturna desde los recursos de la app y desactiva Force Dark. Las migraciones de Room conservan los datos existentes y agregan las tablas locales de planes, rutinas y medidas corporales.
+
+Los iconos de interfaz son Vector Drawable nativos de 24dp ubicados en `core/core-ui` o `app`, con colores derivados de tokens del tema. No se agregan librerías externas de iconos.
 
 ## Verificación en dispositivo
 
-En el Motorola e13 con Android 13 se comprobó el arranque, el recorrido de las cinco pestañas, el desplazamiento y los controles principales en modo claro y oscuro. También se comprobó el acceso a Perfil y el regreso de Mis Planes a Diario. Logcat quedó sin errores fatales durante los recorridos finales. La verificación en Android 14 queda pendiente.
+La cobertura funcional se registra en [la matriz de pruebas](docs/pruebas-funcionales.md).
 
-Perfil contiene una vista en desarrollo. WOD y el registro de medidas muestran un aviso de disponibilidad. Los botones rápidos de hidratación de Diario aún no registran vasos.
+En el Motorola e13 con Android 13 se comprobó la compilación, el arranque en claro y oscuro, el acceso a Planes, Mis Planes y el regreso a Diario. También se revisó visualmente el dashboard de Diario, sus tarjetas de comidas, hidratación y el estado vacío. La validación completa de todas las operaciones de escritura y en Android 14 queda pendiente.
+
+Hasta el hito 7 están implementados los flujos locales de hidratación, peso, medidas, fotos de progreso, recetas, planes, presupuesto, perfil, configuración y exportación. Insights conserva datos de ejemplo y el ejercicio reciente no tiene todavía una fuente de entrenamiento real.
+
+El hito 8 queda fuera de este corte. Incluye WOD/cronómetro, Health Connect, macros dinámicos, rachas, estado de ánimo y ampliaciones de voz. El escáner mantiene la lectura de código y la integración de alta automática como pendientes conocidos.
 
 Para repetir la prueba, cambiá el modo de pantalla del teléfono desde los ajustes de Android, abrí la app y recorré las pestañas en cada modo. Revisá los cierres del proceso con:
 

@@ -122,7 +122,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="number"
-                                    android:text="@{viewModel.diasAlertaPrecio}" />
+                                    android:text="@{String.valueOf(viewModel.diasAlertaPrecio)}" />
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                     </LinearLayout>

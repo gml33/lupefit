@@ -30,6 +30,9 @@ public interface RecetaDao {
     int deleteRecetaById(long id);
 
     @Query("SELECT * FROM recetas WHERE id = :id")
+    RecetaEntity getRecetaByIdSync(long id);
+
+    @Query("SELECT * FROM recetas WHERE id = :id")
     LiveData<RecetaEntity> getRecetaById(long id);
 
     @Query("SELECT * FROM recetas WHERE serverId = :serverId")
@@ -45,10 +48,19 @@ public interface RecetaDao {
     LiveData<List<RecetaEntity>> getRecetasByUser(long userId);
 
     @Query("SELECT * FROM recetas WHERE categoria = :categoria ORDER BY timestamp DESC")
+    List<RecetaEntity> getRecetasByCategorySync(String categoria);
+
+    @Query("SELECT * FROM recetas WHERE categoria = :categoria ORDER BY timestamp DESC")
     LiveData<List<RecetaEntity>> getRecetasByCategory(String categoria);
 
     @Query("SELECT * FROM recetas WHERE esFavorita = 1 ORDER BY timestamp DESC")
+    List<RecetaEntity> getFavoriteRecetasSync();
+
+    @Query("SELECT * FROM recetas WHERE esFavorita = 1 ORDER BY timestamp DESC")
     LiveData<List<RecetaEntity>> getFavoriteRecetas();
+
+    @Query("SELECT * FROM recetas WHERE nombre LIKE :query ORDER BY timestamp DESC LIMIT 20")
+    List<RecetaEntity> searchRecetasSync(String query);
 
     @Query("SELECT * FROM recetas WHERE nombre LIKE :query ORDER BY timestamp DESC LIMIT 20")
     LiveData<List<RecetaEntity>> searchRecetas(String query);

@@ -36,6 +36,8 @@ public class LoginFragment extends Fragment {
 
         navController = NavHostFragment.findNavController(this);
         viewModel = new ViewModelProvider(this, new LoginViewModel.Factory(requireContext())).get(LoginViewModel.class);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
 
         setupToolbar();
         setupClickListeners();
@@ -47,7 +49,12 @@ public class LoginFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        binding.btnLogin.setOnClickListener(v -> viewModel.login());
+        binding.btnLogin.setOnClickListener(v -> {
+            viewModel.setEmail(binding.etEmail.getText().toString());
+            viewModel.setPassword(binding.etPassword.getText().toString());
+            viewModel.setRecordar(binding.cbRecordar.isChecked());
+            viewModel.login();
+        });
 
         binding.tvOlvidePassword.setOnClickListener(v ->
                 Toast.makeText(requireContext(), "Próximamente", Toast.LENGTH_SHORT).show());

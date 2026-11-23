@@ -42,6 +42,23 @@
                 android:orientation="vertical"
                 android:padding="@dimen/padding_screen">
 
+                <TextView
+                    android:id="@+id/tvDateHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_xs"
+                    android:text="Hoy"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_lg"
+                    android:text="Tu registro diario"
+                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                    android:textColor="?attr/colorOnSurface" />
+
                 <!-- Macro Summary Card -->
                 <include
                     android:id="@+id/macroSummary"
@@ -49,6 +66,75 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_md" />
+
+                <GridLayout
+                    android:id="@+id/mealCards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_md"
+                    android:columnCount="2"
+                    android:useDefaultMargins="true">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        app:cardCornerRadius="@dimen/radius_card"
+                        app:cardElevation="0dp"
+                        app:strokeColor="?attr/colorSurfaceVariant"
+                        app:strokeWidth="1dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/spacing_lg">
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Desayuno" android:textAppearance="?attr/textAppearanceTitleSmall" />
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Sin registros" android:textColor="?attr/colorOnSurfaceVariant" android:textAppearance="?attr/textAppearanceBodySmall" />
+                            <com.google.android.material.button.MaterialButton android:id="@+id/btnAddBreakfast" style="@style/Widget.Material3.Button.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="end" android:minHeight="48dp" android:text="+" android:contentDescription="Agregar desayuno" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        app:cardCornerRadius="@dimen/radius_card"
+                        app:cardElevation="0dp"
+                        app:strokeColor="?attr/colorSurfaceVariant"
+                        app:strokeWidth="1dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/spacing_lg">
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Almuerzo" android:textAppearance="?attr/textAppearanceTitleSmall" />
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Sin registros" android:textColor="?attr/colorOnSurfaceVariant" android:textAppearance="?attr/textAppearanceBodySmall" />
+                            <com.google.android.material.button.MaterialButton android:id="@+id/btnAddLunch" style="@style/Widget.Material3.Button.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="end" android:minHeight="48dp" android:text="+" android:contentDescription="Agregar almuerzo" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        app:cardCornerRadius="@dimen/radius_card"
+                        app:cardElevation="0dp"
+                        app:strokeColor="?attr/colorSurfaceVariant"
+                        app:strokeWidth="1dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/spacing_lg">
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/merienda" android:textAppearance="?attr/textAppearanceTitleSmall" />
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Sin registros" android:textColor="?attr/colorOnSurfaceVariant" android:textAppearance="?attr/textAppearanceBodySmall" />
+                            <com.google.android.material.button.MaterialButton android:id="@+id/btnAddSnack" style="@style/Widget.Material3.Button.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="end" android:minHeight="48dp" android:text="+" android:contentDescription="Agregar merienda" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        app:cardCornerRadius="@dimen/radius_card"
+                        app:cardElevation="0dp"
+                        app:strokeColor="?attr/colorSurfaceVariant"
+                        app:strokeWidth="1dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/spacing_lg">
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/cena" android:textAppearance="?attr/textAppearanceTitleSmall" />
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Sin registros" android:textColor="?attr/colorOnSurfaceVariant" android:textAppearance="?attr/textAppearanceBodySmall" />
+                            <com.google.android.material.button.MaterialButton android:id="@+id/btnAddDinner" style="@style/Widget.Material3.Button.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="end" android:minHeight="48dp" android:text="+" android:contentDescription="Agregar cena" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </GridLayout>
 
                 <!-- Water Progress -->
                 <include

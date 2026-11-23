@@ -56,17 +56,20 @@
         android:label="@string/mis_planes"
         tools:layout="@layout/fragment_mis_planes" />
 
-    <!-- Placeholder fragments for future implementation -->
     <fragment
         android:id="@+id/crearPlanComidaFragment"
-        android:name="com.lupefit.feature.planes.ui.CrearPlanComidaFragment"
+        android:name="com.lupefit.feature.planes.ui.EditarPlanSemanalFragment"
         android:label="@string/crear_plan_comida"
-        tools:layout="@layout/fragment_crear_plan_comida" />
+        tools:layout="@layout/fragment_editar_plan_semanal">
+        <argument android:name="entrenamiento" app:argType="boolean" android:defaultValue="false" />
+    </fragment>
 
     <fragment
         android:id="@+id/crearPlanEntrenamientoFragment"
-        android:name="com.lupefit.feature.planes.ui.CrearPlanEntrenamientoFragment"
+        android:name="com.lupefit.feature.planes.ui.EditarPlanSemanalFragment"
         android:label="@string/crear_plan_entrenamiento"
-        tools:layout="@layout/fragment_crear_plan_entrenamiento" />
+        tools:layout="@layout/fragment_editar_plan_semanal">
+        <argument android:name="entrenamiento" app:argType="boolean" android:defaultValue="true" />
+    </fragment>
 
 </navigation>

@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
+import android.widget.ArrayAdapter
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.lupefit.feature.planes.R
 import com.lupefit.feature.planes.viewmodel.PlanesEntrenamientoViewModel
 
@@ -30,12 +30,12 @@ class PlanEntrenamientoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = NavHostFragment.findNavController(this)
-        viewModel = ViewModelProvider(this).get(PlanesEntrenamientoViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), PlanesEntrenamientoViewModel.Factory(requireContext()))[PlanesEntrenamientoViewModel::class.java]
 
         setupToolbar(view)
-        setupChipGroup(view)
-        setupFab(view)
         setupRecyclerView(view)
+        setupSelectorSemana(view)
+        setupFab(view)
         setupObservers()
     }
 
@@ -45,19 +45,15 @@ class PlanEntrenamientoFragment : Fragment() {
         toolbar.title = getString(R.string.plan_entrenamiento)
     }
 
-    private fun setupChipGroup(view: View) {
-        val chipGroup = view.findViewById<ChipGroup>(R.id.chipGroupSemanas)
-        chipGroup.setOnCheckedChangeListener { _, checkedId ->
-            val semana = when (checkedId) {
-                R.id.chipSemana1 -> 1
-                R.id.chipSemana2 -> 2
-                R.id.chipSemana3 -> 3
-                R.id.chipSemana4 -> 4
-                else -> 1
-            }
-            viewModel.setSemanaActual(semana)
+    private fun setupSelectorSemana(view: View) {
+        val selector = view.findViewById<MaterialAutoCompleteTextView>(R.id.selectorSemana)
+        val semanas = (1..52).map { getString(R.string.planes_semana_numero, it) }
+        selector.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, semanas))
+        selector.setOnItemClickListener { _, _, position, _ -> viewModel.setSemanaActual(position + 1) }
+        viewModel.semanaActual.observe(viewLifecycleOwner) { semana ->
+            selector.setText(semanas[semana - 1], false)
+            renderDias()
         }
-        (chipGroup.getChildAt(0) as Chip).isChecked = true
     }
 
     private fun setupFab(view: View) {
@@ -70,17 +66,24 @@ class PlanEntrenamientoFragment : Fragment() {
     private fun setupRecyclerView(view: View) {
         val rvDias = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvDias)
         rvDias.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
-        rvDias.adapter = DiasEntrenamientoAdapter()
-    }
-
-    private fun setupObservers() {
-        viewModel.semanas.observe(viewLifecycleOwner) { semanas ->
-            (requireView().findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvDias).adapter as? DiasEntrenamientoAdapter)
-                ?.submitList(semanas?.firstOrNull { it.numeroSemana == viewModel.semanaActual.value ?: 1 }?.dias ?: emptyList())
+        rvDias.adapter = DiasEntrenamientoAdapter { dia ->
+            viewModel.toggleDiaCompletado(viewModel.semanaActual.value ?: 1, dia)
         }
     }
 
-    private class DiasEntrenamientoAdapter : androidx.recyclerview.widget.ListAdapter<PlanesEntrenamientoViewModel.DiaEntrenamiento, DiasEntrenamientoAdapter.DiaViewHolder>(
+    private fun setupObservers() {
+        viewModel.semanas.observe(viewLifecycleOwner) { renderDias() }
+    }
+
+    private fun renderDias() {
+        val semana = viewModel.semanaActual.value ?: 1
+        val dias = viewModel.semanas.value.orEmpty().find { it.numeroSemana == semana }?.dias.orEmpty()
+        (requireView().findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rvDias).adapter as DiasEntrenamientoAdapter)
+            .submitList(dias)
+        requireView().findViewById<View>(R.id.tvSemanaSinPlan).visibility = if (dias.isEmpty()) View.VISIBLE else View.GONE
+    }
+
+    private class DiasEntrenamientoAdapter(private val onToggle: (Int) -> Unit) : androidx.recyclerview.widget.ListAdapter<PlanesEntrenamientoViewModel.DiaEntrenamiento, DiasEntrenamientoAdapter.DiaViewHolder>(
         object : androidx.recyclerview.widget.DiffUtil.ItemCallback<PlanesEntrenamientoViewModel.DiaEntrenamiento>() {
             override fun areItemsTheSame(oldItem: PlanesEntrenamientoViewModel.DiaEntrenamiento, newItem: PlanesEntrenamientoViewModel.DiaEntrenamiento): Boolean = oldItem.dia == newItem.dia
             override fun areContentsTheSame(oldItem: PlanesEntrenamientoViewModel.DiaEntrenamiento, newItem: PlanesEntrenamientoViewModel.DiaEntrenamiento): Boolean = oldItem == newItem
@@ -92,7 +95,7 @@ class PlanEntrenamientoFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: DiaViewHolder, position: Int) {
-            holder.bind(getItem(position))
+            holder.bind(getItem(position), onToggle)
         }
 
         class DiaViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
@@ -100,13 +103,13 @@ class PlanEntrenamientoFragment : Fragment() {
             private val tvRutinas: android.widget.TextView = view.findViewById(R.id.tvRecetas)
             private val cbCompletado: android.widget.CheckBox = view.findViewById(R.id.cbCompletado)
 
-            fun bind(dia: PlanesEntrenamientoViewModel.DiaEntrenamiento) {
+            fun bind(dia: PlanesEntrenamientoViewModel.DiaEntrenamiento, onToggle: (Int) -> Unit) {
                 tvDia.text = dia.nombre
                 tvRutinas.text = dia.rutinasAsignadas.joinToString(", ")
+                cbCompletado.isEnabled = dia.rutinasAsignadas.isNotEmpty()
+                cbCompletado.setOnCheckedChangeListener(null)
                 cbCompletado.isChecked = dia.completado
-                cbCompletado.setOnCheckedChangeListener { _, isChecked ->
-                    // TODO: Call viewModel.toggleDiaCompletado
-                }
+                cbCompletado.setOnCheckedChangeListener { _, _ -> onToggle(dia.dia) }
             }
         }
     }

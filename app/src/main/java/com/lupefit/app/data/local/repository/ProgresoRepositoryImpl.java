@@ -2,12 +2,10 @@ package com.lupefit.app.data.local.repository;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Transformations;
-
 import com.lupefit.app.data.local.AppDatabase;
 import com.lupefit.app.data.local.dao.ProgresoDao;
 import com.lupefit.app.data.local.entity.PesoEntity;
+import com.lupefit.app.data.local.entity.MeasurementEntity;
 import com.lupefit.core.domain.model.PesoEntry;
 import com.lupefit.core.domain.repository.ProgresoRepository;
 
@@ -23,18 +21,31 @@ public class ProgresoRepositoryImpl implements ProgresoRepository {
     }
 
     @Override
+    public void saveMeasurement(String kind, double centimeters) {
+        MeasurementEntity entity = new MeasurementEntity();
+        entity.kind = kind;
+        entity.centimeters = centimeters;
+        entity.timestamp = System.currentTimeMillis();
+        progresoDao.insertMeasurement(entity);
+    }
+
+    @Override
+    public List<Measurement> listMeasurements() {
+        List<Measurement> values = new ArrayList<>();
+        for (MeasurementEntity entity : progresoDao.listMeasurements()) {
+            values.add(new Measurement(entity.kind, entity.centimeters, entity.timestamp));
+        }
+        return values;
+    }
+
+    @Override
     public void insertPeso(PesoEntry entry) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            PesoEntity entity = convertToEntity(entry);
-            long id = progresoDao.insertPeso(entity);
-            entry.setId(id);
-        });
+        entry.setId(progresoDao.insertPeso(convertToEntity(entry)));
     }
 
     @Override
     public void getPesoHistory(OnPesoHistoryListener listener) {
-        LiveData<List<PesoEntity>> liveData = progresoDao.getAllPesoEntries();
-        listener.onResult(convertToDomainList(liveData.getValue()));
+        listener.onResult(convertToDomainList(progresoDao.getAllPesoEntriesSync()));
     }
 
     private List<PesoEntry> convertToDomainList(List<PesoEntity> entities) {
